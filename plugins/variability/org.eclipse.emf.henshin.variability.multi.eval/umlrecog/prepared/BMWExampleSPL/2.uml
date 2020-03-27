@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UMLsec="http://www.umlsec.de/profiles/UMLsec" xmlns:UMLsec_VariabilityProfile="http://www.umlsec.de/profiles/UMLsec/variability" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Model name="RootElement">
+    <ownedComment annotatedElement="/0/CarPackage/Combox /0/RemoteServices" body="&lt;&lt;Conditional_Element>>&#xA;{pc={&quot;ConnectedDrive and Combox&quot;}}"/>
+    <ownedComment annotatedElement="/0/CarPackage/Combox" body="&lt;&lt;critical>>&#xA;{secrecy={&quot;getVIN():String&quot;}, &#xA;integrity={&quot;performTask()&quot;}}"/>
+    <ownedComment annotatedElement="/0/CarPackage/Combox" body="&lt;&lt;critical>>&#xA;{integrity={&quot;performTask()&quot;}}"/>
+    <ownedComment annotatedElement="/0/CarPackage/Combox" body="&lt;&lt;Conditional_Element>>&#xA;{pc={&quot;Combox&quot;}}"/>
+    <packagedElement xsi:type="uml:CommunicationPath" name="modem2phone" memberEnd="/0/CarPackage/Car/Modem/mobilecell /0/modem2phone/modem">
+      <eAnnotations source="org.eclipse.papyrus">
+        <details key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd name="modem" type="/0/CarPackage/Car/Modem" association="/0/modem2phone"/>
+    </packagedElement>
+    <packagedElement xsi:type="uml:CommunicationPath" name="phone2backend" memberEnd="/0/MobileAppPackage/Phone/backend /0/phone2backend/mobilecell">
+      <eAnnotations source="org.eclipse.papyrus">
+        <details key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd name="mobilecell" type="/0/MobileAppPackage/Phone" association="/0/phone2backend"/>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Package" name="CarPackage">
+      <ownedComment annotatedElement="/0/CarPackage/Combox /0/CarPackage/VehicleInformation /0/CarPackage/Car/Modem" body="&lt;&lt;critical>>&#xA;{{secrecy=&#xA;{&quot;getVIN():String&quot;}}"/>
+      <packagedElement xsi:type="uml:Node" name="Car">
+        <nestedNode name="Modem">
+          <ownedComment/>
+          <ownedAttribute name="centralcu" type="/0/CarPackage/Car/CentralCU" association="/0/CarPackage/@packagedElement.2"/>
+          <ownedAttribute name="mobilecell" type="/0/MobileAppPackage/Phone" association="/0/modem2phone"/>
+          <ownedAttribute name="taskdb" type="/0/BackendPackage/Backend/TaskDB" association="/0/CarPackage/modem2db"/>
+          <ownedAttribute name="server" type="/0/BackendPackage/Backend/Server"/>
+          <ownedAttribute/>
+          <ownedAttribute/>
+          <ownedBehavior xsi:type="uml:OpaqueBehavior"/>
+          <ownedBehavior xsi:type="uml:StateMachine">
+            <region/>
+          </ownedBehavior>
+          <ownedBehavior xsi:type="uml:Interaction"/>
+          <ownedOperation/>
+          <nestedClassifier xsi:type="uml:Association" memberEnd="/0/BackendPackage/InstructionProviderComp/backendPort /0/CarPackage/ModemComp/carPort"/>
+          <nestedClassifier xsi:type="uml:Enumeration"/>
+          <nestedClassifier xsi:type="uml:StateMachine">
+            <region/>
+          </nestedClassifier>
+          <nestedClassifier xsi:type="uml:OpaqueBehavior"/>
+          <nestedClassifier xsi:type="uml:Class"/>
+          <nestedClassifier xsi:type="uml:Interaction"/>
+          <deployment client="/0/CarPackage/Car/Modem" supplier="/0/CarPackage/ModemFirmware" deployedArtifact="/0/CarPackage/ModemFirmware"/>
+          <deployment client="/0/CarPackage/Car/Modem" supplier="/0/CarPackage/ErrorFirmware" deployedArtifact="/0/CarPackage/ErrorFirmware"/>
+        </nestedNode>
+        <nestedNode name="CentralCU">
+          <ownedAttribute name="doorcu" type="/0/CarPackage/Car/DoorCU" association="/0/CarPackage/@packagedElement.3"/>
+          <ownedAttribute name="car" type="/0/CarPackage/Car" association="/0/CarPackage/@packagedElement.24"/>
+          <ownedAttribute name="taskdb" type="/0/BackendPackage/Backend/TaskDB" association="/0/CarPackage/centralcu2db"/>
+          <deployment client="/0/CarPackage/Car/CentralCU" supplier="/0/CarPackage/RemoteServicesFirmware" deployedArtifact="/0/CarPackage/RemoteServicesFirmware"/>
+        </nestedNode>
+        <nestedNode name="DoorCU">
+          <deployment client="/0/CarPackage/Car/DoorCU" supplier="/0/CarPackage/DoorFirmware" deployedArtifact="/0/CarPackage/DoorFirmware"/>
+        </nestedNode>
+      </packagedElement>
+      <packagedElement xsi:type="uml:Artifact" name="CarFirmware"/>
+      <packagedElement xsi:type="uml:CommunicationPath" memberEnd="/0/CarPackage/Car/Modem/centralcu /0/CarPackage/@packagedElement.2/modem">
+        <eAnnotations source="org.eclipse.papyrus">
+          <details key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd name="modem" type="/0/CarPackage/Car/Modem" association="/0/CarPackage/@packagedElement.2"/>
+      </packagedElement>
+      <packagedElement xsi:type="uml:CommunicationPath" memberEnd="/0/CarPackage/Car/CentralCU/doorcu /0/CarPackage/@packagedElement.3/centralcu">
+        <eAnnotations source="org.eclipse.papyrus">
+          <details key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd name="centralcu" type="/0/CarPackage/Car/CentralCU" association="/0/CarPackage/@packagedElement.3"/>
+      </packagedElement>
+      <packagedElement xsi:type="uml:Component" name="ModemComp">
+        <ownedAttribute xsi:type="uml:Port" name="carPort" type="/0/CarPackage/Modem" aggregation="composite" association="/0/CarPackage/Car/Modem/@nestedClassifier.0"/>
+      </packagedElement>
+      <packagedElement xsi:type="uml:Interface" name="Modem">
+        <ownedOperation name="requestInstructions"/>
+        <ownedOperation name="sendError"/>
+      </packagedElement>
+      <packagedElement xsi:type="uml:Usage" name="sendReport" client="/0/RemoteServices" supplier="/0/CarPackage/Modem"/>
+      <packagedElement xsi:type="uml:Class" name="DoorController">
+        <ownedOperation name="unlock"/>
+      </packagedElement>
+      <packagedElement xsi:type="uml:Usage" name="unlockDoor" client="/0/RemoteServices" supplier="/0/CarPackage/DoorController"/>
+      <packagedElement xsi:type="uml:Class" name="VehicleInformation">
+        <ownedAttribute name="VIN" visibility="private" isStatic="true">
+          <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedAttribute>
+        <ownedOperation name="getVIN" visibility="package" isStatic="true">
+          <ownedParameter name="ret" visibility="package" direction="return">
+            <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xsi:type="uml:Usage" name="requestVIN" client="/0/RemoteServices" supplier="/0/CarPackage/VehicleInformation"/>
+      <packagedElement xsi:type="uml:Component" name="RemoteServices"/>
+      <packagedElement xsi:type="uml:Dependency" name="car2server" client="/0/CarPackage/ModemFirmware" supplier="/0/BackendPackage/ServerSoftware"/>
+      <packagedElement xsi:type="uml:Dependency" name="error2app" client="/0/CarPackage/ErrorFirmware" supplier="/0/MobileAppPackage/MobileApp"/>
+      <packagedElement xsi:type="uml:CommunicationPath" name="modem2db" memberEnd="/0/CarPackage/Car/Modem/taskdb /0/CarPackage/modem2db/modem">
+        <eAnnotations source="org.eclipse.papyrus">
+          <details key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd name="modem" type="/0/CarPackage/Car/Modem" association="/0/CarPackage/modem2db"/>
+      </packagedElement>
+      <packagedElement xsi:type="uml:Artifact" name="ModemFirmware"/>
+      <packagedElement xsi:type="uml:Artifact" name="RemoteServicesFirmware"/>
+      <packagedElement xsi:type="uml:Artifact" name="DoorFirmware"/>
+      <packagedElement xsi:type="uml:Artifact" name="ErrorFirmware" fileName=""/>
+      <packagedElement xsi:type="uml:Dependency" name="modem2remoteservices" client="/0/CarPackage/ModemFirmware" supplier="/0/CarPackage/RemoteServicesFirmware"/>
+      <packagedElement xsi:type="uml:Dependency" name="remoteservices2door" client="/0/CarPackage/RemoteServicesFirmware" supplier="/0/CarPackage/DoorFirmware"/>
+      <packagedElement xsi:type="uml:Dependency" name="remoteservices2error" client="/0/CarPackage/RemoteServicesFirmware" supplier="/0/CarPackage/ErrorFirmware"/>
+      <packagedElement xsi:type="uml:Dependency" name="remoteservices2car" client="/0/CarPackage/RemoteServicesFirmware" supplier="/0/CarPackage/CarFirmware"/>
+      <packagedElement xsi:type="uml:Dependency" name="error2car" client="/0/CarPackage/ErrorFirmware" supplier="/0/CarPackage/CarFirmware"/>
+      <packagedElement xsi:type="uml:CommunicationPath" memberEnd="/0/CarPackage/Car/CentralCU/car /0/CarPackage/@packagedElement.24/centralcu">
+        <eAnnotations source="org.eclipse.papyrus">
+          <details key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd name="centralcu" type="/0/CarPackage/Car/CentralCU" association="/0/CarPackage/@packagedElement.24"/>
+      </packagedElement>
+      <packagedElement xsi:type="uml:CommunicationPath" name="centralcu2db" memberEnd="/0/CarPackage/Car/CentralCU/taskdb /0/CarPackage/centralcu2db/centralcu">
+        <eAnnotations source="org.eclipse.papyrus">
+          <details key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd name="centralcu" type="/0/CarPackage/Car/CentralCU" association="/0/CarPackage/centralcu2db"/>
+      </packagedElement>
+      <packagedElement xsi:type="uml:Usage" client="/0/CarPackage/ModemComp/carPort" supplier="/0/BackendPackage/InstructionProviderComp/backendPort"/>
+      <packagedElement xsi:type="uml:Class" name="Combox" visibility="package">
+        <interfaceRealization client="/0/CarPackage/Combox" supplier="/0/CarPackage/Modem" contract="/0/CarPackage/Modem"/>
+        <ownedOperation name="sendError"/>
+        <ownedOperation name="requestInstructions"/>
+      </packagedElement>
+      <packagedElement xsi:type="uml:Usage" name="sendResponse" client="/0/CarPackage/Combox" supplier="/0/MobileAppPackage/App/enableRemoteServices"/>
+      <packagedElement xsi:type="uml:Usage" name="getInstructions" client="/0/CarPackage/Combox" supplier="/0/BackendPackage/InstructionProvider"/>
+      <packagedElement xsi:type="uml:Usage" name="processInstructions" client="/0/CarPackage/Combox" supplier="/0/RemoteServices"/>
+      <packagedElement xsi:type="uml:CommunicationPath" memberEnd="/0/BackendPackage/InstructionProviderComp/server /0/CarPackage/@packagedElement.31/modem">
+        <eAnnotations source="org.eclipse.papyrus">
+          <details key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd name="modem" association="/0/CarPackage/@packagedElement.31"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Package" name="BackendPackage">
+      <packagedElement xsi:type="uml:Node" name="Backend">
+        <nestedNode name="Server">
+          <deployment client="/0/BackendPackage/Backend/Server" supplier="/0/BackendPackage/ServerSoftware" deployedArtifact="/0/BackendPackage/ServerSoftware"/>
+        </nestedNode>
+        <nestedNode name="TaskDB">
+          <ownedAttribute name="server" type="/0/BackendPackage/Backend/Server" association="/0/BackendPackage/@packagedElement.4"/>
+          <deployment client="/0/BackendPackage/Backend/TaskDB" supplier="/0/BackendPackage/DBSoftware" deployedArtifact="/0/BackendPackage/DBSoftware"/>
+        </nestedNode>
+      </packagedElement>
+      <packagedElement xsi:type="uml:Artifact" name="DBSoftware" fileName="">
+        <manifestation client="/0/BackendPackage/DBSoftware" supplier="/0/BackendPackage/InstructionProviderComp" utilizedElement="/0/BackendPackage/InstructionProviderComp"/>
+      </packagedElement>
+      <packagedElement xsi:type="uml:Class" name="InstructionProviderImpl">
+        <interfaceRealization client="/0/BackendPackage/InstructionProviderImpl" supplier="/0/BackendPackage/InstructionProvider" contract="/0/BackendPackage/InstructionProvider"/>
+        <ownedOperation name="getInstructions"/>
+      </packagedElement>
+      <packagedElement xsi:type="uml:Interface" name="InstructionProvider">
+        <ownedOperation name="getInstructions"/>
+      </packagedElement>
+      <packagedElement xsi:type="uml:CommunicationPath" memberEnd="/0/BackendPackage/Backend/TaskDB/server /0/BackendPackage/@packagedElement.4/taskdb">
+        <eAnnotations source="org.eclipse.papyrus">
+          <details key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd name="taskdb" type="/0/BackendPackage/Backend/TaskDB" association="/0/BackendPackage/@packagedElement.4"/>
+      </packagedElement>
+      <packagedElement xsi:type="uml:Dependency" name="db2remoteservices" client="/0 /0/BackendPackage/DBSoftware" supplier="/0/CarPackage/RemoteServicesFirmware"/>
+      <packagedElement xsi:type="uml:Component" name="InstructionProviderComp" redefinedClassifier="/0/CarPackage/Car/Modem">
+        <generalization general="/0/CarPackage/Car/Modem"/>
+        <ownedAttribute xsi:type="uml:Port" name="backendPort" visibility="public" type="/0/CarPackage/Car/Modem" aggregation="composite" association="/0/CarPackage/Car/Modem/@nestedClassifier.0"/>
+        <ownedAttribute name="server" type="/0/BackendPackage/Backend/Server" association="/0/CarPackage/@packagedElement.31"/>
+      </packagedElement>
+      <packagedElement xsi:type="uml:Artifact" name="ServerSoftware"/>
+      <packagedElement xsi:type="uml:Dependency" name="server2db" client="/0/BackendPackage/ServerSoftware" supplier="/0/BackendPackage/DBSoftware"/>
+      <packagedElement xsi:type="uml:Usage" client="/0" supplier="/0/CarPackage/ModemComp/carPort"/>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Package" name="MobileAppPackage">
+      <packagedElement xsi:type="uml:Class" name="App">
+        <ownedOperation name="unlockDoor"/>
+        <ownedOperation name="enableRemoteServices"/>
+        <ownedOperation name="receive" raisedException="/0/CarPackage/Car/Modem"/>
+      </packagedElement>
+      <packagedElement xsi:type="uml:Artifact" name="MobileApp" fileName=""/>
+      <packagedElement xsi:type="uml:Node" name="Phone">
+        <ownedAttribute name="backend" type="/0/BackendPackage/Backend" association="/0/phone2backend"/>
+        <deployment client="/0/MobileAppPackage/Phone" supplier="/0/MobileAppPackage/MobileApp" deployedArtifact="/0/MobileAppPackage/MobileApp"/>
+      </packagedElement>
+      <packagedElement xsi:type="uml:Dependency" name="app2car" client="/0" supplier="/0/CarPackage/ModemFirmware"/>
+      <packagedElement xsi:type="uml:Usage" name="sendInstructions" client="/0/MobileAppPackage/App" supplier="/0/CarPackage/Modem"/>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Class" name="ProfessionalRadio">
+      <interfaceRealization client="/0/ProfessionalRadio" supplier="/0/Radio" contract="/0/Radio"/>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Class" name="BusinessRadio">
+      <interfaceRealization client="/0/BusinessRadio" supplier="/0/Radio" contract="/0/Radio"/>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Class" name="StandardRadio">
+      <interfaceRealization client="/0/StandardRadio" supplier="/0/Radio" contract="/0/Radio"/>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Interface" name="Radio"/>
+    <packagedElement xsi:type="uml:Class" name="TLS">
+      <interfaceRealization client="/0/TLS" supplier="/0/Encrypt" contract="/0/Encrypt"/>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Class" name="SSL">
+      <interfaceRealization client="/0/SSL" supplier="/0/Encrypt" contract="/0/Encrypt"/>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Interface" name="Encrypt"/>
+    <packagedElement xsi:type="uml:Class" name="RemoteServices">
+      <ownedOperation name="performTask"/>
+      <ownedOperation name="enable">
+        <ownedParameter name="key">
+          <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <profileApplication>
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references href="http://www.umlsec.de/profiles/UMLsec#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UMLsec/UMLsec.uml#_kGQWQDnkEeCyb9nmG-9Lpw"/>
+    </profileApplication>
+    <profileApplication>
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references href="http://www.umlsec.de/profiles/UMLsec/variability#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UMLsec/Variability.uml#_Sqaf4OMOEeaLBYiNhRdDPg"/>
+    </profileApplication>
+  </uml:Model>
+  <UMLsec:Internet base_CommunicationPath="/0/modem2phone"/>
+  <UMLsec:wire base_CommunicationPath="/0/CarPackage/@packagedElement.2"/>
+  <UMLsec:wire base_CommunicationPath="/0/CarPackage/@packagedElement.3"/>
+  <UMLsec:Internet base_CommunicationPath="/0/phone2backend"/>
+  <UMLsec:LAN base_CommunicationPath="/0/BackendPackage/@packagedElement.4"/>
+  <UMLsec:securelinks base_Package="/0"/>
+  <UMLsec:securedependency base_Package="/0"/>
+  <UMLsec:critical base_Class="/0/CarPackage/VehicleInformation" base_Classifier="/0/CarPackage/VehicleInformation">
+    <secrecy>getVIN():String</secrecy>
+  </UMLsec:critical>
+  <UMLsec:critical base_Class="/0/RemoteServices" base_Classifier="/0/RemoteServices">
+    <secrecy>getVIN():String</secrecy>
+    <integrity>performTask()</integrity>
+  </UMLsec:critical>
+  <UMLsec:call base_Dependency="/0/CarPackage/sendReport"/>
+  <UMLsec:call base_Dependency="/0/CarPackage/requestVIN"/>
+  <UMLsec:call base_Dependency="/0/CarPackage/car2server"/>
+  <UMLsec:send base_Dependency="/0/BackendPackage/db2remoteservices"/>
+  <UMLsec:send base_Dependency="/0/MobileAppPackage/app2car"/>
+  <UMLsec:send base_Dependency="/0/CarPackage/error2app"/>
+  <UMLsec:Internet base_CommunicationPath="/0/CarPackage/modem2db"/>
+  <UMLsec:call base_Dependency="/0/CarPackage/remoteservices2error"/>
+  <UMLsec:high base_Dependency="/0/CarPackage/remoteservices2error"/>
+  <UMLsec:call base_Dependency="/0/CarPackage/remoteservices2car"/>
+  <UMLsec:high base_Dependency="/0/CarPackage/remoteservices2car"/>
+  <UMLsec:call base_Dependency="/0/CarPackage/error2car"/>
+  <UMLsec:high base_Dependency="/0/CarPackage/error2car"/>
+  <UMLsec:call base_Dependency="/0/CarPackage/remoteservices2door"/>
+  <UMLsec:integrity base_Dependency="/0/CarPackage/remoteservices2door"/>
+  <UMLsec:call base_Dependency="/0/CarPackage/modem2remoteservices"/>
+  <UMLsec:integrity base_Dependency="/0/CarPackage/modem2remoteservices"/>
+  <UMLsec:wire base_CommunicationPath="/0/CarPackage/@packagedElement.24"/>
+  <UMLsec:call base_Dependency="/0/BackendPackage/server2db"/>
+  <UMLsec:high base_Dependency="/0/BackendPackage/server2db"/>
+  <UMLsec:critical base_Class="/0/CarPackage/Combox" base_Classifier="/0/CarPackage/Combox">
+    <integrity>performTask()</integrity>
+    <high></high>
+  </UMLsec:critical>
+  <UMLsec:call base_Dependency="/0/CarPackage/processInstructions"/>
+  <UMLsec:secrecy base_Dependency="/0/CarPackage/requestVIN"/>
+  <UMLsec:integrity base_Dependency="/0/CarPackage/processInstructions"/>
+  <UMLsec:encrypted base_CommunicationPath="/0/CarPackage/centralcu2db"/>
+  <UMLsec:secrecy base_Dependency="/0/BackendPackage/db2remoteservices"/>
+  <UMLsec:integrity base_Dependency="/0/BackendPackage/db2remoteservices"/>
+  <UMLsec:encrypted base_CommunicationPath="/0/CarPackage/@packagedElement.31"/>
+  <UMLsec_VariabilityProfile:Conditional_Secrecy base_Dependency="/0/CarPackage/car2server">
+    <presence_condition>Normal and not Emergency</presence_condition>
+  </UMLsec_VariabilityProfile:Conditional_Secrecy>
+</xmi:XMI>

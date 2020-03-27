@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="org.eclipse.emf.henshin.variability.validation.constraints"
+         point="org.eclipse.emf.validation.constraintProviders">
+         <category
+            name="Henshin Constraints"
+            id="org.eclipse.emf.henshin.validation">
+            Description of the example constraints category.
+         <category
+               name="VariabilityBased"
+               id="vb">
+               Constraints for the Henshin VB rules.
+         </category>
+      </category>
+         <constraintProvider>
+            <package
+                  namespaceUri="http://www.eclipse.org/emf/2011/Henshin">
+            </package>
+            <constraints categories="org.eclipse.emf.henshin.validation/vb">
+               <constraint
+                     class="org.eclipse.emf.henshin.variability.validation.validators.VBAnnotationValidator"
+                     id="presenceCondition"
+                     isEnabledByDefault="true"
+                     lang="Java"
+                     mode="Live"
+                     name="PresenceCondition"
+                     severity="ERROR"
+                     statusCode="100">
+	               <description>
+	                  Checks the presence condition of an element
+	               </description>
+	               <message>&quot;{0}&quot;</message>
+	               <target
+	                     class="Annotation">
+	               </target>
+               </constraint>
+               <constraint
+                     class="org.eclipse.emf.henshin.variability.validation.validators.VBRuleFMValidator"
+                     id="featureModel"
+                     isEnabledByDefault="true"
+                     lang="Java"
+                     mode="Live"
+                     name="FeatureModel"
+                     severity="ERROR"
+                     statusCode="100">
+	               <description>
+	                  Checks a VB Rule's Feature Model
+	               </description>
+	               <message>&quot;{0}&quot;</message>
+	               <target
+	                     class="Rule">
+	               </target>
+               </constraint>
+                 <constraint
+                     class="org.eclipse.emf.henshin.variability.validation.validators.VBRuleInjectiveValidator"
+                     id="injectiveMatchingPC"
+                     isEnabledByDefault="true"
+                     lang="Java"
+                     mode="Live"
+                     name="InjectiveMatchingPC"
+                     severity="ERROR"
+                     statusCode="100">
+	               <description>
+	                  Checks a VB Rule's Injective Matching PC
+	               </description>
+	               <message>&quot;{0}&quot;</message>
+	               <target
+	                     class="Rule">
+	               </target>
+	           </constraint>
+                 <constraint
+                     class="org.eclipse.emf.henshin.variability.validation.validators.VBRuleFeaturesValidator"
+                     id="features"
+                     isEnabledByDefault="true"
+                     lang="Java"
+                     mode="Live"
+                     name="FeaturesList"
+                     severity="WARNING"
+                     statusCode="100">
+	               <description>
+	                  Checks a VB Rule's Features List
+	               </description>
+	               <message>&quot;{0}&quot;</message>
+	               <target
+	                     class="Rule">
+	               </target>
+	           </constraint>
+            </constraints>
+         </constraintProvider>
+   </extension>
+</plugin>

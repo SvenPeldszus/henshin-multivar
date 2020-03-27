@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel>
+		<properties/>
+		<struct>
+			<and abstract="true" mandatory="true" name="Lampiro">
+				<feature name="TIMING"/>
+				<and name="UI">
+					<feature name="MOTOROLA"/>
+					<feature name="ADVER"/>
+					<feature name="SCREENSAVER"/>
+				</and>
+				<alt name="RIM">
+					<feature mandatory="true" name="RIM_LIGHT"/>
+					<feature mandatory="true" name="RIM5"/>
+				</alt>
+				<feature name="BXMPP"/>
+				<and name="MIDP">
+					<feature name="BT_PLAIN_SOCKET"/>
+				</and>
+				<feature name="GLIDER"/>
+				<and name="BETA">
+					<or abstract="true" name="DEBUG">
+						<feature mandatory="true" name="UI_DEBUG"/>
+						<feature mandatory="true" name="SEND_DEBUG1"/>
+					</or>
+					<feature name="TEST_COMPONENTS"/>
+				</and>
+				<feature name="TLS"/>
+				<feature name="COMPRESSION"/>
+				<alt abstract="true" name="BLUENDO">
+					<feature mandatory="true" name="BLUENDO_REG"/>
+					<feature mandatory="true" name="BLUENDO_SECURE"/>
+				</alt>
+			</and>
+		</struct>
+		<constraints>
+			<rule>
+				<imp>
+					<var>TLS</var>
+					<conj>
+						<var>BLUENDO_REG</var>
+						<conj>
+							<var>MIDP</var>
+							<conj>
+								<var>COMPRESSION</var>
+								<var>UI</var>
+							</conj>
+						</conj>
+					</conj>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>COMPRESSION</var>
+					<conj>
+						<var>MIDP</var>
+						<conj>
+							<var>UI</var>
+							<var>BLUENDO_REG</var>
+						</conj>
+					</conj>
+				</imp>
+			</rule>
+			<rule>
+				<disj>
+					<conj>
+						<var>SEND_DEBUG1</var>
+						<not>
+							<var>TIMING</var>
+						</not>
+					</conj>
+					<disj>
+						<conj>
+							<not>
+								<var>SEND_DEBUG1</var>
+							</not>
+							<var>TIMING</var>
+						</conj>
+						<conj>
+							<not>
+								<var>SEND_DEBUG1</var>
+							</not>
+							<not>
+								<var>TIMING</var>
+							</not>
+						</conj>
+					</disj>
+				</disj>
+			</rule>
+			<rule>
+				<imp>
+					<var>UI_DEBUG</var>
+					<var>UI</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>GLIDER</var>
+					<var>COMPRESSION</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>TIMING</var>
+					<var>UI</var>
+				</imp>
+			</rule>
+			<rule>
+				<disj>
+					<conj>
+						<var>MOTOROLA</var>
+						<not>
+							<var>RIM</var>
+						</not>
+					</conj>
+					<conj>
+						<not>
+							<var>MOTOROLA</var>
+						</not>
+						<var>RIM</var>
+					</conj>
+				</disj>
+			</rule>
+		</constraints>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>

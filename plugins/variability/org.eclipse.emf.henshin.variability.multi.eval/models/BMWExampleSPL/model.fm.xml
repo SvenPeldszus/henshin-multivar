@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel>
+		<properties/>
+		<struct>
+			<and abstract="true" mandatory="true" name="Root">
+				<and abstract="true" name="Modem">
+					<feature name="Combox"/>
+				</and>
+				<feature name="ConnectedDrive"/>
+				<alt abstract="true" mandatory="true" name="Radio">
+					<feature name="Standard"/>
+					<feature name="Professional"/>
+					<feature name="Business"/>
+				</alt>
+				<and abstract="true" mandatory="true" name="Security">
+					<or abstract="true" name="Encryption">
+						<feature name="ApplicationLayer"/>
+						<feature name="TransportLayer"/>
+					</or>
+					<alt abstract="true" mandatory="true" name="Level">
+						<feature name="Emergency"/>
+						<feature name="Normal"/>
+					</alt>
+				</and>
+			</and>
+		</struct>
+		<constraints>
+			<rule>
+				<imp>
+					<var>Professional</var>
+					<var>Combox</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>ConnectedDrive</var>
+					<var>Modem</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Emergency</var>
+					<not>
+						<var>TransportLayer</var>
+					</not>
+				</imp>
+			</rule>
+		</constraints>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>

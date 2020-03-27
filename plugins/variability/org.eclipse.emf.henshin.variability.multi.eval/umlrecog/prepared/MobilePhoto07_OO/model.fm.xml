@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel>
+		<properties/>
+		<struct>
+			<and abstract="true" mandatory="true" name="MobilePhoto">
+				<feature name="includeVideo"/>
+				<feature name="includePhotoAlbum"/>
+				<feature name="includeMMAPI"/>
+				<feature name="includeSmsFeature"/>
+				<feature name="includeCountViews"/>
+				<feature name="includeFavourites"/>
+				<feature name="simulatePlayVideo"/>
+				<alt abstract="true" mandatory="true" name="hardware">
+					<feature mandatory="true" name="device_screen_176x205"/>
+					<feature mandatory="true" name="device_screen_128x149"/>
+					<feature mandatory="true" name="device_screen_132x176"/>
+				</alt>
+				<and abstract="true" mandatory="true" name="edit">
+					<feature name="capturePhoto"/>
+					<feature name="captureVideo"/>
+					<feature name="includeCopyPhoto"/>
+				</and>
+			</and>
+		</struct>
+		<constraints/>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>

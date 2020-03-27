@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel>
+		<properties/>
+		<struct>
+			<and abstract="true" mandatory="true" name="Root">
+				<feature name="DMZ"/>
+				<feature name="Mail"/>
+				<alt abstract="true" name="VPN">
+					<feature mandatory="true" name="IPSec"/>
+					<feature mandatory="true" name="ICA"/>
+				</alt>
+				<feature name="ActiveDirectory"/>
+				<feature name="Citrix"/>
+				<feature name="Antivir"/>
+			</and>
+		</struct>
+		<constraints/>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>

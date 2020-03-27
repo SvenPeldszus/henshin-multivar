@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:UMLsec="http://www.umlsec.de/profiles/UMLsec" xmlns:UMLsec_VariabilityProfile="http://www.umlsec.de/profiles/UMLsec/variability" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Model xmi:id="_Cwq_AA8LEeeMF4sLD5w0yA" name="RootElement">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_CYuo0HzXEeelJ4vlvZxmqg" annotatedElement="_b9PkAB6UEeeDGpeVfSBp4A _iVWZgBCGEeel-8Kc4Xp0uQ">
+      <body>&lt;&lt;Conditional_Element>>
+{pc={&quot;ConnectedDrive and Combox&quot;}}</body>
+    </ownedComment>
+    <ownedComment xmi:type="uml:Comment" xmi:id="_CYxFEHzXEeelJ4vlvZxmqg" annotatedElement="_b9PkAB6UEeeDGpeVfSBp4A _iVWZgBCGEeel-8Kc4Xp0uQ">
+      <body>&lt;&lt;critical>>
+{secrecy={&quot;getVIN():String&quot;}, 
+integrity={&quot;performTask()&quot;}}</body>
+    </ownedComment>
+    <ownedComment xmi:type="uml:Comment" xmi:id="_sTPYYHzWEeelJ4vlvZxmqg" annotatedElement="_b9PkAB6UEeeDGpeVfSBp4A">
+      <body>&lt;&lt;critical>>
+{integrity={&quot;performTask()&quot;}}</body>
+    </ownedComment>
+    <ownedComment xmi:type="uml:Comment" xmi:id="_ZsoCkHzWEeelJ4vlvZxmqg" annotatedElement="_b9PkAB6UEeeDGpeVfSBp4A">
+      <body>&lt;&lt;Conditional_Element>>
+{pc={&quot;Combox&quot;}}</body>
+    </ownedComment>
+    <packagedElement xmi:type="uml:CommunicationPath" xmi:id="_sx8BYA8LEeeMF4sLD5w0yA" name="modem2phone" memberEnd="_sx8ocg8LEeeMF4sLD5w0yA _sx9PgA8LEeeMF4sLD5w0yA">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_sx8ocA8LEeeMF4sLD5w0yA" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_sx8ocQ8LEeeMF4sLD5w0yA" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_sx9PgA8LEeeMF4sLD5w0yA" name="modem" type="_mG9uIBB_Eeel-8Kc4Xp0uQ" association="_sx8BYA8LEeeMF4sLD5w0yA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:CommunicationPath" xmi:id="_CMvtEBCAEeel-8Kc4Xp0uQ" name="phone2backend" memberEnd="_CMwUIhCAEeel-8Kc4Xp0uQ _CMw7MBCAEeel-8Kc4Xp0uQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_CMwUIBCAEeel-8Kc4Xp0uQ" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_CMwUIRCAEeel-8Kc4Xp0uQ" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_CMw7MBCAEeel-8Kc4Xp0uQ" name="mobilecell" type="_C3pEMBCAEeel-8Kc4Xp0uQ" association="_CMvtEBCAEeel-8Kc4Xp0uQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_s9ddIBCFEeel-8Kc4Xp0uQ" name="CarPackage">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_4_bXIHzWEeelJ4vlvZxmqg" annotatedElement="_b9PkAB6UEeeDGpeVfSBp4A _pxjFUBCGEeel-8Kc4Xp0uQ">
+        <body>&lt;&lt;critical>>
+{{secrecy=
+{&quot;getVIN():String&quot;}}</body>
+      </ownedComment>
+      <packagedElement xmi:type="uml:Node" xmi:id="_oFqfgA8LEeeMF4sLD5w0yA" name="Car">
+        <nestedNode xmi:type="uml:Node" xmi:id="_mG9uIBB_Eeel-8Kc4Xp0uQ" name="Modem">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_y1VeMBB_Eeel-8Kc4Xp0uQ" name="centralcu" type="_rGaqsBB_Eeel-8Kc4Xp0uQ" association="_y1P-oBB_Eeel-8Kc4Xp0uQ"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_sx8ocg8LEeeMF4sLD5w0yA" name="mobilecell" type="_C3pEMBCAEeel-8Kc4Xp0uQ" association="_sx8BYA8LEeeMF4sLD5w0yA"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_Ad8zQhOREeei89Q6IkPElA" name="taskdb" type="_CVot4BCBEeel-8Kc4Xp0uQ" association="_Ad7lIBOREeei89Q6IkPElA"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_9d1I8YdGEeeBqpjbvtV8Jg" name="server" type="_lNNmMBCAEeel-8Kc4Xp0uQ"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_iNOvood0Eee7Ktp76cOXiQ" name="server" type="_lNNmMBCAEeel-8Kc4Xp0uQ" association="_iNOIkId0Eee7Ktp76cOXiQ"/>
+          <deployment xmi:type="uml:Deployment" xmi:id="_5JmfEBOUEeei89Q6IkPElA" client="_mG9uIBB_Eeel-8Kc4Xp0uQ" supplier="_3iKAIBOUEeei89Q6IkPElA" deployedArtifact="_3iKAIBOUEeei89Q6IkPElA"/>
+          <deployment xmi:type="uml:Deployment" xmi:id="_KB3csBOVEeei89Q6IkPElA" client="_mG9uIBB_Eeel-8Kc4Xp0uQ" supplier="_F6D50BOVEeei89Q6IkPElA" deployedArtifact="_F6D50BOVEeei89Q6IkPElA"/>
+        </nestedNode>
+        <nestedNode xmi:type="uml:Node" xmi:id="_rGaqsBB_Eeel-8Kc4Xp0uQ" name="CentralCU">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_TlycghCAEeel-8Kc4Xp0uQ" name="doorcu" type="_R39BsBCAEeel-8Kc4Xp0uQ" association="_Tlx1cBCAEeel-8Kc4Xp0uQ"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_oZESYhOaEeei89Q6IkPElA" name="car" type="_oFqfgA8LEeeMF4sLD5w0yA" association="_oZDrUBOaEeei89Q6IkPElA"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_fWmrABOoEee1gr0Q42Tp6g" name="taskdb" type="_CVot4BCBEeel-8Kc4Xp0uQ" association="_fWfWQBOoEee1gr0Q42Tp6g"/>
+          <deployment xmi:type="uml:Deployment" xmi:id="_mf830BOeEee1gr0Q42Tp6g" client="_rGaqsBB_Eeel-8Kc4Xp0uQ" supplier="_55g5EBOUEeei89Q6IkPElA" deployedArtifact="_55g5EBOUEeei89Q6IkPElA"/>
+        </nestedNode>
+        <nestedNode xmi:type="uml:Node" xmi:id="_R39BsBCAEeel-8Kc4Xp0uQ" name="DoorCU">
+          <deployment xmi:type="uml:Deployment" xmi:id="_oU1V0BOeEee1gr0Q42Tp6g" client="_R39BsBCAEeel-8Kc4Xp0uQ" supplier="_81ilUBOUEeei89Q6IkPElA" deployedArtifact="_81ilUBOUEeei89Q6IkPElA"/>
+        </nestedNode>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Artifact" xmi:id="_C0afIBCCEeel-8Kc4Xp0uQ" name="CarFirmware"/>
+      <packagedElement xmi:type="uml:CommunicationPath" xmi:id="_y1P-oBB_Eeel-8Kc4Xp0uQ" memberEnd="_y1VeMBB_Eeel-8Kc4Xp0uQ _y1WFQBB_Eeel-8Kc4Xp0uQ">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_y1TpABB_Eeel-8Kc4Xp0uQ" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_y1UQEBB_Eeel-8Kc4Xp0uQ" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_y1WFQBB_Eeel-8Kc4Xp0uQ" name="modem" type="_mG9uIBB_Eeel-8Kc4Xp0uQ" association="_y1P-oBB_Eeel-8Kc4Xp0uQ"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:CommunicationPath" xmi:id="_Tlx1cBCAEeel-8Kc4Xp0uQ" memberEnd="_TlycghCAEeel-8Kc4Xp0uQ _TlycgxCAEeel-8Kc4Xp0uQ">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_TlycgBCAEeel-8Kc4Xp0uQ" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_TlycgRCAEeel-8Kc4Xp0uQ" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_TlycgxCAEeel-8Kc4Xp0uQ" name="centralcu" type="_rGaqsBB_Eeel-8Kc4Xp0uQ" association="_Tlx1cBCAEeel-8Kc4Xp0uQ"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Component" xmi:id="_EGOIcBCGEeel-8Kc4Xp0uQ" name="ModemComp">
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_asLgUBCUEeel-8Kc4Xp0uQ" name="carPort" type="_eHkKcBCGEeel-8Kc4Xp0uQ" aggregation="composite"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="_eHkKcBCGEeel-8Kc4Xp0uQ" name="Modem">
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_ErQ5wBCHEeel-8Kc4Xp0uQ" name="requestInstructions"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_AR2CcBCHEeel-8Kc4Xp0uQ" name="sendError"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_iVWZgBCGEeel-8Kc4Xp0uQ" name="RemoteServices">
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_ci2Z8BCHEeel-8Kc4Xp0uQ" name="performTask"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_GOKEUBCREeel-8Kc4Xp0uQ" name="enable">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_RtCicBCREeel-8Kc4Xp0uQ" name="key">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Usage" xmi:id="_krrXsBCGEeel-8Kc4Xp0uQ" name="sendReport" client="_iVWZgBCGEeel-8Kc4Xp0uQ" supplier="_eHkKcBCGEeel-8Kc4Xp0uQ"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_lu0PsBCGEeel-8Kc4Xp0uQ" name="DoorController">
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_QFdWEBCQEeel-8Kc4Xp0uQ" name="unlock"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Usage" xmi:id="_oGZLEBCGEeel-8Kc4Xp0uQ" name="unlockDoor" client="_iVWZgBCGEeel-8Kc4Xp0uQ" supplier="_lu0PsBCGEeel-8Kc4Xp0uQ"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_pxjFUBCGEeel-8Kc4Xp0uQ" name="VehicleInformation">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_wldCEBCGEeel-8Kc4Xp0uQ" name="VIN" visibility="private" isStatic="true">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedAttribute>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_1nO54BCGEeel-8Kc4Xp0uQ" name="getVIN" visibility="package" isStatic="true">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_7O8JQBCGEeel-8Kc4Xp0uQ" name="ret" visibility="package" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Usage" xmi:id="_r9G98BCGEeel-8Kc4Xp0uQ" name="requestVIN" client="_iVWZgBCGEeel-8Kc4Xp0uQ" supplier="_pxjFUBCGEeel-8Kc4Xp0uQ"/>
+      <packagedElement xmi:type="uml:Component" xmi:id="_n2R1ABCSEeel-8Kc4Xp0uQ" name="RemoteServices"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_mUEXABLlEeeNH-0Be37m1Q" name="car2server" client="_3iKAIBOUEeei89Q6IkPElA" supplier="_tDB0MBOnEee1gr0Q42Tp6g"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_Yp26cBONEeei89Q6IkPElA" name="error2app" client="_F6D50BOVEeei89Q6IkPElA" supplier="_0P-6cBCDEeel-8Kc4Xp0uQ"/>
+      <packagedElement xmi:type="uml:CommunicationPath" xmi:id="_Ad7lIBOREeei89Q6IkPElA" name="modem2db" memberEnd="_Ad8zQhOREeei89Q6IkPElA _Ad9aUBOREeei89Q6IkPElA">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Ad8zQBOREeei89Q6IkPElA" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Ad8zQROREeei89Q6IkPElA" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_Ad9aUBOREeei89Q6IkPElA" name="modem" type="_mG9uIBB_Eeel-8Kc4Xp0uQ" association="_Ad7lIBOREeei89Q6IkPElA"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Artifact" xmi:id="_3iKAIBOUEeei89Q6IkPElA" name="ModemFirmware"/>
+      <packagedElement xmi:type="uml:Artifact" xmi:id="_55g5EBOUEeei89Q6IkPElA" name="RemoteServicesFirmware"/>
+      <packagedElement xmi:type="uml:Artifact" xmi:id="_81ilUBOUEeei89Q6IkPElA" name="DoorFirmware"/>
+      <packagedElement xmi:type="uml:Artifact" xmi:id="_F6D50BOVEeei89Q6IkPElA" name="ErrorFirmware" fileName=""/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_3ReGgBOZEeei89Q6IkPElA" name="modem2remoteservices" client="_3iKAIBOUEeei89Q6IkPElA" supplier="_55g5EBOUEeei89Q6IkPElA"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_6_NjkBOZEeei89Q6IkPElA" name="remoteservices2door" client="_55g5EBOUEeei89Q6IkPElA" supplier="_81ilUBOUEeei89Q6IkPElA"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_KfQKABOaEeei89Q6IkPElA" name="remoteservices2error" client="_55g5EBOUEeei89Q6IkPElA" supplier="_F6D50BOVEeei89Q6IkPElA"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_Q2f_8BOaEeei89Q6IkPElA" name="remoteservices2car" client="_55g5EBOUEeei89Q6IkPElA" supplier="_C0afIBCCEeel-8Kc4Xp0uQ"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_UagSMBOaEeei89Q6IkPElA" name="error2car" client="_F6D50BOVEeei89Q6IkPElA" supplier="_C0afIBCCEeel-8Kc4Xp0uQ"/>
+      <packagedElement xmi:type="uml:CommunicationPath" xmi:id="_oZDrUBOaEeei89Q6IkPElA" memberEnd="_oZESYhOaEeei89Q6IkPElA _oZE5cBOaEeei89Q6IkPElA">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_oZESYBOaEeei89Q6IkPElA" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_oZESYROaEeei89Q6IkPElA" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_oZE5cBOaEeei89Q6IkPElA" name="centralcu" type="_rGaqsBB_Eeel-8Kc4Xp0uQ" association="_oZDrUBOaEeei89Q6IkPElA"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:CommunicationPath" xmi:id="_fWfWQBOoEee1gr0Q42Tp6g" name="centralcu2db" memberEnd="_fWmrABOoEee1gr0Q42Tp6g _fWnSEBOoEee1gr0Q42Tp6g">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_fWjAoBOoEee1gr0Q42Tp6g" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_fWjAoROoEee1gr0Q42Tp6g" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_fWnSEBOoEee1gr0Q42Tp6g" name="centralcu" type="_rGaqsBB_Eeel-8Kc4Xp0uQ" association="_fWfWQBOoEee1gr0Q42Tp6g"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Usage" xmi:id="_ohQ6YBPBEee1gr0Q42Tp6g" client="_asLgUBCUEeel-8Kc4Xp0uQ" supplier="_Nw9nEBCUEeel-8Kc4Xp0uQ"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_b9PkAB6UEeeDGpeVfSBp4A" name="Combox" visibility="package">
+        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_lr-TIB6UEeeDGpeVfSBp4A" client="_b9PkAB6UEeeDGpeVfSBp4A" supplier="_eHkKcBCGEeel-8Kc4Xp0uQ" contract="_eHkKcBCGEeel-8Kc4Xp0uQ"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_mZ0QkB6UEeeDGpeVfSBp4A" name="sendError"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_mZybYB6UEeeDGpeVfSBp4A" name="requestInstructions"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Usage" xmi:id="_BbnqAB6VEeeDGpeVfSBp4A" name="sendResponse" client="_b9PkAB6UEeeDGpeVfSBp4A" supplier="___3WEBCQEeel-8Kc4Xp0uQ"/>
+      <packagedElement xmi:type="uml:Usage" xmi:id="_D-3p4B6VEeeDGpeVfSBp4A" name="getInstructions" client="_b9PkAB6UEeeDGpeVfSBp4A" supplier="_keivEBCQEeel-8Kc4Xp0uQ"/>
+      <packagedElement xmi:type="uml:Usage" xmi:id="_yDgn4CU0EeeTqeDsrzjCdA" name="processInstructions" client="_b9PkAB6UEeeDGpeVfSBp4A" supplier="_iVWZgBCGEeel-8Kc4Xp0uQ"/>
+      <packagedElement xmi:type="uml:CommunicationPath" xmi:id="_iNOIkId0Eee7Ktp76cOXiQ" memberEnd="_iNOvood0Eee7Ktp76cOXiQ _iNPWsId0Eee7Ktp76cOXiQ">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_iNOvoId0Eee7Ktp76cOXiQ" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_iNOvoYd0Eee7Ktp76cOXiQ" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_iNPWsId0Eee7Ktp76cOXiQ" name="modem" type="_mG9uIBB_Eeel-8Kc4Xp0uQ" association="_iNOIkId0Eee7Ktp76cOXiQ"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_x8BB0BCFEeel-8Kc4Xp0uQ" name="BackendPackage">
+      <packagedElement xmi:type="uml:Node" xmi:id="_BAc5EBCAEeel-8Kc4Xp0uQ" name="Backend">
+        <nestedNode xmi:type="uml:Node" xmi:id="_lNNmMBCAEeel-8Kc4Xp0uQ" name="Server">
+          <deployment xmi:type="uml:Deployment" xmi:id="_wZjEEBOnEee1gr0Q42Tp6g" client="_lNNmMBCAEeel-8Kc4Xp0uQ" supplier="_tDB0MBOnEee1gr0Q42Tp6g" deployedArtifact="_tDB0MBOnEee1gr0Q42Tp6g"/>
+        </nestedNode>
+        <nestedNode xmi:type="uml:Node" xmi:id="_CVot4BCBEeel-8Kc4Xp0uQ" name="TaskDB">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_E_xY4RCBEeel-8Kc4Xp0uQ" name="server" type="_lNNmMBCAEeel-8Kc4Xp0uQ" association="_E_wx0BCBEeel-8Kc4Xp0uQ"/>
+          <deployment xmi:type="uml:Deployment" xmi:id="_9kX28BCDEeel-8Kc4Xp0uQ" client="_CVot4BCBEeel-8Kc4Xp0uQ" supplier="_6qHsUBCDEeel-8Kc4Xp0uQ" deployedArtifact="_6qHsUBCDEeel-8Kc4Xp0uQ"/>
+        </nestedNode>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Artifact" xmi:id="_6qHsUBCDEeel-8Kc4Xp0uQ" name="DBSoftware" fileName="">
+        <manifestation xmi:type="uml:Manifestation" xmi:id="__ukqYBCTEeel-8Kc4Xp0uQ" client="_6qHsUBCDEeel-8Kc4Xp0uQ" supplier="_9GvFcBCTEeel-8Kc4Xp0uQ" utilizedElement="_9GvFcBCTEeel-8Kc4Xp0uQ"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_fvuPgBCQEeel-8Kc4Xp0uQ" name="InstructionProviderImpl">
+        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_oHytsBCQEeel-8Kc4Xp0uQ" client="_fvuPgBCQEeel-8Kc4Xp0uQ" supplier="_keivEBCQEeel-8Kc4Xp0uQ" contract="_keivEBCQEeel-8Kc4Xp0uQ"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_rO5BgBCQEeel-8Kc4Xp0uQ" name="getInstructions"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="_keivEBCQEeel-8Kc4Xp0uQ" name="InstructionProvider">
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_sy1ggBCQEeel-8Kc4Xp0uQ" name="getInstructions"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:CommunicationPath" xmi:id="_E_wx0BCBEeel-8Kc4Xp0uQ" memberEnd="_E_xY4RCBEeel-8Kc4Xp0uQ _E_xY4hCBEeel-8Kc4Xp0uQ">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_E_wx0RCBEeel-8Kc4Xp0uQ" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_E_xY4BCBEeel-8Kc4Xp0uQ" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_E_xY4hCBEeel-8Kc4Xp0uQ" name="taskdb" type="_CVot4BCBEeel-8Kc4Xp0uQ" association="_E_wx0BCBEeel-8Kc4Xp0uQ"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_lJVCMBLlEeeNH-0Be37m1Q" name="db2remoteservices" client="_Cwq_AA8LEeeMF4sLD5w0yA _6qHsUBCDEeel-8Kc4Xp0uQ" supplier="_55g5EBOUEeei89Q6IkPElA"/>
+      <packagedElement xmi:type="uml:Component" xmi:id="_9GvFcBCTEeel-8Kc4Xp0uQ" name="InstructionProviderComp">
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_Nw9nEBCUEeel-8Kc4Xp0uQ" name="backendPort" visibility="public" type="_keivEBCQEeel-8Kc4Xp0uQ" aggregation="composite"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Artifact" xmi:id="_tDB0MBOnEee1gr0Q42Tp6g" name="ServerSoftware"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_5anb8BOnEee1gr0Q42Tp6g" name="server2db" client="_tDB0MBOnEee1gr0Q42Tp6g" supplier="_6qHsUBCDEeel-8Kc4Xp0uQ"/>
+      <packagedElement xmi:type="uml:Usage" xmi:id="_qgjRkBPBEee1gr0Q42Tp6g" client="_Cwq_AA8LEeeMF4sLD5w0yA" supplier="_asLgUBCUEeel-8Kc4Xp0uQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_468h0BCQEeel-8Kc4Xp0uQ" name="MobileAppPackage">
+      <packagedElement xmi:type="uml:Class" xmi:id="_8az68BCQEeel-8Kc4Xp0uQ" name="App">
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_-W5NIBCQEeel-8Kc4Xp0uQ" name="unlockDoor"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="___3WEBCQEeel-8Kc4Xp0uQ" name="enableRemoteServices"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_E4tyEH3DEeenjbTRUxN6cg" name="receive"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Artifact" xmi:id="_0P-6cBCDEeel-8Kc4Xp0uQ" name="MobileApp" fileName=""/>
+      <packagedElement xmi:type="uml:Node" xmi:id="_C3pEMBCAEeel-8Kc4Xp0uQ" name="Phone">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_CMwUIhCAEeel-8Kc4Xp0uQ" name="backend" type="_BAc5EBCAEeel-8Kc4Xp0uQ" association="_CMvtEBCAEeel-8Kc4Xp0uQ"/>
+        <deployment xmi:type="uml:Deployment" xmi:id="_3NWDcBCDEeel-8Kc4Xp0uQ" client="_C3pEMBCAEeel-8Kc4Xp0uQ" supplier="_0P-6cBCDEeel-8Kc4Xp0uQ" deployedArtifact="_0P-6cBCDEeel-8Kc4Xp0uQ"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_kWJRwBLlEeeNH-0Be37m1Q" name="app2car" client="_Cwq_AA8LEeeMF4sLD5w0yA" supplier="_3iKAIBOUEeei89Q6IkPElA"/>
+      <packagedElement xmi:type="uml:Usage" xmi:id="_gRXQAHzYEeelJ4vlvZxmqg" name="sendInstructions" client="_8az68BCQEeel-8Kc4Xp0uQ" supplier="_eHkKcBCGEeel-8Kc4Xp0uQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_GdDEgIc4EeendsdBboz6cw" name="ProfessionalRadio">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_R0s5QIc4EeendsdBboz6cw" client="_GdDEgIc4EeendsdBboz6cw" supplier="_Mvi9UIc4EeendsdBboz6cw" contract="_Mvi9UIc4EeendsdBboz6cw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_IedioIc4EeendsdBboz6cw" name="BusinessRadio">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_SjWH8Ic4EeendsdBboz6cw" client="_IedioIc4EeendsdBboz6cw" supplier="_Mvi9UIc4EeendsdBboz6cw" contract="_Mvi9UIc4EeendsdBboz6cw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_KsijwIc4EeendsdBboz6cw" name="StandardRadio">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_TAldkIc4EeendsdBboz6cw" client="_KsijwIc4EeendsdBboz6cw" supplier="_Mvi9UIc4EeendsdBboz6cw" contract="_Mvi9UIc4EeendsdBboz6cw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_Mvi9UIc4EeendsdBboz6cw" name="Radio"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_DbJu4Ic6Eee-J9RH7adhbQ" name="TLS">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_NaQcUIc6Eee-J9RH7adhbQ" client="_DbJu4Ic6Eee-J9RH7adhbQ" supplier="_KJZvkIc6Eee-J9RH7adhbQ" contract="_KJZvkIc6Eee-J9RH7adhbQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_EkTvUIc6Eee-J9RH7adhbQ" name="SSL">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_M4OtUIc6Eee-J9RH7adhbQ" client="_EkTvUIc6Eee-J9RH7adhbQ" supplier="_KJZvkIc6Eee-J9RH7adhbQ" contract="_KJZvkIc6Eee-J9RH7adhbQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_KJZvkIc6Eee-J9RH7adhbQ" name="Encrypt"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_C0RFkA8LEeeMF4sLD5w0yA">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_C0S6wA8LEeeMF4sLD5w0yA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.umlsec.de/profiles/UMLsec#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://UMLsec/UMLsec.uml#_kGQWQDnkEeCyb9nmG-9Lpw"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_FEO9EA8LEeeMF4sLD5w0yA">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_FERZUA8LEeeMF4sLD5w0yA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.umlsec.de/profiles/UMLsec/variability#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://UMLsec/Variability.uml#_Sqaf4OMOEeaLBYiNhRdDPg"/>
+    </profileApplication>
+  </uml:Model>
+  <UMLsec:Internet xmi:id="_8y6QsBB2Eeel-8Kc4Xp0uQ" base_CommunicationPath="_sx8BYA8LEeeMF4sLD5w0yA"/>
+  <UMLsec:wire xmi:id="_1HoQ8BB_Eeel-8Kc4Xp0uQ" base_CommunicationPath="_y1P-oBB_Eeel-8Kc4Xp0uQ"/>
+  <UMLsec:wire xmi:id="_Vxs6cBCAEeel-8Kc4Xp0uQ" base_CommunicationPath="_Tlx1cBCAEeel-8Kc4Xp0uQ"/>
+  <UMLsec:Internet xmi:id="_cR87YBCAEeel-8Kc4Xp0uQ" base_CommunicationPath="_CMvtEBCAEeel-8Kc4Xp0uQ"/>
+  <UMLsec:LAN xmi:id="_GVJQYBCBEeel-8Kc4Xp0uQ" base_CommunicationPath="_E_wx0BCBEeel-8Kc4Xp0uQ"/>
+  <UMLsec:securelinks xmi:id="_QvRmkBLqEeeNH-0Be37m1Q" base_Package="_Cwq_AA8LEeeMF4sLD5w0yA"/>
+  <UMLsec:securedependency xmi:id="_QwE30BLqEeeNH-0Be37m1Q" base_Package="_Cwq_AA8LEeeMF4sLD5w0yA"/>
+  <UMLsec:critical xmi:id="_UwwfABLqEeeNH-0Be37m1Q" base_Class="_pxjFUBCGEeel-8Kc4Xp0uQ" base_Classifier="_pxjFUBCGEeel-8Kc4Xp0uQ">
+    <secrecy>getVIN():String</secrecy>
+  </UMLsec:critical>
+  <UMLsec:critical xmi:id="_avxbIBLqEeeNH-0Be37m1Q" base_Class="_iVWZgBCGEeel-8Kc4Xp0uQ" base_Classifier="_iVWZgBCGEeel-8Kc4Xp0uQ">
+    <secrecy>getVIN():String</secrecy>
+    <integrity>performTask()</integrity>
+  </UMLsec:critical>
+  <UMLsec:call xmi:id="_KblOYBL_EeeNm-P4rOjWIA" base_Dependency="_krrXsBCGEeel-8Kc4Xp0uQ"/>
+  <UMLsec:call xmi:id="_MK2zoBL_EeeNm-P4rOjWIA" base_Dependency="_r9G98BCGEeel-8Kc4Xp0uQ"/>
+  <UMLsec:call xmi:id="_nKEzIBL_EeeNm-P4rOjWIA" base_Dependency="_mUEXABLlEeeNH-0Be37m1Q"/>
+  <UMLsec:send xmi:id="_AYm9EBONEeei89Q6IkPElA" base_Dependency="_lJVCMBLlEeeNH-0Be37m1Q"/>
+  <UMLsec:send xmi:id="_Ilh7MBONEeei89Q6IkPElA" base_Dependency="_kWJRwBLlEeeNH-0Be37m1Q"/>
+  <UMLsec:send xmi:id="_gQ4WMBONEeei89Q6IkPElA" base_Dependency="_Yp26cBONEeei89Q6IkPElA"/>
+  <UMLsec:Internet xmi:id="_LEZ0kBOREeei89Q6IkPElA" base_CommunicationPath="_Ad7lIBOREeei89Q6IkPElA"/>
+  <UMLsec:call xmi:id="_O4MgMBOaEeei89Q6IkPElA" base_Dependency="_KfQKABOaEeei89Q6IkPElA"/>
+  <UMLsec:high xmi:id="_O5h88BOaEeei89Q6IkPElA" base_Dependency="_KfQKABOaEeei89Q6IkPElA"/>
+  <UMLsec:call xmi:id="_TKQLQBOaEeei89Q6IkPElA" base_Dependency="_Q2f_8BOaEeei89Q6IkPElA"/>
+  <UMLsec:high xmi:id="_TLStEBOaEeei89Q6IkPElA" base_Dependency="_Q2f_8BOaEeei89Q6IkPElA"/>
+  <UMLsec:call xmi:id="_WdW6wBOaEeei89Q6IkPElA" base_Dependency="_UagSMBOaEeei89Q6IkPElA"/>
+  <UMLsec:high xmi:id="_WeT9ABOaEeei89Q6IkPElA" base_Dependency="_UagSMBOaEeei89Q6IkPElA"/>
+  <UMLsec:call xmi:id="_YbVDUBOaEeei89Q6IkPElA" base_Dependency="_6_NjkBOZEeei89Q6IkPElA"/>
+  <UMLsec:integrity xmi:id="_YclnkBOaEeei89Q6IkPElA" base_Dependency="_6_NjkBOZEeei89Q6IkPElA"/>
+  <UMLsec:call xmi:id="_bFIXIBOaEeei89Q6IkPElA" base_Dependency="_3ReGgBOZEeei89Q6IkPElA"/>
+  <UMLsec:integrity xmi:id="_bGDkMBOaEeei89Q6IkPElA" base_Dependency="_3ReGgBOZEeei89Q6IkPElA"/>
+  <UMLsec:wire xmi:id="_pp4aABOaEeei89Q6IkPElA" base_CommunicationPath="_oZDrUBOaEeei89Q6IkPElA"/>
+  <UMLsec:call xmi:id="_DTSKMBOoEee1gr0Q42Tp6g" base_Dependency="_5anb8BOnEee1gr0Q42Tp6g"/>
+  <UMLsec:high xmi:id="_DUlxwBOoEee1gr0Q42Tp6g" base_Dependency="_5anb8BOnEee1gr0Q42Tp6g"/>
+  <UMLsec_VariabilityProfile:Conditional_Element xmi:id="_I6sDoB6VEeeDGpeVfSBp4A" base_Element="_b9PkAB6UEeeDGpeVfSBp4A">
+    <presence_condition>Combox</presence_condition>
+  </UMLsec_VariabilityProfile:Conditional_Element>
+  <UMLsec:critical xmi:id="_NWZ4YCaVEeeauIl3APA_sg" base_Class="_b9PkAB6UEeeDGpeVfSBp4A" base_Classifier="_b9PkAB6UEeeDGpeVfSBp4A">
+    <integrity>performTask()</integrity>
+    <high></high>
+  </UMLsec:critical>
+  <UMLsec_VariabilityProfile:Conditional_Element xmi:id="_W9OosCaVEeeauIl3APA_sg" base_Element="_iVWZgBCGEeel-8Kc4Xp0uQ">
+    <presence_condition>ConnectedDrive and Combox</presence_condition>
+  </UMLsec_VariabilityProfile:Conditional_Element>
+  <UMLsec:call xmi:id="_bk7zoCaVEeeauIl3APA_sg" base_Dependency="_yDgn4CU0EeeTqeDsrzjCdA"/>
+  <UMLsec_VariabilityProfile:Conditional_Element xmi:id="_p7b_ICaVEeeauIl3APA_sg" base_Element="_mG9uIBB_Eeel-8Kc4Xp0uQ">
+    <presence_condition>Modem</presence_condition>
+  </UMLsec_VariabilityProfile:Conditional_Element>
+  <UMLsec_VariabilityProfile:Conditional_Element xmi:id="_uIJQICaVEeeauIl3APA_sg" base_Element="_3iKAIBOUEeei89Q6IkPElA">
+    <presence_condition>Modem</presence_condition>
+  </UMLsec_VariabilityProfile:Conditional_Element>
+  <UMLsec_VariabilityProfile:Conditional_Element xmi:id="_xR2zECaVEeeauIl3APA_sg" base_Element="_F6D50BOVEeei89Q6IkPElA">
+    <presence_condition>Modem</presence_condition>
+  </UMLsec_VariabilityProfile:Conditional_Element>
+  <UMLsec:secrecy xmi:id="_rsQUMH3DEeenjbTRUxN6cg" base_Dependency="_r9G98BCGEeel-8Kc4Xp0uQ"/>
+  <UMLsec_VariabilityProfile:Conditional_Element xmi:id="_WuWIwIc4EeendsdBboz6cw" base_Element="_GdDEgIc4EeendsdBboz6cw">
+    <presence_condition>Professional</presence_condition>
+  </UMLsec_VariabilityProfile:Conditional_Element>
+  <UMLsec_VariabilityProfile:Conditional_Element xmi:id="_Y7D38Ic4EeendsdBboz6cw" base_Element="_IedioIc4EeendsdBboz6cw">
+    <presence_condition>Business</presence_condition>
+  </UMLsec_VariabilityProfile:Conditional_Element>
+  <UMLsec_VariabilityProfile:Conditional_Element xmi:id="_kUOvoIc4EeendsdBboz6cw" base_Element="_KsijwIc4EeendsdBboz6cw">
+    <presence_condition>Standard</presence_condition>
+  </UMLsec_VariabilityProfile:Conditional_Element>
+  <UMLsec_VariabilityProfile:Conditional_Element xmi:id="_QD7NQIc6Eee-J9RH7adhbQ" base_Element="_DbJu4Ic6Eee-J9RH7adhbQ">
+    <presence_condition>TransportLayer</presence_condition>
+  </UMLsec_VariabilityProfile:Conditional_Element>
+  <UMLsec_VariabilityProfile:Conditional_Element xmi:id="_SYX8IIc6Eee-J9RH7adhbQ" base_Element="_EkTvUIc6Eee-J9RH7adhbQ">
+    <presence_condition>ApplicationLayer</presence_condition>
+  </UMLsec_VariabilityProfile:Conditional_Element>
+  <UMLsec:integrity xmi:id="_Y-EK0IdHEeeBqpjbvtV8Jg" base_Dependency="_yDgn4CU0EeeTqeDsrzjCdA"/>
+  <UMLsec:encrypted xmi:id="_QZoZsIdJEeeube1sFX4HsQ" base_CommunicationPath="_fWfWQBOoEee1gr0Q42Tp6g"/>
+  <UMLsec:secrecy xmi:id="_grmMUIdJEeeube1sFX4HsQ" base_Dependency="_lJVCMBLlEeeNH-0Be37m1Q"/>
+  <UMLsec:integrity xmi:id="_gtcmcIdJEeeube1sFX4HsQ" base_Dependency="_lJVCMBLlEeeNH-0Be37m1Q"/>
+  <UMLsec:encrypted xmi:id="_kWBBEId0Eee7Ktp76cOXiQ" base_CommunicationPath="_iNOIkId0Eee7Ktp76cOXiQ"/>
+  <UMLsec_VariabilityProfile:Conditional_Secrecy xmi:id="_I4Ob8IeEEee9qZamrg9MpA" base_Dependency="_mUEXABLlEeeNH-0Be37m1Q">
+    <presence_condition>Normal and not Emergency</presence_condition>
+  </UMLsec_VariabilityProfile:Conditional_Secrecy>
+</xmi:XMI>
