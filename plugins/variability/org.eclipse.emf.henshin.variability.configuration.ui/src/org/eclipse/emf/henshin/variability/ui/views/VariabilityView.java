@@ -62,6 +62,7 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
@@ -228,7 +229,7 @@ public class VariabilityView extends ViewPart
 				MessageDialog messageDialog = new MessageDialog(getViewSite().getShell(), "Delete features", null,
 						"Do you really want to delete the selected features?\nDoing so may render the rule's feature model invalid.",
 						MessageDialog.WARNING, new String[] { "Yes", "No" }, 0);
-				
+
 				if (messageDialog.open() == 0) {
 					for (Feature feature : selectedFeatures) {
 						config.removeFeature(feature);
@@ -422,7 +423,7 @@ public class VariabilityView extends ViewPart
 			}
 		});
 		featureModelToolbar.setVisible(false);
-		
+
 		variabilityModelText = new Text(composite, SWT.BORDER);
 		variabilityModelText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
 		IObservableValue<?> target = WidgetProperties.text(SWT.Modify).observe(variabilityModelText);
@@ -584,7 +585,8 @@ public class VariabilityView extends ViewPart
 				if (isChecked() && selectedRuleEditPart != null) {
 					super.run();
 					RuleEditPartVisibilityHelper.showConfiguredRule(selectedRuleEditPart, config,
-							TransactionalVariabilityFactory.INSTANCE.createVariabilityRule(config.getRule()).getFeatureModel());
+							TransactionalVariabilityFactory.INSTANCE.createVariabilityRule(config.getRule())
+									.getFeatureModel());
 					if (creationMode == CreationMode.SELECTION) {
 						updateEditPolicy(selectedRuleEditPart);
 					}
@@ -697,7 +699,6 @@ public class VariabilityView extends ViewPart
 	public void setFocus() {
 		viewer.getControl().setFocus();
 	}
-	
 
 	private class ConfigurationListener extends ResourceSetListenerImpl {
 
@@ -706,14 +707,16 @@ public class VariabilityView extends ViewPart
 			Annotation annotation = findModifiedAnnotation(event.getNotifications());
 			if (annotation != null) {
 				String value = annotation.getValue();
-				if ((annotation.getKey().equals(VariabilityConstants.FEATURE_MODEL) || annotation.getKey().equals(VariabilityConstants.FEATURES)) && value != null && !value.isEmpty()) {
+				if ((annotation.getKey().equals(VariabilityConstants.FEATURE_MODEL)
+						|| annotation.getKey().equals(VariabilityConstants.FEATURES)) && value != null
+						&& !value.isEmpty()) {
 					if (config.getRule().hasMissingFeatures()) {
 						featureModelToolbar.setVisible(true);
 					} else {
 						featureModelToolbar.setVisible(false);
 					}
 				}
-				
+
 			}
 			if (observableFeatureModelValue.shouldUpdate()) {
 				refresh();
@@ -721,7 +724,7 @@ public class VariabilityView extends ViewPart
 				viewer.refresh();
 			}
 		}
-		
+
 		private Annotation findModifiedAnnotation(List<Notification> notifications) {
 			for (Notification notification : notifications) {
 				if (notification.getNotifier() instanceof Annotation) {
@@ -747,7 +750,7 @@ public class VariabilityView extends ViewPart
 		if (showConfiguredRuleAction.isChecked()) {
 			showConfiguredRuleAction.run();
 		}
-		
+
 		if (rule.getMissingFeatures().length > 0) {
 			featureModelToolbar.setVisible(true);
 		} else {
@@ -776,19 +779,19 @@ public class VariabilityView extends ViewPart
 		if (!this.linkingActive || !getViewSite().getPage().isPartVisible(this) || activeEditor == null) {
 			return;
 		}
-
-		StructuredSelection selection = (StructuredSelection) activeEditor.getEditorSite().getSelectionProvider()
-				.getSelection();
-		if (selection.size() == 1 && selection.getFirstElement() instanceof RuleEditPart) {
-			RuleEditPart ruleEditPart = (RuleEditPart) selection.getFirstElement();
-			Rule rule = VariabilityModelHelper.getRuleForEditPart(ruleEditPart);
-			config = configurationProvider.getConfiguration(rule);
-			setContent(config);
-			refresh();
-		} else if (selection.size() == 1) {
-			refresh();
+		ISelection selection = activeEditor.getEditorSite().getSelectionProvider().getSelection();
+		if (selection instanceof StructuredSelection) {
+			StructuredSelection structuredSelection = (StructuredSelection) selection;
+			if (structuredSelection.size() == 1 && structuredSelection.getFirstElement() instanceof RuleEditPart) {
+				RuleEditPart ruleEditPart = (RuleEditPart) structuredSelection.getFirstElement();
+				Rule rule = VariabilityModelHelper.getRuleForEditPart(ruleEditPart);
+				config = configurationProvider.getConfiguration(rule);
+				setContent(config);
+				refresh();
+			} else if (structuredSelection.size() == 1) {
+				refresh();
+			}
 		}
-
 	}
 
 	protected void toggleLinking(boolean checked) {
@@ -868,7 +871,7 @@ public class VariabilityView extends ViewPart
 			clearFavorite();
 		}
 	}
-	
+
 	private void clearFavorite() {
 		selectedFavorite.setText("Configuration");
 		loadFavoritesMenu.uncheckAll();
