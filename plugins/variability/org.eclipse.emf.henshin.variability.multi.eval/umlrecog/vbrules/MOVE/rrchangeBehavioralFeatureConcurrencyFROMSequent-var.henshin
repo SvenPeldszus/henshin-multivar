@@ -1,7 +1,7 @@
-<henshin:Module xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmi:id="_VxTy4rRVEeexAvqQ_kM_vQ">
+<henshin:Module xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmi:id="_VxTy4rRVEeexAvqQ_kM_vQ">
   <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
   <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
-  <units xsi:type="henshin:Rule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="_RrvEobRVEeexAvqQ_kM_vQ" name="rr:changeBehavioralFeatureConcurrency_FROM_Sequential_TO_guarded,rr:changeOperationConcurrency_FROM_Sequential_TO_guarded" features="def(A),def(B)">
+  <units xsi:type="henshin:Rule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="_RrvEobRVEeexAvqQ_kM_vQ" name="rr:changeBehavioralFeatureConcurrency_FROM_Sequential_TO_guarded,rr:changeOperationConcurrency_FROM_Sequential_TO_guarded">
     <annotations xmi:id="_VxTy4bRVEeexAvqQ_kM_vQ" key="originalRules" value="A=Rule rr:changeBehavioralFeatureConcurrency_FROM_Sequential_TO_guarded(Selected:BehavioralFeature, &quot;sequential&quot;:CallConcurrencyKind, &quot;guarded&quot;:CallConcurrencyKind), B=Rule rr:changeOperationConcurrency_FROM_Sequential_TO_guarded(Selected:BehavioralFeature, &quot;sequential&quot;:CallConcurrencyKind, &quot;guarded&quot;:CallConcurrencyKind)"/>
     <parameters xmi:id="__8FWAgsYEeajEecGJ9W2hw" name="Selected">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//BehavioralFeature"/>
@@ -141,7 +141,7 @@
     <mappings xmi:id="__8FWLwsYEeajEecGJ9W2hw" origin="__8FWDAsYEeajEecGJ9W2hw" image="__8FWGQsYEeajEecGJ9W2hw"/>
     <mappings xmi:id="__8FWMAsYEeajEecGJ9W2hw" origin="__8FWDgsYEeajEecGJ9W2hw" image="__8FWIwsYEeajEecGJ9W2hw"/>
     <mappings xmi:id="_VxTy4LRVEeexAvqQ_kM_vQ" origin="_92AaXgsYEeajEecGJ9W2hw" image="_92AacwsYEeajEecGJ9W2hw"/>
-    <annotations key="featureModel" value="xor(A,B)"/>
+    <annotations key="featureConstraint" value="xor(A,B)"/>
     <annotations key="features" value="A,B"/>
   </units>
 </henshin:Module>
