@@ -1,6 +1,7 @@
 package org.eclipse.emf.henshin.variability.multi.eval;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,7 @@ import org.eclipse.emf.henshin.variability.multi.eval.util.RuntimeBenchmarkRepor
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityFactory;
 import org.eclipse.emf.henshin.variability.multi.eval.util.LoadingHelper.RuleSet;
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
+import de.ovgu.featureide.fm.core.init.FMCoreLibrary;
 import de.ovgu.featureide.fm.core.io.manager.FeatureModelManager;
 
 public class UmlRecogBenchmarkVB extends UmlRecogBenchmark {
@@ -34,6 +36,7 @@ public class UmlRecogBenchmarkVB extends UmlRecogBenchmark {
 	}
 
 	public static void main(String[] args) {
+		FMCoreLibrary.getInstance().install();
 		for (RuleSet set : RuleSet.values()) {
 			if (set == RuleSet.ALL || set == RuleSet.NOFILTER) {
 				continue;
@@ -65,9 +68,8 @@ public class UmlRecogBenchmarkVB extends UmlRecogBenchmark {
 		HenshinResourceSet rs = (HenshinResourceSet) module.eResource().getResourceSet();
 
 		// Load the model into a graph:
-		IFeatureModel modelFM = FeatureModelManager
-				.getInstance(new File(FILE_PATH + FILE_PATH_INSTANCES + FILE_NAME_INSTANCE_FEATURE_MODEL).toPath())
-				.getObject();
+		Path fmPath = new File(FILE_PATH + FILE_PATH_INSTANCES + FILE_NAME_INSTANCE_FEATURE_MODEL).toPath();
+		IFeatureModel modelFM = FeatureModelManager.load(fmPath);
 
 		Resource res1 = rs.getResource(exampleID + "/" + FILE_NAME_INSTANCE_1);
 		Resource res2 = rs.getResource(exampleID + "/" + FILE_NAME_INSTANCE_2);
@@ -96,15 +98,16 @@ public class UmlRecogBenchmarkVB extends UmlRecogBenchmark {
 			int graphCurrent = graph.size();
 			boolean successful = false;
 
-			
 			if (VariabilityFactory.INSTANCE.createVariabilityRule(rule).getFeatureModel() != null) {
 				try {
-					new VBExecution(new SecPLUtil()).transformSecPlModelWithVBRule(modelFM, roots, rule, engine, presenceConditions, graph);
+					new VBExecution(new SecPLUtil()).transformSecPlModelWithVBRule(modelFM, roots, rule, engine,
+							presenceConditions, graph);
 				} catch (InconsistentRuleException e) {
 					throw new IllegalStateException(e);
 				}
 			} else { // i.e., not a VB rule
-				new VBExecution(new SecPLUtil()).transformSecPlModelWithClassicRule(modelFM, roots, rule, engine, presenceConditions, graph);
+				new VBExecution(new SecPLUtil()).transformSecPlModelWithClassicRule(modelFM, roots, rule, engine,
+						presenceConditions, graph);
 			}
 
 			long runtime = (System.currentTimeMillis() - currentRunTime);
