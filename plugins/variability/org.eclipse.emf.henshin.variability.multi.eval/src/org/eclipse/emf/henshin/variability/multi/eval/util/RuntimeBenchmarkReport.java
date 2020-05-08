@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,8 +16,8 @@ import org.eclipse.emf.henshin.model.Unit;
 public class RuntimeBenchmarkReport {
 	private int count = 0;
 	String name = "";
-	String logfilePath = "";
-	String runtimefilePath = "";
+	File logfilePath;
+	File runtimefilePath;
 	PrintWriter out;
 	String date;
 
@@ -31,14 +30,17 @@ public class RuntimeBenchmarkReport {
 	}
 
 	public RuntimeBenchmarkReport(String name, String logDirectory) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmss");
-		this.date = sdf.format(new Date());
 		File file = new File(logDirectory);
 		if(!file.exists()){
 			file.mkdirs();
 		}
-		logfilePath = logDirectory + "/" + date + ".log";
-		runtimefilePath = logDirectory + "/runtimes.log";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmss");
+		do {
+			this.date = sdf.format(new Date());
+			logfilePath = new File(logDirectory, date + ".log");
+		}
+		while(logfilePath.exists());
+		runtimefilePath = new File(logDirectory, "/runtimes.log");
 	}
 
 	private boolean PRINT_TO_CONSOLE = false;
@@ -61,7 +63,7 @@ public class RuntimeBenchmarkReport {
 
 	private void createReport() {
 		try {
-			Files.write(Paths.get(logfilePath), new String().getBytes(), StandardOpenOption.CREATE_NEW);
+			Files.write(logfilePath.toPath(), new byte[0], StandardOpenOption.CREATE_NEW);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -97,7 +99,7 @@ public class RuntimeBenchmarkReport {
 	}
 
 	private void addToRuntimelog(long runtime) {
-		Path path = Paths.get(runtimefilePath);
+		Path path = runtimefilePath.toPath();
 		
 		try {
 			StandardOpenOption[] append = new StandardOpenOption[0];
@@ -118,14 +120,13 @@ public class RuntimeBenchmarkReport {
 
 		try {
 			StandardOpenOption[] append = new StandardOpenOption[0];
-			Path path = Paths.get(logfilePath);
-			if (path.toFile().exists()) {
+			if (logfilePath.exists()) {
 				append = new StandardOpenOption[] { StandardOpenOption.APPEND };
 			} else {
-				path.getParent().toFile().mkdirs();
+				logfilePath.getParentFile().mkdirs();
 			}
 
-			Files.write(path, info.toString().getBytes(), append);
+			Files.write(logfilePath.toPath(), info.toString().getBytes(), append);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
