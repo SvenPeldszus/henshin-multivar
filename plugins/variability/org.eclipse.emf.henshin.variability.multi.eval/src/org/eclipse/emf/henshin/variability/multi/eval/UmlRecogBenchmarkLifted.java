@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.henshin.interpreter.impl.EGraphImpl;
 import org.eclipse.emf.henshin.model.Module;
 import org.eclipse.emf.henshin.model.Rule;
@@ -77,7 +78,8 @@ public class UmlRecogBenchmarkLifted extends UmlRecogBenchmark {
 		Resource res1 = rs.getResource(exampleID + "/" + FILE_NAME_INSTANCE_1);
 		Resource res2 = rs.getResource(exampleID + "/" + FILE_NAME_INSTANCE_2);
 		EObject diff = rs.getEObject(exampleID + "/" + FILE_NAME_INSTANCE_DIFF);
-
+		EcoreUtil.resolveAll(rs);
+		
 		List<EObject> roots = new ArrayList<EObject>();
 		roots.addAll(res1.getContents());
 		roots.addAll(res2.getContents());

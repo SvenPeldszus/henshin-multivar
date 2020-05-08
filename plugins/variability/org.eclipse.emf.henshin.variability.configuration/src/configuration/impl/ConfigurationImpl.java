@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
@@ -191,7 +192,7 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	
 	private void updateAllFeatures() {
 		Map<String, FeatureBinding> bindings = getBindings();
-		List<String> annotationFeatures = VariabilityFactory.INSTANCE.createVariabilityRule(rule).getFeatures();
+		Set<String> annotationFeatures = VariabilityFactory.INSTANCE.createVariabilityRule(rule).getFeatures();
 		EList<Feature> oldFeatures = getFeatures();
 		features.clear();
 		for (String featureName : annotationFeatures) {
@@ -210,7 +211,7 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	@Override
 	public boolean addFeature(Feature feature) {
 		disableContentAdapter();
-		List<String> annotationFeatures = VariabilityFactory.INSTANCE.createVariabilityRule(rule).getFeatures();
+		Set<String> annotationFeatures = VariabilityFactory.INSTANCE.createVariabilityRule(rule).getFeatures();
 		String featureAnnotationValue = "";
 		if (annotationFeatures != null && !annotationFeatures.isEmpty()) {
 			featureAnnotationValue = String.join(", ", annotationFeatures);
@@ -245,7 +246,7 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	public boolean removeFeature(final Feature feature) {
 		disableContentAdapter();
 		if (feature != null) {
-			List<String> annotationFeatures = VariabilityFactory.INSTANCE.createVariabilityRule(rule).getFeatures();
+			Set<String> annotationFeatures = VariabilityFactory.INSTANCE.createVariabilityRule(rule).getFeatures();
 			String featureAnnotationValue = "";
 			for (String annotationFeature : annotationFeatures) {
 				if (!annotationFeature.equals(feature.getName())) {					

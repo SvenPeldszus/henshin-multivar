@@ -49,6 +49,7 @@ public class UmlRecogBenchmarkClassic extends UmlRecogBenchmark {
 				FILE_NAME_INSTANCE_DIFF);
 
 		for (String example : examples) {
+			System.out.println("Run: "+example);
 			try {
 				new UmlRecogBenchmarkClassic().runPerformanceBenchmark(module, example, reporter);
 			} catch (IOException e) {
@@ -83,7 +84,7 @@ public class UmlRecogBenchmarkClassic extends UmlRecogBenchmark {
 		int graphInitially = graph.size();
 		Engine engine = new EngineImpl();
 		// engine.getOptions().put(Engine. OPTION_SORT_VARIABLES, false);
-		List<Rule> detectedRules = new ArrayList<Rule>();
+		List<Rule> detectedRules = new ArrayList<>();
 		
 		System.gc();
 		long startTime = System.currentTimeMillis();

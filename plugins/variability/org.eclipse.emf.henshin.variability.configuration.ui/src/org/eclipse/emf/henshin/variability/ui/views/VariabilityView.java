@@ -1,6 +1,7 @@
 package org.eclipse.emf.henshin.variability.ui.views;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -618,7 +619,7 @@ public class VariabilityView extends ViewPart
 				if (event.detail == 0) {
 					if (!configurationProvider.isFavorite(config)) {
 						Rule rule = VariabilityModelHelper.getRuleForEditPart(selectedRuleEditPart);
-						ArrayList<String> favoriteNames = new ArrayList<String>();
+						Set<String> favoriteNames = new HashSet<>();
 						Set<Favorite> favorites = configurationProvider.getFavorites(rule);
 
 						if (favorites != null) {

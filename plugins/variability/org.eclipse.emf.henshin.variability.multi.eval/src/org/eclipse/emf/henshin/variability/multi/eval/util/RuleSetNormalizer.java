@@ -47,7 +47,7 @@ public class RuleSetNormalizer {
 	}
 
 	public static List<Rule> prepareRules(Module module) {
-		List<Rule> rules = new ArrayList<Rule>();
+		List<Rule> rules = new ArrayList<>();
 		for (Rule rule : module.getAllRules()) {
 			rules.add(normalizeRule(rule));
 		}

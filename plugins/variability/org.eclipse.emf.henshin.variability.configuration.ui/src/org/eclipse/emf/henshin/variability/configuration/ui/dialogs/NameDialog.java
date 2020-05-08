@@ -1,7 +1,7 @@
 package org.eclipse.emf.henshin.variability.configuration.ui.dialogs;
 
-import java.util.List;
 import java.util.PropertyResourceBundle;
+import java.util.Set;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.henshin.variability.ui.Activator;
@@ -35,9 +35,9 @@ public class NameDialog extends Dialog {
 	
 	private Text txtName;
 	private Label lblError;
-	private List<String> takenNames;
+	private Set<String> takenNames;
 	
-	public NameDialog(Shell parentShell, String dialogContext, List<String> takenNames) {
+	public NameDialog(Shell parentShell, String dialogContext, Set<String> takenNames) {
 		super(parentShell);
 		PropertyResourceBundle properties = Activator.getProperties();
 		this.title = properties.getString("_Dialog_Name_Title_" + dialogContext);

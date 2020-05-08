@@ -1,12 +1,12 @@
 package org.eclipse.emf.henshin.variability.wrapper;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -50,10 +50,10 @@ import aima.core.logic.propositional.visitors.SymbolCollector;
  */
 public class VariabilityRule extends EObjectImpl implements Rule {
 	final Rule rule;
-	final Annotation featureModel;
-	final Annotation injectiveMatchingPresenceCondition;
-	final Annotation features;
-	
+	private final Annotation featureModelAnnotation;
+	private final Annotation injectiveMatchingPresenceConditionAnnotation;
+	private final Annotation featureAnnotation;
+
 	static Annotation[] addVariabilityToRule(Rule rule, boolean transactional) {
 		Annotation[] result = new Annotation[3];
 		Annotation featModel = null;
@@ -76,36 +76,38 @@ public class VariabilityRule extends EObjectImpl implements Rule {
 				break;
 			}
 		}
-		
-		if(featModel != null) {
+
+		if (featModel != null) {
 			result[0] = featModel;
 		} else if (transactional) {
 			result[0] = VariabilityTransactionHelper.addAnnotation(rule, VariabilityConstants.FEATURE_MODEL, "");
 		} else {
 			result[0] = VariabilityHelper.addAnnotation(rule, VariabilityConstants.FEATURE_MODEL, "");
 		}
-		
-		if(injMatPreCon != null) {
+
+		if (injMatPreCon != null) {
 			result[1] = injMatPreCon;
 		} else if (transactional) {
-			result[1] = VariabilityTransactionHelper.addAnnotation(rule, VariabilityConstants.INJECTIVE_MATCHING_PC, "");
+			result[1] = VariabilityTransactionHelper.addAnnotation(rule, VariabilityConstants.INJECTIVE_MATCHING_PC,
+					"");
 		} else {
 			result[1] = VariabilityHelper.addAnnotation(rule, VariabilityConstants.INJECTIVE_MATCHING_PC, "");
 		}
-		
-		if(feats != null) {
+
+		if (feats != null) {
 			result[2] = feats;
 		} else if (transactional) {
 			result[2] = VariabilityTransactionHelper.addAnnotation(rule, VariabilityConstants.FEATURES, "");
 		} else {
 			result[2] = VariabilityHelper.addAnnotation(rule, VariabilityConstants.FEATURES, "");
 		}
-		
+
 		return result;
 	}
-	
+
 	/**
 	 * Returns the original {@link org.eclipse.emf.henshin.model.Rule}.
+	 * 
 	 * @return the rule.
 	 */
 	public Rule getRule() {
@@ -113,39 +115,58 @@ public class VariabilityRule extends EObjectImpl implements Rule {
 	}
 
 	/**
-	 * Creates a new {@link org.eclipse.emf.henshin.model.Rule} and makes it variability aware.
+	 * Creates a new {@link org.eclipse.emf.henshin.model.Rule} and makes it
+	 * variability aware.
 	 */
 	VariabilityRule() {
 		this(HenshinFactory.eINSTANCE.createRule());
 	}
-	
+
 	/**
-	 * Creates a new {@link org.eclipse.emf.henshin.model.Rule} with the given name and makes it variability aware.
+	 * Creates a new {@link org.eclipse.emf.henshin.model.Rule} with the given name
+	 * and makes it variability aware.
+	 * 
 	 * @param name the name of the new henshin rule
 	 */
 	VariabilityRule(String name) {
 		this(HenshinFactory.eINSTANCE.createRule(name));
 	}
-	
+
 	/**
-	 * Adds multiple {@link org.eclipse.emf.henshin.model.Annotation} to the given {@link org.eclipse.emf.henshin.model.Rule} in order to enable variability awareness.
+	 * Adds multiple {@link org.eclipse.emf.henshin.model.Annotation} to the given
+	 * {@link org.eclipse.emf.henshin.model.Rule} in order to enable variability
+	 * awareness.
+	 * 
 	 * @param rule
 	 */
 	VariabilityRule(Rule rule) {
 		this(rule, false);
 	}
-	
+
 	/**
-	 * Adds multiple {@link org.eclipse.emf.henshin.model.Annotation} to the given {@link org.eclipse.emf.henshin.model.Rule} in order to enable variability awareness.
+	 * Adds multiple {@link org.eclipse.emf.henshin.model.Annotation} to the given
+	 * {@link org.eclipse.emf.henshin.model.Rule} in order to enable variability
+	 * awareness.
+	 * 
 	 * @param rule
 	 * @param transactional
 	 */
 	VariabilityRule(Rule rule, boolean transactional) {
 		this.rule = rule;
 		Annotation[] annos = addVariabilityToRule(rule, transactional);
-		featureModel = annos[0];
-		injectiveMatchingPresenceCondition = annos[1];
-		features = annos[2];
+		featureModelAnnotation = annos[0];
+		injectiveMatchingPresenceConditionAnnotation = annos[1];
+		featureAnnotation = annos[2];
+	}
+
+	/**
+	 * Creates a feature set from the comma separated feature string
+	 * 
+	 * @param featureString A comma separated list of feature names
+	 * @return A set of the features in the string
+	 */
+	public Set<String> toFeatureSet(String featureString) {
+		return new HashSet<>(Stream.of(featureString.split(",")).map(String::trim).collect(Collectors.toSet()));
 	}
 
 	/**
@@ -154,7 +175,7 @@ public class VariabilityRule extends EObjectImpl implements Rule {
 	 * @return the feature model of this Rule.
 	 */
 	public String getFeatureModel() {
-		return featureModel.getValue();
+		return featureModelAnnotation.getValue();
 	}
 
 	/**
@@ -163,7 +184,7 @@ public class VariabilityRule extends EObjectImpl implements Rule {
 	 * @param featureModelString the feature model to be set for this Rule.
 	 */
 	public void setFeatureModel(String featureModelString) {
-		featureModel.setValue(featureModelString);
+		featureModelAnnotation.setValue(featureModelString);
 		// TODO: Update list of features
 	}
 
@@ -173,7 +194,7 @@ public class VariabilityRule extends EObjectImpl implements Rule {
 	 * @return the injective matching presence condition of this Rule.
 	 */
 	public String getInjectiveMatchingPresenceCondition() {
-		return injectiveMatchingPresenceCondition.getValue();
+		return injectiveMatchingPresenceConditionAnnotation.getValue();
 	}
 
 	/**
@@ -183,7 +204,7 @@ public class VariabilityRule extends EObjectImpl implements Rule {
 	 *                  Rule.
 	 */
 	public void setInjectiveMatchingPresenceCondition(String condition) {
-		injectiveMatchingPresenceCondition.setValue(condition);
+		injectiveMatchingPresenceConditionAnnotation.setValue(condition);
 	}
 
 	/**
@@ -191,21 +212,8 @@ public class VariabilityRule extends EObjectImpl implements Rule {
 	 * 
 	 * @return an {@link java.util.List} containing this Rule's variability points.
 	 */
-	public List<String> getFeatures() {
-		if (features.getValue() == null) {
-			return null;
-		}
-
-		if (!features.getValue().isEmpty()) {
-			List<String> featureList = Arrays.asList(features.getValue().split(","));
-			List<String> result = new ArrayList<String>();
-			for (String string : featureList) {
-				result.add(string.trim());
-			}
-			return Collections.unmodifiableList(result);
-		} else {
-			return Collections.unmodifiableList(new ArrayList<String>());
-		}
+	public Set<String> getFeatures() {
+		return toFeatureSet(featureAnnotation.getValue());
 	}
 
 	/**
@@ -214,7 +222,7 @@ public class VariabilityRule extends EObjectImpl implements Rule {
 	 * @param featureString the string containing all features
 	 */
 	public void setFeatures(String featureString) {
-		features.setValue(featureString);
+		featureAnnotation.setValue(String.join(",", toFeatureSet(featureString)));
 	}
 
 	/**
@@ -222,10 +230,10 @@ public class VariabilityRule extends EObjectImpl implements Rule {
 	 * 
 	 * @param featureList the list containing all features
 	 */
-	public void setFeatures(List<String> featureList) {
-		for (String feature : featureList) {
-			addFeature(feature);
-		}
+	public void setFeatures(Set<String> featureList) {
+		Set<String> sanitized = featureList.parallelStream().filter(Objects::nonNull)
+				.map(String::trim).filter(s -> !s.isEmpty()).collect(Collectors.toSet());
+		featureAnnotation.setValue(String.join(",", sanitized));
 	}
 
 	/**
@@ -234,13 +242,12 @@ public class VariabilityRule extends EObjectImpl implements Rule {
 	 * @param feature the variability point to be added to this
 	 */
 	public void addFeature(String feature) {
-		if (features.getValue() == null) {
-			features.setValue("");
+		Set<String> features = toFeatureSet(feature);
+		String trimmed = feature.trim();
+		if (!trimmed.isEmpty()) {
+			features.add(trimmed);
 		}
-
-		String featuresString = features.getValue();
-		featuresString += (featuresString.length() > 0) ? "," + features : features;
-		features.setValue(featuresString);
+		featureAnnotation.setValue(String.join(",", features));
 	}
 
 	/**
@@ -249,45 +256,32 @@ public class VariabilityRule extends EObjectImpl implements Rule {
 	 * @param variabilityPoint the variability point to be removed.
 	 */
 	public void removeFeature(String feature) {
-		if (features.getValue() == null) {
-			return;
+		Set<String> features = getFeatures();
+		if(features.remove(feature.trim())) {
+			featureAnnotation.setValue(String.join(",", features));
 		}
-
-		List<String> featureList = new ArrayList<String>(Arrays.asList(features.getValue().split(",")));
-		featureList.remove(feature);
-		features.setValue(String.join(",", featureList));
 	}
 
-	String oldFeatureModel = "";
-	String oldFeatures = "";
-	List<String> missingFeatures = new ArrayList<String>();;
-
 	public boolean hasMissingFeatures() {
-		calculateMissingFeatureNames();
-		return missingFeatures == null || !missingFeatures.isEmpty();
+		return !calculateMissingFeatureNames().isEmpty();
 	}
 
 	public String[] getMissingFeatures() {
-		calculateMissingFeatureNames();
-		return missingFeatures.toArray(new String[0]);
+		return calculateMissingFeatureNames().toArray(new String[0]);
 	}
 
-	private void calculateMissingFeatureNames() {
+	private Set<String> calculateMissingFeatureNames() {
 		String currentModel = getFeatureModel();
-		if (!currentModel.trim().equals(oldFeatureModel) || !oldFeatures.equals(features.getValue())) {
-			Sentence sentence = FeatureExpression.getExpr(currentModel);
-			missingFeatures.clear();
-			Set<PropositionSymbol> symbols = SymbolCollector.getSymbolsFrom(sentence);
-			List<String> definedFeatures = getFeatures();
-			for (PropositionSymbol symbol : symbols) {
-				String symbolName = symbol.getSymbol();
-				if (!definedFeatures.contains(symbolName)) {
-					missingFeatures.add(symbolName);
-				}
+		Sentence sentence = FeatureExpression.getExpr(currentModel);
+		Set<PropositionSymbol> symbols = SymbolCollector.getSymbolsFrom(sentence);
+		Set<String> missingFeatures = new HashSet<>();
+		for (PropositionSymbol symbol : symbols) {
+			String symbolName = symbol.getSymbol().trim();
+			if (!getFeatures().contains(symbolName)) {
+				missingFeatures.add(symbolName);
 			}
-			oldFeatureModel = currentModel.trim();
-			oldFeatures = features.getValue();
 		}
+		return missingFeatures;
 	}
 
 	/**

@@ -113,8 +113,10 @@ public class LoadingHelper {
 				module.getUnits().addAll(mod.getUnits());
 			}
 		}
-
-		module.eClass();
+		if(module == null) {
+			throw new IllegalStateException("No rule loaded!");
+		}
+		
 		module.getUnits()
 				.retainAll(module.getUnits().stream().filter(u -> u instanceof Rule).collect(Collectors.toSet()));
 		RuleSetNormalizer.prepareRules(module);

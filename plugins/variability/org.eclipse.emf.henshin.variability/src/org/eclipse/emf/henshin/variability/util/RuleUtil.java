@@ -67,7 +67,7 @@ public class RuleUtil {
 			return true;
 		}
 		VariabilityRule varRule = VariabilityFactory.INSTANCE.createVariabilityRule(rule);
-		List<String> features = varRule.getFeatures();
+		Set<String> features = varRule.getFeatures();
 
 		Stream<PropositionSymbol> fm = SymbolCollector
 				.getSymbolsFrom(FeatureExpression.getExpr(varRule.getFeatureModel())).parallelStream();

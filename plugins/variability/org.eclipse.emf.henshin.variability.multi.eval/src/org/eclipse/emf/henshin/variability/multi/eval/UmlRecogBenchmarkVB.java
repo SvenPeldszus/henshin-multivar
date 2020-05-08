@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.henshin.interpreter.impl.EGraphImpl;
 import org.eclipse.emf.henshin.model.Module;
 import org.eclipse.emf.henshin.model.Rule;
@@ -21,6 +22,7 @@ import org.eclipse.emf.henshin.variability.multi.VBExecution;
 import org.eclipse.emf.henshin.variability.multi.eval.util.LoadingHelper;
 import org.eclipse.emf.henshin.variability.multi.eval.util.RuntimeBenchmarkReport;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityFactory;
+import org.junit.Test;
 import org.eclipse.emf.henshin.variability.multi.eval.util.LoadingHelper.RuleSet;
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
 import de.ovgu.featureide.fm.core.init.FMCoreLibrary;
@@ -35,6 +37,11 @@ public class UmlRecogBenchmarkVB extends UmlRecogBenchmark {
 		FILE_PATH_RULES = "vbrules";
 	}
 
+	@Test
+	public void test() {
+		main(new String[0]);
+	}
+	
 	public static void main(String[] args) {
 		FMCoreLibrary.getInstance().install();
 		for (RuleSet set : RuleSet.values()) {
@@ -74,8 +81,9 @@ public class UmlRecogBenchmarkVB extends UmlRecogBenchmark {
 		Resource res1 = rs.getResource(exampleID + "/" + FILE_NAME_INSTANCE_1);
 		Resource res2 = rs.getResource(exampleID + "/" + FILE_NAME_INSTANCE_2);
 		EObject diff = rs.getEObject(exampleID + "/" + FILE_NAME_INSTANCE_DIFF);
+		EcoreUtil.resolveAll(rs);
 
-		List<EObject> roots = new ArrayList<EObject>();
+		List<EObject> roots = new ArrayList<>();
 		roots.addAll(res1.getContents());
 		roots.addAll(res2.getContents());
 		roots.add(diff);
