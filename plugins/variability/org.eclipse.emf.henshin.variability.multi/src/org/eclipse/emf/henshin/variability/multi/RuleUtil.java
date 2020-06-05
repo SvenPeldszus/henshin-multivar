@@ -26,7 +26,7 @@ import org.eclipse.emf.henshin.variability.util.SatChecker;
 import org.eclipse.emf.henshin.variability.matcher.VariabilityAwareMatch;
 import org.eclipse.emf.henshin.variability.matcher.VariabilityAwareMatcher.MatchingInfo;
 import org.eclipse.emf.henshin.variability.matcher.VariabilityAwareMatcher.RuleInfo;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityFactory;
+import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 import org.sat4j.specs.ISolver;
 import org.sat4j.specs.TimeoutException;
 import aima.core.logic.propositional.kb.data.Clause;
@@ -83,7 +83,7 @@ public class RuleUtil {
 	public static Status calculateTrueAndFalseFeatures(Rule rule, RuleInfo ruleInfo,
 			List<List<String>> trueFeatureList, List<List<String>> falseFeatureList) {
 		// Line 5: calculate Phi_rule
-		List<String> features = VariabilityFactory.INSTANCE.createVariabilityRule(rule).getFeatures().stream()
+		List<String> features = VariabilityHelper.INSTANCE.getFeatures(rule).stream()
 				.map(f -> pattern.matcher(f).replaceAll("definedEx($2)")).collect(Collectors.toList());
 
 		

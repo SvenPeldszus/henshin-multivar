@@ -18,7 +18,7 @@ import org.eclipse.emf.henshin.model.Module;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.model.resource.HenshinResourceSet;
 import org.eclipse.emf.henshin.variability.util.RuleUtil;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityFactory;
+import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
@@ -65,7 +65,7 @@ public class TestCreator {
 					continue;
 				}
 				Map<String, Boolean> configuration = getFeatureConfiguration(application);
-				if (!VariabilityFactory.INSTANCE.createVariabilityRule(rule).getFeatures().containsAll(configuration.keySet())) {
+				if (!VariabilityHelper.INSTANCE.getFeatures(rule).containsAll(configuration.keySet())) {
 					System.err.println("Skip as there are bindings for unknown features: "
 							+ String.join(", ", configuration.keySet()));
 					continue;

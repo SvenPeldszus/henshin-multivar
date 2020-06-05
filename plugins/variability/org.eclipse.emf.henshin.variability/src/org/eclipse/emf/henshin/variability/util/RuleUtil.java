@@ -13,9 +13,7 @@ import org.eclipse.emf.henshin.model.Node;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.model.Unit;
 import org.eclipse.emf.henshin.variability.matcher.FeatureExpression;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityConstants;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityFactory;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityRule;
+import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 
 import aima.core.logic.propositional.parsing.ast.PropositionSymbol;
 import aima.core.logic.propositional.visitors.SymbolCollector;
@@ -29,9 +27,9 @@ import aima.core.logic.propositional.visitors.SymbolCollector;
 public class RuleUtil {
 
 	public static void removeElementsFromRule(Rule rule, List<GraphElement> elementsToRemove) {
-		Set<Node> nodes2delete = new HashSet<Node>();
-		Set<Edge> edges2delete = new HashSet<Edge>();
-		Set<Attribute> attribs2delete = new HashSet<Attribute>();
+		Set<Node> nodes2delete = new HashSet<>();
+		Set<Edge> edges2delete = new HashSet<>();
+		Set<Attribute> attribs2delete = new HashSet<>();
 
 		for (GraphElement o : elementsToRemove) {
 			if (o instanceof Node) {
@@ -54,28 +52,22 @@ public class RuleUtil {
 	}
 
 	public static boolean isVarRule(Unit unit) {
-		if (unit instanceof Rule) {
-			if (VariabilityFactory.INSTANCE.createVariabilityRule((Rule) unit).getFeatureModel() != null) {
-				return true;
-			}
-		}
-		return false;
+		return (unit instanceof Rule && VariabilityHelper.isVariabilityRule((Rule) unit));
 	}
 
 	public static boolean checkRule(Rule rule) {
 		if (!isVarRule(rule)) {
 			return true;
 		}
-		VariabilityRule varRule = VariabilityFactory.INSTANCE.createVariabilityRule(rule);
-		Set<String> features = varRule.getFeatures();
+		Set<String> features = VariabilityHelper.INSTANCE.getFeatures(rule);
 
 		Stream<PropositionSymbol> fm = SymbolCollector
-				.getSymbolsFrom(FeatureExpression.getExpr(varRule.getFeatureModel())).parallelStream();
-		Stream<PropositionSymbol> symbols = varRule.getAnnotations().parallelStream()
-				.filter(annot -> VariabilityConstants.PRESENCE_CONDITION.equals(annot.getKey()))
-				.flatMap(annot -> SymbolCollector.getSymbolsFrom(FeatureExpression.getExpr(annot.getValue()))
-						.parallelStream());
-		List<String> symbolNames = Stream.concat(fm, symbols).map(symbol -> symbol.getSymbol()).distinct()
+				.getSymbolsFrom(FeatureExpression.getExpr(VariabilityHelper.INSTANCE.getFeatureModel(rule)))
+				.parallelStream();
+		Stream<PropositionSymbol> symbols = SymbolCollector
+				.getSymbolsFrom(FeatureExpression.getExpr(VariabilityHelper.INSTANCE.getPresenceCondition(rule)))
+				.parallelStream();
+		List<String> symbolNames = Stream.concat(fm, symbols).map(PropositionSymbol::getSymbol).distinct()
 				.collect(Collectors.toList());
 
 		return features.containsAll(symbolNames);

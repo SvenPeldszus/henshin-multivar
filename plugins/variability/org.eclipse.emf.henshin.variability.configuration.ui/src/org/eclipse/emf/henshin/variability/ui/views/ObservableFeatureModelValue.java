@@ -8,9 +8,7 @@ import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.IValueChangeListener;
 import org.eclipse.emf.databinding.internal.EMFObservableValueDecorator;
 import org.eclipse.emf.henshin.model.Rule;
-import org.eclipse.emf.henshin.variability.wrapper.TransactionalVariabilityFactory;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityConstants;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityRule;
+import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityTransactionHelper;
 
 /**
@@ -87,9 +85,9 @@ public class ObservableFeatureModelValue<T> implements IObservableValue<String>{
 
 	@Override
 	public String getValue() {
-		VariabilityRule rule = getTargetVariabilityRule();
+		Rule rule = getTargetVariabilityRule();
 		if (rule != null) {
-			return rule.getFeatureModel();			
+			return VariabilityHelper.INSTANCE.getFeatureModel(rule);			
 		}
 		return value.getValue();
 	}
@@ -97,9 +95,9 @@ public class ObservableFeatureModelValue<T> implements IObservableValue<String>{
 	@Override
 	public void setValue(String value) {
 		shouldUpdate = false;
-		VariabilityRule rule = getTargetVariabilityRule();
+		Rule rule = getTargetVariabilityRule();
 		if (rule != null) {
-			VariabilityTransactionHelper.setAnnotationValue(rule, VariabilityConstants.FEATURE_MODEL, value);
+			VariabilityTransactionHelper.INSTANCE.setFeatureModel(rule, value);
 		}
 		shouldUpdate = true;
 	}
@@ -115,12 +113,13 @@ public class ObservableFeatureModelValue<T> implements IObservableValue<String>{
 		
 	}
 	
-	private VariabilityRule getTargetVariabilityRule() {
+	private Rule getTargetVariabilityRule() {
 		if (this.value instanceof EMFObservableValueDecorator) {
 			EMFObservableValueDecorator emfValue = (EMFObservableValueDecorator) this.value;
 			
-			if (emfValue.getObserved() != null &&  emfValue.getObserved() instanceof Rule) {
-				return TransactionalVariabilityFactory.INSTANCE.createVariabilityRule((Rule) emfValue.getObserved());
+			Object observed = emfValue.getObserved();
+			if (observed instanceof Rule) {
+				return (Rule) observed;
 			}
 		}
 		return null;

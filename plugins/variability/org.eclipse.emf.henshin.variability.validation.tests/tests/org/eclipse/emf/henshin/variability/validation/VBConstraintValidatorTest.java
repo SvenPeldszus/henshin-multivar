@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 
 import org.eclipse.core.runtime.IStatus;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ class VBConstraintValidatorTest {
 	 */
 	@Test
 	void testCheckConstraintAllOK() {
-		IStatus status = AbstractVBValidator.checkConstraint(Arrays.asList("A", "B"), "A && B");
+		IStatus status = AbstractVBValidator.checkConstraint(new HashSet<>(Arrays.asList("A", "B")), "A && B");
 		System.out.println(status.getMessage());
 		assertEquals(status.getSeverity(), IStatus.OK);
 	}
@@ -34,7 +35,7 @@ class VBConstraintValidatorTest {
 	 */
 	@Test
 	void testCheckConstraintUnknownFeatures() {
-		IStatus status = AbstractVBValidator.checkConstraint(Collections.emptyList(), "A && B");
+		IStatus status = AbstractVBValidator.checkConstraint(Collections.emptySet(), "A && B");
 		System.out.println(status.getMessage());
 		assertEquals(status.getSeverity(), IStatus.ERROR);
 	}
@@ -45,7 +46,7 @@ class VBConstraintValidatorTest {
 	 */
 	@Test
 	void testCheckConstraintInvalidConstraint() {
-		IStatus status = AbstractVBValidator.checkConstraint(Arrays.asList("A", "B"), "Hello World");
+		IStatus status = AbstractVBValidator.checkConstraint(new HashSet<>(Arrays.asList("A", "B")), "Hello World");
 		System.out.println(status.getMessage());
 		assertEquals(status.getSeverity(), IStatus.ERROR);
 	}

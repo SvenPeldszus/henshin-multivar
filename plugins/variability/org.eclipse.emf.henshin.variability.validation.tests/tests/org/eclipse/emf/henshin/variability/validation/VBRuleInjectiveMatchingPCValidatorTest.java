@@ -131,7 +131,7 @@ class VBRuleInjectiveMatchingPCValidatorTest extends AbstractVBValidatorTest {
 	 */
 	private Annotation createInjectiveMatchingPC(String pc) {
 		Annotation annotation = HenshinFactory.eINSTANCE.createAnnotation();
-		annotation.setKey(VariabilityConstants.INJECTIVE_MATCHING_PC);
+		annotation.setKey(VariabilityConstants.INJECTIVE_MATCHING_PC.toString());
 		annotation.setValue(pc);
 		return annotation;
 	}

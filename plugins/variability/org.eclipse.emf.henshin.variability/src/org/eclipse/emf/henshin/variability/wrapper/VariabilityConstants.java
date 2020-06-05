@@ -6,9 +6,20 @@ package org.eclipse.emf.henshin.variability.wrapper;
  * @author Stefan Schulz
  *
  */
-public interface VariabilityConstants {
-	public String PRESENCE_CONDITION = "presenceCondition";
-	public String FEATURE_MODEL = "featureModel";
-	public String INJECTIVE_MATCHING_PC = "injectiveMatchingPresenceCondition";
-	public String FEATURES = "features";
+public enum VariabilityConstants {
+	PRESENCE_CONDITION("presenceCondition"), 
+	FEATURE_MODEL("featureModel"),
+	INJECTIVE_MATCHING_PC("injectiveMatchingPresenceCondition"), 
+	FEATURES("features");
+
+	private final String value;
+
+	private VariabilityConstants(String value) {
+		this.value = value;
+	}
+
+	@Override
+	public String toString() {
+		return this.value;
+	}
 }

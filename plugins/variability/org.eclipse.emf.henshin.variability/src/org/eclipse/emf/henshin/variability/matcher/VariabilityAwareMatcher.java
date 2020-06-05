@@ -27,10 +27,7 @@ import org.eclipse.emf.henshin.model.Node;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.variability.InconsistentRuleException;
 import org.eclipse.emf.henshin.variability.util.RuleUtil;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityFactory;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityGraphElement;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityNode;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityRule;
+import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 
 import aima.core.logic.propositional.parsing.ast.Sentence;
 
@@ -133,12 +130,10 @@ public class VariabilityAwareMatcher {
 		// Per definition, mapped nodes must have the same presence condition
 		// in the LHS and the RHS.
 		for (Mapping mapping : rule.getMappings()) {
-
-			VariabilityNode origin = VariabilityFactory.INSTANCE.createVariabilityNode(mapping.getOrigin());
-			VariabilityNode image = VariabilityFactory.INSTANCE.createVariabilityNode(mapping.getImage());
-
-			if (!origin.getPresenceCondition().equals(image.getPresenceCondition())) {
-				image.setPresenceCondition(origin.getPresenceCondition());
+			Node image = mapping.getImage();
+			String originPresenceCondition = VariabilityHelper.INSTANCE.getPresenceCondition(mapping.getOrigin());
+			if (!originPresenceCondition.equals(VariabilityHelper.INSTANCE.getPresenceCondition(image))) {
+				VariabilityHelper.INSTANCE.setPresenceCondition(image, originPresenceCondition);
 			}
 		}
 	}
@@ -294,7 +289,7 @@ public class VariabilityAwareMatcher {
 	}
 
 	public static class RuleInfo {
-		VariabilityRule rule;
+		Rule rule;
 		Map<String, Sentence> usedExpressions;
 		Map<Sentence, Set<GraphElement>> pc2elem;
 		Map<Node, Set<Mapping>> node2Mapping;
@@ -302,22 +297,12 @@ public class VariabilityAwareMatcher {
 		Sentence injectiveMatching;
 
 		public RuleInfo(Rule rule) {
-			this.rule = VariabilityFactory.INSTANCE.createVariabilityRule(rule);
-			this.featureModel = FeatureExpression.getExpr(this.rule.getFeatureModel());
-			String injective = this.rule.getInjectiveMatchingPresenceCondition();
-			if (injective == null)
-				injective = rule.isInjectiveMatching() + "";
-			this.injectiveMatching = FeatureExpression.getExpr(injective);
-
-			populateMaps();
-		}
-		
-		public RuleInfo(VariabilityRule rule) {
 			this.rule = rule;
-			this.featureModel = FeatureExpression.getExpr(this.rule.getFeatureModel());
-			String injective = this.rule.getInjectiveMatchingPresenceCondition();
-			if (injective == null)
-				injective = rule.isInjectiveMatching() + "";
+			this.featureModel = FeatureExpression.getExpr(VariabilityHelper.INSTANCE.getFeatureModel(this.rule));
+			String injective = VariabilityHelper.INSTANCE.getInjectiveMatchingPresenceCondition(this.rule);
+			if (injective == null) {
+				injective = Boolean.toString(rule.isInjectiveMatching());
+			}
 			this.injectiveMatching = FeatureExpression.getExpr(injective);
 
 			populateMaps();
@@ -343,9 +328,8 @@ public class VariabilityAwareMatcher {
 			while (it.hasNext()) {
 				EObject o = it.next();
 				if (o instanceof Node || o instanceof Edge || o instanceof Attribute) {
-					VariabilityGraphElement g = VariabilityFactory.INSTANCE.createVariabilityGraphElement((GraphElement) o);
-					if (!RuleInfo.presenceConditionEmpty(g)) {
-						String pc = g.getPresenceCondition();
+					String pc = VariabilityHelper.INSTANCE.getPresenceConditionIfModelElement((GraphElement) o);
+					if (!RuleInfo.presenceConditionEmpty(pc)) {
 						Sentence expr = FeatureExpression.getExpr(pc);
 						usedExpressions.put(pc, expr);
 						if (!pc2elem.containsKey(expr))
@@ -388,8 +372,7 @@ public class VariabilityAwareMatcher {
 			return injectiveMatching;
 		}
 
-		private static boolean presenceConditionEmpty(GraphElement elem) {
-			String presenceCondition = VariabilityFactory.INSTANCE.createVariabilityGraphElement(elem).getPresenceCondition();
+		private static boolean presenceConditionEmpty(String presenceCondition) {
 			return (presenceCondition == null) || presenceCondition.isEmpty();
 		}
 

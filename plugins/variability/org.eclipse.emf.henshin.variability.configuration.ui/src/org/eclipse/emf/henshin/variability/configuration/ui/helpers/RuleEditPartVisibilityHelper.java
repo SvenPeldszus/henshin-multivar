@@ -10,8 +10,9 @@ import org.eclipse.emf.henshin.diagram.edit.parts.RuleEditPart;
 import org.eclipse.emf.henshin.model.Attribute;
 import org.eclipse.emf.henshin.model.Edge;
 import org.eclipse.emf.henshin.model.GraphElement;
+import org.eclipse.emf.henshin.model.ModelElement;
 import org.eclipse.emf.henshin.variability.matcher.FeatureExpression;
-import org.eclipse.emf.henshin.variability.wrapper.TransactionalVariabilityFactory;
+import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 
 import aima.core.logic.propositional.parsing.ast.Sentence;
 import configuration.Configuration;
@@ -46,8 +47,11 @@ public class RuleEditPartVisibilityHelper {
 
 		@Override
 		public boolean shouldConceal(GraphElement graphElement) {
-			String pc = TransactionalVariabilityFactory.INSTANCE.createVariabilityGraphElement(graphElement).getPresenceCondition();
-			return pc != null && !pc.isEmpty();
+			if(graphElement instanceof ModelElement) {
+				String pc = VariabilityHelper.INSTANCE.getPresenceCondition((ModelElement) graphElement);
+				return pc != null && !pc.isEmpty();
+			}
+			throw new IllegalStateException();
 		}
 	}
 
@@ -62,7 +66,14 @@ public class RuleEditPartVisibilityHelper {
 		@Override
 		public boolean shouldConceal(GraphElement graphElement) {
 			boolean result = REVEAL;
-			String pc = TransactionalVariabilityFactory.INSTANCE.createVariabilityGraphElement(graphElement).getPresenceCondition();
+			String pc;
+			if(graphElement instanceof ModelElement) {
+				pc = VariabilityHelper.INSTANCE.getPresenceCondition((ModelElement) graphElement);
+
+			}
+			else {
+				throw new IllegalStateException();
+			}
 			if (pc != null && !pc.isEmpty()) {
 				Sentence expr = FeatureExpression.getExpr(pc);
 				result = FeatureExpression.contradicts(expr, configurationExpr);

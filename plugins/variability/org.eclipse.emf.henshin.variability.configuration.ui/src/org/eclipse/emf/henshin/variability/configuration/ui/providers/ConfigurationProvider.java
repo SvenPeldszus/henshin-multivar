@@ -9,8 +9,7 @@ import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.henshin.model.Rule;
-import org.eclipse.emf.henshin.variability.wrapper.TransactionalVariabilityFactory;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityRule;
+import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 
 import configuration.Configuration;
 import configuration.ConfigurationFactory;
@@ -135,15 +134,15 @@ public class ConfigurationProvider {
 		Configuration result = null;
 
 		if (rule != null) {
-			VariabilityRule varRule = TransactionalVariabilityFactory.INSTANCE.createVariabilityRule(rule);
 			ConfigurationFactory fac = ConfigurationFactoryImpl.init();
 			result = fac.createConfiguration();
-			result.setRule(varRule);
-			String featureModel = varRule.getFeatureModel();
+			result.setRule(rule);
+			String featureModel = VariabilityHelper.INSTANCE.getFeatureModel(rule);
 			EList<Feature> variabilityPoints = result.getFeatures();
 
-			if(varRule.getFeatures() != null) {
-				for(String variabilityPointName : varRule.getFeatures()) {
+			Set<String> features = VariabilityHelper.INSTANCE.getFeatures(rule);
+			if(!features.isEmpty()) {
+				for(String variabilityPointName : features) {
 					Feature vp = fac.createFeature();
 					vp.setName(variabilityPointName);
 					variabilityPoints.add(vp);

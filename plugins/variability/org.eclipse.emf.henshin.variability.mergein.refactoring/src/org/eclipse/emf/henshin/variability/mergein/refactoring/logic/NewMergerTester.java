@@ -17,11 +17,12 @@ import org.eclipse.emf.henshin.model.Graph;
 import org.eclipse.emf.henshin.model.GraphElement;
 import org.eclipse.emf.henshin.model.Mapping;
 import org.eclipse.emf.henshin.model.MappingList;
+import org.eclipse.emf.henshin.model.ModelElement;
 import org.eclipse.emf.henshin.model.Module;
 import org.eclipse.emf.henshin.model.Node;
 import org.eclipse.emf.henshin.model.Parameter;
 import org.eclipse.emf.henshin.model.Rule;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityFactory;
+import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 
 import mergeSuggestion.MergeRule;
 import mergeSuggestion.MergeRuleElement;
@@ -51,7 +52,7 @@ public abstract class NewMergerTester {
 		for (MergeRuleElement mre : mr.getElements()) {
 			String str = mre.getName() + ":";
 			for (GraphElement elem : mre.getReferenceElements()) {
-				str += " " + elem + "(" + VariabilityFactory.INSTANCE.createVariabilityGraphElement(elem).getPresenceCondition() + ")";
+				str += " " + elem + "(" + VariabilityHelper.INSTANCE.getPresenceCondition((ModelElement) elem) + ")";
 			}
 			System.out.println(str);
 		}

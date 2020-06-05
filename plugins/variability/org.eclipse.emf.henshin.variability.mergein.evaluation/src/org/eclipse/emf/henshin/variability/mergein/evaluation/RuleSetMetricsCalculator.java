@@ -13,10 +13,10 @@ import org.eclipse.emf.henshin.model.Attribute;
 import org.eclipse.emf.henshin.model.Edge;
 import org.eclipse.emf.henshin.model.Graph;
 import org.eclipse.emf.henshin.model.GraphElement;
+import org.eclipse.emf.henshin.model.ModelElement;
 import org.eclipse.emf.henshin.model.Node;
 import org.eclipse.emf.henshin.model.Rule;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityFactory;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityGraphElement;
+import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 
 public class RuleSetMetricsCalculator {
 	public RuleSetMetrics calculcate(Collection<Rule> ruleSet) {
@@ -160,10 +160,10 @@ public class RuleSetMetricsCalculator {
 	}
 
 	private boolean isAnnotated(GraphElement graphElement) {
-		VariabilityGraphElement ge = VariabilityFactory.INSTANCE.createVariabilityGraphElement(graphElement);
-		if (ge.getPresenceCondition() != null
-				&& !ge.getPresenceCondition().isEmpty()
-				&& !ge.getPresenceCondition().equals("true"))
+		String presenceCondition = VariabilityHelper.INSTANCE.getPresenceCondition((ModelElement) graphElement);
+		if (presenceCondition != null
+				&& !presenceCondition.isEmpty()
+				&& !presenceCondition.equals("true"))
 			return true;
 		else
 			return false;

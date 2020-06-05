@@ -13,7 +13,7 @@ import javax.script.ScriptException;
 /**
  * 
  * @author Daniel Strüber
- * @author Sven Peldszus 
+ * @author Sven Peldszus
  *
  */
 public class Logic {
@@ -113,8 +113,7 @@ public class Logic {
 		}
 		String lhs_trimmed = lhs.trim();
 		String rhs_trimmed = rhs.trim();
-		if (FALSE.equals(lhs_trimmed) || TRUE.equals(rhs_trimmed)
-				|| lhs_trimmed.equals(rhs_trimmed)) {
+		if (FALSE.equals(lhs_trimmed) || TRUE.equals(rhs_trimmed) || lhs_trimmed.equals(rhs_trimmed)) {
 			return TRUE_space;
 		}
 		if (FALSE.equals(rhs_trimmed)) {
@@ -192,8 +191,7 @@ public class Logic {
 		if (TRUE.equals(s1_trimmed) || TRUE.equals(s2_trimmed)) {
 			return Logic.TRUE_space;
 		}
-		if (Logic.negate(s1_trimmed).trim().equals(s2_trimmed)
-				|| Logic.negate(s2_trimmed).trim().equals(s1_trimmed)) {
+		if (Logic.negate(s1_trimmed).trim().equals(s2_trimmed) || Logic.negate(s2_trimmed).trim().equals(s1_trimmed)) {
 			return Logic.TRUE_space;
 		}
 		if (s1_trimmed.equals(s2_trimmed)) {
@@ -243,8 +241,7 @@ public class Logic {
 		if (FALSE.equals(s1_trimmed) || FALSE.equals(s2_trimmed)) {
 			return Logic.FALSE_space;
 		}
-		if (Logic.negate(s1_trimmed).trim().equals(s2_trimmed)
-				|| Logic.negate(s2_trimmed).trim().equals(s1_trimmed)) {
+		if (Logic.negate(s1_trimmed).trim().equals(s2_trimmed) || Logic.negate(s2_trimmed).trim().equals(s1_trimmed)) {
 			return Logic.FALSE_space;
 		}
 		final List<String> list = new ArrayList<String>();
@@ -297,8 +294,7 @@ public class Logic {
 								.replaceAll(String.valueOf(Logic.AND) + Logic.TRUE, "")
 								.replaceAll(Logic.TRUE + Logic.AND, "");
 						final String part1 = clause.substring(0, clause.indexOf(variable) + variable.length());
-						String part2 = clause.substring(clause.indexOf(variable) + variable.length(),
-								clause.length());
+						String part2 = clause.substring(clause.indexOf(variable) + variable.length(), clause.length());
 						part2 = part2.replaceAll(String.valueOf(Logic.AND) + Logic.NOT + variable, "");
 						part2 = part2.replaceAll(String.valueOf(Logic.AND) + variable, "");
 						clause = String.valueOf(part1) + part2;
@@ -316,15 +312,30 @@ public class Logic {
 		return newExpression;
 	}
 
-	public static Boolean reduce(String pc, List<String> trueFeatures, List<String> falseFeatures) throws ScriptException {
+	public static Boolean reduce(String pc, List<String> trueFeatures, List<String> falseFeatures)
+			throws ScriptException {
 		ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
-		for(String trueFeature : trueFeatures) {
+		for (String trueFeature : trueFeatures) {
 			engine.put(trueFeature, Boolean.TRUE);
 		}
-		for(String falseFeature : falseFeatures) {
+		for (String falseFeature : falseFeatures) {
 			engine.put(falseFeature, Boolean.FALSE);
 		}
-		
-		return (Boolean) engine.eval(pc);
+
+		Object result = engine.eval(pc);
+		if (result instanceof Boolean) {
+			return (Boolean) result;
+		} else if (result instanceof Integer) {
+			int number = (int) result;
+			if (number == 0) {
+				return false;
+			}
+			if (number == 1) {
+				return true;
+			}
+		}
+		throw new IllegalStateException("Unknown evaluation result:\n" + "Constraint: " + pc + "\n" + "True features: "
+				+ String.join(", ", trueFeatures) + "\n" + "False features: " + String.join(", ", falseFeatures) + "\n"
+				+ "Result: " + result);
 	}
 }

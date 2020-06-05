@@ -8,7 +8,6 @@ import org.eclipse.emf.henshin.model.ModelElement;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.variability.configuration.ui.helpers.VariabilityModelHelper;
 import org.eclipse.emf.henshin.variability.configuration.ui.providers.ConfigurationProvider;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityConstants;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityTransactionHelper;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.eclipse.gmf.runtime.notation.View;
@@ -38,7 +37,7 @@ public class MoveElementToConfigurationAction implements IActionDelegate {
 					Rule rule = graphElement.getGraph().getRule();
 					Configuration configuration = ConfigurationProvider.getInstance().getConfiguration(rule);
 					String presenceCondition = VariabilityModelHelper.getPresenceCondition(configuration);
-					VariabilityTransactionHelper.setAnnotationValue((ModelElement) graphElement, VariabilityConstants.PRESENCE_CONDITION, presenceCondition);
+					VariabilityTransactionHelper.INSTANCE.setPresenceCondition((ModelElement) graphElement, presenceCondition);
 				}
 			}
 		}

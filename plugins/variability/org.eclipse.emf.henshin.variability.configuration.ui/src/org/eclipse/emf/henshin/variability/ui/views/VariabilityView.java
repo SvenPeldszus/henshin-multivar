@@ -41,9 +41,7 @@ import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerBindingEd
 import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerComparator;
 import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerContentProvider;
 import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerNameEditingSupport;
-import org.eclipse.emf.henshin.variability.wrapper.TransactionalVariabilityFactory;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityConstants;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityRule;
+import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -185,10 +183,15 @@ public class VariabilityView extends ViewPart
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Rule rule = VariabilityModelHelper.getRuleForEditPart(selectedRuleEditPart);
+				Rule rule;
+				if (selectedRuleEditPart == null) {
+					rule = writableValue.doGetValue();
+				} else {
+					rule = VariabilityModelHelper.getRuleForEditPart(selectedRuleEditPart);
+				}
 
 				NameDialog dialog = new NameDialog(getViewSite().getShell(), "Feature",
-						TransactionalVariabilityFactory.INSTANCE.createVariabilityRule(rule).getFeatures());
+						VariabilityHelper.INSTANCE.getFeatures(rule));
 
 				if (dialog.open() == Window.OK) {
 					String featureName = dialog.getName().trim();
@@ -408,7 +411,7 @@ public class VariabilityView extends ViewPart
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				Rule rule = VariabilityModelHelper.getRuleForEditPart(selectedRuleEditPart);
-				String[] missingFeatures = config.getRule().getMissingFeatures();
+				String[] missingFeatures = VariabilityHelper.INSTANCE.getMissingFeatures(config.getRule());
 				for (String featureName : missingFeatures) {
 					Feature feature = ConfigurationFactory.eINSTANCE.createFeature();
 					feature.setName(featureName);
@@ -586,8 +589,7 @@ public class VariabilityView extends ViewPart
 				if (isChecked() && selectedRuleEditPart != null) {
 					super.run();
 					RuleEditPartVisibilityHelper.showConfiguredRule(selectedRuleEditPart, config,
-							TransactionalVariabilityFactory.INSTANCE.createVariabilityRule(config.getRule())
-									.getFeatureModel());
+							VariabilityHelper.INSTANCE.getFeatureModel(config.getRule()));
 					if (creationMode == CreationMode.SELECTION) {
 						updateEditPolicy(selectedRuleEditPart);
 					}
@@ -708,14 +710,9 @@ public class VariabilityView extends ViewPart
 			Annotation annotation = findModifiedAnnotation(event.getNotifications());
 			if (annotation != null) {
 				String value = annotation.getValue();
-				if ((annotation.getKey().equals(VariabilityConstants.FEATURE_MODEL)
-						|| annotation.getKey().equals(VariabilityConstants.FEATURES)) && value != null
-						&& !value.isEmpty()) {
-					if (config.getRule().hasMissingFeatures()) {
-						featureModelToolbar.setVisible(true);
-					} else {
-						featureModelToolbar.setVisible(false);
-					}
+				if (VariabilityHelper.isFeatureModelAnnotation(annotation)
+						|| VariabilityHelper.isFeaturesAnnotation(annotation) && value != null && !value.isEmpty()) {
+					featureModelToolbar.setVisible(VariabilityHelper.INSTANCE.hasMissingFeatures(config.getRule()));
 				}
 
 			}
@@ -738,7 +735,7 @@ public class VariabilityView extends ViewPart
 
 	@Override
 	public void setContent(Configuration config) {
-		VariabilityRule rule = config.getRule();
+		Rule rule = config.getRule();
 
 		TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(rule);
 		domain.addResourceSetListener(new ConfigurationListener());
@@ -752,7 +749,7 @@ public class VariabilityView extends ViewPart
 			showConfiguredRuleAction.run();
 		}
 
-		if (rule.getMissingFeatures().length > 0) {
+		if (VariabilityHelper.INSTANCE.getMissingFeatures(rule).length > 0) {
 			featureModelToolbar.setVisible(true);
 		} else {
 			featureModelToolbar.setVisible(false);

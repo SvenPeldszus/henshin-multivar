@@ -7,8 +7,7 @@ import org.eclipse.emf.henshin.model.Edge;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.variability.matcher.FeatureExpression;
 import org.eclipse.emf.henshin.variability.util.Logic;
-import org.eclipse.emf.henshin.variability.wrapper.TransactionalVariabilityFactory;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityNode;
+import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 import org.eclipse.gmf.runtime.notation.impl.ShapeImpl;
 
 import aima.core.logic.propositional.parsing.ast.Sentence;
@@ -35,7 +34,7 @@ public class VariabilityModelHelper {
 	}
 
 	public static Sentence getFeatureExpression(Configuration configuration) {
-		Sentence expr = FeatureExpression.getExpr(TransactionalVariabilityFactory.INSTANCE.createVariabilityRule(configuration.getRule()).getFeatureModel());
+		Sentence expr = FeatureExpression.getExpr(VariabilityHelper.INSTANCE.getFeatureModel(configuration.getRule()));
 		for (Feature vp : configuration.getFeatures()) {
 			if (vp.getBinding() == FeatureBinding.TRUE) {
 				expr = FeatureExpression.and(expr, FeatureExpression.getExpr(vp.getName()));
@@ -66,7 +65,7 @@ public class VariabilityModelHelper {
 	}
 
 	private static Sentence getFeatureExpression(Configuration configuration, Feature feature) {
-		Sentence expr = FeatureExpression.getExpr(TransactionalVariabilityFactory.INSTANCE.createVariabilityRule(configuration.getRule()).getFeatureModel());
+		Sentence expr = FeatureExpression.getExpr(VariabilityHelper.INSTANCE.getFeatureModel(configuration.getRule()));
 		if (expr == null)
 			expr = FeatureExpression.getExpr(Logic.TRUE);
 		for (Feature vp : configuration.getFeatures()) {
@@ -80,7 +79,7 @@ public class VariabilityModelHelper {
 	}
 
 	public static String[] getNonContradictingBindingOptions(Configuration configuration, Feature vp) {
-		ArrayList<String> options = new ArrayList<String>();
+		ArrayList<String> options = new ArrayList<>();
 		Sentence configurationExpr = getFeatureExpression(configuration, vp);
 
 		options.add(FeatureBinding.UNBOUND.getName());
@@ -102,29 +101,29 @@ public class VariabilityModelHelper {
 
 	public static String getPresenceConditionForNewEdge(Edge edge, Configuration configuration) {
 		String configPC = getPresenceCondition(configuration);
-		VariabilityNode varSource = TransactionalVariabilityFactory.INSTANCE.createVariabilityNode(edge.getSource());
-		VariabilityNode varTarget = TransactionalVariabilityFactory.INSTANCE.createVariabilityNode(edge.getTarget());
 		Sentence config = FeatureExpression.getExpr(configPC);
-		Sentence source = FeatureExpression.getExpr(varSource.getPresenceCondition());
-		Sentence target = FeatureExpression.getExpr(varTarget.getPresenceCondition());
+		String sourcePresenceCondition = VariabilityHelper.INSTANCE.getPresenceCondition(edge.getTarget());
+		Sentence source = FeatureExpression.getExpr(sourcePresenceCondition);
+		String targetPresenceCondition = VariabilityHelper.INSTANCE.getPresenceCondition(edge.getSource());
+		Sentence target = FeatureExpression.getExpr(targetPresenceCondition);
 
 		// Out of the current configuration, the source node, and the target
-		// node, try to find the strongest presence condition. If there is 
+		// node, try to find the strongest presence condition. If there is
 		// no single strongest, do a conjunction over the two strongest
 		// or all.
 		if (FeatureExpression.implies(source, config)) {
 			if (FeatureExpression.implies(source, target)) {
-				return varSource.getPresenceCondition();
+				return sourcePresenceCondition;
 			} else {
-				return varSource.getPresenceCondition() + " & " + varTarget.getPresenceCondition();
+				return sourcePresenceCondition + " & " + targetPresenceCondition;
 			}
 		}
 
 		if (FeatureExpression.implies(target, config)) {
 			if (FeatureExpression.implies(target, config)) {
-				return varTarget.getPresenceCondition();
+				return targetPresenceCondition;
 			} else {
-				return varSource.getPresenceCondition() + " & " + varTarget.getPresenceCondition();
+				return sourcePresenceCondition + " & " + targetPresenceCondition;
 			}
 		}
 
@@ -132,15 +131,14 @@ public class VariabilityModelHelper {
 			if (FeatureExpression.implies(config, target)) {
 				return configPC;
 			} else {
-				return config + " & " + varTarget.getPresenceCondition();
+				return config + " & " + targetPresenceCondition;
 			}
 		}
 
 		if (FeatureExpression.implies(config, target)) {
-			return varSource.getPresenceCondition() + " & " + configPC;
+			return sourcePresenceCondition + " & " + configPC;
 		} else {
-			return varSource.getPresenceCondition() + " & " + varTarget.getPresenceCondition() + " & "
-					+ configPC;
+			return sourcePresenceCondition + " & " + targetPresenceCondition + " & " + configPC;
 		}
 	}
 }

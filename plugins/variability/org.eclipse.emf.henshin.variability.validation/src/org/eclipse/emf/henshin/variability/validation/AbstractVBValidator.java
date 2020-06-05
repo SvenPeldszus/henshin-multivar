@@ -3,7 +3,6 @@
  */
 package org.eclipse.emf.henshin.variability.validation;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,9 +13,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.henshin.model.Annotation;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.variability.matcher.FeatureExpression;
-import org.eclipse.emf.henshin.variability.validation.exceptions.VBNotAplicibleException;
-import org.eclipse.emf.henshin.variability.validation.exceptions.VBValidationException;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityConstants;
 import org.eclipse.emf.validation.AbstractModelConstraint;
 import org.eclipse.emf.validation.IValidationContext;
 import org.eclipse.emf.validation.model.IConstraintStatus;
@@ -58,7 +54,7 @@ public abstract class AbstractVBValidator extends AbstractModelConstraint implem
 	 * @param constraint The constraint
 	 * @return If the constraint is valid
 	 */
-	protected static IStatus checkConstraint(List<String> features, String constraint) {
+	protected static IStatus checkConstraint(Set<String> features, String constraint) {
 		Sentence sentence;
 		try {
 			sentence = FeatureExpression.getExpr(constraint);
@@ -69,38 +65,13 @@ public abstract class AbstractVBValidator extends AbstractModelConstraint implem
 			return new Status(IStatus.ERROR, Activator.PLUGIN_ID, "No features are specified!");
 		}
 		Set<PropositionSymbol> symbols = SymbolCollector.getSymbolsFrom(sentence);
-		String missing = symbols.parallelStream().map(symbol -> symbol.getSymbol())
+		String missing = symbols.parallelStream().map(PropositionSymbol::getSymbol)
 				.filter(symbol -> !features.contains(symbol)).collect(Collectors.joining(", "));
 		if (missing.length() > 0) {
 			return new Status(IStatus.ERROR, Activator.PLUGIN_ID,
 					"The following features are used but not contained in the list of all features: " + missing);
 		}
 		return Status.OK_STATUS;
-	}
-
-	/**
-	 * Reads the list of features from a VB rule
-	 * 
-	 * @param rule The VB rule
-	 * @return The list of features
-	 * @throws VBValidationException   If there are multiple feature lists
-	 * @throws VBNotAplicibleException If there is no feature list
-	 */
-	public static List<String> getFeatures(Rule rule) throws VBValidationException, VBNotAplicibleException {
-		List<Annotation> featureLists = getAnnotations(VariabilityConstants.FEATURES, rule);
-		if (featureLists.isEmpty()) {
-			throw new VBNotAplicibleException(
-					"There is no list of features given for the rule \"" + rule.getName() + "\"");
-		}
-		if (featureLists.size() > 1) {
-			throw new VBValidationException(
-					"There are multiple feature lists given for the rule \"" + rule.getName() + "\"");
-		}
-		String value = featureLists.get(0).getValue();
-		if (value == null) {
-			throw new VBValidationException("The list of features is null!");
-		}
-		return Arrays.asList(value.split("\\s*,\\s*"));
 	}
 
 	/**

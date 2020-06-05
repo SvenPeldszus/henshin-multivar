@@ -1,6 +1,7 @@
 package org.eclipse.emf.henshin.variability.validation.validators;
 
-import java.util.List;
+import java.util.Set;
+
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
@@ -8,9 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.henshin.model.Annotation;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.variability.validation.AbstractVBValidator;
-import org.eclipse.emf.henshin.variability.validation.exceptions.VBNotAplicibleException;
-import org.eclipse.emf.henshin.variability.validation.exceptions.VBValidationException;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityConstants;
+import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 
 /**
  * A validator for VB rules
@@ -36,21 +35,8 @@ public class VBRuleFMValidator extends AbstractVBValidator {
 	public static IStatus validateFeatureModel(Rule rule) {
 		EList<Annotation> annotations = rule.getAnnotations();
 		if (!annotations.isEmpty()) {
-			String fm = null;
-			try {
-				fm = getFM(rule);
-			} catch (VBValidationException e) {
-				return new Status(Status.ERROR, "TODO", e.getMessage());
-			} catch (VBNotAplicibleException e) {
-				// Ignore this exception
-			}
-			
-			List<String> features = null;
-			try {
-				features = getFeatures(rule);
-			} catch (VBValidationException | VBNotAplicibleException e) {
-				// Ignore this exception as this exception is considered in an other check
-			}
+			String fm = VariabilityHelper.INSTANCE.getFeatureModel(rule);
+			Set<String> features = VariabilityHelper.INSTANCE.getFeatures(rule);
 
 			if (features == null && fm == null) {
 				return Status.OK_STATUS;
@@ -67,26 +53,5 @@ public class VBRuleFMValidator extends AbstractVBValidator {
 
 		}
 		return Status.OK_STATUS;
-	}
-
-	/**
-	 * Searches the feature model annotation of the rule
-	 * 
-	 * @param rule The rule
-	 * @return The feature model
-	 * @throws VBValidationException   If there are more than one feature models
-	 * @throws VBNotAplicibleException If there is no feature model given
-	 */
-	private static String getFM(Rule rule) throws VBValidationException, VBNotAplicibleException {
-		List<Annotation> featureModels = getAnnotations(VariabilityConstants.FEATURE_MODEL, rule);
-		if (featureModels.isEmpty()) {
-			throw new VBNotAplicibleException(
-					"There is no feature model given for the rule \"" + rule.getName() + "\"");
-		}
-		if (featureModels.size() > 1) {
-			throw new VBValidationException(
-					"There are multiple feature model given for the rule \"" + rule.getName() + "\"");
-		}
-		return featureModels.get(0).getValue();
 	}
 }

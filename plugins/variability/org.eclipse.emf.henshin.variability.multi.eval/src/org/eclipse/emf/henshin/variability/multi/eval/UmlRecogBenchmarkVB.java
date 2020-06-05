@@ -21,8 +21,7 @@ import org.eclipse.emf.henshin.variability.multi.SecPLUtil;
 import org.eclipse.emf.henshin.variability.multi.VBExecution;
 import org.eclipse.emf.henshin.variability.multi.eval.util.LoadingHelper;
 import org.eclipse.emf.henshin.variability.multi.eval.util.RuntimeBenchmarkReport;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityFactory;
-import org.junit.Test;
+import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 import org.eclipse.emf.henshin.variability.multi.eval.util.LoadingHelper.RuleSet;
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
 import de.ovgu.featureide.fm.core.init.FMCoreLibrary;
@@ -37,11 +36,6 @@ public class UmlRecogBenchmarkVB extends UmlRecogBenchmark {
 		FILE_PATH_RULES = "vbrules";
 	}
 
-	@Test
-	public void test() {
-		main(new String[0]);
-	}
-	
 	public static void main(String[] args) {
 		FMCoreLibrary.getInstance().install();
 		for (RuleSet set : RuleSet.values()) {
@@ -94,7 +88,7 @@ public class UmlRecogBenchmarkVB extends UmlRecogBenchmark {
 		RuleToProductLineEngine engine = new RuleToProductLineEngine();
 
 		// engine.getOptions().put(Engine. OPTION_SORT_VARIABLES, false);
-		List<Rule> detectedRules = new ArrayList<Rule>();
+		List<Rule> detectedRules = new ArrayList<>();
 
 		System.gc();
 		long startTime = System.currentTimeMillis();
@@ -106,7 +100,7 @@ public class UmlRecogBenchmarkVB extends UmlRecogBenchmark {
 			int graphCurrent = graph.size();
 			boolean successful = false;
 
-			if (VariabilityFactory.INSTANCE.createVariabilityRule(rule).getFeatureModel() != null) {
+			if (VariabilityHelper.isVariabilityRule(rule)) {
 				try {
 					new VBExecution(new SecPLUtil()).transformSecPlModelWithVBRule(modelFM, roots, rule, engine,
 							presenceConditions, graph);

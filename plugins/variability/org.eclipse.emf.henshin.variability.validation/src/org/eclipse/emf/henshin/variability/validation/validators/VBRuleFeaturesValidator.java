@@ -1,6 +1,7 @@
 package org.eclipse.emf.henshin.variability.validation.validators;
 
-import java.util.List;
+import java.util.Set;
+
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
@@ -8,8 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.henshin.model.Annotation;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.variability.validation.AbstractVBValidator;
-import org.eclipse.emf.henshin.variability.validation.exceptions.VBNotAplicibleException;
-import org.eclipse.emf.henshin.variability.validation.exceptions.VBValidationException;
+import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 
 /**
  * A validator for VB rules
@@ -35,14 +35,8 @@ public class VBRuleFeaturesValidator extends AbstractVBValidator {
 	public static IStatus validateFeatures(Rule rule) {
 		EList<Annotation> annotations = rule.getAnnotations();
 		if (!annotations.isEmpty()) {
-			List<String> features = null;
-			try {
-				features = getFeatures(rule);
-			} catch (VBValidationException e) {
-				return new Status(Status.ERROR, "TODO", e.getMessage());
-			} catch (VBNotAplicibleException e) {
-				return Status.OK_STATUS;
-			}
+			Set<String> features = VariabilityHelper.INSTANCE.getFeatures(rule);
+			
 			for(String feature : features) {
 				if(!feature.matches("^[a-zA-Z0-9\\-|_]+")) {
 					return new Status(IStatus.ERROR, "TODO", "The list of features conatins invalid feature names!");

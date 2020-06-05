@@ -23,7 +23,7 @@ public abstract class AbstractVBValidatorTest {
 	 */
 	protected Annotation createPC(String pc) {
 		Annotation annotation = HenshinFactory.eINSTANCE.createAnnotation();
-		annotation.setKey(VariabilityConstants.PRESENCE_CONDITION);
+		annotation.setKey(VariabilityConstants.PRESENCE_CONDITION.toString());
 		annotation.setValue(pc);
 		return annotation;
 	}
@@ -36,7 +36,7 @@ public abstract class AbstractVBValidatorTest {
 	 */
 	protected Annotation createFM(String fm) {
 		Annotation annotation = HenshinFactory.eINSTANCE.createAnnotation();
-		annotation.setKey(VariabilityConstants.FEATURE_MODEL);
+		annotation.setKey(VariabilityConstants.FEATURE_MODEL.toString());
 		annotation.setValue(fm);
 		return annotation;
 	}
@@ -49,7 +49,7 @@ public abstract class AbstractVBValidatorTest {
 	 */
 	protected Annotation createFeatures(String features) {
 		Annotation annotation = HenshinFactory.eINSTANCE.createAnnotation();
-		annotation.setKey(VariabilityConstants.FEATURES);
+		annotation.setKey(VariabilityConstants.FEATURES.toString());
 		annotation.setValue(features);
 		return annotation;
 	}

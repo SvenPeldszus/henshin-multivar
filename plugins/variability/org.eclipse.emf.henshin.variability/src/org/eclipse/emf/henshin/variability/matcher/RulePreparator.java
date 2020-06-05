@@ -1,7 +1,6 @@
 package org.eclipse.emf.henshin.variability.matcher;
 
 import java.util.BitSet;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -25,8 +24,7 @@ import org.eclipse.emf.henshin.model.Node;
 import org.eclipse.emf.henshin.model.Not;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.variability.matcher.VariabilityAwareMatcher.RuleInfo;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityFactory;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityGraphElement;
+import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 
 import aima.core.logic.propositional.parsing.ast.Sentence;
 
@@ -100,15 +98,6 @@ public class RulePreparator {
 		return bs;
 	}
 
-	private <T extends GraphElement> void addElementToRemoveList(boolean geIsVariabilityAware, GraphElement ge,
-			Collection<T> list) {
-		if (geIsVariabilityAware) {
-			list.add((T) ((VariabilityGraphElement) ge).getGraphElement());
-		} else {
-			list.add((T) ge);
-		}
-	}
-
 	private void fillMaps(RuleInfo ruleInfo, Set<Sentence> rejected) {
 
 		for (Sentence expr : rejected) {
@@ -117,20 +106,19 @@ public class RulePreparator {
 				continue;
 
 			for (GraphElement ge : elements) {
-				boolean geIsVariabilityAware = ge instanceof VariabilityGraphElement;
 
 				if (ge instanceof Node) {
-					addElementToRemoveList(geIsVariabilityAware, ge, removeNodes);
+					removeNodes.add((Node) ge);
 					Set<Mapping> mappings = ruleInfo.getNode2Mapping().get((Node) ge);
 					if (mappings != null) {
 						removeMappings.addAll(mappings);
 					}
 					((Node) ge).getAllEdges()
-							.forEach(edge -> addElementToRemoveList(geIsVariabilityAware, edge, removeEdges));
+							.forEach(removeEdges::add);
 				} else if (ge instanceof Edge) {
-					addElementToRemoveList(geIsVariabilityAware, ge, removeEdges);
+					removeEdges.add((Edge) ge);
 				} else if (ge instanceof Attribute) {
-					addElementToRemoveList(geIsVariabilityAware, ge, removeAttributes);
+					removeAttributes.add((Attribute) ge);
 				}
 
 			}
@@ -142,8 +130,7 @@ public class RulePreparator {
 			removeFormulaContainingRef.put(rule.getLhs().getFormula(), rule.getLhs().getFormula().eContainingFeature());
 		} else {
 			for (NestedCondition ac : rule.getLhs().getNestedConditions()) {
-				Sentence acPC = ruleInfo.getExpressions()
-						.get(VariabilityFactory.INSTANCE.createVariabilityNestedCondition(ac).getPresenceCondition());
+				Sentence acPC = ruleInfo.getExpressions().get(VariabilityHelper.INSTANCE.getPresenceCondition(ac));
 				if (rejected.contains(acPC)) {
 					Formula removeFormula = null;
 					if (ac.isNAC())
