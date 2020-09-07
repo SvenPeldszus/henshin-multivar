@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.emf.henshin.variability.matcher.FeatureExpression;
@@ -33,7 +34,9 @@ public class SatChecker {
 	private List<String> solution;
 
 	public static ISolver createModelIterator(String expr, Map<Integer, String> symbolsToIndices) {
-		Sentence cnf = ConvertToCNF.convert(FeatureExpression.getExpr(expr));
+		Sentence parsedExpr = FeatureExpression.getExpr(expr);
+		
+		Sentence cnf = ConvertToCNF.convert(parsedExpr);
 	
 		Set<PropositionSymbol> symbols = SymbolCollector.getSymbolsFrom(cnf);
 		Set<Clause> clauses = ClauseCollector.getClausesFrom(cnf);
@@ -67,12 +70,12 @@ public class SatChecker {
 		return solver;
 	}
 	
-	public Boolean isSatisfiable(String expr) {
+	public boolean isSatisfiable(String expr) {
 		Sentence cnf = FeatureExpression.getExpr(expr);
 		return isSatisfiable(cnf);
 	}
 
-	public Boolean isSatisfiable(Sentence expr) {
+	public boolean isSatisfiable(Sentence expr) {
 		Sentence cnf = ConvertToCNF.convert(expr);
 		Set<PropositionSymbol> symbols = SymbolCollector.getSymbolsFrom(cnf);
 		Set<Clause> clauses = ClauseCollector.getClausesFrom(cnf);
@@ -87,35 +90,33 @@ public class SatChecker {
 
 		for (Clause clause : clauses) {
 			if(clause.isFalse()){
-				return Boolean.FALSE;
+				return false;
 			}
 			if (!clause.isTautology()) {
 				int[] clauseArray = convertToArray(clause, indices);
 				try {
 					solver.addClause(new VecInt(clauseArray));
 				} catch (ContradictionException e) {
-//					e.printStackTrace();
-					return Boolean.FALSE;
+					return false;
 				} 
 			}
 		}
 
-		try {
-			
+		try {			
 			boolean satisfiable = solver.isSatisfiable();
 			if(satisfiable){
 				solution = new LinkedList<>();
 				int[] model = solver.findModel();
-				for(PropositionSymbol key : indices.keySet()){
-					int index = indices.get(key);
+				for(Entry<PropositionSymbol, Integer> entry : indices.entrySet()){
+					int index = entry.getValue();
 					for(int i : model){
 						if(i > 0 && i == index){
-							solution.add(key.getSymbol());
+							solution.add(entry.getKey().getSymbol());
 						}
 					}
 				}
 			}
-			return Boolean.valueOf(satisfiable);
+			return satisfiable;
 		} catch (TimeoutException e) {
 			throw new RuntimeException("Timeout during evaluation of satisfiability.");
 		}
@@ -123,15 +124,15 @@ public class SatChecker {
 
 
 	public Boolean isContradiction(Sentence expr) {
-		return isSatisfiable(expr) ? Boolean.FALSE : Boolean.TRUE;
+		return !isSatisfiable(expr);
 	}
 
-	public Boolean isContradiction(String expr) {
-		return isSatisfiable(expr).booleanValue() ? Boolean.FALSE : Boolean.TRUE;
+	public boolean isContradiction(String expr) {
+		return !isSatisfiable(expr);
 	}
 
 	private static Map<PropositionSymbol, Integer> getSymbol2IndexMap(Set<PropositionSymbol> symbols) {
-		Map<PropositionSymbol, Integer> list2Index = new HashMap<PropositionSymbol,Integer>(symbols.size());
+		Map<PropositionSymbol, Integer> list2Index = new HashMap<>(symbols.size());
 		int counter = 1;
 		for (PropositionSymbol symbol : symbols) {
 			list2Index.put(symbol, Integer.valueOf(counter));
