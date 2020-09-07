@@ -14,15 +14,15 @@ import org.eclipse.emf.henshin.model.Unit;
 /**
  * Variability-aware {@link org.eclipse.emf.henshin.interpreter.UnitApplication UnitApplication} implementation.
  * 
- * @author Daniel Strüber
+ * @author Daniel Strï¿½ber
  */
-public class VarUnitApplicationImpl extends UnitApplicationImpl {
+public class VBUnitApplicationImpl extends UnitApplicationImpl {
 
-	public VarUnitApplicationImpl(Engine engine) {
+	public VBUnitApplicationImpl(Engine engine) {
 		super(engine);
 	}
 
-	public VarUnitApplicationImpl(Engine engine, EGraph graph, Unit unit,
+	public VBUnitApplicationImpl(Engine engine, EGraph graph, Unit unit,
 			Assignment assignment) {
 		super(engine, graph, unit, assignment);
 	}
@@ -30,7 +30,7 @@ public class VarUnitApplicationImpl extends UnitApplicationImpl {
 	@Override
 	protected boolean executeRule(ApplicationMonitor monitor) {
 		Rule rule = (Rule) unit;
-		RuleApplication ruleApp = new VarRuleApplicationImpl(engine, graph, rule, resultAssignment);
+		RuleApplication ruleApp = new VBRuleApplicationImpl(engine, graph, rule, resultAssignment);
 		if (ruleApp.execute(monitor)) {
 			resultAssignment = new AssignmentImpl(ruleApp.getResultMatch(), true);
 			appliedRules.push(ruleApp);
@@ -55,6 +55,6 @@ public class VarUnitApplicationImpl extends UnitApplicationImpl {
 				assign.setParameterValue(target, resultAssignment.getParameterValue(source));
 			}
 		}
-		return new VarUnitApplicationImpl(engine, graph, subUnit, assign);
+		return new VBUnitApplicationImpl(engine, graph, subUnit, assign);
 	}
 }
