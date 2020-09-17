@@ -27,36 +27,26 @@ http://www.eclipse.org/legal/epl-v10.html
    </url>
 
    <requires>
-      <import plugin="org.eclipse.emf.henshin.interpreter"/>
-      <import plugin="org.eclipse.emf.ecore.xmi" version="2.5.0" match="greaterOrEqual"/>
-      <import plugin="org.junit"/>
       <import plugin="org.eclipse.emf.henshin.model"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.henshin.variability.mergein" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources" version="3.9.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.henshin.variability"/>
       <import plugin="org.eclipse.emf.henshin.trace"/>
-      <import plugin="org.eclipse.ocl.ecore"/>
-      <import plugin="org.eclipse.ocl.ecore" version="3.0.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.henshin.interpreter"/>
       <import plugin="org.eclipse.emf.transaction"/>
       <import plugin="org.sat4j.core"/>
       <import plugin="org.eclipse.gmf.runtime.emf.ui.properties"/>
       <import plugin="org.eclipse.gmf.runtime.diagram.ui"/>
       <import plugin="org.eclipse.emf.henshin.diagram"/>
-      <import plugin="org.eclipse.emf.henshin.variability.configuration" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.henshin.variability.mergein.refactoring"/>
+      <import plugin="org.eclipse.emf.henshin.variability.mergein" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jface.databinding"/>
       <import plugin="org.eclipse.emf.databinding"/>
       <import plugin="org.eclipse.gmf.runtime.diagram.ui" version="1.8.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.databinding.property"/>
-      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.uml2.uml"/>
    </requires>
-
-   <plugin
-         id="org.eclipse.emf.henshin.variability.test"
-         download-size="0"
-         install-size="0"
-         version="1.7.0.qualifier"
-         unpack="false"/>
 
    <plugin
          id="org.eclipse.emf.henshin.variability.mergein"
@@ -98,6 +88,13 @@ http://www.eclipse.org/legal/epl-v10.html
          download-size="0"
          install-size="0"
          version="1.7.0.qualifier"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.emf.henshin.variability.multi"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>
