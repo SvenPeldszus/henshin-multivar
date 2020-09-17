@@ -1,8 +1,12 @@
-<henshin:Module xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmi:id="_Vr0O4LRVEeexAvqQ_kM_vQ">
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_Ho3MoPOJEeqKPbhZweJEtg">
   <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
   <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
-  <units xsi:type="henshin:Rule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="_Rrudk7RVEeexAvqQ_kM_vQ" name="rr:changeBehavioralFeatureConcurrency_FROM_Guarded_TO_sequential,rr:changeOperationConcurrency_FROM_Guarded_TO_sequential">
-    <annotations xmi:id="_Vrzn0bRVEeexAvqQ_kM_vQ" key="originalRules" value="A=Rule rr:changeBehavioralFeatureConcurrency_FROM_Guarded_TO_sequential(Selected:BehavioralFeature, &quot;guarded&quot;:CallConcurrencyKind, &quot;sequential&quot;:CallConcurrencyKind), B=Rule rr:changeOperationConcurrency_FROM_Guarded_TO_sequential(Selected:BehavioralFeature, &quot;guarded&quot;:CallConcurrencyKind, &quot;sequential&quot;:CallConcurrencyKind)"/>
+  <units xsi:type="henshin:Rule" xmi:id="_-0I2gQsYEeajEecGJ9W2hw" name="rr:changeBehavioralFeatureConcurrency_FROM_Guarded_TO_sequential,rr:changeOperationConcurrency_FROM_Guarded_TO_concurrent,rr:changeOperationConcurrency_FROM_Guarded_TO_sequential,rr:changeBehavioralFeatureConcurrency_FROM_Guarded_TO_concurrent" description="Recognize: Changes the attribute value of concurrency_FROM_guarded_TO_sequential">
+    <annotations xmi:id="_Ho1-g_OJEeqKPbhZweJEtg" key="features" value="rrchangeoperationconcurrencyfromguardedtoconcurrent, rrchangeoperationconcurrencyfromguardedtosequential, rrchangebehavioralfeatureconcurrencyfromguardedtosequential, rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent"/>
+    <annotations xmi:id="_Ho1-hPOJEeqKPbhZweJEtg" key="featureConstraintIsCNF" value="true"/>
+    <annotations xmi:id="_Ho1-hfOJEeqKPbhZweJEtg" key="featureConstraint" value="((rrchangebehavioralfeatureconcurrencyfromguardedtosequential) | (rrchangeoperationconcurrencyfromguardedtoconcurrent) | (rrchangeoperationconcurrencyfromguardedtosequential) | (rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent)) &amp; ( ~(rrchangebehavioralfeatureconcurrencyfromguardedtosequential) | ~(rrchangeoperationconcurrencyfromguardedtoconcurrent)) &amp; ( ~(rrchangebehavioralfeatureconcurrencyfromguardedtosequential) | ~(rrchangeoperationconcurrencyfromguardedtosequential)) &amp; ( ~(rrchangebehavioralfeatureconcurrencyfromguardedtosequential) | ~(rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent)) &amp; ( ~(rrchangeoperationconcurrencyfromguardedtoconcurrent) | ~(rrchangeoperationconcurrencyfromguardedtosequential)) &amp; ( ~(rrchangeoperationconcurrencyfromguardedtoconcurrent) | ~(rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent)) &amp; ( ~(rrchangeoperationconcurrencyfromguardedtosequential) | ~(rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent))"/>
+    <annotations xmi:id="_Ho1-hvOJEeqKPbhZweJEtg" key="originalRules" value="A=Rule rr:changeBehavioralFeatureConcurrency_FROM_Guarded_TO_sequential(Selected:BehavioralFeature, &quot;guarded&quot;:CallConcurrencyKind, &quot;sequential&quot;:CallConcurrencyKind, &quot;concurrent&quot;:CallConcurrencyKind), B=Rule rr:changeOperationConcurrency_FROM_Guarded_TO_concurrent(Selected:BehavioralFeature, &quot;guarded&quot;:CallConcurrencyKind, &quot;concurrent&quot;:CallConcurrencyKind), C=Rule rr:changeOperationConcurrency_FROM_Guarded_TO_sequential(Selected:BehavioralFeature, &quot;guarded&quot;:CallConcurrencyKind, &quot;sequential&quot;:CallConcurrencyKind), D=Rule rr:changeBehavioralFeatureConcurrency_FROM_Guarded_TO_concurrent(Selected:BehavioralFeature, &quot;guarded&quot;:CallConcurrencyKind, &quot;concurrent&quot;:CallConcurrencyKind)"/>
     <parameters xmi:id="_-0I2ggsYEeajEecGJ9W2hw" name="Selected">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//BehavioralFeature"/>
     </parameters>
@@ -12,13 +16,26 @@
     <parameters xmi:id="_-0I2hAsYEeajEecGJ9W2hw" name="&quot;sequential&quot;">
       <type xsi:type="ecore:EEnum" href="http://www.eclipse.org/uml2/5.0.0/UML#//CallConcurrencyKind"/>
     </parameters>
+    <parameters xmi:id="_Hov34POJEeqKPbhZweJEtg" name="&quot;concurrent&quot;">
+      <type xsi:type="ecore:EEnum" href="http://www.eclipse.org/uml2/5.0.0/UML#//CallConcurrencyKind"/>
+    </parameters>
     <lhs xmi:id="_-0I2hQsYEeajEecGJ9W2hw" name="Lhs">
       <nodes xmi:id="_-0I2hgsYEeajEecGJ9W2hw" name="B.Selected" incoming="_-0I2kAsYEeajEecGJ9W2hw _-0I2kgsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//BehavioralFeature"/>
         <attributes xmi:id="_-0I2hwsYEeajEecGJ9W2hw" value="&quot;sequential&quot;">
+          <annotations xmi:id="_HormcfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtosequential"/>
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//BehavioralFeature/concurrency"/>
+        </attributes>
+        <attributes xmi:id="_-JZQZwsYEeajEecGJ9W2hw" value="&quot;concurrent&quot;">
+          <annotations xmi:id="_HosNgfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtoconcurrent"/>
           <type href="http://www.eclipse.org/uml2/5.0.0/UML#//BehavioralFeature/concurrency"/>
         </attributes>
         <attributes xmi:id="__REDFgsYEeajEecGJ9W2hw" value="&quot;sequential&quot;">
+          <annotations xmi:id="_HosNg_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtosequential"/>
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//BehavioralFeature/concurrency"/>
+        </attributes>
+        <attributes xmi:id="__JSAFwsYEeajEecGJ9W2hw" value="&quot;concurrent&quot;">
+          <annotations xmi:id="_HosNhfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent"/>
           <type href="http://www.eclipse.org/uml2/5.0.0/UML#//BehavioralFeature/concurrency"/>
         </attributes>
       </nodes>
@@ -27,7 +44,13 @@
         <attributes xmi:id="_-0I2iQsYEeajEecGJ9W2hw" value="&quot;guarded&quot;">
           <type href="http://www.eclipse.org/uml2/5.0.0/UML#//BehavioralFeature/concurrency"/>
         </attributes>
+        <attributes xmi:id="_-JZQaQsYEeajEecGJ9W2hw" value="&quot;guarded&quot;">
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//BehavioralFeature/concurrency"/>
+        </attributes>
         <attributes xmi:id="__REDGAsYEeajEecGJ9W2hw" value="&quot;guarded&quot;">
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//BehavioralFeature/concurrency"/>
+        </attributes>
+        <attributes xmi:id="__JSAGQsYEeajEecGJ9W2hw" value="&quot;guarded&quot;">
           <type href="http://www.eclipse.org/uml2/5.0.0/UML#//BehavioralFeature/concurrency"/>
         </attributes>
       </nodes>
@@ -42,17 +65,31 @@
         <attributes xmi:id="_-0I2jQsYEeajEecGJ9W2hw" value="&quot;concurrency&quot;">
           <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
         </attributes>
+        <attributes xmi:id="_-JZQbQsYEeajEecGJ9W2hw" value="&quot;concurrency&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
         <attributes xmi:id="__REDHAsYEeajEecGJ9W2hw" value="&quot;concurrency&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="__JSAHQsYEeajEecGJ9W2hw" value="&quot;concurrency&quot;">
           <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
         </attributes>
       </nodes>
       <nodes xmi:id="_-0I2jgsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_HormcPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtosequential"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="A"/>
+      </nodes>
+      <nodes xmi:id="_-JZQbgsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_HosNgPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtoconcurrent"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
       </nodes>
       <nodes xmi:id="__REDHQsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_HosNgvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtosequential"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="B"/>
+      </nodes>
+      <nodes xmi:id="__JSAHgsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_HosNhPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
       </nodes>
       <edges xmi:id="_-0I2jwsYEeajEecGJ9W2hw" source="_-0I2igsYEeajEecGJ9W2hw" target="_-0I2iAsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
@@ -80,27 +117,171 @@
       <nodes xmi:id="_-0I2lwsYEeajEecGJ9W2hw" name="" outgoing="_-0I2pAsYEeajEecGJ9W2hw _-0I2pQsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
       </nodes>
-      <nodes xmi:id="_-0I2mAsYEeajEecGJ9W2hw" name="" incoming="_-0I2qQsYEeajEecGJ9W2hw __REDOAsYEeajEecGJ9W2hw" outgoing="_-0I2pgsYEeajEecGJ9W2hw _-0I2pwsYEeajEecGJ9W2hw _-0I2qAsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_-0I2mAsYEeajEecGJ9W2hw" name="" incoming="_-0I2qQsYEeajEecGJ9W2hw _-JZQiQsYEeajEecGJ9W2hw __REDOAsYEeajEecGJ9W2hw __JSAOQsYEeajEecGJ9W2hw" outgoing="_-0I2pgsYEeajEecGJ9W2hw _-0I2pwsYEeajEecGJ9W2hw _-0I2qAsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange"/>
       </nodes>
       <nodes xmi:id="_-0I2mQsYEeajEecGJ9W2hw" name="" incoming="_-0I2qAsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
       </nodes>
       <nodes xmi:id="_-0I2mgsYEeajEecGJ9W2hw" incoming="_-0I2qgsYEeajEecGJ9W2hw" outgoing="_-0I2qQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_HosNhvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtosequential"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="A"/>
+        <attributes xmi:id="_-0I2mwsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_BehavioralFeature_concurrency_FROM_guarded_TO_sequential&quot;">
+          <annotations xmi:id="_HosNivOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtosequential"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-0I2nAsYEeajEecGJ9W2hw" value="&quot;Changes the attribute value of concurrency_FROM_guarded_TO_sequential&quot;">
+          <annotations xmi:id="_HosNi_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtosequential"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-0I2nQsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_BehavioralFeature_concurrency_FROM_guarded_TO_sequential&quot;">
+          <annotations xmi:id="_HosNjPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtosequential"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-0I2ngsYEeajEecGJ9W2hw" value="&quot;RR: CHANGE_LITERAL_BehavioralFeature_concurrency_FROM_guarded_TO_sequential&quot;">
+          <annotations xmi:id="_HosNjfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtosequential"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-0I2nwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_HosNjvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtosequential"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-0I2oAsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_HosNj_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtosequential"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-0I2oQsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_HosNkPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtosequential"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-0I2ogsYEeajEecGJ9W2hw" value="7">
+          <annotations xmi:id="_HosNkfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtosequential"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="_-0I2owsYEeajEecGJ9W2hw" name="" outgoing="_-0I2qgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_HosNh_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtosequential"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="A"/>
+      </nodes>
+      <nodes xmi:id="_-JZQegsYEeajEecGJ9W2hw" incoming="_-JZQigsYEeajEecGJ9W2hw" outgoing="_-JZQiQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_HosNkvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtoconcurrent"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_-JZQewsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Operation_concurrency_FROM_guarded_TO_concurrent&quot;">
+          <annotations xmi:id="_Hos0k_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtoconcurrent"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-JZQfAsYEeajEecGJ9W2hw" value="&quot;Changes the attribute value of concurrency_FROM_guarded_TO_concurrent&quot;">
+          <annotations xmi:id="_Hos0lPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtoconcurrent"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-JZQfQsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Operation_concurrency_FROM_guarded_TO_concurrent&quot;">
+          <annotations xmi:id="_Hos0lfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtoconcurrent"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-JZQfgsYEeajEecGJ9W2hw" value="&quot;RR: CHANGE_LITERAL_Operation_concurrency_FROM_guarded_TO_concurrent&quot;">
+          <annotations xmi:id="_Hos0lvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtoconcurrent"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-JZQfwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_Hos0l_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtoconcurrent"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-JZQgAsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_Hos0mPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtoconcurrent"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-JZQgQsYEeajEecGJ9W2hw" value="2">
+          <annotations xmi:id="_Hos0mfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtoconcurrent"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-JZQggsYEeajEecGJ9W2hw" value="7">
+          <annotations xmi:id="_Hos0mvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtoconcurrent"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-JZQgwsYEeajEecGJ9W2hw" name="" outgoing="_-JZQigsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_Hos0kPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtoconcurrent"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
       </nodes>
       <nodes xmi:id="__REDKQsYEeajEecGJ9W2hw" incoming="__REDOQsYEeajEecGJ9W2hw" outgoing="__REDOAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_Hos0m_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtosequential"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="B"/>
+        <attributes xmi:id="__REDKgsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Operation_concurrency_FROM_guarded_TO_sequential&quot;">
+          <annotations xmi:id="_Hos0n_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtosequential"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__REDKwsYEeajEecGJ9W2hw" value="&quot;Changes the attribute value of concurrency_FROM_guarded_TO_sequential&quot;">
+          <annotations xmi:id="_Hos0oPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtosequential"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__REDLAsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Operation_concurrency_FROM_guarded_TO_sequential&quot;">
+          <annotations xmi:id="_Hos0ofOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtosequential"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__REDLQsYEeajEecGJ9W2hw" value="&quot;RR: CHANGE_LITERAL_Operation_concurrency_FROM_guarded_TO_sequential&quot;">
+          <annotations xmi:id="_Hos0ovOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtosequential"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__REDLgsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_Hos0o_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtosequential"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__REDLwsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_HotboPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtosequential"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__REDMAsYEeajEecGJ9W2hw" value="2">
+          <annotations xmi:id="_HotbofOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtosequential"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__REDMQsYEeajEecGJ9W2hw" value="7">
+          <annotations xmi:id="_HotbovOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtosequential"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="__REDMgsYEeajEecGJ9W2hw" name="" outgoing="__REDOQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_Hos0nPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtosequential"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="B"/>
+      </nodes>
+      <nodes xmi:id="__JSAKgsYEeajEecGJ9W2hw" incoming="__JSAOgsYEeajEecGJ9W2hw" outgoing="__JSAOQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_Hotbo_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="__JSAKwsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_BehavioralFeature_concurrency_FROM_guarded_TO_concurrent&quot;">
+          <annotations xmi:id="_Hotbp_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__JSALAsYEeajEecGJ9W2hw" value="&quot;Changes the attribute value of concurrency_FROM_guarded_TO_concurrent&quot;">
+          <annotations xmi:id="_HotbqPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__JSALQsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_BehavioralFeature_concurrency_FROM_guarded_TO_concurrent&quot;">
+          <annotations xmi:id="_HotbqfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__JSALgsYEeajEecGJ9W2hw" value="&quot;RR: CHANGE_LITERAL_BehavioralFeature_concurrency_FROM_guarded_TO_concurrent&quot;">
+          <annotations xmi:id="_HotbqvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__JSALwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_Hotbq_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__JSAMAsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_HotbrPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__JSAMQsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_HotbrfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__JSAMgsYEeajEecGJ9W2hw" value="7">
+          <annotations xmi:id="_HotbrvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__JSAMwsYEeajEecGJ9W2hw" name="" outgoing="__JSAOgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_HotbpPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
       </nodes>
       <edges xmi:id="_-0I2pAsYEeajEecGJ9W2hw" source="_-0I2lwsYEeajEecGJ9W2hw" target="_-0I2lgsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
@@ -118,20 +299,36 @@
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange/type"/>
       </edges>
       <edges xmi:id="_-0I2qQsYEeajEecGJ9W2hw" source="_-0I2mgsYEeajEecGJ9W2hw" target="_-0I2mAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_HosNiPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtosequential"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="A"/>
       </edges>
       <edges xmi:id="_-0I2qgsYEeajEecGJ9W2hw" source="_-0I2owsYEeajEecGJ9W2hw" target="_-0I2mgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_HosNifOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtosequential"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="A"/>
+      </edges>
+      <edges xmi:id="_-JZQiQsYEeajEecGJ9W2hw" source="_-JZQegsYEeajEecGJ9W2hw" target="_-0I2mAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_Hos0kfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtoconcurrent"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-JZQigsYEeajEecGJ9W2hw" source="_-JZQgwsYEeajEecGJ9W2hw" target="_-JZQegsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_Hos0kvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtoconcurrent"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
       </edges>
       <edges xmi:id="__REDOAsYEeajEecGJ9W2hw" source="__REDKQsYEeajEecGJ9W2hw" target="_-0I2mAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_Hos0nfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtosequential"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="B"/>
       </edges>
       <edges xmi:id="__REDOQsYEeajEecGJ9W2hw" source="__REDMgsYEeajEecGJ9W2hw" target="__REDKQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_Hos0nvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangeoperationconcurrencyfromguardedtosequential"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="B"/>
+      </edges>
+      <edges xmi:id="__JSAOQsYEeajEecGJ9W2hw" source="__JSAKgsYEeajEecGJ9W2hw" target="_-0I2mAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_HotbpfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__JSAOgsYEeajEecGJ9W2hw" source="__JSAMwsYEeajEecGJ9W2hw" target="__JSAKgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_HotbpvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangebehavioralfeatureconcurrencyfromguardedtoconcurrent"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
       </edges>
     </rhs>
     <mappings xmi:id="_-0I2qwsYEeajEecGJ9W2hw" origin="_-0I2hgsYEeajEecGJ9W2hw" image="_-0I2lQsYEeajEecGJ9W2hw"/>
@@ -140,8 +337,8 @@
     <mappings xmi:id="_-0I2rgsYEeajEecGJ9W2hw" origin="_-0I2iwsYEeajEecGJ9W2hw" image="_-0I2mAsYEeajEecGJ9W2hw"/>
     <mappings xmi:id="_-0I2rwsYEeajEecGJ9W2hw" origin="_-0I2jAsYEeajEecGJ9W2hw" image="_-0I2mQsYEeajEecGJ9W2hw"/>
     <mappings xmi:id="_-0I2sAsYEeajEecGJ9W2hw" origin="_-0I2jgsYEeajEecGJ9W2hw" image="_-0I2owsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_Vrzn0LRVEeexAvqQ_kM_vQ" origin="__REDHQsYEeajEecGJ9W2hw" image="__REDMgsYEeajEecGJ9W2hw"/>
-    <annotations key="featureConstraint" value="xor(A,B)"/>
-    <annotations key="features" value="A,B"/>
+    <mappings xmi:id="_Ho1-gPOJEeqKPbhZweJEtg" origin="_-JZQbgsYEeajEecGJ9W2hw" image="_-JZQgwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_Ho1-gfOJEeqKPbhZweJEtg" origin="__REDHQsYEeajEecGJ9W2hw" image="__REDMgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_Ho1-gvOJEeqKPbhZweJEtg" origin="__JSAHgsYEeajEecGJ9W2hw" image="__JSAMwsYEeajEecGJ9W2hw"/>
   </units>
 </henshin:Module>

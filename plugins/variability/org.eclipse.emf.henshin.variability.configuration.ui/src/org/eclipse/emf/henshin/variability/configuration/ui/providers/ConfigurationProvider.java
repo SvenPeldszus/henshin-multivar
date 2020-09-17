@@ -137,7 +137,7 @@ public class ConfigurationProvider {
 			ConfigurationFactory fac = ConfigurationFactoryImpl.init();
 			result = fac.createConfiguration();
 			result.setRule(rule);
-			String featureModel = VariabilityHelper.INSTANCE.getFeatureModel(rule);
+			String featureModel = VariabilityHelper.INSTANCE.getFeatureConstraint(rule);
 			EList<Feature> variabilityPoints = result.getFeatures();
 
 			Set<String> features = VariabilityHelper.INSTANCE.getFeatures(rule);

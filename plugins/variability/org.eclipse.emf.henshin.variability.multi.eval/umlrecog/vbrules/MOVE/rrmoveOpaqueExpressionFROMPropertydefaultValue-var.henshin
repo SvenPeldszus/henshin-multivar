@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_H9UZsPOJEeqKPbhZweJEtg">
+  <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
+  <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
+  <units xsi:type="henshin:Rule" xmi:id="__f5JQQsYEeajEecGJ9W2hw" name="rr:moveOpaqueExpression_FROM_Property_defaultValue_TO_Property_Property,rr:moveOpaqueExpression_FROM_Property_defaultValue_TO_Property_Property0,rr:moveOpaqueExpression_FROM_Property_defaultValue_TO_Message_Message,rr:moveOpaqueExpression_FROM_Property_defaultValue_TO_Package_Package,rr:moveOpaqueExpression_FROM_Property_defaultValue_TO_InteractionConstraint_InteractionConstraint0,rr:moveOpaqueExpression_FROM_Property_defaultValue_TO_InteractionConstraint_InteractionConstraint" description="Recognize: Moves OpaqueExpression from Property(Reference:defaultValue) toProperty(Reference:Property)">
+    <annotations xmi:id="_H9Tys_OJEeqKPbhZweJEtg" key="features" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty, rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage, rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0, rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint, rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0, rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+    <annotations xmi:id="_H9TytPOJEeqKPbhZweJEtg" key="featureConstraintIsCNF" value="true"/>
+    <annotations xmi:id="_H9TytfOJEeqKPbhZweJEtg" key="featureConstraint" value="((rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty) | (rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0) | (rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage) | (rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage) | (rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0) | (rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint)) &amp; ( ~(rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty) | ~(rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0)) &amp; ( ~(rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty) | ~(rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage)) &amp; ( ~(rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty) | ~(rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage)) &amp; ( ~(rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty) | ~(rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0)) &amp; ( ~(rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty) | ~(rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint)) &amp; ( ~(rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0) | ~(rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage)) &amp; ( ~(rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0) | ~(rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage)) &amp; ( ~(rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0) | ~(rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0)) &amp; ( ~(rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0) | ~(rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint)) &amp; ( ~(rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage) | ~(rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage)) &amp; ( ~(rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage) | ~(rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0)) &amp; ( ~(rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage) | ~(rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint)) &amp; ( ~(rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage) | ~(rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0)) &amp; ( ~(rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage) | ~(rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint)) &amp; ( ~(rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0) | ~(rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint))"/>
+    <annotations xmi:id="_H9TytvOJEeqKPbhZweJEtg" key="originalRules" value="A=Rule rr:moveOpaqueExpression_FROM_Property_defaultValue_TO_Property_Property(Selected:OpaqueExpression, OldSource:Property, NewSource:Property, NewSource:Message, NewSource:Package, NewSource:InteractionConstraint), B=Rule rr:moveOpaqueExpression_FROM_Property_defaultValue_TO_Property_Property0(Selected:OpaqueExpression, OldSource:Property, NewSource:Property), C=Rule rr:moveOpaqueExpression_FROM_Property_defaultValue_TO_Message_Message(Selected:OpaqueExpression, OldSource:Property, NewSource:Message), D=Rule rr:moveOpaqueExpression_FROM_Property_defaultValue_TO_Package_Package(Selected:OpaqueExpression, OldSource:Property, NewSource:Package), E=Rule rr:moveOpaqueExpression_FROM_Property_defaultValue_TO_InteractionConstraint_InteractionConstraint0(Selected:OpaqueExpression, OldSource:Property, NewSource:InteractionConstraint), F=Rule rr:moveOpaqueExpression_FROM_Property_defaultValue_TO_InteractionConstraint_InteractionConstraint(Selected:OpaqueExpression, OldSource:Property, NewSource:InteractionConstraint)"/>
+    <parameters xmi:id="__f5JQgsYEeajEecGJ9W2hw" name="Selected">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//OpaqueExpression"/>
+    </parameters>
+    <parameters xmi:id="__f5JQwsYEeajEecGJ9W2hw" name="OldSource">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+    </parameters>
+    <parameters xmi:id="__f5JRAsYEeajEecGJ9W2hw" name="NewSource">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+    </parameters>
+    <parameters xmi:id="_H9IMcPOJEeqKPbhZweJEtg" name="NewSource">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Message"/>
+    </parameters>
+    <parameters xmi:id="_H9JakPOJEeqKPbhZweJEtg" name="NewSource">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+    </parameters>
+    <parameters xmi:id="_H9KosPOJEeqKPbhZweJEtg" name="NewSource">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint"/>
+    </parameters>
+    <lhs xmi:id="__f5JRQsYEeajEecGJ9W2hw" name="Lhs">
+      <nodes xmi:id="__f5JRgsYEeajEecGJ9W2hw" name="B.Selected" incoming="__f5JUQsYEeajEecGJ9W2hw __f5JVwsYEeajEecGJ9W2hw __f5JWQsYEeajEecGJ9W2hw _-uIVOwsYEeajEecGJ9W2hw _99wBKwsYEeajEecGJ9W2hw _ABO72wsZEeajEecGJ9W2hw __gZfpQsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//OpaqueExpression"/>
+      </nodes>
+      <nodes xmi:id="__f5JRwsYEeajEecGJ9W2hw" name="A.Selected" incoming="__f5JUAsYEeajEecGJ9W2hw __f5JUwsYEeajEecGJ9W2hw __f5JVQsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//OpaqueExpression"/>
+      </nodes>
+      <nodes xmi:id="__f5JSAsYEeajEecGJ9W2hw" name="" outgoing="__f5JUAsYEeajEecGJ9W2hw __f5JUQsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
+      </nodes>
+      <nodes xmi:id="__f5JSQsYEeajEecGJ9W2hw" name="A.OldSource" incoming="__f5JUgsYEeajEecGJ9W2hw" outgoing="__f5JVQsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+      </nodes>
+      <nodes xmi:id="__f5JSgsYEeajEecGJ9W2hw" name="B.NewSource" incoming="__f5JVgsYEeajEecGJ9W2hw" outgoing="__f5JWQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9EiJPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty or rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+      </nodes>
+      <nodes xmi:id="__f5JSwsYEeajEecGJ9W2hw" name="" outgoing="__f5JUgsYEeajEecGJ9W2hw __f5JUwsYEeajEecGJ9W2hw __f5JVAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference"/>
+      </nodes>
+      <nodes xmi:id="__f5JTAsYEeajEecGJ9W2hw" name="" incoming="__f5JVAsYEeajEecGJ9W2hw __f5JWAsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="__f5JTQsYEeajEecGJ9W2hw" value="&quot;defaultValue&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="_-X-e_QsYEeajEecGJ9W2hw" value="&quot;defaultValue&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="_-uIVLQsYEeajEecGJ9W2hw" value="&quot;defaultValue&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="_99wBHQsYEeajEecGJ9W2hw" value="&quot;defaultValue&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="__gZflwsYEeajEecGJ9W2hw" value="&quot;defaultValue&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="_ABO7zQsZEeajEecGJ9W2hw" value="&quot;defaultValue&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__f5JTgsYEeajEecGJ9W2hw" name="" outgoing="__f5JVgsYEeajEecGJ9W2hw __f5JVwsYEeajEecGJ9W2hw __f5JWAsYEeajEecGJ9W2hw _-uIVOAsYEeajEecGJ9W2hw _99wBKAsYEeajEecGJ9W2hw _99wBKgsYEeajEecGJ9W2hw _ABO72AsZEeajEecGJ9W2hw __gZfogsYEeajEecGJ9W2hw __gZfpAsYEeajEecGJ9W2hw _-uIVOgsYEeajEecGJ9W2hw _ABO72gsZEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference"/>
+      </nodes>
+      <nodes xmi:id="__f5JTwsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_H9EiEPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_-X-e_wsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_H9EiFfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_-uIVMQsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_H9EiJvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_99wBGgsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_99wBKAsYEeajEecGJ9W2hw" outgoing="_99wBKwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9EiKvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+      </nodes>
+      <nodes xmi:id="_99wBHwsYEeajEecGJ9W2hw" name="" incoming="_99wBKgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9EiK_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="_99wBIAsYEeajEecGJ9W2hw" value="&quot;packagedElement&quot;">
+          <annotations xmi:id="_H9FJXPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_99wBIQsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_H9EiLPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="__gZfmQsYEeajEecGJ9W2hw" name="" incoming="__gZfpAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9EiMPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="__gZfmgsYEeajEecGJ9W2hw" value="&quot;maxint&quot;">
+          <annotations xmi:id="_H9FJIPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_ABO7ygsZEeajEecGJ9W2hw" name="B.NewSource" incoming="_ABO72AsZEeajEecGJ9W2hw" outgoing="_ABO72wsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJIfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint"/>
+      </nodes>
+      <nodes xmi:id="__gZflAsYEeajEecGJ9W2hw" name="B.NewSource" incoming="__gZfogsYEeajEecGJ9W2hw" outgoing="__gZfpQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJXfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint"/>
+      </nodes>
+      <nodes xmi:id="__gZfmwsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_H9FJXvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_-uIVKgsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_-uIVOAsYEeajEecGJ9W2hw" outgoing="_-uIVOwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJYvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message"/>
+      </nodes>
+      <nodes xmi:id="_-uIVLwsYEeajEecGJ9W2hw" name="" incoming="_-uIVOgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJY_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="_-uIVMAsYEeajEecGJ9W2hw" value="&quot;argument&quot;">
+          <annotations xmi:id="_H9EiKfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_ABO7zwsZEeajEecGJ9W2hw" name="" incoming="_ABO72gsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJZfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="_ABO70AsZEeajEecGJ9W2hw" value="&quot;minint&quot;">
+          <annotations xmi:id="_H9FJJPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_ABO70QsZEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_H9FJZvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <edges xmi:id="__f5JUAsYEeajEecGJ9W2hw" source="__f5JSAsYEeajEecGJ9W2hw" target="__f5JRwsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
+      </edges>
+      <edges xmi:id="__f5JUQsYEeajEecGJ9W2hw" source="__f5JSAsYEeajEecGJ9W2hw" target="__f5JRgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objB"/>
+      </edges>
+      <edges xmi:id="__f5JUgsYEeajEecGJ9W2hw" source="__f5JSwsYEeajEecGJ9W2hw" target="__f5JSQsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="__f5JUwsYEeajEecGJ9W2hw" source="__f5JSwsYEeajEecGJ9W2hw" target="__f5JRwsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/tgt"/>
+      </edges>
+      <edges xmi:id="__f5JVAsYEeajEecGJ9W2hw" source="__f5JSwsYEeajEecGJ9W2hw" target="__f5JTAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="__f5JVQsYEeajEecGJ9W2hw" source="__f5JSQsYEeajEecGJ9W2hw" target="__f5JRwsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Property/defaultValue"/>
+      </edges>
+      <edges xmi:id="__f5JVgsYEeajEecGJ9W2hw" source="__f5JTgsYEeajEecGJ9W2hw" target="__f5JSgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9EiEfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty or rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="__f5JVwsYEeajEecGJ9W2hw" source="__f5JTgsYEeajEecGJ9W2hw" target="__f5JRgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/tgt"/>
+      </edges>
+      <edges xmi:id="__f5JWAsYEeajEecGJ9W2hw" source="__f5JTgsYEeajEecGJ9W2hw" target="__f5JTAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJWvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty or rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="__f5JWQsYEeajEecGJ9W2hw" source="__f5JSgsYEeajEecGJ9W2hw" target="__f5JRgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9EiE_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty or rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Property/defaultValue"/>
+      </edges>
+      <edges xmi:id="_-uIVOAsYEeajEecGJ9W2hw" source="__f5JTgsYEeajEecGJ9W2hw" target="_-uIVKgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9EiJ_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_-uIVOwsYEeajEecGJ9W2hw" source="_-uIVKgsYEeajEecGJ9W2hw" target="__f5JRgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9EiKPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/argument"/>
+      </edges>
+      <edges xmi:id="_99wBKAsYEeajEecGJ9W2hw" source="__f5JTgsYEeajEecGJ9W2hw" target="_99wBGgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9EiLfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_99wBKgsYEeajEecGJ9W2hw" source="__f5JTgsYEeajEecGJ9W2hw" target="_99wBHwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9EiLvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="_99wBKwsYEeajEecGJ9W2hw" source="_99wBGgsYEeajEecGJ9W2hw" target="__f5JRgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9EiL_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Package/packagedElement"/>
+      </edges>
+      <edges xmi:id="_ABO72AsZEeajEecGJ9W2hw" source="__f5JTgsYEeajEecGJ9W2hw" target="_ABO7ygsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJIvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_ABO72wsZEeajEecGJ9W2hw" source="_ABO7ygsZEeajEecGJ9W2hw" target="__f5JRgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJI_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint/minint"/>
+      </edges>
+      <edges xmi:id="__gZfogsYEeajEecGJ9W2hw" source="__f5JTgsYEeajEecGJ9W2hw" target="__gZflAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJX_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="__gZfpAsYEeajEecGJ9W2hw" source="__f5JTgsYEeajEecGJ9W2hw" target="__gZfmQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJYPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="__gZfpQsYEeajEecGJ9W2hw" source="__gZflAsYEeajEecGJ9W2hw" target="__f5JRgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJYfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint/maxint"/>
+      </edges>
+      <edges xmi:id="_-uIVOgsYEeajEecGJ9W2hw" source="__f5JTgsYEeajEecGJ9W2hw" target="_-uIVLwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJZPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="_ABO72gsZEeajEecGJ9W2hw" source="__f5JTgsYEeajEecGJ9W2hw" target="_ABO7zwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJZ_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <formula xsi:type="henshin:And" xmi:id="_H9TysfOJEeqKPbhZweJEtg">
+        <left xsi:type="henshin:And" xmi:id="_H9Tyr_OJEeqKPbhZweJEtg">
+          <left xsi:type="henshin:And" xmi:id="_H9TyrfOJEeqKPbhZweJEtg">
+            <left xsi:type="henshin:Not" xmi:id="__f5JWgsYEeajEecGJ9W2hw">
+              <child xsi:type="henshin:NestedCondition" xmi:id="__f5JWwsYEeajEecGJ9W2hw">
+                <annotations xmi:id="_H9FJj_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty"/>
+                <conclusion xmi:id="__f5JXAsYEeajEecGJ9W2hw" name="1">
+                  <nodes xmi:id="__f5JXQsYEeajEecGJ9W2hw" incoming="__f5JXwsYEeajEecGJ9W2hw">
+                    <annotations xmi:id="_H9FJkPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty"/>
+                    <type href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+                  </nodes>
+                  <nodes xmi:id="__f5JXgsYEeajEecGJ9W2hw" name="B.NewSource" outgoing="__f5JXwsYEeajEecGJ9W2hw">
+                    <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+                  </nodes>
+                  <edges xmi:id="__f5JXwsYEeajEecGJ9W2hw" source="__f5JXgsYEeajEecGJ9W2hw" target="__f5JXQsYEeajEecGJ9W2hw">
+                    <annotations xmi:id="_H9FJkfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty"/>
+                    <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Property/defaultValue"/>
+                  </edges>
+                </conclusion>
+                <mappings xmi:id="__f5JYAsYEeajEecGJ9W2hw" origin="__f5JSgsYEeajEecGJ9W2hw" image="__f5JXgsYEeajEecGJ9W2hw"/>
+              </child>
+            </left>
+            <right xsi:type="henshin:Not" xmi:id="_H9TyrvOJEeqKPbhZweJEtg">
+              <child xsi:type="henshin:NestedCondition" xmi:id="__gZfpwsYEeajEecGJ9W2hw">
+                <annotations xmi:id="_H9FJkvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+                <conclusion xmi:id="__gZfqAsYEeajEecGJ9W2hw" name="2">
+                  <nodes xmi:id="__gZfqQsYEeajEecGJ9W2hw" incoming="__gZfqwsYEeajEecGJ9W2hw">
+                    <annotations xmi:id="_H9FJk_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+                    <type href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+                  </nodes>
+                  <nodes xmi:id="__gZfqgsYEeajEecGJ9W2hw" name="B.NewSource" outgoing="__gZfqwsYEeajEecGJ9W2hw">
+                    <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint"/>
+                  </nodes>
+                  <edges xmi:id="__gZfqwsYEeajEecGJ9W2hw" source="__gZfqgsYEeajEecGJ9W2hw" target="__gZfqQsYEeajEecGJ9W2hw">
+                    <annotations xmi:id="_H9FJlPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+                    <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint/maxint"/>
+                  </edges>
+                </conclusion>
+                <mappings xmi:id="__gZfrAsYEeajEecGJ9W2hw" origin="__gZflAsYEeajEecGJ9W2hw" image="__gZfqgsYEeajEecGJ9W2hw"/>
+              </child>
+            </right>
+          </left>
+          <right xsi:type="henshin:Not" xmi:id="_H9TysPOJEeqKPbhZweJEtg">
+            <child xsi:type="henshin:NestedCondition" xmi:id="_-X-fCwsYEeajEecGJ9W2hw">
+              <annotations xmi:id="_H9FJlfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+              <conclusion xmi:id="_-X-fDAsYEeajEecGJ9W2hw" name="3">
+                <nodes xmi:id="_-X-fDQsYEeajEecGJ9W2hw" incoming="_-X-fDwsYEeajEecGJ9W2hw">
+                  <annotations xmi:id="_H9FJlvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+                </nodes>
+                <nodes xmi:id="_-X-fDgsYEeajEecGJ9W2hw" name="B.NewSource" outgoing="_-X-fDwsYEeajEecGJ9W2hw">
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+                </nodes>
+                <edges xmi:id="_-X-fDwsYEeajEecGJ9W2hw" source="_-X-fDgsYEeajEecGJ9W2hw" target="_-X-fDQsYEeajEecGJ9W2hw">
+                  <annotations xmi:id="_H9FJl_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Property/defaultValue"/>
+                </edges>
+              </conclusion>
+              <mappings xmi:id="_-X-fEAsYEeajEecGJ9W2hw" origin="__f5JSgsYEeajEecGJ9W2hw" image="_-X-fDgsYEeajEecGJ9W2hw"/>
+            </child>
+          </right>
+        </left>
+        <right xsi:type="henshin:Not" xmi:id="_H9TysvOJEeqKPbhZweJEtg">
+          <child xsi:type="henshin:NestedCondition" xmi:id="_ABO73QsZEeajEecGJ9W2hw">
+            <annotations xmi:id="_H9FJmPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+            <conclusion xmi:id="_ABO73gsZEeajEecGJ9W2hw" name="4">
+              <nodes xmi:id="_ABO73wsZEeajEecGJ9W2hw" incoming="_ABO74QsZEeajEecGJ9W2hw">
+                <annotations xmi:id="_H9FJmfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+                <type href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+              </nodes>
+              <nodes xmi:id="_ABO74AsZEeajEecGJ9W2hw" name="B.NewSource" outgoing="_ABO74QsZEeajEecGJ9W2hw">
+                <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint"/>
+              </nodes>
+              <edges xmi:id="_ABO74QsZEeajEecGJ9W2hw" source="_ABO74AsZEeajEecGJ9W2hw" target="_ABO73wsZEeajEecGJ9W2hw">
+                <annotations xmi:id="_H9FJmvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+                <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint/minint"/>
+              </edges>
+            </conclusion>
+            <mappings xmi:id="_ABO74gsZEeajEecGJ9W2hw" origin="_ABO7ygsZEeajEecGJ9W2hw" image="_ABO74AsZEeajEecGJ9W2hw"/>
+          </child>
+        </right>
+      </formula>
+    </lhs>
+    <rhs xmi:id="__f5JYQsYEeajEecGJ9W2hw" name="Rhs">
+      <nodes xmi:id="__f5JYgsYEeajEecGJ9W2hw" name="B.Selected" incoming="__f5JdQsYEeajEecGJ9W2hw __f5JewsYEeajEecGJ9W2hw __f5JfQsYEeajEecGJ9W2hw _99wBSQsYEeajEecGJ9W2hw __gZfygsYEeajEecGJ9W2hw _ABO8AAsZEeajEecGJ9W2hw _-uIVWQsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//OpaqueExpression"/>
+      </nodes>
+      <nodes xmi:id="__f5JYwsYEeajEecGJ9W2hw" name="A.Selected" incoming="__f5JdAsYEeajEecGJ9W2hw __f5JdwsYEeajEecGJ9W2hw __f5JeQsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//OpaqueExpression"/>
+      </nodes>
+      <nodes xmi:id="__f5JZAsYEeajEecGJ9W2hw" name="" outgoing="__f5JdAsYEeajEecGJ9W2hw __f5JdQsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
+      </nodes>
+      <nodes xmi:id="__f5JZQsYEeajEecGJ9W2hw" name="A.OldSource" incoming="__f5JdgsYEeajEecGJ9W2hw" outgoing="__f5JeQsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+      </nodes>
+      <nodes xmi:id="__f5JZgsYEeajEecGJ9W2hw" name="B.NewSource" incoming="__f5JegsYEeajEecGJ9W2hw" outgoing="__f5JfQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJSvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty or rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+      </nodes>
+      <nodes xmi:id="__f5JZwsYEeajEecGJ9W2hw" name="" incoming="__f5JfgsYEeajEecGJ9W2hw _99wBSgsYEeajEecGJ9W2hw __gZfywsYEeajEecGJ9W2hw _-X-fLgsYEeajEecGJ9W2hw _-uIVWgsYEeajEecGJ9W2hw _ABO8AQsZEeajEecGJ9W2hw" outgoing="__f5JdgsYEeajEecGJ9W2hw __f5JdwsYEeajEecGJ9W2hw __f5JeAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference"/>
+      </nodes>
+      <nodes xmi:id="__f5JaAsYEeajEecGJ9W2hw" name="" incoming="__f5JeAsYEeajEecGJ9W2hw __f5JfAsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="__f5JaQsYEeajEecGJ9W2hw" name="" incoming="__f5JfwsYEeajEecGJ9W2hw _-X-fLwsYEeajEecGJ9W2hw _99wBSwsYEeajEecGJ9W2hw __gZfzAsYEeajEecGJ9W2hw _-uIVWwsYEeajEecGJ9W2hw _ABO8AgsZEeajEecGJ9W2hw" outgoing="__f5JegsYEeajEecGJ9W2hw __f5JewsYEeajEecGJ9W2hw __f5JfAsYEeajEecGJ9W2hw _-uIVVgsYEeajEecGJ9W2hw _99wBRgsYEeajEecGJ9W2hw _99wBSAsYEeajEecGJ9W2hw __gZfxwsYEeajEecGJ9W2hw __gZfyQsYEeajEecGJ9W2hw _ABO7_QsZEeajEecGJ9W2hw _-uIVWAsYEeajEecGJ9W2hw _ABO7_wsZEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference"/>
+      </nodes>
+      <nodes xmi:id="__f5JagsYEeajEecGJ9W2hw" incoming="__f5JgAsYEeajEecGJ9W2hw" outgoing="__f5JfgsYEeajEecGJ9W2hw __f5JfwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9EiFvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="__f5JawsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueExpression_FROM_Property_(defaultValue)_TO_Property_(defaultValue)&quot;">
+          <annotations xmi:id="_H9FJa_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__f5JbAsYEeajEecGJ9W2hw" value="&quot;MOVEs OpaqueExpression from Property(Reference:defaultValue) to Property(Reference:defaultValue&quot;">
+          <annotations xmi:id="_H9EiHPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__f5JbQsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueExpression_FROM_Property_(defaultValue)_TO_Property_(defaultValue)&quot;">
+          <annotations xmi:id="_H9FJJfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__f5JbgsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_OpaqueExpression_FROM_Property_(defaultValue)_TO_Property_(defaultValue)&quot;">
+          <annotations xmi:id="_H9FJJvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__f5JbwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H9FJbPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__f5JcAsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H9FJbfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__f5JcQsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_H9EiHfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__f5JcgsYEeajEecGJ9W2hw" value="32">
+          <annotations xmi:id="_H9EiHvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__f5JcwsYEeajEecGJ9W2hw" name="" outgoing="__f5JgAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJaPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_-X-fIwsYEeajEecGJ9W2hw" name="" outgoing="_-X-fMAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9EiH_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_-uIVQQsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_-uIVVgsYEeajEecGJ9W2hw" outgoing="_-uIVWQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJJ_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message"/>
+      </nodes>
+      <nodes xmi:id="_-uIVRQsYEeajEecGJ9W2hw" name="" incoming="_-uIVWAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJKPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="_-uIVTwsYEeajEecGJ9W2hw" name="" outgoing="_-uIVXAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJKfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_99wBMQsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_99wBRgsYEeajEecGJ9W2hw" outgoing="_99wBSQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJMPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+      </nodes>
+      <nodes xmi:id="_99wBNgsYEeajEecGJ9W2hw" incoming="_99wBTAsYEeajEecGJ9W2hw" outgoing="_99wBSgsYEeajEecGJ9W2hw _99wBSwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJMfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_99wBNwsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueExpression_FROM_Property_(defaultValue)_TO_Package_(packagedElement)&quot;">
+          <annotations xmi:id="_H9FJOPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_99wBOAsYEeajEecGJ9W2hw" value="&quot;MOVEs OpaqueExpression from Property(Reference:defaultValue) to Package(Reference:packagedElement&quot;">
+          <annotations xmi:id="_H9FJcPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_99wBOQsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueExpression_FROM_Property_(defaultValue)_TO_Package_(packagedElement)&quot;">
+          <annotations xmi:id="_H9FJcfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_99wBOgsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_OpaqueExpression_FROM_Property_(defaultValue)_TO_Package_(packagedElement)&quot;">
+          <annotations xmi:id="_H9FJOfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_99wBOwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H9FJOvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_99wBPAsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_H9FJO_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_99wBPQsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_H9FJcvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_99wBPgsYEeajEecGJ9W2hw" value="28">
+          <annotations xmi:id="_H9FJPPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_99wBPwsYEeajEecGJ9W2hw" name="" outgoing="_99wBTAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJMvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="__gZfsgsYEeajEecGJ9W2hw" name="B.NewSource" incoming="__gZfxwsYEeajEecGJ9W2hw" outgoing="__gZfygsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJPfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint"/>
+      </nodes>
+      <nodes xmi:id="__gZftgsYEeajEecGJ9W2hw" name="" incoming="__gZfyQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJPvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="_ABO76AsZEeajEecGJ9W2hw" name="B.NewSource" incoming="_ABO7_QsZEeajEecGJ9W2hw" outgoing="_ABO8AAsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJUPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint"/>
+      </nodes>
+      <nodes xmi:id="_ABO77AsZEeajEecGJ9W2hw" name="" incoming="_ABO7_wsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJUfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="_ABO77QsZEeajEecGJ9W2hw" incoming="_ABO8AwsZEeajEecGJ9W2hw" outgoing="_ABO8AQsZEeajEecGJ9W2hw _ABO8AgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJUvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_ABO77gsZEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueExpression_FROM_Property_(defaultValue)_TO_InteractionConstraint_(minint)&quot;">
+          <annotations xmi:id="_H9FJVvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_ABO77wsZEeajEecGJ9W2hw" value="&quot;MOVEs OpaqueExpression from Property(Reference:defaultValue) to InteractionConstraint(Reference:minint&quot;">
+          <annotations xmi:id="_H9FJV_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_ABO78AsZEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueExpression_FROM_Property_(defaultValue)_TO_InteractionConstraint_(minint)&quot;">
+          <annotations xmi:id="_H9FJi_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_ABO78QsZEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_OpaqueExpression_FROM_Property_(defaultValue)_TO_InteractionConstraint_(minint)&quot;">
+          <annotations xmi:id="_H9FJWPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_ABO78gsZEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H9FJjPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_ABO78wsZEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H9FJjfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_ABO79AsZEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_H9FJjvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_ABO79QsZEeajEecGJ9W2hw" value="27">
+          <annotations xmi:id="_H9FJWfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_99wBNQsYEeajEecGJ9W2hw" name="" incoming="_99wBSAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJbvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="__gZftwsYEeajEecGJ9W2hw" incoming="__gZfzQsYEeajEecGJ9W2hw" outgoing="__gZfywsYEeajEecGJ9W2hw __gZfzAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJc_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="__gZfuAsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueExpression_FROM_Property_(defaultValue)_TO_InteractionConstraint_(maxint)&quot;">
+          <annotations xmi:id="_H9FJdvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__gZfuQsYEeajEecGJ9W2hw" value="&quot;MOVEs OpaqueExpression from Property(Reference:defaultValue) to InteractionConstraint(Reference:maxint&quot;">
+          <annotations xmi:id="_H9FJd_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__gZfugsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueExpression_FROM_Property_(defaultValue)_TO_InteractionConstraint_(maxint)&quot;">
+          <annotations xmi:id="_H9FJRPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__gZfuwsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_OpaqueExpression_FROM_Property_(defaultValue)_TO_InteractionConstraint_(maxint)&quot;">
+          <annotations xmi:id="_H9FJRfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__gZfvAsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H9FJRvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__gZfvQsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H9FJR_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__gZfvgsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_H9FJSPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__gZfvwsYEeajEecGJ9W2hw" value="27">
+          <annotations xmi:id="_H9FJSfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__gZfwAsYEeajEecGJ9W2hw" name="" outgoing="__gZfzQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJdPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_-X-fGgsYEeajEecGJ9W2hw" incoming="_-X-fMAsYEeajEecGJ9W2hw" outgoing="_-X-fLgsYEeajEecGJ9W2hw _-X-fLwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJePOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_-X-fGwsYEeajEecGJ9W2hw" value="&quot;MOVE_OpaqueExpression_FROM_Property_(defaultValue)_TO_Property_(defaultValue)&quot;">
+          <annotations xmi:id="_H9FJevOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-X-fHAsYEeajEecGJ9W2hw" value="&quot;MOVEs OpaqueExpression from Property(Reference:defaultValue) to Property(Reference:defaultValue&quot;">
+          <annotations xmi:id="_H9FJe_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-X-fHQsYEeajEecGJ9W2hw" value="&quot;MOVE_OpaqueExpression_FROM_Property_(defaultValue)_TO_Property_(defaultValue)&quot;">
+          <annotations xmi:id="_H9EiIPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-X-fHgsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_OpaqueExpression_FROM_Property_(defaultValue)_TO_Property_(defaultValue)&quot;">
+          <annotations xmi:id="_H9FJfPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-X-fHwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H9FJffOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-X-fIAsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H9EiIfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-X-fIQsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_H9EiIvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-X-fIgsYEeajEecGJ9W2hw" value="32">
+          <annotations xmi:id="_H9EiI_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-uIVRgsYEeajEecGJ9W2hw" incoming="_-uIVXAsYEeajEecGJ9W2hw" outgoing="_-uIVWgsYEeajEecGJ9W2hw _-uIVWwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJfvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_-uIVRwsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueExpression_FROM_Property_(defaultValue)_TO_Message_(argument)&quot;">
+          <annotations xmi:id="_H9FJhPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-uIVSAsYEeajEecGJ9W2hw" value="&quot;MOVEs OpaqueExpression from Property(Reference:defaultValue) to Message(Reference:argument&quot;">
+          <annotations xmi:id="_H9FJhfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-uIVSQsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueExpression_FROM_Property_(defaultValue)_TO_Message_(argument)&quot;">
+          <annotations xmi:id="_H9FJK_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-uIVSgsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_OpaqueExpression_FROM_Property_(defaultValue)_TO_Message_(argument)&quot;">
+          <annotations xmi:id="_H9FJLPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-uIVSwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H9FJLfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-uIVTAsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_H9FJLvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-uIVTQsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_H9FJL_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-uIVTgsYEeajEecGJ9W2hw" value="24">
+          <annotations xmi:id="_H9FJhvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_ABO79gsZEeajEecGJ9W2hw" name="" outgoing="_ABO8AwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJh_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <edges xmi:id="__f5JdAsYEeajEecGJ9W2hw" source="__f5JZAsYEeajEecGJ9W2hw" target="__f5JYwsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
+      </edges>
+      <edges xmi:id="__f5JdQsYEeajEecGJ9W2hw" source="__f5JZAsYEeajEecGJ9W2hw" target="__f5JYgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objB"/>
+      </edges>
+      <edges xmi:id="__f5JdgsYEeajEecGJ9W2hw" source="__f5JZwsYEeajEecGJ9W2hw" target="__f5JZQsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="__f5JdwsYEeajEecGJ9W2hw" source="__f5JZwsYEeajEecGJ9W2hw" target="__f5JYwsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/tgt"/>
+      </edges>
+      <edges xmi:id="__f5JeAsYEeajEecGJ9W2hw" source="__f5JZwsYEeajEecGJ9W2hw" target="__f5JaAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="__f5JeQsYEeajEecGJ9W2hw" source="__f5JZQsYEeajEecGJ9W2hw" target="__f5JYwsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Property/defaultValue"/>
+      </edges>
+      <edges xmi:id="__f5JegsYEeajEecGJ9W2hw" source="__f5JaQsYEeajEecGJ9W2hw" target="__f5JZgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJTPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty or rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="__f5JewsYEeajEecGJ9W2hw" source="__f5JaQsYEeajEecGJ9W2hw" target="__f5JYgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/tgt"/>
+      </edges>
+      <edges xmi:id="__f5JfAsYEeajEecGJ9W2hw" source="__f5JaQsYEeajEecGJ9W2hw" target="__f5JaAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJafOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty or rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="__f5JfQsYEeajEecGJ9W2hw" source="__f5JZgsYEeajEecGJ9W2hw" target="__f5JYgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9EiF_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty or rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Property/defaultValue"/>
+      </edges>
+      <edges xmi:id="__f5JfgsYEeajEecGJ9W2hw" source="__f5JagsYEeajEecGJ9W2hw" target="__f5JZwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9EiGfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__f5JfwsYEeajEecGJ9W2hw" source="__f5JagsYEeajEecGJ9W2hw" target="__f5JaQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9EiGvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__f5JgAsYEeajEecGJ9W2hw" source="__f5JcwsYEeajEecGJ9W2hw" target="__f5JagsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9EiG_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="_-uIVVgsYEeajEecGJ9W2hw" source="__f5JaQsYEeajEecGJ9W2hw" target="_-uIVQQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJKvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_99wBRgsYEeajEecGJ9W2hw" source="__f5JaQsYEeajEecGJ9W2hw" target="_99wBMQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJM_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_99wBSAsYEeajEecGJ9W2hw" source="__f5JaQsYEeajEecGJ9W2hw" target="_99wBNQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJNPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="_99wBSQsYEeajEecGJ9W2hw" source="_99wBMQsYEeajEecGJ9W2hw" target="__f5JYgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJNfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Package/packagedElement"/>
+      </edges>
+      <edges xmi:id="_99wBSgsYEeajEecGJ9W2hw" source="_99wBNgsYEeajEecGJ9W2hw" target="__f5JZwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJNvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_99wBTAsYEeajEecGJ9W2hw" source="_99wBPwsYEeajEecGJ9W2hw" target="_99wBNgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJN_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="__gZfxwsYEeajEecGJ9W2hw" source="__f5JaQsYEeajEecGJ9W2hw" target="__gZfsgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJP_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="__gZfyQsYEeajEecGJ9W2hw" source="__f5JaQsYEeajEecGJ9W2hw" target="__gZftgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJQPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="__gZfygsYEeajEecGJ9W2hw" source="__gZfsgsYEeajEecGJ9W2hw" target="__f5JYgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJQfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint/maxint"/>
+      </edges>
+      <edges xmi:id="__gZfywsYEeajEecGJ9W2hw" source="__gZftwsYEeajEecGJ9W2hw" target="__f5JZwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJQvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__gZfzQsYEeajEecGJ9W2hw" source="__gZfwAsYEeajEecGJ9W2hw" target="__gZftwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJQ_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="_-X-fLgsYEeajEecGJ9W2hw" source="_-X-fGgsYEeajEecGJ9W2hw" target="__f5JZwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJTvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-X-fLwsYEeajEecGJ9W2hw" source="_-X-fGgsYEeajEecGJ9W2hw" target="__f5JaQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJT_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_ABO7_QsZEeajEecGJ9W2hw" source="__f5JaQsYEeajEecGJ9W2hw" target="_ABO76AsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJU_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_ABO8AAsZEeajEecGJ9W2hw" source="_ABO76AsZEeajEecGJ9W2hw" target="__f5JYgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJVPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint/minint"/>
+      </edges>
+      <edges xmi:id="_ABO8AwsZEeajEecGJ9W2hw" source="_ABO79gsZEeajEecGJ9W2hw" target="_ABO77QsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJVfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="_99wBSwsYEeajEecGJ9W2hw" source="_99wBNgsYEeajEecGJ9W2hw" target="__f5JaQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJb_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopackagepackage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__gZfzAsYEeajEecGJ9W2hw" source="__gZftwsYEeajEecGJ9W2hw" target="__f5JaQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJdfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-X-fMAsYEeajEecGJ9W2hw" source="_-X-fIwsYEeajEecGJ9W2hw" target="_-X-fGgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJefOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetopropertyproperty0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="_-uIVWAsYEeajEecGJ9W2hw" source="__f5JaQsYEeajEecGJ9W2hw" target="_-uIVRQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJf_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="_-uIVWQsYEeajEecGJ9W2hw" source="_-uIVQQsYEeajEecGJ9W2hw" target="__f5JYgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJgPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/argument"/>
+      </edges>
+      <edges xmi:id="_-uIVWgsYEeajEecGJ9W2hw" source="_-uIVRgsYEeajEecGJ9W2hw" target="__f5JZwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJgfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-uIVWwsYEeajEecGJ9W2hw" source="_-uIVRgsYEeajEecGJ9W2hw" target="__f5JaQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJgvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-uIVXAsYEeajEecGJ9W2hw" source="_-uIVTwsYEeajEecGJ9W2hw" target="_-uIVRgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJg_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetomessagemessage"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="_ABO7_wsZEeajEecGJ9W2hw" source="__f5JaQsYEeajEecGJ9W2hw" target="_ABO77AsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJiPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="_ABO8AQsZEeajEecGJ9W2hw" source="_ABO77QsZEeajEecGJ9W2hw" target="__f5JZwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJifOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_ABO8AgsZEeajEecGJ9W2hw" source="_ABO77QsZEeajEecGJ9W2hw" target="__f5JaQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H9FJivOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaqueexpressionfrompropertydefaultvaluetointeractionconstraintinteractionconstraint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+    </rhs>
+    <mappings xmi:id="__f5JgQsYEeajEecGJ9W2hw" origin="__f5JRgsYEeajEecGJ9W2hw" image="__f5JYgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__f5JggsYEeajEecGJ9W2hw" origin="__f5JRwsYEeajEecGJ9W2hw" image="__f5JYwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__f5JgwsYEeajEecGJ9W2hw" origin="__f5JSAsYEeajEecGJ9W2hw" image="__f5JZAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__f5JhAsYEeajEecGJ9W2hw" origin="__f5JSQsYEeajEecGJ9W2hw" image="__f5JZQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__f5JhQsYEeajEecGJ9W2hw" origin="__f5JSgsYEeajEecGJ9W2hw" image="__f5JZgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__f5JhgsYEeajEecGJ9W2hw" origin="__f5JSwsYEeajEecGJ9W2hw" image="__f5JZwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__f5JhwsYEeajEecGJ9W2hw" origin="__f5JTAsYEeajEecGJ9W2hw" image="__f5JaAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__f5JiAsYEeajEecGJ9W2hw" origin="__f5JTgsYEeajEecGJ9W2hw" image="__f5JaQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__f5JiQsYEeajEecGJ9W2hw" origin="__f5JTwsYEeajEecGJ9W2hw" image="__f5JcwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H9TyoPOJEeqKPbhZweJEtg" origin="_-X-e_wsYEeajEecGJ9W2hw" image="_-X-fIwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H9TyofOJEeqKPbhZweJEtg" origin="_-uIVKgsYEeajEecGJ9W2hw" image="_-uIVQQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H9TyovOJEeqKPbhZweJEtg" origin="_-uIVLwsYEeajEecGJ9W2hw" image="_-uIVRQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H9Tyo_OJEeqKPbhZweJEtg" origin="_-uIVMQsYEeajEecGJ9W2hw" image="_-uIVTwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H9TypPOJEeqKPbhZweJEtg" origin="_99wBGgsYEeajEecGJ9W2hw" image="_99wBMQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H9TypfOJEeqKPbhZweJEtg" origin="_99wBHwsYEeajEecGJ9W2hw" image="_99wBNQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H9TypvOJEeqKPbhZweJEtg" origin="_99wBIQsYEeajEecGJ9W2hw" image="_99wBPwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H9Typ_OJEeqKPbhZweJEtg" origin="__gZflAsYEeajEecGJ9W2hw" image="__gZfsgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H9TyqPOJEeqKPbhZweJEtg" origin="__gZfmQsYEeajEecGJ9W2hw" image="__gZftgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H9TyqfOJEeqKPbhZweJEtg" origin="__gZfmwsYEeajEecGJ9W2hw" image="__gZfwAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H9TyqvOJEeqKPbhZweJEtg" origin="_ABO7ygsZEeajEecGJ9W2hw" image="_ABO76AsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H9Tyq_OJEeqKPbhZweJEtg" origin="_ABO7zwsZEeajEecGJ9W2hw" image="_ABO77AsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H9TyrPOJEeqKPbhZweJEtg" origin="_ABO70QsZEeajEecGJ9W2hw" image="_ABO79gsZEeajEecGJ9W2hw"/>
+  </units>
+</henshin:Module>

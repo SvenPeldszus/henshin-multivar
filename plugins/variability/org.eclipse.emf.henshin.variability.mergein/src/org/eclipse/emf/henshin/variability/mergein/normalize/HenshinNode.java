@@ -8,7 +8,6 @@ public class HenshinNode extends HenshinGraphElement {
 	Type actionType;
 	String ruleName;
 
-
 	public HenshinNode(HenshinGraph graph, EObject type, Type actionType, String ruleName) {
 		super(graph);
 		this.type = type;
@@ -38,6 +37,12 @@ public class HenshinNode extends HenshinGraphElement {
 
 	public void setRuleName(String rule) {
 		this.ruleName = rule;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() + "(type=\"" + type.eClass().getName() + "\", actionType=\"" + actionType.toString()
+				+ "\" )";
 	}
 
 //	@Override

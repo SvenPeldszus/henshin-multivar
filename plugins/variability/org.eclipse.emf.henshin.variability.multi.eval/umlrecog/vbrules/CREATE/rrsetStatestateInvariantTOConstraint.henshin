@@ -1,7 +1,8 @@
-<henshin:Module xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmi:id="_rR1Q4LRcEeeYUfLk2h7sIw">
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_4jWNwPOCEeqe6s0sCOQVEQ">
   <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
   <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
-  <units xsi:type="henshin:Rule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="_qpO_0LRcEeeYUfLk2h7sIw" name="rr:setState_stateInvariant_TO_Constraint">
+  <units xsi:type="henshin:Rule" xmi:id="_-GyBQQsYEeajEecGJ9W2hw" name="rr:setState_stateInvariant_TO_Constraint" description="Recognize: SetStateRefstateInvariantToConstraint">
     <parameters xmi:id="_-GyBQgsYEeajEecGJ9W2hw" name="Selected">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
     </parameters>
@@ -39,6 +40,22 @@
       <edges xmi:id="_-GyBTgsYEeajEecGJ9W2hw" source="_-GyBRQsYEeajEecGJ9W2hw" target="_-GyBRgsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/stateInvariant"/>
       </edges>
+      <formula xsi:type="henshin:Not" xmi:id="_-GyBTwsYEeajEecGJ9W2hw">
+        <child xsi:type="henshin:NestedCondition" xmi:id="_-GyBUAsYEeajEecGJ9W2hw">
+          <conclusion xmi:id="_-GyBUQsYEeajEecGJ9W2hw" name="ub0">
+            <nodes xmi:id="_-GyBUgsYEeajEecGJ9W2hw" incoming="_-GyBVAsYEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Constraint"/>
+            </nodes>
+            <nodes xmi:id="_-GyBUwsYEeajEecGJ9W2hw" name="B.Selected" outgoing="_-GyBVAsYEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+            </nodes>
+            <edges xmi:id="_-GyBVAsYEeajEecGJ9W2hw" source="_-GyBUwsYEeajEecGJ9W2hw" target="_-GyBUgsYEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/stateInvariant"/>
+            </edges>
+          </conclusion>
+          <mappings xmi:id="_-GyBVQsYEeajEecGJ9W2hw" origin="_-GyBRQsYEeajEecGJ9W2hw" image="_-GyBUwsYEeajEecGJ9W2hw"/>
+        </child>
+      </formula>
     </lhs>
     <rhs xmi:id="_-GyBVgsYEeajEecGJ9W2hw" name="Rhs">
       <nodes xmi:id="_-GyBVwsYEeajEecGJ9W2hw" name="B.Selected" incoming="_-GyBZQsYEeajEecGJ9W2hw" outgoing="_-GyBaAsYEeajEecGJ9W2hw">
@@ -55,6 +72,30 @@
       </nodes>
       <nodes xmi:id="_-GyBWwsYEeajEecGJ9W2hw" incoming="_-GyBagsYEeajEecGJ9W2hw" outgoing="_-GyBaQsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_-GyBXAsYEeajEecGJ9W2hw" value="&quot;SET_REFERENCE_State_(stateInvariant)_TGT_Constraint&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-GyBXQsYEeajEecGJ9W2hw" value="&quot;Sets State's reference stateInvariant the target Constraint&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-GyBXgsYEeajEecGJ9W2hw" value="&quot;SET_REFERENCE_State_(stateInvariant)_TGT_Constraint&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-GyBXwsYEeajEecGJ9W2hw" value="&quot;RR: SET_REFERENCE_State_(stateInvariant)_TGT_Constraint&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-GyBYAsYEeajEecGJ9W2hw" value="1">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-GyBYQsYEeajEecGJ9W2hw" value="1">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-GyBYgsYEeajEecGJ9W2hw" value="2">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-GyBYwsYEeajEecGJ9W2hw" value="13">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="_-GyBZAsYEeajEecGJ9W2hw" name="" outgoing="_-GyBagsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>

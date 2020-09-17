@@ -33,11 +33,7 @@ public class SatChecker {
 	
 	private List<String> solution;
 
-	public static ISolver createModelIterator(String expr, Map<Integer, String> symbolsToIndices) {
-		Sentence parsedExpr = FeatureExpression.getExpr(expr);
-		
-		Sentence cnf = ConvertToCNF.convert(parsedExpr);
-	
+	public static ISolver createModelIterator(Sentence cnf, Map<Integer, String> symbolsToIndices) {
 		Set<PropositionSymbol> symbols = SymbolCollector.getSymbolsFrom(cnf);
 		Set<Clause> clauses = ClauseCollector.getClausesFrom(cnf);
 		Map<PropositionSymbol, Integer> indices = getSymbol2IndexMap(symbols);

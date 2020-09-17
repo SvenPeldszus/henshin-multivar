@@ -1,9 +1,9 @@
 /**
- * 
+ *
  */
 package org.eclipse.emf.henshin.variability.tests.parameterized;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,20 +26,20 @@ import org.eclipse.emf.henshin.interpreter.impl.EGraphImpl;
 import org.eclipse.emf.henshin.interpreter.impl.EngineImpl;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.variability.InconsistentRuleException;
-import org.eclipse.emf.henshin.variability.VarRuleApplicationImpl;
-import org.eclipse.emf.henshin.variability.matcher.VariabilityAwareMatch;
-import org.eclipse.emf.henshin.variability.matcher.VariabilityAwareMatcher;
+import org.eclipse.emf.henshin.variability.VBRuleApplicationImpl;
+import org.eclipse.emf.henshin.variability.matcher.VBMatch;
+import org.eclipse.emf.henshin.variability.matcher.VBMatcher;
 import org.eclipse.emf.henshin.variability.tests.parameterized.create.TestCreator;
 import org.eclipse.emf.henshin.variability.tests.parameterized.data.TestResult;
 import org.eclipse.emf.henshin.variability.tests.parameterized.data.VBTestData;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-import org.junit.runner.RunWith;
 
 /**
  * @author speldszus
- * 
+ *
  *         A test for checking the Henshin engine. The tests are specified in
  *         JSON files described by inner classes.
  *
@@ -49,7 +49,7 @@ public class VBEngineParameterizedTest {
 
 	private static final File dataFile = new File("data");
 	private static final boolean DEBUG = false;
-	private VBTestData data;
+	private final VBTestData data;
 
 	public VBEngineParameterizedTest(VBTestData data) {
 		this.data = data;
@@ -81,32 +81,32 @@ public class VBEngineParameterizedTest {
 
 	/**
 	 * Executes the specified test
-	 * 
+	 *
 	 * @param dataFile The test specification
 	 * @throws InconsistentRuleException If a inconsistent rule should be executed
 	 */
 	@Test
 	public void testVBEngine() throws InconsistentRuleException {
 		EngineImpl engine = new EngineImpl();
-		EGraphImpl graph = new EGraphImpl(data.getResource());
-		Map<String, Boolean> configuration = data.getConfiguration();
-		Rule rule = data.getRule();
-		
-		VariabilityAwareMatcher matcher = new VariabilityAwareMatcher(rule, graph, configuration);
-		Set<VariabilityAwareMatch> allMatches = matcher.findMatches();
-		
-		
-		for(VariabilityAwareMatch match : allMatches) {
-			RuleApplication vbRuleApp = new VarRuleApplicationImpl(engine, graph, rule, configuration, match);
+		EGraphImpl graph = new EGraphImpl(this.data.getResource());
+		Map<String, Boolean> configuration = this.data.getConfiguration();
+		Rule rule = this.data.getRule();
+
+		VBMatcher matcher = new VBMatcher(rule, graph, configuration);
+		Set<? extends VBMatch> allMatches = matcher.findMatches();
+
+
+		for(VBMatch match : allMatches) {
+			RuleApplication vbRuleApp = new VBRuleApplicationImpl(engine, graph, rule, configuration, match);
 			vbRuleApp.execute(null);
 		}
-		
+
 		if (DEBUG) {
 			save();
 		}
 
-		int modelSize = getModelSize(data);
-		for (TestResult check : data.getExpect()) {
+		int modelSize = getModelSize(this.data);
+		for (TestResult check : this.data.getExpect()) {
 			switch (check.getKind()) {
 			case MATCHES:
 				assertEquals("Number of matches not as expected!", ((Number) check.getValue()).intValue(), allMatches.size());
@@ -119,13 +119,13 @@ public class VBEngineParameterizedTest {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void save() {
-		Path path = Paths.get("debug/" + data.getResource().getURI().lastSegment());
+		Path path = Paths.get("debug/" + this.data.getResource().getURI().lastSegment());
 		path.getParent().toFile().mkdirs();
 		try (OutputStream outputStream = Files.newOutputStream(path)) {
-			data.getResource().save(outputStream, Collections.emptyMap());
+			this.data.getResource().save(outputStream, Collections.emptyMap());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -133,7 +133,7 @@ public class VBEngineParameterizedTest {
 
 	/**
 	 * Calculates the size of the test model in terms of model elements
-	 * 
+	 *
 	 * @param data The test data
 	 * @return The size of the model
 	 */

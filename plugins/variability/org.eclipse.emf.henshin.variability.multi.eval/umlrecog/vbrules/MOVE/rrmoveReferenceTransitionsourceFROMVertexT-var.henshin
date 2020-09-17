@@ -1,8 +1,12 @@
-<henshin:Module xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmi:id="_Vq6P9LRVEeexAvqQ_kM_vQ">
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_Hxlq0POJEeqKPbhZweJEtg">
   <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
   <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
-  <units xsi:type="henshin:Rule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="_RtKA9LRVEeexAvqQ_kM_vQ" name="rr:moveReference_Transition_(source)_FROM_Vertex_TO_Vertex,rr:changeTransition_source_TO_Vertex,rr:moveReference_Transition_(target)_FROM_Vertex_TO_Vertex,rr:changeTransition_target_TO_Vertex">
-    <annotations xmi:id="_Vq6P87RVEeexAvqQ_kM_vQ" key="originalRules" value="A=Rule rr:moveReference_Transition_(source)_FROM_Vertex_TO_Vertex(Selected:Transition, OldTarget:Vertex, NewTarget:Vertex), B=Rule rr:changeTransition_source_TO_Vertex(Selected:Transition, OldTarget:Vertex, NewTarget:Vertex), C=Rule rr:moveReference_Transition_(target)_FROM_Vertex_TO_Vertex(Selected:Transition, OldTarget:Vertex, NewTarget:Vertex), D=Rule rr:changeTransition_target_TO_Vertex(Selected:Transition, OldTarget:Vertex, NewTarget:Vertex)"/>
+  <units xsi:type="henshin:Rule" xmi:id="_AIvR8QsZEeajEecGJ9W2hw" name="rr:moveReference_Transition_(source)_FROM_Vertex_TO_Vertex,rr:changeTransition_source_TO_Vertex,rr:moveReference_Transition_(target)_FROM_Vertex_TO_Vertex,rr:changeTransition_target_TO_Vertex" description="Recognize: MOVEs Reference source of Transition from Vertex to Vertex">
+    <annotations xmi:id="_HxlDw_OJEeqKPbhZweJEtg" key="features" value="rrmovereferencetransitiontargetfromvertextovertex, rrmovereferencetransitionsourcefromvertextovertex, rrchangetransitionsourcetovertex, rrchangetransitiontargettovertex"/>
+    <annotations xmi:id="_HxlDxPOJEeqKPbhZweJEtg" key="featureConstraintIsCNF" value="true"/>
+    <annotations xmi:id="_HxlDxfOJEeqKPbhZweJEtg" key="featureConstraint" value="((rrmovereferencetransitionsourcefromvertextovertex) | (rrchangetransitionsourcetovertex) | (rrmovereferencetransitiontargetfromvertextovertex) | (rrchangetransitiontargettovertex)) &amp; ( ~(rrmovereferencetransitionsourcefromvertextovertex) | ~(rrchangetransitionsourcetovertex)) &amp; ( ~(rrmovereferencetransitionsourcefromvertextovertex) | ~(rrmovereferencetransitiontargetfromvertextovertex)) &amp; ( ~(rrmovereferencetransitionsourcefromvertextovertex) | ~(rrchangetransitiontargettovertex)) &amp; ( ~(rrchangetransitionsourcetovertex) | ~(rrmovereferencetransitiontargetfromvertextovertex)) &amp; ( ~(rrchangetransitionsourcetovertex) | ~(rrchangetransitiontargettovertex)) &amp; ( ~(rrmovereferencetransitiontargetfromvertextovertex) | ~(rrchangetransitiontargettovertex))"/>
+    <annotations xmi:id="_HxlDxvOJEeqKPbhZweJEtg" key="originalRules" value="A=Rule rr:moveReference_Transition_(source)_FROM_Vertex_TO_Vertex(Selected:Transition, OldTarget:Vertex, NewTarget:Vertex), B=Rule rr:changeTransition_source_TO_Vertex(Selected:Transition, OldTarget:Vertex, NewTarget:Vertex), C=Rule rr:moveReference_Transition_(target)_FROM_Vertex_TO_Vertex(Selected:Transition, OldTarget:Vertex, NewTarget:Vertex), D=Rule rr:changeTransition_target_TO_Vertex(Selected:Transition, OldTarget:Vertex, NewTarget:Vertex)"/>
     <parameters xmi:id="_AIvR8gsZEeajEecGJ9W2hw" name="Selected">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition"/>
     </parameters>
@@ -16,13 +20,13 @@
       <nodes xmi:id="_AIvR9gsZEeajEecGJ9W2hw" name="B.Selected" incoming="_AIvSAQsZEeajEecGJ9W2hw _AIvSBgsZEeajEecGJ9W2hw" outgoing="_AIvSCQsZEeajEecGJ9W2hw __TzOGQsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition"/>
       </nodes>
-      <nodes xmi:id="_AIvR9wsZEeajEecGJ9W2hw" name="A.Selected" incoming="_AIvSAAsZEeajEecGJ9W2hw _AIvSAgsZEeajEecGJ9W2hw" outgoing="_AIvSBQsZEeajEecGJ9W2hw __TzOFQsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_AIvR9wsZEeajEecGJ9W2hw" name="A.Selected" incoming="_AIvSAAsZEeajEecGJ9W2hw _AIvSAgsZEeajEecGJ9W2hw" outgoing="_AIvSBQsZEeajEecGJ9W2hw __dxpdQsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition"/>
       </nodes>
       <nodes xmi:id="_AIvR-AsZEeajEecGJ9W2hw" name="" outgoing="_AIvSAAsZEeajEecGJ9W2hw _AIvSAQsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
       </nodes>
-      <nodes xmi:id="_AIvR-QsZEeajEecGJ9W2hw" name="A.OldTarget" incoming="_AIvSAwsZEeajEecGJ9W2hw _AIvSBQsZEeajEecGJ9W2hw __TzOFQsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_AIvR-QsZEeajEecGJ9W2hw" name="A.OldTarget" incoming="_AIvSAwsZEeajEecGJ9W2hw _AIvSBQsZEeajEecGJ9W2hw __dxpdQsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Vertex"/>
       </nodes>
       <nodes xmi:id="_AIvR-gsZEeajEecGJ9W2hw" name="B.NewTarget" incoming="_AIvSBwsZEeajEecGJ9W2hw _AIvSCQsZEeajEecGJ9W2hw __TzOGQsYEeajEecGJ9W2hw">
@@ -34,40 +38,40 @@
       <nodes xmi:id="_AIvR_AsZEeajEecGJ9W2hw" name="" incoming="_AIvSBAsZEeajEecGJ9W2hw _AIvSCAsZEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
         <attributes xmi:id="_AIvR_QsZEeajEecGJ9W2hw" value="&quot;source&quot;">
+          <annotations xmi:id="_HxfkM_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex or rrchangetransitionsourcetovertex"/>
           <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-          <annotations key="presenceCondition" value="A or B"/>
-        </attributes>
-        <attributes xmi:id="__TzODQsYEeajEecGJ9W2hw" value="&quot;target&quot;">
-          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-          <annotations key="presenceCondition" value="C"/>
-        </attributes>
-        <attributes xmi:id="__dxpbQsYEeajEecGJ9W2hw" value="&quot;target&quot;">
-          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-          <annotations key="presenceCondition" value="D"/>
         </attributes>
         <attributes xmi:id="_-EMnXQsYEeajEecGJ9W2hw" value="&quot;source&quot;">
+          <annotations xmi:id="_HxfkNPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex or rrchangetransitionsourcetovertex"/>
           <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-          <annotations key="presenceCondition" value="A or B"/>
+        </attributes>
+        <attributes xmi:id="__TzODQsYEeajEecGJ9W2hw" value="&quot;target&quot;">
+          <annotations xmi:id="_HxfkRfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitiontargetfromvertextovertex"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="__dxpbQsYEeajEecGJ9W2hw" value="&quot;target&quot;">
+          <annotations xmi:id="_HxfkZPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitiontargettovertex"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
         </attributes>
       </nodes>
       <nodes xmi:id="_AIvR_gsZEeajEecGJ9W2hw" name="" outgoing="_AIvSBgsZEeajEecGJ9W2hw _AIvSBwsZEeajEecGJ9W2hw _AIvSCAsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference"/>
       </nodes>
       <nodes xmi:id="_AIvR_wsZEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_HxfkMPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="A"/>
       </nodes>
       <nodes xmi:id="_-EMnXwsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_HxfkNfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitionsourcetovertex"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="B"/>
       </nodes>
       <nodes xmi:id="__TzODwsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_HxfkQ_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitiontargetfromvertextovertex"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="C"/>
       </nodes>
       <nodes xmi:id="__dxpbwsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_HxfkY_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitiontargettovertex"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="D"/>
       </nodes>
       <edges xmi:id="_AIvSAAsZEeajEecGJ9W2hw" source="_AIvR-AsZEeajEecGJ9W2hw" target="_AIvR9wsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
@@ -85,8 +89,8 @@
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
       </edges>
       <edges xmi:id="_AIvSBQsZEeajEecGJ9W2hw" source="_AIvR9wsZEeajEecGJ9W2hw" target="_AIvR-QsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkSPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex or rrchangetransitionsourcetovertex"/>
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition/source"/>
-        <annotations key="presenceCondition" value="A or B"/>
       </edges>
       <edges xmi:id="_AIvSBgsZEeajEecGJ9W2hw" source="_AIvR_gsZEeajEecGJ9W2hw" target="_AIvR9gsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
@@ -98,74 +102,202 @@
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
       </edges>
       <edges xmi:id="_AIvSCQsZEeajEecGJ9W2hw" source="_AIvR9gsZEeajEecGJ9W2hw" target="_AIvR-gsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkMfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex or rrchangetransitionsourcetovertex"/>
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition/source"/>
-        <annotations key="presenceCondition" value="A or B"/>
-      </edges>
-      <edges xmi:id="__TzOFQsYEeajEecGJ9W2hw" source="_AIvR9wsZEeajEecGJ9W2hw" target="_AIvR-QsZEeajEecGJ9W2hw">
-        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition/target"/>
-        <annotations key="presenceCondition" value="C"/>
       </edges>
       <edges xmi:id="__TzOGQsYEeajEecGJ9W2hw" source="_AIvR9gsZEeajEecGJ9W2hw" target="_AIvR-gsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkRPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitiontargetfromvertextovertex"/>
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition/target"/>
-        <annotations key="presenceCondition" value="C"/>
+      </edges>
+      <edges xmi:id="__dxpdQsYEeajEecGJ9W2hw" source="_AIvR9wsZEeajEecGJ9W2hw" target="_AIvR-QsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkRvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitiontargettovertex"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition/target"/>
       </edges>
     </lhs>
     <rhs xmi:id="_AIvSCgsZEeajEecGJ9W2hw" name="Rhs">
       <nodes xmi:id="_AIvSCwsZEeajEecGJ9W2hw" name="B.Selected" incoming="_AIvSHgsZEeajEecGJ9W2hw _AIvSIwsZEeajEecGJ9W2hw" outgoing="_AIvSJgsZEeajEecGJ9W2hw __TzONgsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition"/>
       </nodes>
-      <nodes xmi:id="_AIvSDAsZEeajEecGJ9W2hw" name="A.Selected" incoming="_AIvSHQsZEeajEecGJ9W2hw _AIvSHwsZEeajEecGJ9W2hw" outgoing="_AIvSIgsZEeajEecGJ9W2hw __TzOMgsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_AIvSDAsZEeajEecGJ9W2hw" name="A.Selected" incoming="_AIvSHQsZEeajEecGJ9W2hw _AIvSHwsZEeajEecGJ9W2hw" outgoing="_AIvSIgsZEeajEecGJ9W2hw __dxpkgsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition"/>
       </nodes>
       <nodes xmi:id="_AIvSDQsZEeajEecGJ9W2hw" name="" outgoing="_AIvSHQsZEeajEecGJ9W2hw _AIvSHgsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
       </nodes>
-      <nodes xmi:id="_AIvSDgsZEeajEecGJ9W2hw" name="A.OldTarget" incoming="_AIvSIAsZEeajEecGJ9W2hw _AIvSIgsZEeajEecGJ9W2hw __TzOMgsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_AIvSDgsZEeajEecGJ9W2hw" name="A.OldTarget" incoming="_AIvSIAsZEeajEecGJ9W2hw _AIvSIgsZEeajEecGJ9W2hw __dxpkgsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Vertex"/>
       </nodes>
       <nodes xmi:id="_AIvSDwsZEeajEecGJ9W2hw" name="B.NewTarget" incoming="_AIvSJAsZEeajEecGJ9W2hw _AIvSJgsZEeajEecGJ9W2hw __TzONgsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Vertex"/>
       </nodes>
-      <nodes xmi:id="_AIvSEAsZEeajEecGJ9W2hw" name="" incoming="_AIvSJwsZEeajEecGJ9W2hw __TzONwsYEeajEecGJ9W2hw _-EMnhwsYEeajEecGJ9W2hw __dxplwsYEeajEecGJ9W2hw" outgoing="_AIvSHwsZEeajEecGJ9W2hw _AIvSIAsZEeajEecGJ9W2hw _AIvSIQsZEeajEecGJ9W2hw">
+      <nodes xmi:id="_AIvSEAsZEeajEecGJ9W2hw" name="" incoming="_AIvSJwsZEeajEecGJ9W2hw __TzONwsYEeajEecGJ9W2hw __dxplwsYEeajEecGJ9W2hw _-EMnhwsYEeajEecGJ9W2hw" outgoing="_AIvSHwsZEeajEecGJ9W2hw _AIvSIAsZEeajEecGJ9W2hw _AIvSIQsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference"/>
       </nodes>
       <nodes xmi:id="_AIvSEQsZEeajEecGJ9W2hw" name="" incoming="_AIvSIQsZEeajEecGJ9W2hw _AIvSJQsZEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
       </nodes>
-      <nodes xmi:id="_AIvSEgsZEeajEecGJ9W2hw" name="" incoming="_AIvSKAsZEeajEecGJ9W2hw __TzOOAsYEeajEecGJ9W2hw _-EMniAsYEeajEecGJ9W2hw __dxpmAsYEeajEecGJ9W2hw" outgoing="_AIvSIwsZEeajEecGJ9W2hw _AIvSJAsZEeajEecGJ9W2hw _AIvSJQsZEeajEecGJ9W2hw">
+      <nodes xmi:id="_AIvSEgsZEeajEecGJ9W2hw" name="" incoming="_AIvSKAsZEeajEecGJ9W2hw __TzOOAsYEeajEecGJ9W2hw __dxpmAsYEeajEecGJ9W2hw _-EMniAsYEeajEecGJ9W2hw" outgoing="_AIvSIwsZEeajEecGJ9W2hw _AIvSJAsZEeajEecGJ9W2hw _AIvSJQsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference"/>
       </nodes>
       <nodes xmi:id="_AIvSEwsZEeajEecGJ9W2hw" incoming="_AIvSKQsZEeajEecGJ9W2hw" outgoing="_AIvSJwsZEeajEecGJ9W2hw _AIvSKAsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkefOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="A"/>
+        <attributes xmi:id="_AIvSFAsZEeajEecGJ9W2hw" value="&quot;MOVE_REFERENCE_Transition_(source)_FROM_Vertex_TO_Vertex&quot;">
+          <annotations xmi:id="_HxfkOvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_AIvSFQsZEeajEecGJ9W2hw" value="&quot;MOVEs Reference source of Transition from Vertex to Vertex&quot;">
+          <annotations xmi:id="_HxfkO_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_AIvSFgsZEeajEecGJ9W2hw" value="&quot;MOVE_REFERENCE_Transition_(source)_FROM_Vertex_TO_Vertex&quot;">
+          <annotations xmi:id="_HxfkTfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_AIvSFwsZEeajEecGJ9W2hw" value="&quot;RR: MOVE_REFERENCE_Transition_(source)_FROM_Vertex_TO_Vertex&quot;">
+          <annotations xmi:id="_HxfkTvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_AIvSGAsZEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_HxfkPPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_AIvSGQsZEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_HxfkPfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_AIvSGgsZEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_Hxfke_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_AIvSGwsZEeajEecGJ9W2hw" value="14">
+          <annotations xmi:id="_HxfkPvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="_AIvSHAsZEeajEecGJ9W2hw" name="" outgoing="_AIvSKQsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkevOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="A"/>
-      </nodes>
-      <nodes xmi:id="_-EMnfAsYEeajEecGJ9W2hw" name="" outgoing="_-EMniQsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="B"/>
-      </nodes>
-      <nodes xmi:id="__TzOIwsYEeajEecGJ9W2hw" incoming="__TzOOQsYEeajEecGJ9W2hw" outgoing="__TzONwsYEeajEecGJ9W2hw __TzOOAsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="C"/>
-      </nodes>
-      <nodes xmi:id="__TzOLAsYEeajEecGJ9W2hw" name="" outgoing="__TzOOQsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="C"/>
-      </nodes>
-      <nodes xmi:id="__dxpgwsYEeajEecGJ9W2hw" incoming="__dxpmQsYEeajEecGJ9W2hw" outgoing="__dxplwsYEeajEecGJ9W2hw __dxpmAsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="D"/>
       </nodes>
       <nodes xmi:id="_-EMncwsYEeajEecGJ9W2hw" incoming="_-EMniQsYEeajEecGJ9W2hw" outgoing="_-EMnhwsYEeajEecGJ9W2hw _-EMniAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkP_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitionsourcetovertex"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="B"/>
+        <attributes xmi:id="_-EMndAsYEeajEecGJ9W2hw" value="&quot;CHANGE_REFERENCE_Transition_(source)_TGT_Vertex&quot;">
+          <annotations xmi:id="_HxfkQPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitionsourcetovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-EMndQsYEeajEecGJ9W2hw" value="&quot;CHANGEs Transition's reference source the target Vertex&quot;">
+          <annotations xmi:id="_HxfkYfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitionsourcetovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-EMndgsYEeajEecGJ9W2hw" value="&quot;CHANGE_REFERENCE_Transition_(source)_TGT_Vertex&quot;">
+          <annotations xmi:id="_HxfkdvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitionsourcetovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-EMndwsYEeajEecGJ9W2hw" value="&quot;RR: CHANGE_REFERENCE_Transition_(source)_TGT_Vertex&quot;">
+          <annotations xmi:id="_Hxfkd_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitionsourcetovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-EMneAsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_HxfkQfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitionsourcetovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-EMneQsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_HxfkQvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitionsourcetovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-EMnegsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_HxfkePOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitionsourcetovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-EMnewsYEeajEecGJ9W2hw" value="14">
+          <annotations xmi:id="_HxfkYvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitionsourcetovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__TzOIwsYEeajEecGJ9W2hw" incoming="__TzOOQsYEeajEecGJ9W2hw" outgoing="__TzONwsYEeajEecGJ9W2hw __TzOOAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkT_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitiontargetfromvertextovertex"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="__TzOJAsYEeajEecGJ9W2hw" value="&quot;MOVE_REFERENCE_Transition_(target)_FROM_Vertex_TO_Vertex&quot;">
+          <annotations xmi:id="_HxfkVfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitiontargetfromvertextovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__TzOJQsYEeajEecGJ9W2hw" value="&quot;MOVEs Reference target of Transition from Vertex to Vertex&quot;">
+          <annotations xmi:id="_HxfkVvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitiontargetfromvertextovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__TzOJgsYEeajEecGJ9W2hw" value="&quot;MOVE_REFERENCE_Transition_(target)_FROM_Vertex_TO_Vertex&quot;">
+          <annotations xmi:id="_HxfkbvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitiontargetfromvertextovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__TzOJwsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_REFERENCE_Transition_(target)_FROM_Vertex_TO_Vertex&quot;">
+          <annotations xmi:id="_Hxfkb_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitiontargetfromvertextovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__TzOKAsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_HxfkcPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitiontargetfromvertextovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__TzOKQsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_HxfkcfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitiontargetfromvertextovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__TzOKgsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_HxfkcvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitiontargetfromvertextovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__TzOKwsYEeajEecGJ9W2hw" value="14">
+          <annotations xmi:id="_Hxfkc_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitiontargetfromvertextovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__TzOLAsYEeajEecGJ9W2hw" name="" outgoing="__TzOOQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkUPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitiontargetfromvertextovertex"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="__dxpgwsYEeajEecGJ9W2hw" incoming="__dxpmQsYEeajEecGJ9W2hw" outgoing="__dxplwsYEeajEecGJ9W2hw __dxpmAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkV_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitiontargettovertex"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="__dxphAsYEeajEecGJ9W2hw" value="&quot;CHANGE_REFERENCE_Transition_(target)_TGT_Vertex&quot;">
+          <annotations xmi:id="_HxfkWvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitiontargettovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__dxphQsYEeajEecGJ9W2hw" value="&quot;CHANGEs Transition's reference target the target Vertex&quot;">
+          <annotations xmi:id="_HxfkavOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitiontargettovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__dxphgsYEeajEecGJ9W2hw" value="&quot;CHANGE_REFERENCE_Transition_(target)_TGT_Vertex&quot;">
+          <annotations xmi:id="_Hxfka_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitiontargettovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__dxphwsYEeajEecGJ9W2hw" value="&quot;RR: CHANGE_REFERENCE_Transition_(target)_TGT_Vertex&quot;">
+          <annotations xmi:id="_HxfkW_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitiontargettovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__dxpiAsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_HxfkXPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitiontargettovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__dxpiQsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_HxfkXfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitiontargettovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__dxpigsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_HxfkbPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitiontargettovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__dxpiwsYEeajEecGJ9W2hw" value="14">
+          <annotations xmi:id="_HxfkXvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitiontargettovertex"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-EMnfAsYEeajEecGJ9W2hw" name="" outgoing="_-EMniQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkX_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitionsourcetovertex"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
       </nodes>
       <nodes xmi:id="__dxpjAsYEeajEecGJ9W2hw" name="" outgoing="__dxpmQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkZvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitiontargettovertex"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="D"/>
       </nodes>
       <edges xmi:id="_AIvSHQsZEeajEecGJ9W2hw" source="_AIvSDQsZEeajEecGJ9W2hw" target="_AIvSDAsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
@@ -183,8 +315,8 @@
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
       </edges>
       <edges xmi:id="_AIvSIgsZEeajEecGJ9W2hw" source="_AIvSDAsZEeajEecGJ9W2hw" target="_AIvSDgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkSvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex or rrchangetransitionsourcetovertex"/>
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition/source"/>
-        <annotations key="presenceCondition" value="A or B"/>
       </edges>
       <edges xmi:id="_AIvSIwsZEeajEecGJ9W2hw" source="_AIvSEgsZEeajEecGJ9W2hw" target="_AIvSCwsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
@@ -196,64 +328,64 @@
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
       </edges>
       <edges xmi:id="_AIvSJgsZEeajEecGJ9W2hw" source="_AIvSCwsZEeajEecGJ9W2hw" target="_AIvSDwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkNvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex or rrchangetransitionsourcetovertex"/>
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition/source"/>
-        <annotations key="presenceCondition" value="A or B"/>
       </edges>
       <edges xmi:id="_AIvSJwsZEeajEecGJ9W2hw" source="_AIvSEwsZEeajEecGJ9W2hw" target="_AIvSEAsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkOPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="A"/>
       </edges>
       <edges xmi:id="_AIvSKAsZEeajEecGJ9W2hw" source="_AIvSEwsZEeajEecGJ9W2hw" target="_AIvSEgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkTPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="A"/>
       </edges>
       <edges xmi:id="_AIvSKQsZEeajEecGJ9W2hw" source="_AIvSHAsZEeajEecGJ9W2hw" target="_AIvSEwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkOfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitionsourcefromvertextovertex"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="A"/>
-      </edges>
-      <edges xmi:id="_-EMniQsYEeajEecGJ9W2hw" source="_-EMnfAsYEeajEecGJ9W2hw" target="_-EMncwsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="B"/>
-      </edges>
-      <edges xmi:id="__TzONwsYEeajEecGJ9W2hw" source="__TzOIwsYEeajEecGJ9W2hw" target="_AIvSEAsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="C"/>
-      </edges>
-      <edges xmi:id="__TzOOAsYEeajEecGJ9W2hw" source="__TzOIwsYEeajEecGJ9W2hw" target="_AIvSEgsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="C"/>
-      </edges>
-      <edges xmi:id="__TzOOQsYEeajEecGJ9W2hw" source="__TzOLAsYEeajEecGJ9W2hw" target="__TzOIwsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="C"/>
-      </edges>
-      <edges xmi:id="_-EMniAsYEeajEecGJ9W2hw" source="_-EMncwsYEeajEecGJ9W2hw" target="_AIvSEgsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="B"/>
-      </edges>
-      <edges xmi:id="__TzOMgsYEeajEecGJ9W2hw" source="_AIvSDAsZEeajEecGJ9W2hw" target="_AIvSDgsZEeajEecGJ9W2hw">
-        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition/target"/>
-        <annotations key="presenceCondition" value="C"/>
       </edges>
       <edges xmi:id="__TzONgsYEeajEecGJ9W2hw" source="_AIvSCwsZEeajEecGJ9W2hw" target="_AIvSDwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkUfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitiontargetfromvertextovertex"/>
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition/target"/>
-        <annotations key="presenceCondition" value="C"/>
       </edges>
-      <edges xmi:id="_-EMnhwsYEeajEecGJ9W2hw" source="_-EMncwsYEeajEecGJ9W2hw" target="_AIvSEAsZEeajEecGJ9W2hw">
+      <edges xmi:id="__TzONwsYEeajEecGJ9W2hw" source="__TzOIwsYEeajEecGJ9W2hw" target="_AIvSEAsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkUvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitiontargetfromvertextovertex"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="B"/>
+      </edges>
+      <edges xmi:id="__TzOOAsYEeajEecGJ9W2hw" source="__TzOIwsYEeajEecGJ9W2hw" target="_AIvSEgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkU_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitiontargetfromvertextovertex"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__TzOOQsYEeajEecGJ9W2hw" source="__TzOLAsYEeajEecGJ9W2hw" target="__TzOIwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkVPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovereferencetransitiontargetfromvertextovertex"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
       </edges>
       <edges xmi:id="__dxplwsYEeajEecGJ9W2hw" source="__dxpgwsYEeajEecGJ9W2hw" target="_AIvSEAsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkWPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitiontargettovertex"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="D"/>
       </edges>
       <edges xmi:id="__dxpmAsYEeajEecGJ9W2hw" source="__dxpgwsYEeajEecGJ9W2hw" target="_AIvSEgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkWfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitiontargettovertex"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="D"/>
+      </edges>
+      <edges xmi:id="_-EMniAsYEeajEecGJ9W2hw" source="_-EMncwsYEeajEecGJ9W2hw" target="_AIvSEgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkYPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitionsourcetovertex"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__dxpkgsYEeajEecGJ9W2hw" source="_AIvSDAsZEeajEecGJ9W2hw" target="_AIvSDgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkZ_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitiontargettovertex"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition/target"/>
       </edges>
       <edges xmi:id="__dxpmQsYEeajEecGJ9W2hw" source="__dxpjAsYEeajEecGJ9W2hw" target="__dxpgwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkafOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitiontargettovertex"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="D"/>
+      </edges>
+      <edges xmi:id="_-EMnhwsYEeajEecGJ9W2hw" source="_-EMncwsYEeajEecGJ9W2hw" target="_AIvSEAsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkdPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitionsourcetovertex"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-EMniQsYEeajEecGJ9W2hw" source="_-EMnfAsYEeajEecGJ9W2hw" target="_-EMncwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_HxfkdfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangetransitionsourcetovertex"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
       </edges>
     </rhs>
     <mappings xmi:id="_AIvSKgsZEeajEecGJ9W2hw" origin="_AIvR9gsZEeajEecGJ9W2hw" image="_AIvSCwsZEeajEecGJ9W2hw"/>
@@ -265,10 +397,8 @@
     <mappings xmi:id="_AIvSMAsZEeajEecGJ9W2hw" origin="_AIvR_AsZEeajEecGJ9W2hw" image="_AIvSEQsZEeajEecGJ9W2hw"/>
     <mappings xmi:id="_AIvSMQsZEeajEecGJ9W2hw" origin="_AIvR_gsZEeajEecGJ9W2hw" image="_AIvSEgsZEeajEecGJ9W2hw"/>
     <mappings xmi:id="_AIvSMgsZEeajEecGJ9W2hw" origin="_AIvR_wsZEeajEecGJ9W2hw" image="_AIvSHAsZEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_Vq6P8LRVEeexAvqQ_kM_vQ" origin="_-EMnXwsYEeajEecGJ9W2hw" image="_-EMnfAsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_Vq6P8bRVEeexAvqQ_kM_vQ" origin="__TzODwsYEeajEecGJ9W2hw" image="__TzOLAsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_Vq6P8rRVEeexAvqQ_kM_vQ" origin="__dxpbwsYEeajEecGJ9W2hw" image="__dxpjAsYEeajEecGJ9W2hw"/>
-    <annotations key="featureConstraint" value="xor(A,B,C,D)"/>
-    <annotations key="features" value="A,B,C,D"/>
+    <mappings xmi:id="_HxlDwPOJEeqKPbhZweJEtg" origin="_-EMnXwsYEeajEecGJ9W2hw" image="_-EMnfAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_HxlDwfOJEeqKPbhZweJEtg" origin="__TzODwsYEeajEecGJ9W2hw" image="__TzOLAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_HxlDwvOJEeqKPbhZweJEtg" origin="__dxpbwsYEeajEecGJ9W2hw" image="__dxpjAsYEeajEecGJ9W2hw"/>
   </units>
 </henshin:Module>

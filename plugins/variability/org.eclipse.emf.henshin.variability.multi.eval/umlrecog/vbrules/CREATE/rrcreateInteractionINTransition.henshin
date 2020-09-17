@@ -1,7 +1,8 @@
-<henshin:Module xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmi:id="_rPFe4LRcEeeYUfLk2h7sIw">
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_4ihHUPOCEeqe6s0sCOQVEQ">
   <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
   <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
-  <units xsi:type="henshin:Rule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="_qo4agLRcEeeYUfLk2h7sIw" name="rr:createInteraction_IN_Transition">
+  <units xsi:type="henshin:Rule" xmi:id="_AHtXMQsZEeajEecGJ9W2hw" name="rr:createInteraction_IN_Transition" description="Recognize: creates one Interaction in the context: Transition">
     <parameters xmi:id="_AHtXMgsZEeajEecGJ9W2hw" name="Selected">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition"/>
     </parameters>
@@ -87,6 +88,22 @@
       <edges xmi:id="_AHtXTgsZEeajEecGJ9W2hw" source="_AHtXPAsZEeajEecGJ9W2hw" target="_AHtXPgsZEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition/effect"/>
       </edges>
+      <formula xsi:type="henshin:Not" xmi:id="_AHtXTwsZEeajEecGJ9W2hw">
+        <child xsi:type="henshin:NestedCondition" xmi:id="_AHtXUAsZEeajEecGJ9W2hw">
+          <conclusion xmi:id="_AHtXUQsZEeajEecGJ9W2hw" name="ub0">
+            <nodes xmi:id="_AHtXUgsZEeajEecGJ9W2hw" incoming="_AHtXVAsZEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Behavior"/>
+            </nodes>
+            <nodes xmi:id="_AHtXUwsZEeajEecGJ9W2hw" name="B.Selected" outgoing="_AHtXVAsZEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition"/>
+            </nodes>
+            <edges xmi:id="_AHtXVAsZEeajEecGJ9W2hw" source="_AHtXUwsZEeajEecGJ9W2hw" target="_AHtXUgsZEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition/effect"/>
+            </edges>
+          </conclusion>
+          <mappings xmi:id="_AHtXVQsZEeajEecGJ9W2hw" origin="_AHtXPAsZEeajEecGJ9W2hw" image="_AHtXUwsZEeajEecGJ9W2hw"/>
+        </child>
+      </formula>
     </lhs>
     <rhs xmi:id="_AHtXVgsZEeajEecGJ9W2hw" name="Rhs">
       <nodes xmi:id="_AHtXVwsZEeajEecGJ9W2hw" name="B.Selected" incoming="_AHtXZwsZEeajEecGJ9W2hw" outgoing="_AHtXagsZEeajEecGJ9W2hw">
@@ -106,6 +123,30 @@
       </nodes>
       <nodes xmi:id="_AHtXXAsZEeajEecGJ9W2hw" incoming="_AHtXbQsZEeajEecGJ9W2hw" outgoing="_AHtXawsZEeajEecGJ9W2hw _AHtXbAsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_AHtXXQsZEeajEecGJ9W2hw" value="&quot;CREATE_Interaction_IN_Transition_(effect)&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_AHtXXgsZEeajEecGJ9W2hw" value="&quot;Creates one Interaction in Transition&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_AHtXXwsZEeajEecGJ9W2hw" value="&quot;CREATE_Interaction_IN_Transition_(effect)&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_AHtXYAsZEeajEecGJ9W2hw" value="&quot;RR: CREATE_Interaction_IN_Transition_(effect)&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_AHtXYQsZEeajEecGJ9W2hw" value="1">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_AHtXYgsZEeajEecGJ9W2hw" value="1">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_AHtXYwsZEeajEecGJ9W2hw" value="9">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_AHtXZAsZEeajEecGJ9W2hw" value="23">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="_AHtXZQsZEeajEecGJ9W2hw" name="" outgoing="_AHtXbQsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>

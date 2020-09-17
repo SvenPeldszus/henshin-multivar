@@ -13,19 +13,19 @@ import org.eclipse.emf.henshin.interpreter.Engine;
 import org.eclipse.emf.henshin.interpreter.impl.MatchImpl;
 import org.eclipse.emf.henshin.interpreter.impl.RuleApplicationImpl;
 import org.eclipse.emf.henshin.model.Rule;
-import org.eclipse.emf.henshin.variability.matcher.VariabilityAwareMatcher;
-import org.eclipse.emf.henshin.variability.matcher.VariabilityAwareMatch;
-import org.eclipse.emf.henshin.variability.util.RuleUtil;
+import org.eclipse.emf.henshin.variability.matcher.VBMatch;
+import org.eclipse.emf.henshin.variability.matcher.VBMatcher;
+import org.eclipse.emf.henshin.variability.util.VBRuleUtil;
 
 /**
  * Variability-aware {@link org.eclipse.emf.henshin.interpreter.RuleApplication
  * RuleApplication} implementation.
- * 
+ *
  * @author Daniel Strüber
  * @author Sven Peldszus
  */
 public class VBRuleApplicationImpl extends RuleApplicationImpl {
-	private VariabilityAwareMatch completeVarMatch;
+	private VBMatch completeVarMatch;
 	private Map<String, Boolean> configuration;
 
 	public VBRuleApplicationImpl(Engine engine, EGraph graph, Rule rule, Assignment partialMatch) {
@@ -35,19 +35,20 @@ public class VBRuleApplicationImpl extends RuleApplicationImpl {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param engine
 	 * @param graph
 	 * @param rule
 	 * @param completeMatchVar If available, a complete match
 	 * @param configuration A (potentially partial) map of feature names to a boolean value
 	 */
-	public VBRuleApplicationImpl(Engine engine, EGraph graph, Rule rule, Map<String,Boolean> configuration, VariabilityAwareMatch completeMatchVar) {
+	public VBRuleApplicationImpl(Engine engine, EGraph graph, Rule rule, Map<String,Boolean> configuration, VBMatch completeMatchVar) {
 		super(engine, graph, rule, null);
-		if (configuration == null)
+		if (configuration == null) {
 			this.configuration = new HashMap<>();
-		else
+		} else {
 			this.configuration = configuration;
+		}
 		this.completeVarMatch = completeMatchVar;
 	}
 
@@ -57,84 +58,87 @@ public class VBRuleApplicationImpl extends RuleApplicationImpl {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.emf.henshin.interpreter.UnitApplication#execute(org.eclipse
 	 * .emf.henshin.interpreter.ApplicationMonitor)
 	 */
 	@Override
 	public boolean execute(ApplicationMonitor monitor) {
-		if (unit == null) {
+		if (this.unit == null) {
 			throw new NullPointerException("No transformation unit set");
 		}
 		// Already executed?
-		if (isExecuted) {
-			if (isCompleteMatchDerived) {
-				completeMatch = null; // reset the complete match if it was
-										// derived
-				isCompleteMatchDerived = false;
+		if (this.isExecuted) {
+			if (this.isCompleteMatchDerived) {
+				this.completeMatch = null; // reset the complete match if it was
+				// derived
+				this.isCompleteMatchDerived = false;
 			}
-			isExecuted = false;
-			isUndone = false;
-			change = null;
-			resultMatch = null;
+			this.isExecuted = false;
+			this.isUndone = false;
+			this.change = null;
+			this.resultMatch = null;
 		}
 		// Do we need to derive a complete match?
 
-		if (completeVarMatch != null) {
-			completeMatch = completeVarMatch.getMatch();
+		if (this.completeVarMatch != null) {
+			this.completeMatch = this.completeVarMatch.getMatch();
 		} else {
 			long startTime = System.currentTimeMillis();
 
-			if (completeMatch == null) {
-				if (!RuleUtil.isVarRule(unit)) {
-					completeMatch = engine.findMatches((Rule) unit, graph, partialMatch).iterator().next();
+			if (this.completeMatch == null) {
+				if (!VBRuleUtil.isVarRule(this.unit)) {
+					this.completeMatch = this.engine.findMatches((Rule) this.unit, this.graph, this.partialMatch).iterator().next();
 				} else {
-					VariabilityAwareMatcher vbEngine;
+					VBMatcher vbEngine;
 					try {
-						List<String> initiallyTrue = configuration.keySet().stream().filter(s -> configuration.get(s)).collect(Collectors.toList());
-						List<String> initiallyFalse = configuration.keySet().stream().filter(s -> !configuration.get(s)).collect(Collectors.toList());
-						vbEngine = new VariabilityAwareMatcher((Rule) unit, graph, initiallyTrue, initiallyFalse);
+						List<String> initiallyTrue = this.configuration.keySet().stream().filter(s -> this.configuration.get(s)).collect(Collectors.toList());
+						List<String> initiallyFalse = this.configuration.keySet().stream().filter(s -> !this.configuration.get(s)).collect(Collectors.toList());
+						vbEngine = new VBMatcher((Rule) this.unit, this.graph, initiallyTrue, initiallyFalse);
 					} catch (InconsistentRuleException e) {
 						return false;
 					}
-					Set<VariabilityAwareMatch> matches = vbEngine.findMatches();
+					Set<? extends VBMatch> matches = vbEngine.findMatches();
 					if (!matches.isEmpty()) {
-						completeVarMatch = matches.iterator().next();
-						completeMatch = completeVarMatch.getMatch();
-						unit = completeVarMatch.getMatch().getRule();
+						this.completeVarMatch = matches.iterator().next();
+						this.completeMatch = this.completeVarMatch.getMatch();
+						this.unit = this.completeVarMatch.getMatch().getRule();
 
 					}
 
 				}
-				isCompleteMatchDerived = true;
+				this.isCompleteMatchDerived = true;
 			}
 			long runtime = (System.currentTimeMillis() - startTime);
-			MatchingLog.getEntries().add(new MatchingLogEntry(unit, completeMatch != null, runtime, graph.size(), 0)); // InterpreterUtil.countEdges(graph)));
-			if (completeMatch == null) {
+			MatchingLog.getEntries().add(new MatchingLogEntry(this.unit, this.completeMatch != null, runtime, this.graph.size(), 0)); // InterpreterUtil.countEdges(graph)));
+			if (this.completeMatch == null) {
 				if (monitor != null) {
 					monitor.notifyExecute(this, false);
 				}
 				return false;
 			}
 		}
-		if (completeVarMatch != null) {
-			completeVarMatch.prepareRule();
+		if (this.completeVarMatch != null) {
+			this.completeVarMatch.prepareRule();
 		}
-		resultMatch = new MatchImpl((Rule) unit, true);
-		change = engine.createChange((Rule) unit, graph, completeMatch, resultMatch);
-		if (change == null) {
+		this.resultMatch = new MatchImpl((Rule) this.unit, true);
+		this.change = this.engine.createChange((Rule) this.unit, this.graph, this.completeMatch, this.resultMatch);
+		if (this.change == null) {
 			if (monitor != null) {
 				monitor.notifyExecute(this, false);
 			}
+			if (this.completeVarMatch != null) {
+				this.completeVarMatch.undoPreparation();
+			}
 			return false;
 		}
-		change.applyAndReverse();
-		isExecuted = true;
+		this.change.applyAndReverse();
+		this.isExecuted = true;
 		if (monitor != null) {
 			monitor.notifyExecute(this, true);
 		}
-		if (completeVarMatch != null) {
-			completeVarMatch.undoPreparation();
+		if (this.completeVarMatch != null) {
+			this.completeVarMatch.undoPreparation();
 		}
 		return true;
 	}

@@ -9,6 +9,7 @@ import java.util.Set;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
+import org.eclipse.core.databinding.property.value.IValueProperty;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.henshin.diagram.edit.parts.NodeCompartmentEditPart;
@@ -55,7 +56,7 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.databinding.swt.typed.WidgetProperties;
+import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
@@ -81,6 +82,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
+import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.PartInitException;
@@ -430,9 +432,10 @@ public class VariabilityView extends ViewPart
 
 		variabilityModelText = new Text(composite, SWT.BORDER);
 		variabilityModelText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
-		IObservableValue<?> target = WidgetProperties.text(SWT.Modify).observe(variabilityModelText);
+		IValueProperty<Widget, String> property = WidgetProperties.text(SWT.Modify);
+		IObservableValue<String> target = property.observe(variabilityModelText);
 		variabilityModelTextBindingContext = new DataBindingContext();
-		writableValue = new WritableValue<Rule>();
+		writableValue = new WritableValue<>();
 		IObservableValue<String> model = EMFProperties.value(HenshinPackage.Literals.MODEL_ELEMENT__ANNOTATIONS)
 				.observeDetail(writableValue);
 //		UpdateValueStrategy strategy = new UpdateValueStrategy();
@@ -589,7 +592,7 @@ public class VariabilityView extends ViewPart
 				if (isChecked() && selectedRuleEditPart != null) {
 					super.run();
 					RuleEditPartVisibilityHelper.showConfiguredRule(selectedRuleEditPart, config,
-							VariabilityHelper.INSTANCE.getFeatureModel(config.getRule()));
+							VariabilityHelper.INSTANCE.getFeatureConstraint(config.getRule()));
 					if (creationMode == CreationMode.SELECTION) {
 						updateEditPolicy(selectedRuleEditPart);
 					}

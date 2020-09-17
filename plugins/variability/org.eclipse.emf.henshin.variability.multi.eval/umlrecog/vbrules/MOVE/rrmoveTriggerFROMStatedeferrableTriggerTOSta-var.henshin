@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_IAd0UPOJEeqKPbhZweJEtg">
+  <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
+  <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
+  <units xsi:type="henshin:Rule" xmi:id="_-_QhYQsYEeajEecGJ9W2hw" name="rr:moveTrigger_FROM_State_deferrableTrigger_TO_State_State0,rr:moveTrigger_FROM_State_deferrableTrigger_TO_State_State,rr:moveTrigger_FROM_Transition_trigger_TO_State_State" description="Recognize: Moves Trigger from State(Reference:deferrableTrigger) toState(Reference:State)">
+    <annotations xmi:id="_IAdNRvOJEeqKPbhZweJEtg" key="features" value="rrmovetriggerfromstatedeferrabletriggertostatestate, rrmovetriggerfromtransitiontriggertostatestate, rrmovetriggerfromstatedeferrabletriggertostatestate0"/>
+    <annotations xmi:id="_IAdNR_OJEeqKPbhZweJEtg" key="featureConstraintIsCNF" value="true"/>
+    <annotations xmi:id="_IAdNSPOJEeqKPbhZweJEtg" key="featureConstraint" value="((rrmovetriggerfromstatedeferrabletriggertostatestate0) | (rrmovetriggerfromstatedeferrabletriggertostatestate) | (rrmovetriggerfromtransitiontriggertostatestate)) &amp; ( ~(rrmovetriggerfromstatedeferrabletriggertostatestate0) | ~(rrmovetriggerfromstatedeferrabletriggertostatestate)) &amp; ( ~(rrmovetriggerfromstatedeferrabletriggertostatestate0) | ~(rrmovetriggerfromtransitiontriggertostatestate)) &amp; ( ~(rrmovetriggerfromstatedeferrabletriggertostatestate) | ~(rrmovetriggerfromtransitiontriggertostatestate))"/>
+    <annotations xmi:id="_IAdNSfOJEeqKPbhZweJEtg" key="originalRules" value="A=Rule rr:moveTrigger_FROM_State_deferrableTrigger_TO_State_State0(Selected:Trigger, OldSource:State, NewSource:State, OldSource:Transition), B=Rule rr:moveTrigger_FROM_State_deferrableTrigger_TO_State_State(Selected:Trigger, OldSource:State, NewSource:State), C=Rule rr:moveTrigger_FROM_Transition_trigger_TO_State_State(Selected:Trigger, OldSource:Transition, NewSource:State)"/>
+    <parameters xmi:id="_-_QhYgsYEeajEecGJ9W2hw" name="Selected">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Trigger"/>
+    </parameters>
+    <parameters xmi:id="_-_QhYwsYEeajEecGJ9W2hw" name="OldSource">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+    </parameters>
+    <parameters xmi:id="_-_QhZAsYEeajEecGJ9W2hw" name="NewSource">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+    </parameters>
+    <parameters xmi:id="_IAYUwPOJEeqKPbhZweJEtg" name="OldSource">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition"/>
+    </parameters>
+    <lhs xmi:id="_-_QhZQsYEeajEecGJ9W2hw" name="Lhs">
+      <nodes xmi:id="_-_QhZgsYEeajEecGJ9W2hw" name="B.Selected" incoming="_-_QhcQsYEeajEecGJ9W2hw _-_QhdwsYEeajEecGJ9W2hw _-_QheQsYEeajEecGJ9W2hw _-pJumwsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Trigger"/>
+      </nodes>
+      <nodes xmi:id="_-_QhZwsYEeajEecGJ9W2hw" name="A.Selected" incoming="_-_QhcAsYEeajEecGJ9W2hw _-_QhcwsYEeajEecGJ9W2hw _-_QhdQsYEeajEecGJ9W2hw _-pJulwsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Trigger"/>
+      </nodes>
+      <nodes xmi:id="_-_QhaAsYEeajEecGJ9W2hw" name="" outgoing="_-_QhcAsYEeajEecGJ9W2hw _-_QhcQsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
+      </nodes>
+      <nodes xmi:id="_-_QhaQsYEeajEecGJ9W2hw" name="A.OldSource" incoming="_-_QhcgsYEeajEecGJ9W2hw" outgoing="_-_QhdQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqifOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+      </nodes>
+      <nodes xmi:id="_-_QhagsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_-_QhdgsYEeajEecGJ9W2hw" outgoing="_-_QheQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqjvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+      </nodes>
+      <nodes xmi:id="_-_QhawsYEeajEecGJ9W2hw" name="" outgoing="_-_QhcgsYEeajEecGJ9W2hw _-_QhcwsYEeajEecGJ9W2hw _-_QhdAsYEeajEecGJ9W2hw _-pJulAsYEeajEecGJ9W2hw _-pJulgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference"/>
+      </nodes>
+      <nodes xmi:id="_-_QhbAsYEeajEecGJ9W2hw" name="" incoming="_-_QhdAsYEeajEecGJ9W2hw _-_QheAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqc_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="_-_QhbQsYEeajEecGJ9W2hw" value="&quot;deferrableTrigger&quot;">
+          <annotations xmi:id="_IAUqd_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="_9-scTQsYEeajEecGJ9W2hw" value="&quot;deferrableTrigger&quot;">
+          <annotations xmi:id="_IAUqePOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-_QhbgsYEeajEecGJ9W2hw" name="" outgoing="_-_QhdgsYEeajEecGJ9W2hw _-_QhdwsYEeajEecGJ9W2hw _-_QheAsYEeajEecGJ9W2hw _-pJumAsYEeajEecGJ9W2hw _-pJumgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference"/>
+      </nodes>
+      <nodes xmi:id="_-_QhbwsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_IAUqkPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_9-scTwsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_IAUqi_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_-pJuiQsYEeajEecGJ9W2hw" name="A.OldSource" incoming="_-pJulAsYEeajEecGJ9W2hw" outgoing="_-pJulwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqk_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition"/>
+      </nodes>
+      <nodes xmi:id="_-pJuigsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_-pJumAsYEeajEecGJ9W2hw" outgoing="_-pJumwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqlPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+      </nodes>
+      <nodes xmi:id="_-pJujAsYEeajEecGJ9W2hw" name="" incoming="_-pJulgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqlfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="_-pJujQsYEeajEecGJ9W2hw" value="&quot;trigger&quot;">
+          <annotations xmi:id="_IAUqnvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-pJujwsYEeajEecGJ9W2hw" name="" incoming="_-pJumgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqlvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="_-pJukAsYEeajEecGJ9W2hw" value="&quot;deferrableTrigger&quot;">
+          <annotations xmi:id="_IAUqn_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-pJukQsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_IAUql_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <edges xmi:id="_-_QhcAsYEeajEecGJ9W2hw" source="_-_QhaAsYEeajEecGJ9W2hw" target="_-_QhZwsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
+      </edges>
+      <edges xmi:id="_-_QhcQsYEeajEecGJ9W2hw" source="_-_QhaAsYEeajEecGJ9W2hw" target="_-_QhZgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objB"/>
+      </edges>
+      <edges xmi:id="_-_QhcgsYEeajEecGJ9W2hw" source="_-_QhawsYEeajEecGJ9W2hw" target="_-_QhaQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqkfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="_-_QhcwsYEeajEecGJ9W2hw" source="_-_QhawsYEeajEecGJ9W2hw" target="_-_QhZwsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/tgt"/>
+      </edges>
+      <edges xmi:id="_-_QhdAsYEeajEecGJ9W2hw" source="_-_QhawsYEeajEecGJ9W2hw" target="_-_QhbAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqYPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="_-_QhdQsYEeajEecGJ9W2hw" source="_-_QhaQsYEeajEecGJ9W2hw" target="_-_QhZwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqjPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/deferrableTrigger"/>
+      </edges>
+      <edges xmi:id="_-_QhdgsYEeajEecGJ9W2hw" source="_-_QhbgsYEeajEecGJ9W2hw" target="_-_QhagsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqdfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_-_QhdwsYEeajEecGJ9W2hw" source="_-_QhbgsYEeajEecGJ9W2hw" target="_-_QhZgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/tgt"/>
+      </edges>
+      <edges xmi:id="_-_QheAsYEeajEecGJ9W2hw" source="_-_QhbgsYEeajEecGJ9W2hw" target="_-_QhbAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqYvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="_-_QheQsYEeajEecGJ9W2hw" source="_-_QhagsYEeajEecGJ9W2hw" target="_-_QhZgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqZPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/deferrableTrigger"/>
+      </edges>
+      <edges xmi:id="_-pJulAsYEeajEecGJ9W2hw" source="_-_QhawsYEeajEecGJ9W2hw" target="_-pJuiQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqmPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="_-pJulgsYEeajEecGJ9W2hw" source="_-_QhawsYEeajEecGJ9W2hw" target="_-pJujAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqmfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="_-pJulwsYEeajEecGJ9W2hw" source="_-pJuiQsYEeajEecGJ9W2hw" target="_-_QhZwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqmvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition/trigger"/>
+      </edges>
+      <edges xmi:id="_-pJumAsYEeajEecGJ9W2hw" source="_-_QhbgsYEeajEecGJ9W2hw" target="_-pJuigsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqm_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_-pJumgsYEeajEecGJ9W2hw" source="_-_QhbgsYEeajEecGJ9W2hw" target="_-pJujwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqnPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="_-pJumwsYEeajEecGJ9W2hw" source="_-pJuigsYEeajEecGJ9W2hw" target="_-_QhZgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqnfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/deferrableTrigger"/>
+      </edges>
+    </lhs>
+    <rhs xmi:id="_-_QhegsYEeajEecGJ9W2hw" name="Rhs">
+      <nodes xmi:id="_-_QhewsYEeajEecGJ9W2hw" name="B.Selected" incoming="_-_QhjgsYEeajEecGJ9W2hw _-_QhlAsYEeajEecGJ9W2hw _-_QhlgsYEeajEecGJ9W2hw _-pJuuQsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Trigger"/>
+      </nodes>
+      <nodes xmi:id="_-_QhfAsYEeajEecGJ9W2hw" name="A.Selected" incoming="_-_QhjQsYEeajEecGJ9W2hw _-_QhkAsYEeajEecGJ9W2hw _-_QhkgsYEeajEecGJ9W2hw _-pJutQsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Trigger"/>
+      </nodes>
+      <nodes xmi:id="_-_QhfQsYEeajEecGJ9W2hw" name="" outgoing="_-_QhjQsYEeajEecGJ9W2hw _-_QhjgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
+      </nodes>
+      <nodes xmi:id="_-_QhfgsYEeajEecGJ9W2hw" name="A.OldSource" incoming="_-_QhjwsYEeajEecGJ9W2hw" outgoing="_-_QhkgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqefOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+      </nodes>
+      <nodes xmi:id="_-_QhfwsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_-_QhkwsYEeajEecGJ9W2hw" outgoing="_-_QhlgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqg_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+      </nodes>
+      <nodes xmi:id="_-_QhgAsYEeajEecGJ9W2hw" name="" incoming="_-_QhlwsYEeajEecGJ9W2hw _9-scdwsYEeajEecGJ9W2hw _-pJuugsYEeajEecGJ9W2hw" outgoing="_-_QhjwsYEeajEecGJ9W2hw _-_QhkAsYEeajEecGJ9W2hw _-_QhkQsYEeajEecGJ9W2hw _-pJusgsYEeajEecGJ9W2hw _-pJutAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference"/>
+      </nodes>
+      <nodes xmi:id="_-_QhgQsYEeajEecGJ9W2hw" name="" incoming="_-_QhkQsYEeajEecGJ9W2hw _-_QhlQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqe_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="_-_QhggsYEeajEecGJ9W2hw" name="" incoming="_-_QhmAsYEeajEecGJ9W2hw _9-sceAsYEeajEecGJ9W2hw _-pJuuwsYEeajEecGJ9W2hw" outgoing="_-_QhkwsYEeajEecGJ9W2hw _-_QhlAsYEeajEecGJ9W2hw _-_QhlQsYEeajEecGJ9W2hw _-pJutgsYEeajEecGJ9W2hw _-pJuuAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference"/>
+      </nodes>
+      <nodes xmi:id="_-_QhgwsYEeajEecGJ9W2hw" incoming="_-_QhmQsYEeajEecGJ9W2hw" outgoing="_-_QhlwsYEeajEecGJ9W2hw _-_QhmAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqZvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_-_QhhAsYEeajEecGJ9W2hw" value="&quot;MOVE_Trigger_FROM_State_(deferrableTrigger)_TO_State_(deferrableTrigger)&quot;">
+          <annotations xmi:id="_IAUqq_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-_QhhQsYEeajEecGJ9W2hw" value="&quot;MOVEs Trigger from State(Reference:deferrableTrigger) to State(Reference:deferrableTrigger&quot;">
+          <annotations xmi:id="_IAUqafOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-_QhhgsYEeajEecGJ9W2hw" value="&quot;MOVE_Trigger_FROM_State_(deferrableTrigger)_TO_State_(deferrableTrigger)&quot;">
+          <annotations xmi:id="_IAUqrPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-_QhhwsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_Trigger_FROM_State_(deferrableTrigger)_TO_State_(deferrableTrigger)&quot;">
+          <annotations xmi:id="_IAUqgvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-_QhiAsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IAUqavOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-_QhiQsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_IAUqrfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-_QhigsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_IAUqrvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-_QhiwsYEeajEecGJ9W2hw" value="18">
+          <annotations xmi:id="_IAUqa_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-_QhjAsYEeajEecGJ9W2hw" name="" outgoing="_-_QhmQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqpPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_9-scYwsYEeajEecGJ9W2hw" incoming="_9-sceQsYEeajEecGJ9W2hw" outgoing="_9-scdwsYEeajEecGJ9W2hw _9-sceAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqbPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_9-scZAsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_Trigger_FROM_State_(deferrableTrigger)_TO_State_(deferrableTrigger)&quot;">
+          <annotations xmi:id="_IAUqbfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_9-scZQsYEeajEecGJ9W2hw" value="&quot;MOVEs Trigger from State(Reference:deferrableTrigger) to State(Reference:deferrableTrigger&quot;">
+          <annotations xmi:id="_IAUqbvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_9-scZgsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_Trigger_FROM_State_(deferrableTrigger)_TO_State_(deferrableTrigger)&quot;">
+          <annotations xmi:id="_IAUqiPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_9-scZwsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_Trigger_FROM_State_(deferrableTrigger)_TO_State_(deferrableTrigger)&quot;">
+          <annotations xmi:id="_IAUqo_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_9-scaAsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IAUqb_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_9-scaQsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_IAUqcPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_9-scagsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_IAUqcfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_9-scawsYEeajEecGJ9W2hw" value="18">
+          <annotations xmi:id="_IAUqcvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_9-scbAsYEeajEecGJ9W2hw" name="" outgoing="_9-sceQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqhfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_-pJuoAsYEeajEecGJ9W2hw" name="A.OldSource" incoming="_-pJusgsYEeajEecGJ9W2hw" outgoing="_-pJutQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqr_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition"/>
+      </nodes>
+      <nodes xmi:id="_-pJuoQsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_-pJutgsYEeajEecGJ9W2hw" outgoing="_-pJuuQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqsPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+      </nodes>
+      <nodes xmi:id="_-pJuowsYEeajEecGJ9W2hw" name="" incoming="_-pJutAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqsfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="_-pJupQsYEeajEecGJ9W2hw" name="" incoming="_-pJuuAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqsvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="_-pJupgsYEeajEecGJ9W2hw" incoming="_-pJuvAsYEeajEecGJ9W2hw" outgoing="_-pJuugsYEeajEecGJ9W2hw _-pJuuwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqs_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_-pJupwsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_Trigger_FROM_Transition_(trigger)_TO_State_(deferrableTrigger)&quot;">
+          <annotations xmi:id="_IAUqvvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-pJuqAsYEeajEecGJ9W2hw" value="&quot;MOVEs Trigger from Transition(Reference:trigger) to State(Reference:deferrableTrigger&quot;">
+          <annotations xmi:id="_IAUqv_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-pJuqQsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_Trigger_FROM_Transition_(trigger)_TO_State_(deferrableTrigger)&quot;">
+          <annotations xmi:id="_IAVRcPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-pJuqgsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_Trigger_FROM_Transition_(trigger)_TO_State_(deferrableTrigger)&quot;">
+          <annotations xmi:id="_IAVRcfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-pJuqwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IAVRcvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-pJurAsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_IAVRc_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-pJurQsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_IAVRdPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-pJurgsYEeajEecGJ9W2hw" value="17">
+          <annotations xmi:id="_IAVRdfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-pJurwsYEeajEecGJ9W2hw" name="" outgoing="_-pJuvAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqtPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <edges xmi:id="_-_QhjQsYEeajEecGJ9W2hw" source="_-_QhfQsYEeajEecGJ9W2hw" target="_-_QhfAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
+      </edges>
+      <edges xmi:id="_-_QhjgsYEeajEecGJ9W2hw" source="_-_QhfQsYEeajEecGJ9W2hw" target="_-_QhewsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objB"/>
+      </edges>
+      <edges xmi:id="_-_QhjwsYEeajEecGJ9W2hw" source="_-_QhgAsYEeajEecGJ9W2hw" target="_-_QhfgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqpfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="_-_QhkAsYEeajEecGJ9W2hw" source="_-_QhgAsYEeajEecGJ9W2hw" target="_-_QhfAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/tgt"/>
+      </edges>
+      <edges xmi:id="_-_QhkQsYEeajEecGJ9W2hw" source="_-_QhgAsYEeajEecGJ9W2hw" target="_-_QhgQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqp_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="_-_QhkgsYEeajEecGJ9W2hw" source="_-_QhfgsYEeajEecGJ9W2hw" target="_-_QhfAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqZ_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/deferrableTrigger"/>
+      </edges>
+      <edges xmi:id="_-_QhkwsYEeajEecGJ9W2hw" source="_-_QhggsYEeajEecGJ9W2hw" target="_-_QhfwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqoPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_-_QhlAsYEeajEecGJ9W2hw" source="_-_QhggsYEeajEecGJ9W2hw" target="_-_QhewsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/tgt"/>
+      </edges>
+      <edges xmi:id="_-_QhlQsYEeajEecGJ9W2hw" source="_-_QhggsYEeajEecGJ9W2hw" target="_-_QhgQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqffOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="_-_QhlgsYEeajEecGJ9W2hw" source="_-_QhfwsYEeajEecGJ9W2hw" target="_-_QhewsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqf_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0 or rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/deferrableTrigger"/>
+      </edges>
+      <edges xmi:id="_-_QhlwsYEeajEecGJ9W2hw" source="_-_QhgwsYEeajEecGJ9W2hw" target="_-_QhgAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqqfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-_QhmAsYEeajEecGJ9W2hw" source="_-_QhgwsYEeajEecGJ9W2hw" target="_-_QhggsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqgfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-_QhmQsYEeajEecGJ9W2hw" source="_-_QhjAsYEeajEecGJ9W2hw" target="_-_QhgwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqqvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="_9-sceAsYEeajEecGJ9W2hw" source="_9-scYwsYEeajEecGJ9W2hw" target="_-_QhggsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqhvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_9-sceQsYEeajEecGJ9W2hw" source="_9-scbAsYEeajEecGJ9W2hw" target="_9-scYwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqh_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="_9-scdwsYEeajEecGJ9W2hw" source="_9-scYwsYEeajEecGJ9W2hw" target="_-_QhgAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqovOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromstatedeferrabletriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-pJusgsYEeajEecGJ9W2hw" source="_-_QhgAsYEeajEecGJ9W2hw" target="_-pJuoAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqtfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="_-pJutAsYEeajEecGJ9W2hw" source="_-_QhgAsYEeajEecGJ9W2hw" target="_-pJuowsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqtvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="_-pJutQsYEeajEecGJ9W2hw" source="_-pJuoAsYEeajEecGJ9W2hw" target="_-_QhfAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqt_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition/trigger"/>
+      </edges>
+      <edges xmi:id="_-pJutgsYEeajEecGJ9W2hw" source="_-_QhggsYEeajEecGJ9W2hw" target="_-pJuoQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUquPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_-pJuuAsYEeajEecGJ9W2hw" source="_-_QhggsYEeajEecGJ9W2hw" target="_-pJupQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqufOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="_-pJuuQsYEeajEecGJ9W2hw" source="_-pJuoQsYEeajEecGJ9W2hw" target="_-_QhewsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUquvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/deferrableTrigger"/>
+      </edges>
+      <edges xmi:id="_-pJuugsYEeajEecGJ9W2hw" source="_-pJupgsYEeajEecGJ9W2hw" target="_-_QhgAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqu_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-pJuuwsYEeajEecGJ9W2hw" source="_-pJupgsYEeajEecGJ9W2hw" target="_-_QhggsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqvPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-pJuvAsYEeajEecGJ9W2hw" source="_-pJurwsYEeajEecGJ9W2hw" target="_-pJupgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IAUqvfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmovetriggerfromtransitiontriggertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+    </rhs>
+    <mappings xmi:id="_-_QhmgsYEeajEecGJ9W2hw" origin="_-_QhZgsYEeajEecGJ9W2hw" image="_-_QhewsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-_QhmwsYEeajEecGJ9W2hw" origin="_-_QhZwsYEeajEecGJ9W2hw" image="_-_QhfAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-_QhnAsYEeajEecGJ9W2hw" origin="_-_QhaAsYEeajEecGJ9W2hw" image="_-_QhfQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-_QhnQsYEeajEecGJ9W2hw" origin="_-_QhaQsYEeajEecGJ9W2hw" image="_-_QhfgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-_QhngsYEeajEecGJ9W2hw" origin="_-_QhagsYEeajEecGJ9W2hw" image="_-_QhfwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-_QhnwsYEeajEecGJ9W2hw" origin="_-_QhawsYEeajEecGJ9W2hw" image="_-_QhgAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-_QhoAsYEeajEecGJ9W2hw" origin="_-_QhbAsYEeajEecGJ9W2hw" image="_-_QhgQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-_QhoQsYEeajEecGJ9W2hw" origin="_-_QhbgsYEeajEecGJ9W2hw" image="_-_QhggsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-_QhogsYEeajEecGJ9W2hw" origin="_-_QhbwsYEeajEecGJ9W2hw" image="_-_QhjAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_IAdNQPOJEeqKPbhZweJEtg" origin="_9-scTwsYEeajEecGJ9W2hw" image="_9-scbAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_IAdNQfOJEeqKPbhZweJEtg" origin="_-pJuiQsYEeajEecGJ9W2hw" image="_-pJuoAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_IAdNQvOJEeqKPbhZweJEtg" origin="_-pJuigsYEeajEecGJ9W2hw" image="_-pJuoQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_IAdNQ_OJEeqKPbhZweJEtg" origin="_-pJujAsYEeajEecGJ9W2hw" image="_-pJuowsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_IAdNRPOJEeqKPbhZweJEtg" origin="_-pJujwsYEeajEecGJ9W2hw" image="_-pJupQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_IAdNRfOJEeqKPbhZweJEtg" origin="_-pJukQsYEeajEecGJ9W2hw" image="_-pJurwsYEeajEecGJ9W2hw"/>
+  </units>
+</henshin:Module>

@@ -36,7 +36,7 @@ public abstract class AbstractVBValidatorTest {
 	 */
 	protected Annotation createFM(String fm) {
 		Annotation annotation = HenshinFactory.eINSTANCE.createAnnotation();
-		annotation.setKey(VariabilityConstants.FEATURE_MODEL.toString());
+		annotation.setKey(VariabilityConstants.FEATURE_CONSTRAINT.toString());
 		annotation.setValue(fm);
 		return annotation;
 	}

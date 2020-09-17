@@ -22,7 +22,7 @@ import org.eclipse.emf.henshin.model.Unit;
 import org.eclipse.emf.henshin.model.resource.HenshinResourceSet;
 import org.eclipse.emf.henshin.variability.InconsistentRuleException;
 
-import org.eclipse.emf.henshin.variability.matcher.VariabilityAwareMatcher;
+import org.eclipse.emf.henshin.variability.matcher.VBMatcher;
 
 /**
  * Comb pattern example for Henshin. This class implements several benchmarks
@@ -124,7 +124,7 @@ public class CombBenchmark {
 		long time = System.currentTimeMillis();
 		int foundMatches;
 		if (variabilityAware)
-			foundMatches = new VariabilityAwareMatcher(combPattern, graph).findMatches().size();
+			foundMatches = new VBMatcher(combPattern, graph).findMatches().size();
 		else
 			foundMatches = InterpreterUtil.findAllMatches(engine, combPattern,
 				graph, null).size();

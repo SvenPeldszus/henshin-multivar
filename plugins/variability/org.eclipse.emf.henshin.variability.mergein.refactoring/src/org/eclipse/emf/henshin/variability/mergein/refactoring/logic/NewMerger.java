@@ -33,6 +33,7 @@ import org.eclipse.emf.henshin.model.Parameter;
 //import org.eclipse.emf.henshin.model.Module;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.model.resource.HenshinResourceSet;
+import org.eclipse.emf.henshin.variability.util.XorEncoderUtil;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 
 import mergeSuggestion.MergeNAC;
@@ -62,28 +63,30 @@ public class NewMerger {
 	private EList<ParameterRulesMapping> parameterRulesMappings;
 	private EList<MergeRuleElementRulesMapping> mergeRuleElementRulesMappings;
 	private boolean unifyParameters;
+	private boolean optimizePerformance;
 
 	public NewMerger(MergeRule m) throws MergeInException {
-		this(m, false);
+		this(m, false, false);
 	}
 
-	public NewMerger(MergeRule m, boolean unifyParams) throws MergeInException {
-		mergeRule = m;
-		unifyParameters = unifyParams;
-		masterRule = mergeRule.getMasterRule();
-		furtherRules = new ArrayList<Rule>();
-		furtherRules.addAll(mergeRule.getRules());
-		furtherRules.remove(masterRule);
-		numberOfRules = furtherRules.size() + 1;
+	public NewMerger(MergeRule m, boolean unifyParams, boolean optimizePerformance) throws MergeInException {
+		this.optimizePerformance = optimizePerformance;
+		this.mergeRule = m;
+		this.unifyParameters = unifyParams;
+		this.masterRule = mergeRule.getMasterRule();
+		this.furtherRules = new ArrayList<>();
+		this.furtherRules.addAll(mergeRule.getRules());
+		this.furtherRules.remove(masterRule);
+		this.numberOfRules = furtherRules.size() + 1;
 		setModule();
-		nodesMap = new HashMap<Node, Node>();
-		rule2ConditionMap = new LinkedHashMap<Rule, String>();
-		elementsLhs = new BasicEList<MergeRuleElement>();
-		elementsRhs = new BasicEList<MergeRuleElement>();
-		elementsConditions = new BasicEList<MergeRuleElement>();
-		elementsNestedRules = new BasicEList<MergeRuleElement>();
-		parameterRulesMappings = new BasicEList<ParameterRulesMapping>();
-		mergeRuleElementRulesMappings = new BasicEList<MergeRuleElementRulesMapping>();
+		this.nodesMap = new HashMap<>();
+		this.rule2ConditionMap = new LinkedHashMap<>();
+		this.elementsLhs = new BasicEList<>();
+		this.elementsRhs = new BasicEList<>();
+		this.elementsConditions = new BasicEList<>();
+		this.elementsNestedRules = new BasicEList<>();
+		this.parameterRulesMappings = new BasicEList<>();
+		this.mergeRuleElementRulesMappings = new BasicEList<>();
 	}
 
 	public void saveModule(String path) throws MergeInException {
@@ -171,23 +174,22 @@ public class NewMerger {
 		}
 		removeNonMasterRules();
 	}
-	
+
 	private void setAnnotation() {
 		Annotation anno = HenshinFactory.eINSTANCE.createAnnotation();
 		StringBuilder sb = new StringBuilder();
-		for ( Entry<Rule, String> entry : rule2ConditionMap.entrySet()) {
+		for (Entry<Rule, String> entry : rule2ConditionMap.entrySet()) {
 			sb.append(entry.getValue());
 			sb.append('=');
 			sb.append(entry.getKey());
 			sb.append(", ");
 		}
 		String value = sb.toString();
-		value = value.substring(0, value.length()-2);
+		value = value.substring(0, value.length() - 2);
 		anno.setKey("originalRules");
 		anno.setValue(value);
 		masterRule.getAnnotations().add(anno);
 	}
-
 
 	private void removeNonMasterRules() throws MergeInException {
 		for (Rule rule : furtherRules) {
@@ -199,23 +201,38 @@ public class NewMerger {
 	}
 
 	private void setFeatureModel() {
-		String featureModel = XOR;
-		VariabilityHelper.INSTANCE.addFeature(masterRule, masterRule.getName());
-		featureModel += BRACKET_LEFT;
-		featureModel += getCondition(masterRule);
-		for (Rule rule : furtherRules) {
-			featureModel += COMMA;
-			featureModel += getCondition(rule);
-			VariabilityHelper.INSTANCE.addFeature(masterRule, rule.getName());
+		List<String> features = new ArrayList<>(furtherRules.size() + 1);
+		String masterRuleFeature = createFeature(masterRule);
+		features.add(masterRuleFeature);
+		VariabilityHelper.INSTANCE.addFeature(masterRule, masterRuleFeature);
+		for(Rule rule : furtherRules) {
+			String feature = createFeature(rule);
+			VariabilityHelper.INSTANCE.addFeature(masterRule, feature);
+			features.add(feature);
 		}
-		featureModel += BRACKET_RIGHT;
-		VariabilityHelper.INSTANCE.setFeatureModel(masterRule, featureModel);
+		
+		String featureModel;
+		if (optimizePerformance) {
+			// Already translate the fm to a CNF
+			featureModel = XorEncoderUtil.createXorEncodingCNF(features);
+			VariabilityHelper.INSTANCE.setFeatureConstraintIsCNF(masterRule, true);
+		} else {
+			featureModel = XOR;
+			featureModel += BRACKET_LEFT;
+			featureModel += masterRuleFeature;
+			for (String feature : features) {
+				featureModel += COMMA;
+				featureModel += feature;
+			}
+			featureModel += BRACKET_RIGHT;
+		}
+		VariabilityHelper.INSTANCE.setFeatureConstraint(masterRule, featureModel);
 	}
-	
+
 	private void setFeatures() {
 		Set<String> sb = new HashSet<>();
-		for ( Entry<Rule, String> entry : rule2ConditionMap.entrySet()) {
-			sb.add(getCondition(entry.getKey()));
+		for (Entry<Rule, String> entry : rule2ConditionMap.entrySet()) {
+			sb.add(createFeature(entry.getKey()));
 		}
 		VariabilityHelper.INSTANCE.setFeatures(masterRule, sb);
 	}
@@ -255,7 +272,7 @@ public class NewMerger {
 	}
 
 	private EList<Rule> getRulesWithCondition() {
-		EList<Rule> rulesWithCondition = new BasicEList<Rule>();
+		EList<Rule> rulesWithCondition = new BasicEList<>();
 		for (MergeRuleElementRulesMapping mapping : mergeRuleElementRulesMappings) {
 			Rule rule = mapping.getRules().get(0);
 			if (rule != masterRule) {
@@ -320,9 +337,9 @@ public class NewMerger {
 	}
 
 	private void mergeRhsGraph() {
-		List<Node> nodesRhs = new ArrayList<Node>();
-		List<Edge> edgesRhs = new ArrayList<Edge>();
-		List<Attribute> attributesRhs = new ArrayList<Attribute>();
+		List<Node> nodesRhs = new ArrayList<>();
+		List<Edge> edgesRhs = new ArrayList<>();
+		List<Attribute> attributesRhs = new ArrayList<>();
 		fillLists(nodesRhs, edgesRhs, attributesRhs, elementsRhs);
 		addNodes2GraphOfMasterRule(masterRule.getRhs(), nodesRhs);
 		addAttributes2Nodes(attributesRhs);
@@ -330,9 +347,9 @@ public class NewMerger {
 	}
 
 	private void mergeLhsGraph() {
-		List<Node> nodesLhs = new ArrayList<Node>();
-		List<Edge> edgesLhs = new ArrayList<Edge>();
-		List<Attribute> attributesLhs = new ArrayList<Attribute>();
+		List<Node> nodesLhs = new ArrayList<>();
+		List<Edge> edgesLhs = new ArrayList<>();
+		List<Attribute> attributesLhs = new ArrayList<>();
 		fillLists(nodesLhs, edgesLhs, attributesLhs, elementsLhs);
 		addNodes2GraphOfMasterRule(masterRule.getLhs(), nodesLhs);
 		addAttributes2Nodes(attributesLhs);
@@ -367,7 +384,7 @@ public class NewMerger {
 
 	private void addNodes2GraphOfMasterRule(Graph graph, List<Node> nodes) {
 		for (Node node : nodes) {
-			if (nodesMap.get(node) == node && !(node.getGraph().getRule() == masterRule)) {
+			if (nodesMap.get(node) == node && node.getGraph().getRule() != masterRule) {
 				graph.getNodes().add(node);
 			}
 		}
@@ -485,7 +502,8 @@ public class NewMerger {
 		for (MergeRuleElement mre : mergeRule.getElements()) {
 			if (getRulesFromMergeRuleElement(mre).contains((Rule) param.getUnit())) {
 				for (GraphElement ge : mre.getReferenceElements()) {
-					if (ge instanceof Node && ((Node) ge).getName() != null && ((Node) ge).getName().equals(param.getName())) {
+					if (ge instanceof Node && ((Node) ge).getName() != null
+							&& ((Node) ge).getName().equals(param.getName())) {
 						if (ge.getGraph().getRule().getKernelRule() != null) {
 							mapping.addRule(ge.getGraph().getRule().getKernelRule());
 						} else {
@@ -567,7 +585,7 @@ public class NewMerger {
 			rule2ConditionMap.put(rule, str(i));
 			i++;
 		}
-		
+
 		for (MergeRuleElement mre : mergeRule.getElements()) {
 			if (mre.getReferenceElements().size() != numberOfRules) {
 				for (GraphElement elem : mre.getReferenceElements()) {
@@ -585,9 +603,9 @@ public class NewMerger {
 			}
 		}
 	}
-	
+
 	static String str(int i) {
-	    return i < 0 ? "" : str((i / 26) - 1) + (char)(65 + i % 26);
+		return i < 0 ? "" : str((i / 26) - 1) + (char) (65 + i % 26);
 	}
 
 	private void setPresenceCondition(MergeNAC nac, Graph g) {
@@ -604,12 +622,12 @@ public class NewMerger {
 		}
 		for (Edge edge : g.getEdges()) {
 			if (edge.getActionEdge() == edge)
-				VariabilityHelper.INSTANCE.setPresenceCondition(edge,condition);
+				VariabilityHelper.INSTANCE.setPresenceCondition(edge, condition);
 		}
 	}
 
 	private String getCondition(MergeNAC nac) {
-		List<Rule> affectedRules = new ArrayList<Rule>();
+		List<Rule> affectedRules = new ArrayList<>();
 		for (Graph el : nac.getReferenceNACs()) {
 			affectedRules.add(el.getRule());
 		}
@@ -617,7 +635,7 @@ public class NewMerger {
 	}
 
 	private String getCondition(MergeRuleElement mre) {
-		List<Rule> affectedRules = new ArrayList<Rule>();
+		List<Rule> affectedRules = new ArrayList<>();
 		for (GraphElement elem : mre.getReferenceElements()) {
 			affectedRules.add(elem.getGraph().getRule());
 		}
@@ -627,20 +645,19 @@ public class NewMerger {
 	private String getCondition(List<Rule> affectedRules) {
 		String condition = "";
 		if (!affectedRules.isEmpty()) {
-			condition = getCondition(affectedRules.get(0));
+			condition = createFeature(affectedRules.get(0));
 		}
 		for (int i = 1; i < affectedRules.size(); i++) {
-			condition += OR + getCondition(affectedRules.get(i));
+			condition += OR + createFeature(affectedRules.get(i));
 		}
 		return condition;
 	}
 
-	private String getCondition(Rule rule) {
+	private String createFeature(Rule rule) {
 		String ruleName = rule.getName();
 		ruleName = ruleName.replaceAll("\\W", "");
-		ruleName = ruleName.replaceAll("_", "");
-		return "def("+ruleName.toLowerCase()+")";
-//		return "def("+rule2ConditionMap.get(rule)+")";
+		ruleName = ruleName.replace("_", "");
+		return ruleName.toLowerCase();
 	}
 
 	private void sortMergeRuleElements() {
@@ -702,9 +719,9 @@ public class NewMerger {
 		} else if (injective.size() == mergeRule.getRules().size()) {
 			// NOOP, is default.
 		} else {
-			String condition = getCondition(injective.get(0));
+			String condition = createFeature(injective.get(0));
 			for (int i = 1; i < injective.size(); i++) {
-				condition += OR + getCondition(injective.get(i));
+				condition += OR + createFeature(injective.get(i));
 			}
 			VariabilityHelper.INSTANCE.setInjectiveMatchingPresenceCondition(masterRule, condition);
 		}

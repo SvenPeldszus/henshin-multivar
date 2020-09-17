@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_IIOpMPOJEeqKPbhZweJEtg">
+  <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
+  <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
+  <units xsi:type="henshin:Rule" xmi:id="__N0h0QsYEeajEecGJ9W2hw" name="rr:changePseudostateKind_FROM_Terminate_TO_exitPoint,rr:changePseudostateKind_FROM_Terminate_TO_junction" description="Recognize: Changes the attribute value of kind_FROM_terminate_TO_exitPoint">
+    <annotations xmi:id="_IIOCIfOJEeqKPbhZweJEtg" key="features" value="rrchangepseudostatekindfromterminatetojunction, rrchangepseudostatekindfromterminatetoexitpoint"/>
+    <annotations xmi:id="_IIOCIvOJEeqKPbhZweJEtg" key="featureConstraintIsCNF" value="true"/>
+    <annotations xmi:id="_IIOCI_OJEeqKPbhZweJEtg" key="featureConstraint" value="((rrchangepseudostatekindfromterminatetoexitpoint) | (rrchangepseudostatekindfromterminatetojunction)) &amp; ( ~(rrchangepseudostatekindfromterminatetoexitpoint) | ~(rrchangepseudostatekindfromterminatetojunction))"/>
+    <annotations xmi:id="_IIOCJPOJEeqKPbhZweJEtg" key="originalRules" value="A=Rule rr:changePseudostateKind_FROM_Terminate_TO_exitPoint(Selected:Pseudostate, &quot;terminate&quot;:PseudostateKind, &quot;exitPoint&quot;, &quot;junction&quot;:PseudostateKind), B=Rule rr:changePseudostateKind_FROM_Terminate_TO_junction(Selected:Pseudostate, &quot;terminate&quot;:PseudostateKind, &quot;junction&quot;:PseudostateKind)"/>
+    <parameters xmi:id="__N0h0gsYEeajEecGJ9W2hw" name="Selected">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate"/>
+    </parameters>
+    <parameters xmi:id="__N0h0wsYEeajEecGJ9W2hw" name="&quot;terminate&quot;">
+      <type xsi:type="ecore:EEnum" href="http://www.eclipse.org/uml2/5.0.0/UML#//PseudostateKind"/>
+    </parameters>
+    <parameters xmi:id="__N0h1AsYEeajEecGJ9W2hw" name="&quot;exitPoint&quot;">
+      <type xsi:type="ecore:EEnum" href="http://www.eclipse.org/uml2/5.0.0/UML#//PseudostateKind"/>
+    </parameters>
+    <parameters xmi:id="_IIMM8POJEeqKPbhZweJEtg" name="&quot;junction&quot;">
+      <type xsi:type="ecore:EEnum" href="http://www.eclipse.org/uml2/5.0.0/UML#//PseudostateKind"/>
+    </parameters>
+    <lhs xmi:id="__N0h1QsYEeajEecGJ9W2hw" name="Lhs">
+      <nodes xmi:id="__N0h1gsYEeajEecGJ9W2hw" name="B.Selected" incoming="__N0h4AsYEeajEecGJ9W2hw __N0h4gsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate"/>
+        <attributes xmi:id="__N0h1wsYEeajEecGJ9W2hw" value="&quot;exitPoint&quot;">
+          <annotations xmi:id="_IIJwsfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetoexitpoint"/>
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+        <attributes xmi:id="_AC3TdwsZEeajEecGJ9W2hw" value="&quot;junction&quot;">
+          <annotations xmi:id="_IIJws_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetojunction"/>
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__N0h2AsYEeajEecGJ9W2hw" name="A.Selected" incoming="__N0h3wsYEeajEecGJ9W2hw __N0h4QsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate"/>
+        <attributes xmi:id="__N0h2QsYEeajEecGJ9W2hw" value="&quot;terminate&quot;">
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+        <attributes xmi:id="_AC3TeQsZEeajEecGJ9W2hw" value="&quot;terminate&quot;">
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__N0h2gsYEeajEecGJ9W2hw" name="" outgoing="__N0h3wsYEeajEecGJ9W2hw __N0h4AsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
+      </nodes>
+      <nodes xmi:id="__N0h2wsYEeajEecGJ9W2hw" name="" outgoing="__N0h4QsYEeajEecGJ9W2hw __N0h4gsYEeajEecGJ9W2hw __N0h4wsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange"/>
+      </nodes>
+      <nodes xmi:id="__N0h3AsYEeajEecGJ9W2hw" name="" incoming="__N0h4wsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
+        <attributes xmi:id="__N0h3QsYEeajEecGJ9W2hw" value="&quot;kind&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="_AC3TfQsZEeajEecGJ9W2hw" value="&quot;kind&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__N0h3gsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_IIJwsPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetoexitpoint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_AC3TfgsZEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_IIJwsvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetojunction"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <edges xmi:id="__N0h3wsYEeajEecGJ9W2hw" source="__N0h2gsYEeajEecGJ9W2hw" target="__N0h2AsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
+      </edges>
+      <edges xmi:id="__N0h4AsYEeajEecGJ9W2hw" source="__N0h2gsYEeajEecGJ9W2hw" target="__N0h1gsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objB"/>
+      </edges>
+      <edges xmi:id="__N0h4QsYEeajEecGJ9W2hw" source="__N0h2wsYEeajEecGJ9W2hw" target="__N0h2AsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange/objA"/>
+      </edges>
+      <edges xmi:id="__N0h4gsYEeajEecGJ9W2hw" source="__N0h2wsYEeajEecGJ9W2hw" target="__N0h1gsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange/objB"/>
+      </edges>
+      <edges xmi:id="__N0h4wsYEeajEecGJ9W2hw" source="__N0h2wsYEeajEecGJ9W2hw" target="__N0h3AsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange/type"/>
+      </edges>
+    </lhs>
+    <rhs xmi:id="__N0h5AsYEeajEecGJ9W2hw" name="Rhs">
+      <nodes xmi:id="__N0h5QsYEeajEecGJ9W2hw" name="B.Selected" incoming="__N0h9QsYEeajEecGJ9W2hw __N0h9wsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate"/>
+      </nodes>
+      <nodes xmi:id="__N0h5gsYEeajEecGJ9W2hw" name="A.Selected" incoming="__N0h9AsYEeajEecGJ9W2hw __N0h9gsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate"/>
+      </nodes>
+      <nodes xmi:id="__N0h5wsYEeajEecGJ9W2hw" name="" outgoing="__N0h9AsYEeajEecGJ9W2hw __N0h9QsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
+      </nodes>
+      <nodes xmi:id="__N0h6AsYEeajEecGJ9W2hw" name="" incoming="__N0h-QsYEeajEecGJ9W2hw _AC3TmQsZEeajEecGJ9W2hw" outgoing="__N0h9gsYEeajEecGJ9W2hw __N0h9wsYEeajEecGJ9W2hw __N0h-AsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange"/>
+      </nodes>
+      <nodes xmi:id="__N0h6QsYEeajEecGJ9W2hw" name="" incoming="__N0h-AsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
+      </nodes>
+      <nodes xmi:id="__N0h6gsYEeajEecGJ9W2hw" incoming="__N0h-gsYEeajEecGJ9W2hw" outgoing="__N0h-QsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IIJwtPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetoexitpoint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="__N0h6wsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_terminate_TO_exitPoint&quot;">
+          <annotations xmi:id="_IIJwuPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetoexitpoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__N0h7AsYEeajEecGJ9W2hw" value="&quot;Changes the attribute value of kind_FROM_terminate_TO_exitPoint&quot;">
+          <annotations xmi:id="_IIJwufOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetoexitpoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__N0h7QsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_terminate_TO_exitPoint&quot;">
+          <annotations xmi:id="_IIJwuvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetoexitpoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__N0h7gsYEeajEecGJ9W2hw" value="&quot;RR: CHANGE_LITERAL_Pseudostate_kind_FROM_terminate_TO_exitPoint&quot;">
+          <annotations xmi:id="_IIJwu_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetoexitpoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__N0h7wsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IIJwvPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetoexitpoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__N0h8AsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_IIJwvfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetoexitpoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__N0h8QsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_IIJwvvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetoexitpoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__N0h8gsYEeajEecGJ9W2hw" value="5">
+          <annotations xmi:id="_IIJwv_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetoexitpoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__N0h8wsYEeajEecGJ9W2hw" name="" outgoing="__N0h-gsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IIJwtfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetoexitpoint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_AC3TigsZEeajEecGJ9W2hw" incoming="_AC3TmgsZEeajEecGJ9W2hw" outgoing="_AC3TmQsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IIJwwPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetojunction"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_AC3TiwsZEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_terminate_TO_junction&quot;">
+          <annotations xmi:id="_IIJwxPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetojunction"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_AC3TjAsZEeajEecGJ9W2hw" value="&quot;Changes the attribute value of kind_FROM_terminate_TO_junction&quot;">
+          <annotations xmi:id="_IIJwxfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetojunction"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_AC3TjQsZEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_terminate_TO_junction&quot;">
+          <annotations xmi:id="_IIJwxvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetojunction"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_AC3TjgsZEeajEecGJ9W2hw" value="&quot;RR: CHANGE_LITERAL_Pseudostate_kind_FROM_terminate_TO_junction&quot;">
+          <annotations xmi:id="_IIJwx_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetojunction"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_AC3TjwsZEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IIJwyPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetojunction"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_AC3TkAsZEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_IIJwyfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetojunction"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_AC3TkQsZEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_IIJwyvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetojunction"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_AC3TkgsZEeajEecGJ9W2hw" value="5">
+          <annotations xmi:id="_IIJwy_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetojunction"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_AC3TkwsZEeajEecGJ9W2hw" name="" outgoing="_AC3TmgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IIJwwfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetojunction"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <edges xmi:id="__N0h9AsYEeajEecGJ9W2hw" source="__N0h5wsYEeajEecGJ9W2hw" target="__N0h5gsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
+      </edges>
+      <edges xmi:id="__N0h9QsYEeajEecGJ9W2hw" source="__N0h5wsYEeajEecGJ9W2hw" target="__N0h5QsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objB"/>
+      </edges>
+      <edges xmi:id="__N0h9gsYEeajEecGJ9W2hw" source="__N0h6AsYEeajEecGJ9W2hw" target="__N0h5gsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange/objA"/>
+      </edges>
+      <edges xmi:id="__N0h9wsYEeajEecGJ9W2hw" source="__N0h6AsYEeajEecGJ9W2hw" target="__N0h5QsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange/objB"/>
+      </edges>
+      <edges xmi:id="__N0h-AsYEeajEecGJ9W2hw" source="__N0h6AsYEeajEecGJ9W2hw" target="__N0h6QsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange/type"/>
+      </edges>
+      <edges xmi:id="__N0h-QsYEeajEecGJ9W2hw" source="__N0h6gsYEeajEecGJ9W2hw" target="__N0h6AsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IIJwtvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetoexitpoint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__N0h-gsYEeajEecGJ9W2hw" source="__N0h8wsYEeajEecGJ9W2hw" target="__N0h6gsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IIJwt_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetoexitpoint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="_AC3TmQsZEeajEecGJ9W2hw" source="_AC3TigsZEeajEecGJ9W2hw" target="__N0h6AsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IIJwwvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetojunction"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_AC3TmgsZEeajEecGJ9W2hw" source="_AC3TkwsZEeajEecGJ9W2hw" target="_AC3TigsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IIJww_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromterminatetojunction"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+    </rhs>
+    <mappings xmi:id="__N0h-wsYEeajEecGJ9W2hw" origin="__N0h1gsYEeajEecGJ9W2hw" image="__N0h5QsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__N0h_AsYEeajEecGJ9W2hw" origin="__N0h2AsYEeajEecGJ9W2hw" image="__N0h5gsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__N0h_QsYEeajEecGJ9W2hw" origin="__N0h2gsYEeajEecGJ9W2hw" image="__N0h5wsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__N0h_gsYEeajEecGJ9W2hw" origin="__N0h2wsYEeajEecGJ9W2hw" image="__N0h6AsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__N0h_wsYEeajEecGJ9W2hw" origin="__N0h3AsYEeajEecGJ9W2hw" image="__N0h6QsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__N0iAAsYEeajEecGJ9W2hw" origin="__N0h3gsYEeajEecGJ9W2hw" image="__N0h8wsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_IIOCIPOJEeqKPbhZweJEtg" origin="_AC3TfgsZEeajEecGJ9W2hw" image="_AC3TkwsZEeajEecGJ9W2hw"/>
+  </units>
+</henshin:Module>

@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_H2gAAPOJEeqKPbhZweJEtg">
+  <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
+  <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
+  <units xsi:type="henshin:Rule" xmi:id="_-s0tkQsYEeajEecGJ9W2hw" name="rr:changePseudostateKind_FROM_ShallowHistory_TO_fork,rr:changePseudostateKind_FROM_ShallowHistory_TO_entryPoint,rr:changePseudostateKind_FROM_ShallowHistory_TO_exitPoint,rr:changePseudostateKind_FROM_ShallowHistory_TO_junction,rr:changePseudostateKind_FROM_ShallowHistory_TO_choice,rr:changePseudostateKind_FROM_ShallowHistory_TO_join,rr:changePseudostateKind_FROM_ShallowHistory_TO_deepHistory" description="Recognize: Changes the attribute value of kind_FROM_shallowHistory_TO_fork">
+    <annotations xmi:id="_H2fY9vOJEeqKPbhZweJEtg" key="features" value="rrchangepseudostatekindfromshallowhistorytojoin, rrchangepseudostatekindfromshallowhistorytodeephistory, rrchangepseudostatekindfromshallowhistorytochoice, rrchangepseudostatekindfromshallowhistorytojunction, rrchangepseudostatekindfromshallowhistorytoentrypoint, rrchangepseudostatekindfromshallowhistorytoexitpoint, rrchangepseudostatekindfromshallowhistorytofork"/>
+    <annotations xmi:id="_H2fY9_OJEeqKPbhZweJEtg" key="featureConstraintIsCNF" value="true"/>
+    <annotations xmi:id="_H2fY-POJEeqKPbhZweJEtg" key="featureConstraint" value="((rrchangepseudostatekindfromshallowhistorytofork) | (rrchangepseudostatekindfromshallowhistorytoentrypoint) | (rrchangepseudostatekindfromshallowhistorytoexitpoint) | (rrchangepseudostatekindfromshallowhistorytojunction) | (rrchangepseudostatekindfromshallowhistorytochoice) | (rrchangepseudostatekindfromshallowhistorytojoin) | (rrchangepseudostatekindfromshallowhistorytodeephistory)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytofork) | ~(rrchangepseudostatekindfromshallowhistorytoentrypoint)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytofork) | ~(rrchangepseudostatekindfromshallowhistorytoexitpoint)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytofork) | ~(rrchangepseudostatekindfromshallowhistorytojunction)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytofork) | ~(rrchangepseudostatekindfromshallowhistorytochoice)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytofork) | ~(rrchangepseudostatekindfromshallowhistorytojoin)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytofork) | ~(rrchangepseudostatekindfromshallowhistorytodeephistory)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytoentrypoint) | ~(rrchangepseudostatekindfromshallowhistorytoexitpoint)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytoentrypoint) | ~(rrchangepseudostatekindfromshallowhistorytojunction)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytoentrypoint) | ~(rrchangepseudostatekindfromshallowhistorytochoice)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytoentrypoint) | ~(rrchangepseudostatekindfromshallowhistorytojoin)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytoentrypoint) | ~(rrchangepseudostatekindfromshallowhistorytodeephistory)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytoexitpoint) | ~(rrchangepseudostatekindfromshallowhistorytojunction)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytoexitpoint) | ~(rrchangepseudostatekindfromshallowhistorytochoice)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytoexitpoint) | ~(rrchangepseudostatekindfromshallowhistorytojoin)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytoexitpoint) | ~(rrchangepseudostatekindfromshallowhistorytodeephistory)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytojunction) | ~(rrchangepseudostatekindfromshallowhistorytochoice)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytojunction) | ~(rrchangepseudostatekindfromshallowhistorytojoin)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytojunction) | ~(rrchangepseudostatekindfromshallowhistorytodeephistory)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytochoice) | ~(rrchangepseudostatekindfromshallowhistorytojoin)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytochoice) | ~(rrchangepseudostatekindfromshallowhistorytodeephistory)) &amp; ( ~(rrchangepseudostatekindfromshallowhistorytojoin) | ~(rrchangepseudostatekindfromshallowhistorytodeephistory))"/>
+    <annotations xmi:id="_H2fY-fOJEeqKPbhZweJEtg" key="originalRules" value="A=Rule rr:changePseudostateKind_FROM_ShallowHistory_TO_fork(Selected:Pseudostate, &quot;shallowHistory&quot;:PseudostateKind, &quot;fork&quot;, &quot;entryPoint&quot;:PseudostateKind, &quot;exitPoint&quot;:PseudostateKind, &quot;junction&quot;:PseudostateKind, &quot;choice&quot;:PseudostateKind, &quot;join&quot;:PseudostateKind, &quot;deepHistory&quot;:PseudostateKind), B=Rule rr:changePseudostateKind_FROM_ShallowHistory_TO_entryPoint(Selected:Pseudostate, &quot;shallowHistory&quot;:PseudostateKind, &quot;entryPoint&quot;:PseudostateKind), C=Rule rr:changePseudostateKind_FROM_ShallowHistory_TO_exitPoint(Selected:Pseudostate, &quot;shallowHistory&quot;:PseudostateKind, &quot;exitPoint&quot;:PseudostateKind), D=Rule rr:changePseudostateKind_FROM_ShallowHistory_TO_junction(Selected:Pseudostate, &quot;shallowHistory&quot;:PseudostateKind, &quot;junction&quot;:PseudostateKind), E=Rule rr:changePseudostateKind_FROM_ShallowHistory_TO_choice(Selected:Pseudostate, &quot;shallowHistory&quot;:PseudostateKind, &quot;choice&quot;:PseudostateKind), F=Rule rr:changePseudostateKind_FROM_ShallowHistory_TO_join(Selected:Pseudostate, &quot;shallowHistory&quot;:PseudostateKind, &quot;join&quot;:PseudostateKind), G=Rule rr:changePseudostateKind_FROM_ShallowHistory_TO_deepHistory(Selected:Pseudostate, &quot;shallowHistory&quot;:PseudostateKind, &quot;deepHistory&quot;:PseudostateKind)"/>
+    <parameters xmi:id="_-s0tkgsYEeajEecGJ9W2hw" name="Selected">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate"/>
+    </parameters>
+    <parameters xmi:id="_-s0tkwsYEeajEecGJ9W2hw" name="&quot;shallowHistory&quot;">
+      <type xsi:type="ecore:EEnum" href="http://www.eclipse.org/uml2/5.0.0/UML#//PseudostateKind"/>
+    </parameters>
+    <parameters xmi:id="_-s0tlAsYEeajEecGJ9W2hw" name="&quot;fork&quot;">
+      <type xsi:type="ecore:EEnum" href="http://www.eclipse.org/uml2/5.0.0/UML#//PseudostateKind"/>
+    </parameters>
+    <parameters xmi:id="_H2VA4POJEeqKPbhZweJEtg" name="&quot;entryPoint&quot;">
+      <type xsi:type="ecore:EEnum" href="http://www.eclipse.org/uml2/5.0.0/UML#//PseudostateKind"/>
+    </parameters>
+    <parameters xmi:id="_H2WPAPOJEeqKPbhZweJEtg" name="&quot;exitPoint&quot;">
+      <type xsi:type="ecore:EEnum" href="http://www.eclipse.org/uml2/5.0.0/UML#//PseudostateKind"/>
+    </parameters>
+    <parameters xmi:id="_H2XdIPOJEeqKPbhZweJEtg" name="&quot;junction&quot;">
+      <type xsi:type="ecore:EEnum" href="http://www.eclipse.org/uml2/5.0.0/UML#//PseudostateKind"/>
+    </parameters>
+    <parameters xmi:id="_H2YrQPOJEeqKPbhZweJEtg" name="&quot;choice&quot;">
+      <type xsi:type="ecore:EEnum" href="http://www.eclipse.org/uml2/5.0.0/UML#//PseudostateKind"/>
+    </parameters>
+    <parameters xmi:id="_H2Z5YPOJEeqKPbhZweJEtg" name="&quot;join&quot;">
+      <type xsi:type="ecore:EEnum" href="http://www.eclipse.org/uml2/5.0.0/UML#//PseudostateKind"/>
+    </parameters>
+    <parameters xmi:id="_H2bHgPOJEeqKPbhZweJEtg" name="&quot;deepHistory&quot;">
+      <type xsi:type="ecore:EEnum" href="http://www.eclipse.org/uml2/5.0.0/UML#//PseudostateKind"/>
+    </parameters>
+    <lhs xmi:id="_-s0tlQsYEeajEecGJ9W2hw" name="Lhs">
+      <nodes xmi:id="_-s0tlgsYEeajEecGJ9W2hw" name="B.Selected" incoming="_-s0toAsYEeajEecGJ9W2hw _-s0togsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate"/>
+        <attributes xmi:id="_-s0tlwsYEeajEecGJ9W2hw" value="&quot;fork&quot;">
+          <annotations xmi:id="_H2R9kfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytofork"/>
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+        <attributes xmi:id="__bwQJwsYEeajEecGJ9W2hw" value="&quot;entryPoint&quot;">
+          <annotations xmi:id="_H2R9k_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoentrypoint"/>
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+        <attributes xmi:id="__wB3BwsYEeajEecGJ9W2hw" value="&quot;exitPoint&quot;">
+          <annotations xmi:id="_H2R9lfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoexitpoint"/>
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+        <attributes xmi:id="_AR_UlwsZEeajEecGJ9W2hw" value="&quot;junction&quot;">
+          <annotations xmi:id="_H2R9l_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojunction"/>
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+        <attributes xmi:id="_AV0EpwsZEeajEecGJ9W2hw" value="&quot;choice&quot;">
+          <annotations xmi:id="_H2R9mfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytochoice"/>
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+        <attributes xmi:id="_AFtMFwsZEeajEecGJ9W2hw" value="&quot;join&quot;">
+          <annotations xmi:id="_H2R9m_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojoin"/>
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+        <attributes xmi:id="__2-MhwsYEeajEecGJ9W2hw" value="&quot;deepHistory&quot;">
+          <annotations xmi:id="_H2SkofOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytodeephistory"/>
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-s0tmAsYEeajEecGJ9W2hw" name="A.Selected" incoming="_-s0tnwsYEeajEecGJ9W2hw _-s0toQsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate"/>
+        <attributes xmi:id="_-s0tmQsYEeajEecGJ9W2hw" value="&quot;shallowHistory&quot;">
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+        <attributes xmi:id="__bwQKQsYEeajEecGJ9W2hw" value="&quot;shallowHistory&quot;">
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+        <attributes xmi:id="__wB3CQsYEeajEecGJ9W2hw" value="&quot;shallowHistory&quot;">
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+        <attributes xmi:id="_AR_UmQsZEeajEecGJ9W2hw" value="&quot;shallowHistory&quot;">
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+        <attributes xmi:id="_AV0EqQsZEeajEecGJ9W2hw" value="&quot;shallowHistory&quot;">
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+        <attributes xmi:id="_AFtMGQsZEeajEecGJ9W2hw" value="&quot;shallowHistory&quot;">
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+        <attributes xmi:id="__2-MiQsYEeajEecGJ9W2hw" value="&quot;shallowHistory&quot;">
+          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate/kind"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-s0tmgsYEeajEecGJ9W2hw" name="" outgoing="_-s0tnwsYEeajEecGJ9W2hw _-s0toAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
+      </nodes>
+      <nodes xmi:id="_-s0tmwsYEeajEecGJ9W2hw" name="" outgoing="_-s0toQsYEeajEecGJ9W2hw _-s0togsYEeajEecGJ9W2hw _-s0towsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange"/>
+      </nodes>
+      <nodes xmi:id="_-s0tnAsYEeajEecGJ9W2hw" name="" incoming="_-s0towsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
+        <attributes xmi:id="_-s0tnQsYEeajEecGJ9W2hw" value="&quot;kind&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="__bwQLQsYEeajEecGJ9W2hw" value="&quot;kind&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="__wB3DQsYEeajEecGJ9W2hw" value="&quot;kind&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="_AR_UnQsZEeajEecGJ9W2hw" value="&quot;kind&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="_AV0ErQsZEeajEecGJ9W2hw" value="&quot;kind&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="_AFtMHQsZEeajEecGJ9W2hw" value="&quot;kind&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="__2-MjQsYEeajEecGJ9W2hw" value="&quot;kind&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-s0tngsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_H2R9kPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytofork"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="__bwQLgsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_H2R9kvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoentrypoint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="__wB3DgsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_H2R9lPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoexitpoint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_AR_UngsZEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_H2R9lvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojunction"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_AV0ErgsZEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_H2R9mPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytochoice"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_AFtMHgsZEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_H2R9mvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojoin"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="__2-MjgsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_H2SkoPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytodeephistory"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <edges xmi:id="_-s0tnwsYEeajEecGJ9W2hw" source="_-s0tmgsYEeajEecGJ9W2hw" target="_-s0tmAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
+      </edges>
+      <edges xmi:id="_-s0toAsYEeajEecGJ9W2hw" source="_-s0tmgsYEeajEecGJ9W2hw" target="_-s0tlgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objB"/>
+      </edges>
+      <edges xmi:id="_-s0toQsYEeajEecGJ9W2hw" source="_-s0tmwsYEeajEecGJ9W2hw" target="_-s0tmAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange/objA"/>
+      </edges>
+      <edges xmi:id="_-s0togsYEeajEecGJ9W2hw" source="_-s0tmwsYEeajEecGJ9W2hw" target="_-s0tlgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange/objB"/>
+      </edges>
+      <edges xmi:id="_-s0towsYEeajEecGJ9W2hw" source="_-s0tmwsYEeajEecGJ9W2hw" target="_-s0tnAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange/type"/>
+      </edges>
+    </lhs>
+    <rhs xmi:id="_-s0tpAsYEeajEecGJ9W2hw" name="Rhs">
+      <nodes xmi:id="_-s0tpQsYEeajEecGJ9W2hw" name="B.Selected" incoming="_-s0ttQsYEeajEecGJ9W2hw _-s0ttwsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate"/>
+      </nodes>
+      <nodes xmi:id="_-s0tpgsYEeajEecGJ9W2hw" name="A.Selected" incoming="_-s0ttAsYEeajEecGJ9W2hw _-s0ttgsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Pseudostate"/>
+      </nodes>
+      <nodes xmi:id="_-s0tpwsYEeajEecGJ9W2hw" name="" outgoing="_-s0ttAsYEeajEecGJ9W2hw _-s0ttQsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
+      </nodes>
+      <nodes xmi:id="_-s0tqAsYEeajEecGJ9W2hw" name="" incoming="_-s0tuQsYEeajEecGJ9W2hw __bwQSQsYEeajEecGJ9W2hw __wB3KQsYEeajEecGJ9W2hw _AR_UuQsZEeajEecGJ9W2hw _AV0EyQsZEeajEecGJ9W2hw _AFtMOQsZEeajEecGJ9W2hw __2-MqQsYEeajEecGJ9W2hw" outgoing="_-s0ttgsYEeajEecGJ9W2hw _-s0ttwsYEeajEecGJ9W2hw _-s0tuAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange"/>
+      </nodes>
+      <nodes xmi:id="_-s0tqQsYEeajEecGJ9W2hw" name="" incoming="_-s0tuAsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
+      </nodes>
+      <nodes xmi:id="_-s0tqgsYEeajEecGJ9W2hw" incoming="_-s0tugsYEeajEecGJ9W2hw" outgoing="_-s0tuQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2SkovOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytofork"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_-s0tqwsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_fork&quot;">
+          <annotations xmi:id="_H2SkpvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytofork"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-s0trAsYEeajEecGJ9W2hw" value="&quot;Changes the attribute value of kind_FROM_shallowHistory_TO_fork&quot;">
+          <annotations xmi:id="_H2Skp_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytofork"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-s0trQsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_fork&quot;">
+          <annotations xmi:id="_H2SkqPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytofork"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-s0trgsYEeajEecGJ9W2hw" value="&quot;RR: CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_fork&quot;">
+          <annotations xmi:id="_H2SkqfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytofork"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-s0trwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H2SkqvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytofork"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-s0tsAsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_H2Skq_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytofork"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-s0tsQsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_H2SkrPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytofork"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-s0tsgsYEeajEecGJ9W2hw" value="5">
+          <annotations xmi:id="_H2SkrfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytofork"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-s0tswsYEeajEecGJ9W2hw" name="" outgoing="_-s0tugsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2Sko_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytofork"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="__bwQOgsYEeajEecGJ9W2hw" incoming="__bwQSgsYEeajEecGJ9W2hw" outgoing="__bwQSQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2SkrvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoentrypoint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="__bwQOwsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_entryPoint&quot;">
+          <annotations xmi:id="_H2SksvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoentrypoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__bwQPAsYEeajEecGJ9W2hw" value="&quot;Changes the attribute value of kind_FROM_shallowHistory_TO_entryPoint&quot;">
+          <annotations xmi:id="_H2Sks_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoentrypoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__bwQPQsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_entryPoint&quot;">
+          <annotations xmi:id="_H2SktPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoentrypoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__bwQPgsYEeajEecGJ9W2hw" value="&quot;RR: CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_entryPoint&quot;">
+          <annotations xmi:id="_H2SktfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoentrypoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__bwQPwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H2SktvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoentrypoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__bwQQAsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_H2Skt_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoentrypoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__bwQQQsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_H2SkuPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoentrypoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__bwQQgsYEeajEecGJ9W2hw" value="5">
+          <annotations xmi:id="_H2SkufOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoentrypoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__bwQQwsYEeajEecGJ9W2hw" name="" outgoing="__bwQSgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2Skr_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoentrypoint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="__wB3GgsYEeajEecGJ9W2hw" incoming="__wB3KgsYEeajEecGJ9W2hw" outgoing="__wB3KQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2SkuvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoexitpoint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="__wB3GwsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_exitPoint&quot;">
+          <annotations xmi:id="_H2SkvvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoexitpoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__wB3HAsYEeajEecGJ9W2hw" value="&quot;Changes the attribute value of kind_FROM_shallowHistory_TO_exitPoint&quot;">
+          <annotations xmi:id="_H2Skv_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoexitpoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__wB3HQsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_exitPoint&quot;">
+          <annotations xmi:id="_H2SkwPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoexitpoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__wB3HgsYEeajEecGJ9W2hw" value="&quot;RR: CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_exitPoint&quot;">
+          <annotations xmi:id="_H2SkwfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoexitpoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__wB3HwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H2SkwvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoexitpoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__wB3IAsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_H2Skw_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoexitpoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__wB3IQsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_H2SkxPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoexitpoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__wB3IgsYEeajEecGJ9W2hw" value="5">
+          <annotations xmi:id="_H2SkxfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoexitpoint"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__wB3IwsYEeajEecGJ9W2hw" name="" outgoing="__wB3KgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2Sku_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoexitpoint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_AR_UqgsZEeajEecGJ9W2hw" incoming="_AR_UugsZEeajEecGJ9W2hw" outgoing="_AR_UuQsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2SkxvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojunction"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_AR_UqwsZEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_junction&quot;">
+          <annotations xmi:id="_H2SkyvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojunction"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_AR_UrAsZEeajEecGJ9W2hw" value="&quot;Changes the attribute value of kind_FROM_shallowHistory_TO_junction&quot;">
+          <annotations xmi:id="_H2Sky_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojunction"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_AR_UrQsZEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_junction&quot;">
+          <annotations xmi:id="_H2SkzPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojunction"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_AR_UrgsZEeajEecGJ9W2hw" value="&quot;RR: CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_junction&quot;">
+          <annotations xmi:id="_H2SkzfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojunction"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_AR_UrwsZEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H2SkzvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojunction"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_AR_UsAsZEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_H2Skz_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojunction"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_AR_UsQsZEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_H2Sk0POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojunction"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_AR_UsgsZEeajEecGJ9W2hw" value="5">
+          <annotations xmi:id="_H2Sk0fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojunction"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_AR_UswsZEeajEecGJ9W2hw" name="" outgoing="_AR_UugsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2Skx_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojunction"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_AV0EugsZEeajEecGJ9W2hw" incoming="_AV0EygsZEeajEecGJ9W2hw" outgoing="_AV0EyQsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2Sk0vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytochoice"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_AV0EuwsZEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_choice&quot;">
+          <annotations xmi:id="_H2Sk1vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytochoice"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_AV0EvAsZEeajEecGJ9W2hw" value="&quot;Changes the attribute value of kind_FROM_shallowHistory_TO_choice&quot;">
+          <annotations xmi:id="_H2Sk1_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytochoice"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_AV0EvQsZEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_choice&quot;">
+          <annotations xmi:id="_H2Sk2POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytochoice"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_AV0EvgsZEeajEecGJ9W2hw" value="&quot;RR: CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_choice&quot;">
+          <annotations xmi:id="_H2Sk2fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytochoice"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_AV0EvwsZEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H2Sk2vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytochoice"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_AV0EwAsZEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_H2Sk2_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytochoice"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_AV0EwQsZEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_H2Sk3POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytochoice"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_AV0EwgsZEeajEecGJ9W2hw" value="5">
+          <annotations xmi:id="_H2Sk3fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytochoice"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_AV0EwwsZEeajEecGJ9W2hw" name="" outgoing="_AV0EygsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2Sk0_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytochoice"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_AFtMKgsZEeajEecGJ9W2hw" incoming="_AFtMOgsZEeajEecGJ9W2hw" outgoing="_AFtMOQsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2Sk3vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojoin"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_AFtMKwsZEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_join&quot;">
+          <annotations xmi:id="_H2Sk4vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojoin"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_AFtMLAsZEeajEecGJ9W2hw" value="&quot;Changes the attribute value of kind_FROM_shallowHistory_TO_join&quot;">
+          <annotations xmi:id="_H2Sk4_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojoin"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_AFtMLQsZEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_join&quot;">
+          <annotations xmi:id="_H2Sk5POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojoin"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_AFtMLgsZEeajEecGJ9W2hw" value="&quot;RR: CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_join&quot;">
+          <annotations xmi:id="_H2Sk5fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojoin"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_AFtMLwsZEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H2Sk5vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojoin"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_AFtMMAsZEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_H2Sk5_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojoin"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_AFtMMQsZEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_H2Sk6POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojoin"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_AFtMMgsZEeajEecGJ9W2hw" value="5">
+          <annotations xmi:id="_H2Sk6fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojoin"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_AFtMMwsZEeajEecGJ9W2hw" name="" outgoing="_AFtMOgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2Sk3_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojoin"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="__2-MmgsYEeajEecGJ9W2hw" incoming="__2-MqgsYEeajEecGJ9W2hw" outgoing="__2-MqQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2Sk6vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytodeephistory"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="__2-MmwsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_deepHistory&quot;">
+          <annotations xmi:id="_H2Sk7vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytodeephistory"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__2-MnAsYEeajEecGJ9W2hw" value="&quot;Changes the attribute value of kind_FROM_shallowHistory_TO_deepHistory&quot;">
+          <annotations xmi:id="_H2Sk7_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytodeephistory"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__2-MnQsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_deepHistory&quot;">
+          <annotations xmi:id="_H2Sk8POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytodeephistory"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__2-MngsYEeajEecGJ9W2hw" value="&quot;RR: CHANGE_LITERAL_Pseudostate_kind_FROM_shallowHistory_TO_deepHistory&quot;">
+          <annotations xmi:id="_H2Sk8fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytodeephistory"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__2-MnwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H2Sk8vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytodeephistory"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__2-MoAsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_H2Sk8_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytodeephistory"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__2-MoQsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_H2Sk9POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytodeephistory"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__2-MogsYEeajEecGJ9W2hw" value="5">
+          <annotations xmi:id="_H2Sk9fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytodeephistory"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__2-MowsYEeajEecGJ9W2hw" name="" outgoing="__2-MqgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2Sk6_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytodeephistory"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <edges xmi:id="_-s0ttAsYEeajEecGJ9W2hw" source="_-s0tpwsYEeajEecGJ9W2hw" target="_-s0tpgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
+      </edges>
+      <edges xmi:id="_-s0ttQsYEeajEecGJ9W2hw" source="_-s0tpwsYEeajEecGJ9W2hw" target="_-s0tpQsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objB"/>
+      </edges>
+      <edges xmi:id="_-s0ttgsYEeajEecGJ9W2hw" source="_-s0tqAsYEeajEecGJ9W2hw" target="_-s0tpgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange/objA"/>
+      </edges>
+      <edges xmi:id="_-s0ttwsYEeajEecGJ9W2hw" source="_-s0tqAsYEeajEecGJ9W2hw" target="_-s0tpQsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange/objB"/>
+      </edges>
+      <edges xmi:id="_-s0tuAsYEeajEecGJ9W2hw" source="_-s0tqAsYEeajEecGJ9W2hw" target="_-s0tqQsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange/type"/>
+      </edges>
+      <edges xmi:id="_-s0tuQsYEeajEecGJ9W2hw" source="_-s0tqgsYEeajEecGJ9W2hw" target="_-s0tqAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2SkpPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytofork"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-s0tugsYEeajEecGJ9W2hw" source="_-s0tswsYEeajEecGJ9W2hw" target="_-s0tqgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2SkpfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytofork"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="__bwQSQsYEeajEecGJ9W2hw" source="__bwQOgsYEeajEecGJ9W2hw" target="_-s0tqAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2SksPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoentrypoint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__bwQSgsYEeajEecGJ9W2hw" source="__bwQQwsYEeajEecGJ9W2hw" target="__bwQOgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2SksfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoentrypoint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="__wB3KQsYEeajEecGJ9W2hw" source="__wB3GgsYEeajEecGJ9W2hw" target="_-s0tqAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2SkvPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoexitpoint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__wB3KgsYEeajEecGJ9W2hw" source="__wB3IwsYEeajEecGJ9W2hw" target="__wB3GgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2SkvfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytoexitpoint"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="_AR_UuQsZEeajEecGJ9W2hw" source="_AR_UqgsZEeajEecGJ9W2hw" target="_-s0tqAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2SkyPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojunction"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_AR_UugsZEeajEecGJ9W2hw" source="_AR_UswsZEeajEecGJ9W2hw" target="_AR_UqgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2SkyfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojunction"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="_AV0EyQsZEeajEecGJ9W2hw" source="_AV0EugsZEeajEecGJ9W2hw" target="_-s0tqAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2Sk1POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytochoice"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_AV0EygsZEeajEecGJ9W2hw" source="_AV0EwwsZEeajEecGJ9W2hw" target="_AV0EugsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2Sk1fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytochoice"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="_AFtMOQsZEeajEecGJ9W2hw" source="_AFtMKgsZEeajEecGJ9W2hw" target="_-s0tqAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2Sk4POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojoin"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_AFtMOgsZEeajEecGJ9W2hw" source="_AFtMMwsZEeajEecGJ9W2hw" target="_AFtMKgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2Sk4fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytojoin"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="__2-MqQsYEeajEecGJ9W2hw" source="__2-MmgsYEeajEecGJ9W2hw" target="_-s0tqAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2Sk7POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytodeephistory"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__2-MqgsYEeajEecGJ9W2hw" source="__2-MowsYEeajEecGJ9W2hw" target="__2-MmgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H2Sk7fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangepseudostatekindfromshallowhistorytodeephistory"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+    </rhs>
+    <mappings xmi:id="_-s0tuwsYEeajEecGJ9W2hw" origin="_-s0tlgsYEeajEecGJ9W2hw" image="_-s0tpQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-s0tvAsYEeajEecGJ9W2hw" origin="_-s0tmAsYEeajEecGJ9W2hw" image="_-s0tpgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-s0tvQsYEeajEecGJ9W2hw" origin="_-s0tmgsYEeajEecGJ9W2hw" image="_-s0tpwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-s0tvgsYEeajEecGJ9W2hw" origin="_-s0tmwsYEeajEecGJ9W2hw" image="_-s0tqAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-s0tvwsYEeajEecGJ9W2hw" origin="_-s0tnAsYEeajEecGJ9W2hw" image="_-s0tqQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-s0twAsYEeajEecGJ9W2hw" origin="_-s0tngsYEeajEecGJ9W2hw" image="_-s0tswsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H2fY8POJEeqKPbhZweJEtg" origin="__bwQLgsYEeajEecGJ9W2hw" image="__bwQQwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H2fY8fOJEeqKPbhZweJEtg" origin="__wB3DgsYEeajEecGJ9W2hw" image="__wB3IwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H2fY8vOJEeqKPbhZweJEtg" origin="_AR_UngsZEeajEecGJ9W2hw" image="_AR_UswsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H2fY8_OJEeqKPbhZweJEtg" origin="_AV0ErgsZEeajEecGJ9W2hw" image="_AV0EwwsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H2fY9POJEeqKPbhZweJEtg" origin="_AFtMHgsZEeajEecGJ9W2hw" image="_AFtMMwsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H2fY9fOJEeqKPbhZweJEtg" origin="__2-MjgsYEeajEecGJ9W2hw" image="__2-MowsYEeajEecGJ9W2hw"/>
+  </units>
+</henshin:Module>

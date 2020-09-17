@@ -56,8 +56,8 @@ public class HenshinGraphFactory {
 		List<Node> result = new ArrayList<Node>();
 		result.addAll(rule.getLhs().getNodes());
 		result.addAll(rule.getRhs().getNodes());
-		for (NestedCondition cond : rule.getLhs().getNestedConditions())
-			result.addAll(cond.getConclusion().getNodes());
+//		for (NestedCondition cond : rule.getLhs().getNestedConditions())
+//			result.addAll(cond.getConclusion().getNodes());
 		return result;
 	}
 
@@ -65,8 +65,8 @@ public class HenshinGraphFactory {
 		List<Edge> result = new ArrayList<Edge>();
 		result.addAll(rule.getLhs().getEdges());
 		result.addAll(rule.getRhs().getEdges());
-		for (NestedCondition cond : rule.getLhs().getNestedConditions())
-			result.addAll(cond.getConclusion().getEdges());
+//		for (NestedCondition cond : rule.getLhs().getNestedConditions())
+//			result.addAll(cond.getConclusion().getEdges());
 		return result;
 	}
 

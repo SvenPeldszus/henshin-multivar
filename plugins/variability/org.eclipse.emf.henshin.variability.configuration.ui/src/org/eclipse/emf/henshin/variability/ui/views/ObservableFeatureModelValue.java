@@ -87,7 +87,7 @@ public class ObservableFeatureModelValue<T> implements IObservableValue<String>{
 	public String getValue() {
 		Rule rule = getTargetVariabilityRule();
 		if (rule != null) {
-			return VariabilityHelper.INSTANCE.getFeatureModel(rule);			
+			return VariabilityHelper.INSTANCE.getFeatureConstraint(rule);			
 		}
 		return value.getValue();
 	}
@@ -97,7 +97,7 @@ public class ObservableFeatureModelValue<T> implements IObservableValue<String>{
 		shouldUpdate = false;
 		Rule rule = getTargetVariabilityRule();
 		if (rule != null) {
-			VariabilityTransactionHelper.INSTANCE.setFeatureModel(rule, value);
+			VariabilityTransactionHelper.INSTANCE.setFeatureConstraint(rule, value);
 		}
 		shouldUpdate = true;
 	}

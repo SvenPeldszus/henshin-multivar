@@ -1,8 +1,12 @@
-<henshin:Module xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmi:id="_V4Vn8bRVEeexAvqQ_kM_vQ">
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_H63ip_OJEeqKPbhZweJEtg">
   <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
   <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
-  <units xsi:type="henshin:Rule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="_RsAxdLRVEeexAvqQ_kM_vQ" name="rr:changeMessageMessageSort_FROM_DeleteMessage_TO_createMessage,rr:changeMessageMessageSort_FROM_SynchCall_TO_asynchCall,rr:changeMessageMessageSort_FROM_CreateMessage_TO_asynchCall,rr:changeMessageMessageSort_FROM_Reply_TO_deleteMessage,rr:changeMessageMessageSort_FROM_DeleteMessage_TO_asynchCall,rr:changeMessageMessageSort_FROM_Reply_TO_createMessage,rr:changeMessageMessageSort_FROM_SynchCall_TO_createMessage,rr:changeMessageMessageSort_FROM_SynchCall_TO_deleteMessage,rr:changeMessageMessageSort_FROM_CreateMessage_TO_synchCall,rr:changeMessageMessageSort_FROM_CreateMessage_TO_reply,rr:changeMessageMessageSort_FROM_SynchCall_TO_reply,rr:changeMessageMessageSort_FROM_Reply_TO_asynchCall,rr:changeMessageMessageSort_FROM_CreateMessage_TO_deleteMessage,rr:changeMessageMessageSort_FROM_DeleteMessage_TO_synchCall,rr:changeMessageMessageSort_FROM_Reply_TO_synchCall,rr:changeMessageMessageSort_FROM_DeleteMessage_TO_reply">
-    <annotations xmi:id="_V4Vn8LRVEeexAvqQ_kM_vQ" key="originalRules" value="A=Rule rr:changeMessageMessageSort_FROM_DeleteMessage_TO_createMessage(Selected:Message, &quot;deleteMessage&quot;:MessageSort, &quot;createMessage&quot;:MessageSort, &quot;synchCall&quot;:MessageSort, &quot;asynchCall&quot;:MessageSort, &quot;reply&quot;:MessageSort), B=Rule rr:changeMessageMessageSort_FROM_SynchCall_TO_asynchCall(Selected:Message, &quot;synchCall&quot;:MessageSort, &quot;asynchCall&quot;:MessageSort), C=Rule rr:changeMessageMessageSort_FROM_CreateMessage_TO_asynchCall(Selected:Message, &quot;createMessage&quot;:MessageSort, &quot;asynchCall&quot;:MessageSort), D=Rule rr:changeMessageMessageSort_FROM_Reply_TO_deleteMessage(Selected:Message, &quot;reply&quot;:MessageSort, &quot;deleteMessage&quot;:MessageSort), E=Rule rr:changeMessageMessageSort_FROM_DeleteMessage_TO_asynchCall(Selected:Message, &quot;deleteMessage&quot;:MessageSort, &quot;asynchCall&quot;:MessageSort), F=Rule rr:changeMessageMessageSort_FROM_Reply_TO_createMessage(Selected:Message, &quot;reply&quot;:MessageSort, &quot;createMessage&quot;:MessageSort), G=Rule rr:changeMessageMessageSort_FROM_SynchCall_TO_createMessage(Selected:Message, &quot;synchCall&quot;:MessageSort, &quot;createMessage&quot;:MessageSort), H=Rule rr:changeMessageMessageSort_FROM_SynchCall_TO_deleteMessage(Selected:Message, &quot;synchCall&quot;:MessageSort, &quot;deleteMessage&quot;:MessageSort), I=Rule rr:changeMessageMessageSort_FROM_CreateMessage_TO_synchCall(Selected:Message, &quot;createMessage&quot;:MessageSort, &quot;synchCall&quot;:MessageSort), J=Rule rr:changeMessageMessageSort_FROM_CreateMessage_TO_reply(Selected:Message, &quot;createMessage&quot;:MessageSort, &quot;reply&quot;:MessageSort), K=Rule rr:changeMessageMessageSort_FROM_SynchCall_TO_reply(Selected:Message, &quot;synchCall&quot;:MessageSort, &quot;reply&quot;:MessageSort), L=Rule rr:changeMessageMessageSort_FROM_Reply_TO_asynchCall(Selected:Message, &quot;reply&quot;:MessageSort, &quot;asynchCall&quot;:MessageSort), M=Rule rr:changeMessageMessageSort_FROM_CreateMessage_TO_deleteMessage(Selected:Message, &quot;createMessage&quot;:MessageSort, &quot;deleteMessage&quot;:MessageSort), N=Rule rr:changeMessageMessageSort_FROM_DeleteMessage_TO_synchCall(Selected:Message, &quot;deleteMessage&quot;:MessageSort, &quot;synchCall&quot;:MessageSort), O=Rule rr:changeMessageMessageSort_FROM_Reply_TO_synchCall(Selected:Message, &quot;reply&quot;:MessageSort, &quot;synchCall&quot;:MessageSort), P=Rule rr:changeMessageMessageSort_FROM_DeleteMessage_TO_reply(Selected:Message, &quot;deleteMessage&quot;:MessageSort, &quot;reply&quot;:MessageSort)"/>
+  <units xsi:type="henshin:Rule" xmi:id="_AAfU4QsZEeajEecGJ9W2hw" name="rr:changeMessageMessageSort_FROM_DeleteMessage_TO_createMessage,rr:changeMessageMessageSort_FROM_DeleteMessage_TO_asynchCall,rr:changeMessageMessageSort_FROM_DeleteMessage_TO_synchCall,rr:changeMessageMessageSort_FROM_DeleteMessage_TO_reply" description="Recognize: Changes the attribute value of messageSort_FROM_deleteMessage_TO_createMessage">
+    <annotations xmi:id="_H63io_OJEeqKPbhZweJEtg" key="features" value="rrchangemessagemessagesortfromdeletemessagetosynchcall, rrchangemessagemessagesortfromdeletemessagetoreply, rrchangemessagemessagesortfromdeletemessagetoasynchcall, rrchangemessagemessagesortfromdeletemessagetocreatemessage"/>
+    <annotations xmi:id="_H63ipPOJEeqKPbhZweJEtg" key="featureConstraintIsCNF" value="true"/>
+    <annotations xmi:id="_H63ipfOJEeqKPbhZweJEtg" key="featureConstraint" value="((rrchangemessagemessagesortfromdeletemessagetocreatemessage) | (rrchangemessagemessagesortfromdeletemessagetoasynchcall) | (rrchangemessagemessagesortfromdeletemessagetosynchcall) | (rrchangemessagemessagesortfromdeletemessagetoreply)) &amp; ( ~(rrchangemessagemessagesortfromdeletemessagetocreatemessage) | ~(rrchangemessagemessagesortfromdeletemessagetoasynchcall)) &amp; ( ~(rrchangemessagemessagesortfromdeletemessagetocreatemessage) | ~(rrchangemessagemessagesortfromdeletemessagetosynchcall)) &amp; ( ~(rrchangemessagemessagesortfromdeletemessagetocreatemessage) | ~(rrchangemessagemessagesortfromdeletemessagetoreply)) &amp; ( ~(rrchangemessagemessagesortfromdeletemessagetoasynchcall) | ~(rrchangemessagemessagesortfromdeletemessagetosynchcall)) &amp; ( ~(rrchangemessagemessagesortfromdeletemessagetoasynchcall) | ~(rrchangemessagemessagesortfromdeletemessagetoreply)) &amp; ( ~(rrchangemessagemessagesortfromdeletemessagetosynchcall) | ~(rrchangemessagemessagesortfromdeletemessagetoreply))"/>
+    <annotations xmi:id="_H63ipvOJEeqKPbhZweJEtg" key="originalRules" value="A=Rule rr:changeMessageMessageSort_FROM_DeleteMessage_TO_createMessage(Selected:Message, &quot;deleteMessage&quot;:MessageSort, &quot;createMessage&quot;, &quot;asynchCall&quot;:MessageSort, &quot;synchCall&quot;:MessageSort, &quot;reply&quot;:MessageSort), B=Rule rr:changeMessageMessageSort_FROM_DeleteMessage_TO_asynchCall(Selected:Message, &quot;deleteMessage&quot;:MessageSort, &quot;asynchCall&quot;:MessageSort), C=Rule rr:changeMessageMessageSort_FROM_DeleteMessage_TO_synchCall(Selected:Message, &quot;deleteMessage&quot;:MessageSort, &quot;synchCall&quot;:MessageSort), D=Rule rr:changeMessageMessageSort_FROM_DeleteMessage_TO_reply(Selected:Message, &quot;deleteMessage&quot;:MessageSort, &quot;reply&quot;:MessageSort)"/>
     <parameters xmi:id="_AAfU4gsZEeajEecGJ9W2hw" name="Selected">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Message"/>
     </parameters>
@@ -12,148 +16,48 @@
     <parameters xmi:id="_AAfU5AsZEeajEecGJ9W2hw" name="&quot;createMessage&quot;">
       <type xsi:type="ecore:EEnum" href="http://www.eclipse.org/uml2/5.0.0/UML#//MessageSort"/>
     </parameters>
-    <parameters xmi:id="_V4FJQLRVEeexAvqQ_kM_vQ" name="&quot;synchCall&quot;">
+    <parameters xmi:id="_H6yDEPOJEeqKPbhZweJEtg" name="&quot;asynchCall&quot;">
       <type xsi:type="ecore:EEnum" href="http://www.eclipse.org/uml2/5.0.0/UML#//MessageSort"/>
     </parameters>
-    <parameters xmi:id="_V4FwULRVEeexAvqQ_kM_vQ" name="&quot;asynchCall&quot;">
+    <parameters xmi:id="_H6zRMPOJEeqKPbhZweJEtg" name="&quot;synchCall&quot;">
       <type xsi:type="ecore:EEnum" href="http://www.eclipse.org/uml2/5.0.0/UML#//MessageSort"/>
     </parameters>
-    <parameters xmi:id="_V4G-cLRVEeexAvqQ_kM_vQ" name="&quot;reply&quot;">
+    <parameters xmi:id="_H60fUPOJEeqKPbhZweJEtg" name="&quot;reply&quot;">
       <type xsi:type="ecore:EEnum" href="http://www.eclipse.org/uml2/5.0.0/UML#//MessageSort"/>
     </parameters>
     <lhs xmi:id="_AAfU5QsZEeajEecGJ9W2hw" name="Lhs">
       <nodes xmi:id="_AAfU5gsZEeajEecGJ9W2hw" name="B.Selected" incoming="_AAfU8AsZEeajEecGJ9W2hw _AAfU8gsZEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message"/>
         <attributes xmi:id="_AAfU5wsZEeajEecGJ9W2hw" value="&quot;createMessage&quot;">
+          <annotations xmi:id="_H6wN4fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetocreatemessage"/>
           <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="A"/>
-        </attributes>
-        <attributes xmi:id="_936e1wsYEeajEecGJ9W2hw" value="&quot;asynchCall&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="B"/>
-        </attributes>
-        <attributes xmi:id="_-m655wsYEeajEecGJ9W2hw" value="&quot;asynchCall&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="C"/>
-        </attributes>
-        <attributes xmi:id="__UUydwsYEeajEecGJ9W2hw" value="&quot;deleteMessage&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="D"/>
         </attributes>
         <attributes xmi:id="_-lLNdwsYEeajEecGJ9W2hw" value="&quot;asynchCall&quot;">
+          <annotations xmi:id="_H6wN4_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoasynchcall"/>
           <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="E"/>
-        </attributes>
-        <attributes xmi:id="__a8-5wsYEeajEecGJ9W2hw" value="&quot;createMessage&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="F"/>
-        </attributes>
-        <attributes xmi:id="_-gRfVwsYEeajEecGJ9W2hw" value="&quot;createMessage&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="G"/>
-        </attributes>
-        <attributes xmi:id="__irXhwsYEeajEecGJ9W2hw" value="&quot;deleteMessage&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="H"/>
-        </attributes>
-        <attributes xmi:id="_-OADlwsYEeajEecGJ9W2hw" value="&quot;synchCall&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="I"/>
-        </attributes>
-        <attributes xmi:id="__GGwRwsYEeajEecGJ9W2hw" value="&quot;reply&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="J"/>
-        </attributes>
-        <attributes xmi:id="_-b9ABwsYEeajEecGJ9W2hw" value="&quot;reply&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="K"/>
-        </attributes>
-        <attributes xmi:id="_-kt6dwsYEeajEecGJ9W2hw" value="&quot;asynchCall&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="L"/>
-        </attributes>
-        <attributes xmi:id="_ADxSZwsZEeajEecGJ9W2hw" value="&quot;deleteMessage&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="M"/>
         </attributes>
         <attributes xmi:id="_96zaxwsYEeajEecGJ9W2hw" value="&quot;synchCall&quot;">
+          <annotations xmi:id="_H6wN5fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetosynchcall"/>
           <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="N"/>
-        </attributes>
-        <attributes xmi:id="_-pQcNwsYEeajEecGJ9W2hw" value="&quot;synchCall&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="O"/>
         </attributes>
         <attributes xmi:id="__x6tZwsYEeajEecGJ9W2hw" value="&quot;reply&quot;">
+          <annotations xmi:id="_H6wN5_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoreply"/>
           <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="P"/>
         </attributes>
       </nodes>
       <nodes xmi:id="_AAfU6AsZEeajEecGJ9W2hw" name="A.Selected" incoming="_AAfU7wsZEeajEecGJ9W2hw _AAfU8QsZEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message"/>
         <attributes xmi:id="_AAfU6QsZEeajEecGJ9W2hw" value="&quot;deleteMessage&quot;">
           <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="A"/>
-        </attributes>
-        <attributes xmi:id="_936e2QsYEeajEecGJ9W2hw" value="&quot;synchCall&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="B"/>
-        </attributes>
-        <attributes xmi:id="_-m656QsYEeajEecGJ9W2hw" value="&quot;createMessage&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="C"/>
-        </attributes>
-        <attributes xmi:id="__UUyeQsYEeajEecGJ9W2hw" value="&quot;reply&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="D"/>
         </attributes>
         <attributes xmi:id="_-lLNeQsYEeajEecGJ9W2hw" value="&quot;deleteMessage&quot;">
           <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="E"/>
-        </attributes>
-        <attributes xmi:id="__a8-6QsYEeajEecGJ9W2hw" value="&quot;reply&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="F"/>
-        </attributes>
-        <attributes xmi:id="_-gRfWQsYEeajEecGJ9W2hw" value="&quot;synchCall&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="G"/>
-        </attributes>
-        <attributes xmi:id="__irXiQsYEeajEecGJ9W2hw" value="&quot;synchCall&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="H"/>
-        </attributes>
-        <attributes xmi:id="_-OADmQsYEeajEecGJ9W2hw" value="&quot;createMessage&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="I"/>
-        </attributes>
-        <attributes xmi:id="__GGwSQsYEeajEecGJ9W2hw" value="&quot;createMessage&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="J"/>
-        </attributes>
-        <attributes xmi:id="_-b9ACQsYEeajEecGJ9W2hw" value="&quot;synchCall&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="K"/>
-        </attributes>
-        <attributes xmi:id="_-kt6eQsYEeajEecGJ9W2hw" value="&quot;reply&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="L"/>
-        </attributes>
-        <attributes xmi:id="_ADxSaQsZEeajEecGJ9W2hw" value="&quot;createMessage&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="M"/>
         </attributes>
         <attributes xmi:id="_96zayQsYEeajEecGJ9W2hw" value="&quot;deleteMessage&quot;">
           <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="N"/>
-        </attributes>
-        <attributes xmi:id="_-pQcOQsYEeajEecGJ9W2hw" value="&quot;reply&quot;">
-          <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="O"/>
         </attributes>
         <attributes xmi:id="__x6taQsYEeajEecGJ9W2hw" value="&quot;deleteMessage&quot;">
           <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/messageSort"/>
-          <annotations key="presenceCondition" value="P"/>
         </attributes>
       </nodes>
       <nodes xmi:id="_AAfU6gsZEeajEecGJ9W2hw" name="" outgoing="_AAfU7wsZEeajEecGJ9W2hw _AAfU8AsZEeajEecGJ9W2hw">
@@ -167,46 +71,10 @@
         <attributes xmi:id="_AAfU7QsZEeajEecGJ9W2hw" value="&quot;messageSort&quot;">
           <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
         </attributes>
-        <attributes xmi:id="_936e3QsYEeajEecGJ9W2hw" value="&quot;messageSort&quot;">
-          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-        </attributes>
-        <attributes xmi:id="_-m657QsYEeajEecGJ9W2hw" value="&quot;messageSort&quot;">
-          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-        </attributes>
-        <attributes xmi:id="__UUyfQsYEeajEecGJ9W2hw" value="&quot;messageSort&quot;">
-          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-        </attributes>
         <attributes xmi:id="_-lLNfQsYEeajEecGJ9W2hw" value="&quot;messageSort&quot;">
           <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
         </attributes>
-        <attributes xmi:id="__a8-7QsYEeajEecGJ9W2hw" value="&quot;messageSort&quot;">
-          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-        </attributes>
-        <attributes xmi:id="_-gRfXQsYEeajEecGJ9W2hw" value="&quot;messageSort&quot;">
-          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-        </attributes>
-        <attributes xmi:id="__irXjQsYEeajEecGJ9W2hw" value="&quot;messageSort&quot;">
-          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-        </attributes>
-        <attributes xmi:id="_-OADnQsYEeajEecGJ9W2hw" value="&quot;messageSort&quot;">
-          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-        </attributes>
-        <attributes xmi:id="__GGwTQsYEeajEecGJ9W2hw" value="&quot;messageSort&quot;">
-          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-        </attributes>
-        <attributes xmi:id="_-b9ADQsYEeajEecGJ9W2hw" value="&quot;messageSort&quot;">
-          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-        </attributes>
-        <attributes xmi:id="_-kt6fQsYEeajEecGJ9W2hw" value="&quot;messageSort&quot;">
-          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-        </attributes>
-        <attributes xmi:id="_ADxSbQsZEeajEecGJ9W2hw" value="&quot;messageSort&quot;">
-          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-        </attributes>
         <attributes xmi:id="_96zazQsYEeajEecGJ9W2hw" value="&quot;messageSort&quot;">
-          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-        </attributes>
-        <attributes xmi:id="_-pQcPQsYEeajEecGJ9W2hw" value="&quot;messageSort&quot;">
           <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
         </attributes>
         <attributes xmi:id="__x6tbQsYEeajEecGJ9W2hw" value="&quot;messageSort&quot;">
@@ -214,68 +82,20 @@
         </attributes>
       </nodes>
       <nodes xmi:id="_AAfU7gsZEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_H6wN4POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetocreatemessage"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="A"/>
-      </nodes>
-      <nodes xmi:id="_936e3gsYEeajEecGJ9W2hw" name="">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="B"/>
-      </nodes>
-      <nodes xmi:id="_-m657gsYEeajEecGJ9W2hw" name="">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="C"/>
-      </nodes>
-      <nodes xmi:id="__UUyfgsYEeajEecGJ9W2hw" name="">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="D"/>
       </nodes>
       <nodes xmi:id="_-lLNfgsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_H6wN4vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoasynchcall"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="E"/>
-      </nodes>
-      <nodes xmi:id="__a8-7gsYEeajEecGJ9W2hw" name="">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="F"/>
-      </nodes>
-      <nodes xmi:id="_-gRfXgsYEeajEecGJ9W2hw" name="">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="G"/>
-      </nodes>
-      <nodes xmi:id="__irXjgsYEeajEecGJ9W2hw" name="">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="H"/>
-      </nodes>
-      <nodes xmi:id="_-OADngsYEeajEecGJ9W2hw" name="">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="I"/>
-      </nodes>
-      <nodes xmi:id="__GGwTgsYEeajEecGJ9W2hw" name="">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="J"/>
-      </nodes>
-      <nodes xmi:id="_-b9ADgsYEeajEecGJ9W2hw" name="">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="K"/>
-      </nodes>
-      <nodes xmi:id="_-kt6fgsYEeajEecGJ9W2hw" name="">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="L"/>
-      </nodes>
-      <nodes xmi:id="_ADxSbgsZEeajEecGJ9W2hw" name="">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="M"/>
       </nodes>
       <nodes xmi:id="_96zazgsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_H6wN5POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetosynchcall"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="N"/>
-      </nodes>
-      <nodes xmi:id="_-pQcPgsYEeajEecGJ9W2hw" name="">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="O"/>
       </nodes>
       <nodes xmi:id="__x6tbgsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_H6wN5vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoreply"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="P"/>
       </nodes>
       <edges xmi:id="_AAfU7wsZEeajEecGJ9W2hw" source="_AAfU6gsZEeajEecGJ9W2hw" target="_AAfU6AsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
@@ -303,139 +123,171 @@
       <nodes xmi:id="_AAfU9wsZEeajEecGJ9W2hw" name="" outgoing="_AAfVBAsZEeajEecGJ9W2hw _AAfVBQsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
       </nodes>
-      <nodes xmi:id="_AAfU-AsZEeajEecGJ9W2hw" name="" incoming="_AAfVCQsZEeajEecGJ9W2hw _936e-QsYEeajEecGJ9W2hw _-m66CQsYEeajEecGJ9W2hw __UUymQsYEeajEecGJ9W2hw _-lLNmQsYEeajEecGJ9W2hw __a8_CQsYEeajEecGJ9W2hw _-gRfeQsYEeajEecGJ9W2hw __irXqQsYEeajEecGJ9W2hw _-OADuQsYEeajEecGJ9W2hw __GGwaQsYEeajEecGJ9W2hw _-b9AKQsYEeajEecGJ9W2hw _-kt6mQsYEeajEecGJ9W2hw _ADxSiQsZEeajEecGJ9W2hw _96za6QsYEeajEecGJ9W2hw _-pQcWQsYEeajEecGJ9W2hw __x6tiQsYEeajEecGJ9W2hw" outgoing="_AAfVBgsZEeajEecGJ9W2hw _AAfVBwsZEeajEecGJ9W2hw _AAfVCAsZEeajEecGJ9W2hw">
+      <nodes xmi:id="_AAfU-AsZEeajEecGJ9W2hw" name="" incoming="_AAfVCQsZEeajEecGJ9W2hw _-lLNmQsYEeajEecGJ9W2hw _96za6QsYEeajEecGJ9W2hw __x6tiQsYEeajEecGJ9W2hw" outgoing="_AAfVBgsZEeajEecGJ9W2hw _AAfVBwsZEeajEecGJ9W2hw _AAfVCAsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange"/>
       </nodes>
       <nodes xmi:id="_AAfU-QsZEeajEecGJ9W2hw" name="" incoming="_AAfVCAsZEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
       </nodes>
       <nodes xmi:id="_AAfU-gsZEeajEecGJ9W2hw" incoming="_AAfVCgsZEeajEecGJ9W2hw" outgoing="_AAfVCQsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H6wN6POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetocreatemessage"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="A"/>
+        <attributes xmi:id="_AAfU-wsZEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Message_messageSort_FROM_deleteMessage_TO_createMessage&quot;">
+          <annotations xmi:id="_H6wN7POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetocreatemessage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_AAfU_AsZEeajEecGJ9W2hw" value="&quot;Changes the attribute value of messageSort_FROM_deleteMessage_TO_createMessage&quot;">
+          <annotations xmi:id="_H6wN7fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetocreatemessage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_AAfU_QsZEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Message_messageSort_FROM_deleteMessage_TO_createMessage&quot;">
+          <annotations xmi:id="_H6wN7vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetocreatemessage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_AAfU_gsZEeajEecGJ9W2hw" value="&quot;RR: CHANGE_LITERAL_Message_messageSort_FROM_deleteMessage_TO_createMessage&quot;">
+          <annotations xmi:id="_H6wN7_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetocreatemessage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_AAfU_wsZEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H6wN8POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetocreatemessage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_AAfVAAsZEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_H6wN8fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetocreatemessage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_AAfVAQsZEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_H6wN8vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetocreatemessage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_AAfVAgsZEeajEecGJ9W2hw" value="4">
+          <annotations xmi:id="_H6wN8_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetocreatemessage"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="_AAfVAwsZEeajEecGJ9W2hw" name="" outgoing="_AAfVCgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H6wN6fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetocreatemessage"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="A"/>
-      </nodes>
-      <nodes xmi:id="_936e6gsYEeajEecGJ9W2hw" incoming="_936e-gsYEeajEecGJ9W2hw" outgoing="_936e-QsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="B"/>
-      </nodes>
-      <nodes xmi:id="_936e8wsYEeajEecGJ9W2hw" name="" outgoing="_936e-gsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="B"/>
-      </nodes>
-      <nodes xmi:id="_-m65-gsYEeajEecGJ9W2hw" incoming="_-m66CgsYEeajEecGJ9W2hw" outgoing="_-m66CQsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="C"/>
-      </nodes>
-      <nodes xmi:id="_-m66AwsYEeajEecGJ9W2hw" name="" outgoing="_-m66CgsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="C"/>
-      </nodes>
-      <nodes xmi:id="__UUyigsYEeajEecGJ9W2hw" incoming="__UUymgsYEeajEecGJ9W2hw" outgoing="__UUymQsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="D"/>
-      </nodes>
-      <nodes xmi:id="__UUykwsYEeajEecGJ9W2hw" name="" outgoing="__UUymgsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="D"/>
       </nodes>
       <nodes xmi:id="_-lLNigsYEeajEecGJ9W2hw" incoming="_-lLNmgsYEeajEecGJ9W2hw" outgoing="_-lLNmQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H6wN9POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoasynchcall"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="E"/>
+        <attributes xmi:id="_-lLNiwsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Message_messageSort_FROM_deleteMessage_TO_asynchCall&quot;">
+          <annotations xmi:id="_H6wN-POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoasynchcall"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-lLNjAsYEeajEecGJ9W2hw" value="&quot;Changes the attribute value of messageSort_FROM_deleteMessage_TO_asynchCall&quot;">
+          <annotations xmi:id="_H6wN-fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoasynchcall"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-lLNjQsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Message_messageSort_FROM_deleteMessage_TO_asynchCall&quot;">
+          <annotations xmi:id="_H6wN-vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoasynchcall"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-lLNjgsYEeajEecGJ9W2hw" value="&quot;RR: CHANGE_LITERAL_Message_messageSort_FROM_deleteMessage_TO_asynchCall&quot;">
+          <annotations xmi:id="_H6wN-_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoasynchcall"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-lLNjwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H6wN_POJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoasynchcall"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-lLNkAsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_H6wN_fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoasynchcall"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-lLNkQsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_H6wN_vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoasynchcall"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-lLNkgsYEeajEecGJ9W2hw" value="4">
+          <annotations xmi:id="_H6wN__OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoasynchcall"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="_-lLNkwsYEeajEecGJ9W2hw" name="" outgoing="_-lLNmgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H6wN9fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoasynchcall"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="E"/>
-      </nodes>
-      <nodes xmi:id="__a8--gsYEeajEecGJ9W2hw" incoming="__a8_CgsYEeajEecGJ9W2hw" outgoing="__a8_CQsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="F"/>
-      </nodes>
-      <nodes xmi:id="__a8_AwsYEeajEecGJ9W2hw" name="" outgoing="__a8_CgsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="F"/>
-      </nodes>
-      <nodes xmi:id="_-gRfagsYEeajEecGJ9W2hw" incoming="_-gRfegsYEeajEecGJ9W2hw" outgoing="_-gRfeQsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="G"/>
-      </nodes>
-      <nodes xmi:id="_-gRfcwsYEeajEecGJ9W2hw" name="" outgoing="_-gRfegsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="G"/>
-      </nodes>
-      <nodes xmi:id="__irXmgsYEeajEecGJ9W2hw" incoming="__irXqgsYEeajEecGJ9W2hw" outgoing="__irXqQsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="H"/>
-      </nodes>
-      <nodes xmi:id="__irXowsYEeajEecGJ9W2hw" name="" outgoing="__irXqgsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="H"/>
-      </nodes>
-      <nodes xmi:id="_-OADqgsYEeajEecGJ9W2hw" incoming="_-OADugsYEeajEecGJ9W2hw" outgoing="_-OADuQsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="I"/>
-      </nodes>
-      <nodes xmi:id="_-OADswsYEeajEecGJ9W2hw" name="" outgoing="_-OADugsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="I"/>
-      </nodes>
-      <nodes xmi:id="__GGwWgsYEeajEecGJ9W2hw" incoming="__GGwagsYEeajEecGJ9W2hw" outgoing="__GGwaQsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="J"/>
-      </nodes>
-      <nodes xmi:id="__GGwYwsYEeajEecGJ9W2hw" name="" outgoing="__GGwagsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="J"/>
-      </nodes>
-      <nodes xmi:id="_-b9AGgsYEeajEecGJ9W2hw" incoming="_-b9AKgsYEeajEecGJ9W2hw" outgoing="_-b9AKQsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="K"/>
-      </nodes>
-      <nodes xmi:id="_-b9AIwsYEeajEecGJ9W2hw" name="" outgoing="_-b9AKgsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="K"/>
-      </nodes>
-      <nodes xmi:id="_-kt6igsYEeajEecGJ9W2hw" incoming="_-kt6mgsYEeajEecGJ9W2hw" outgoing="_-kt6mQsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="L"/>
-      </nodes>
-      <nodes xmi:id="_-kt6kwsYEeajEecGJ9W2hw" name="" outgoing="_-kt6mgsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="L"/>
-      </nodes>
-      <nodes xmi:id="_ADxSegsZEeajEecGJ9W2hw" incoming="_ADxSigsZEeajEecGJ9W2hw" outgoing="_ADxSiQsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="M"/>
-      </nodes>
-      <nodes xmi:id="_ADxSgwsZEeajEecGJ9W2hw" name="" outgoing="_ADxSigsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="M"/>
       </nodes>
       <nodes xmi:id="_96za2gsYEeajEecGJ9W2hw" incoming="_96za6gsYEeajEecGJ9W2hw" outgoing="_96za6QsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H6wOAPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetosynchcall"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="N"/>
+        <attributes xmi:id="_96za2wsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Message_messageSort_FROM_deleteMessage_TO_synchCall&quot;">
+          <annotations xmi:id="_H6wOBPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetosynchcall"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_96za3AsYEeajEecGJ9W2hw" value="&quot;Changes the attribute value of messageSort_FROM_deleteMessage_TO_synchCall&quot;">
+          <annotations xmi:id="_H6wOBfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetosynchcall"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_96za3QsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Message_messageSort_FROM_deleteMessage_TO_synchCall&quot;">
+          <annotations xmi:id="_H6wOBvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetosynchcall"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_96za3gsYEeajEecGJ9W2hw" value="&quot;RR: CHANGE_LITERAL_Message_messageSort_FROM_deleteMessage_TO_synchCall&quot;">
+          <annotations xmi:id="_H6wOB_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetosynchcall"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_96za3wsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H6wOCPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetosynchcall"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_96za4AsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_H6wOCfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetosynchcall"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_96za4QsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_H6wOCvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetosynchcall"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_96za4gsYEeajEecGJ9W2hw" value="4">
+          <annotations xmi:id="_H6wOC_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetosynchcall"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="_96za4wsYEeajEecGJ9W2hw" name="" outgoing="_96za6gsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H6wOAfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetosynchcall"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="N"/>
-      </nodes>
-      <nodes xmi:id="_-pQcSgsYEeajEecGJ9W2hw" incoming="_-pQcWgsYEeajEecGJ9W2hw" outgoing="_-pQcWQsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="O"/>
-      </nodes>
-      <nodes xmi:id="_-pQcUwsYEeajEecGJ9W2hw" name="" outgoing="_-pQcWgsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="O"/>
       </nodes>
       <nodes xmi:id="__x6tegsYEeajEecGJ9W2hw" incoming="__x6tigsYEeajEecGJ9W2hw" outgoing="__x6tiQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H6wODPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoreply"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="P"/>
+        <attributes xmi:id="__x6tewsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Message_messageSort_FROM_deleteMessage_TO_reply&quot;">
+          <annotations xmi:id="_H6wOEPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoreply"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__x6tfAsYEeajEecGJ9W2hw" value="&quot;Changes the attribute value of messageSort_FROM_deleteMessage_TO_reply&quot;">
+          <annotations xmi:id="_H6wOEfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoreply"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__x6tfQsYEeajEecGJ9W2hw" value="&quot;CHANGE_LITERAL_Message_messageSort_FROM_deleteMessage_TO_reply&quot;">
+          <annotations xmi:id="_H6wOEvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoreply"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__x6tfgsYEeajEecGJ9W2hw" value="&quot;RR: CHANGE_LITERAL_Message_messageSort_FROM_deleteMessage_TO_reply&quot;">
+          <annotations xmi:id="_H6wOE_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoreply"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__x6tfwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_H6wOFPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoreply"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__x6tgAsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_H6wOFfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoreply"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__x6tgQsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_H6wOFvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoreply"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__x6tggsYEeajEecGJ9W2hw" value="4">
+          <annotations xmi:id="_H6wOF_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoreply"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="__x6tgwsYEeajEecGJ9W2hw" name="" outgoing="__x6tigsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H6wODfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoreply"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="P"/>
       </nodes>
       <edges xmi:id="_AAfVBAsZEeajEecGJ9W2hw" source="_AAfU9wsZEeajEecGJ9W2hw" target="_AAfU9gsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
@@ -453,132 +305,36 @@
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AttributeValueChange/type"/>
       </edges>
       <edges xmi:id="_AAfVCQsZEeajEecGJ9W2hw" source="_AAfU-gsZEeajEecGJ9W2hw" target="_AAfU-AsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H6wN6vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetocreatemessage"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="A"/>
       </edges>
       <edges xmi:id="_AAfVCgsZEeajEecGJ9W2hw" source="_AAfVAwsZEeajEecGJ9W2hw" target="_AAfU-gsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H6wN6_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetocreatemessage"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="A"/>
-      </edges>
-      <edges xmi:id="_936e-QsYEeajEecGJ9W2hw" source="_936e6gsYEeajEecGJ9W2hw" target="_AAfU-AsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="B"/>
-      </edges>
-      <edges xmi:id="_936e-gsYEeajEecGJ9W2hw" source="_936e8wsYEeajEecGJ9W2hw" target="_936e6gsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="B"/>
-      </edges>
-      <edges xmi:id="_-m66CQsYEeajEecGJ9W2hw" source="_-m65-gsYEeajEecGJ9W2hw" target="_AAfU-AsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="C"/>
-      </edges>
-      <edges xmi:id="_-m66CgsYEeajEecGJ9W2hw" source="_-m66AwsYEeajEecGJ9W2hw" target="_-m65-gsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="C"/>
-      </edges>
-      <edges xmi:id="__UUymQsYEeajEecGJ9W2hw" source="__UUyigsYEeajEecGJ9W2hw" target="_AAfU-AsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="D"/>
-      </edges>
-      <edges xmi:id="__UUymgsYEeajEecGJ9W2hw" source="__UUykwsYEeajEecGJ9W2hw" target="__UUyigsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="D"/>
       </edges>
       <edges xmi:id="_-lLNmQsYEeajEecGJ9W2hw" source="_-lLNigsYEeajEecGJ9W2hw" target="_AAfU-AsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H6wN9vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoasynchcall"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="E"/>
       </edges>
       <edges xmi:id="_-lLNmgsYEeajEecGJ9W2hw" source="_-lLNkwsYEeajEecGJ9W2hw" target="_-lLNigsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H6wN9_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoasynchcall"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="E"/>
-      </edges>
-      <edges xmi:id="__a8_CQsYEeajEecGJ9W2hw" source="__a8--gsYEeajEecGJ9W2hw" target="_AAfU-AsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="F"/>
-      </edges>
-      <edges xmi:id="__a8_CgsYEeajEecGJ9W2hw" source="__a8_AwsYEeajEecGJ9W2hw" target="__a8--gsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="F"/>
-      </edges>
-      <edges xmi:id="_-gRfeQsYEeajEecGJ9W2hw" source="_-gRfagsYEeajEecGJ9W2hw" target="_AAfU-AsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="G"/>
-      </edges>
-      <edges xmi:id="_-gRfegsYEeajEecGJ9W2hw" source="_-gRfcwsYEeajEecGJ9W2hw" target="_-gRfagsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="G"/>
-      </edges>
-      <edges xmi:id="__irXqQsYEeajEecGJ9W2hw" source="__irXmgsYEeajEecGJ9W2hw" target="_AAfU-AsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="H"/>
-      </edges>
-      <edges xmi:id="__irXqgsYEeajEecGJ9W2hw" source="__irXowsYEeajEecGJ9W2hw" target="__irXmgsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="H"/>
-      </edges>
-      <edges xmi:id="_-OADuQsYEeajEecGJ9W2hw" source="_-OADqgsYEeajEecGJ9W2hw" target="_AAfU-AsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="I"/>
-      </edges>
-      <edges xmi:id="_-OADugsYEeajEecGJ9W2hw" source="_-OADswsYEeajEecGJ9W2hw" target="_-OADqgsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="I"/>
-      </edges>
-      <edges xmi:id="__GGwaQsYEeajEecGJ9W2hw" source="__GGwWgsYEeajEecGJ9W2hw" target="_AAfU-AsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="J"/>
-      </edges>
-      <edges xmi:id="__GGwagsYEeajEecGJ9W2hw" source="__GGwYwsYEeajEecGJ9W2hw" target="__GGwWgsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="J"/>
-      </edges>
-      <edges xmi:id="_-b9AKQsYEeajEecGJ9W2hw" source="_-b9AGgsYEeajEecGJ9W2hw" target="_AAfU-AsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="K"/>
-      </edges>
-      <edges xmi:id="_-b9AKgsYEeajEecGJ9W2hw" source="_-b9AIwsYEeajEecGJ9W2hw" target="_-b9AGgsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="K"/>
-      </edges>
-      <edges xmi:id="_-kt6mQsYEeajEecGJ9W2hw" source="_-kt6igsYEeajEecGJ9W2hw" target="_AAfU-AsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="L"/>
-      </edges>
-      <edges xmi:id="_-kt6mgsYEeajEecGJ9W2hw" source="_-kt6kwsYEeajEecGJ9W2hw" target="_-kt6igsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="L"/>
-      </edges>
-      <edges xmi:id="_ADxSiQsZEeajEecGJ9W2hw" source="_ADxSegsZEeajEecGJ9W2hw" target="_AAfU-AsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="M"/>
-      </edges>
-      <edges xmi:id="_ADxSigsZEeajEecGJ9W2hw" source="_ADxSgwsZEeajEecGJ9W2hw" target="_ADxSegsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="M"/>
       </edges>
       <edges xmi:id="_96za6QsYEeajEecGJ9W2hw" source="_96za2gsYEeajEecGJ9W2hw" target="_AAfU-AsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H6wOAvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetosynchcall"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="N"/>
       </edges>
       <edges xmi:id="_96za6gsYEeajEecGJ9W2hw" source="_96za4wsYEeajEecGJ9W2hw" target="_96za2gsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H6wOA_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetosynchcall"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="N"/>
-      </edges>
-      <edges xmi:id="_-pQcWQsYEeajEecGJ9W2hw" source="_-pQcSgsYEeajEecGJ9W2hw" target="_AAfU-AsZEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="O"/>
-      </edges>
-      <edges xmi:id="_-pQcWgsYEeajEecGJ9W2hw" source="_-pQcUwsYEeajEecGJ9W2hw" target="_-pQcSgsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="O"/>
       </edges>
       <edges xmi:id="__x6tiQsYEeajEecGJ9W2hw" source="__x6tegsYEeajEecGJ9W2hw" target="_AAfU-AsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_H6wODvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoreply"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="P"/>
       </edges>
       <edges xmi:id="__x6tigsYEeajEecGJ9W2hw" source="__x6tgwsYEeajEecGJ9W2hw" target="__x6tegsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_H6wOD_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrchangemessagemessagesortfromdeletemessagetoreply"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="P"/>
       </edges>
     </rhs>
     <mappings xmi:id="_AAfVCwsZEeajEecGJ9W2hw" origin="_AAfU5gsZEeajEecGJ9W2hw" image="_AAfU9QsZEeajEecGJ9W2hw"/>
@@ -587,22 +343,8 @@
     <mappings xmi:id="_AAfVDgsZEeajEecGJ9W2hw" origin="_AAfU6wsZEeajEecGJ9W2hw" image="_AAfU-AsZEeajEecGJ9W2hw"/>
     <mappings xmi:id="_AAfVDwsZEeajEecGJ9W2hw" origin="_AAfU7AsZEeajEecGJ9W2hw" image="_AAfU-QsZEeajEecGJ9W2hw"/>
     <mappings xmi:id="_AAfVEAsZEeajEecGJ9W2hw" origin="_AAfU7gsZEeajEecGJ9W2hw" image="_AAfVAwsZEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_V4VA4LRVEeexAvqQ_kM_vQ" origin="_936e3gsYEeajEecGJ9W2hw" image="_936e8wsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_V4VA4bRVEeexAvqQ_kM_vQ" origin="_-m657gsYEeajEecGJ9W2hw" image="_-m66AwsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_V4VA4rRVEeexAvqQ_kM_vQ" origin="__UUyfgsYEeajEecGJ9W2hw" image="__UUykwsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_V4VA47RVEeexAvqQ_kM_vQ" origin="_-lLNfgsYEeajEecGJ9W2hw" image="_-lLNkwsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_V4VA5LRVEeexAvqQ_kM_vQ" origin="__a8-7gsYEeajEecGJ9W2hw" image="__a8_AwsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_V4VA5bRVEeexAvqQ_kM_vQ" origin="_-gRfXgsYEeajEecGJ9W2hw" image="_-gRfcwsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_V4VA5rRVEeexAvqQ_kM_vQ" origin="__irXjgsYEeajEecGJ9W2hw" image="__irXowsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_V4VA57RVEeexAvqQ_kM_vQ" origin="_-OADngsYEeajEecGJ9W2hw" image="_-OADswsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_V4VA6LRVEeexAvqQ_kM_vQ" origin="__GGwTgsYEeajEecGJ9W2hw" image="__GGwYwsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_V4VA6bRVEeexAvqQ_kM_vQ" origin="_-b9ADgsYEeajEecGJ9W2hw" image="_-b9AIwsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_V4VA6rRVEeexAvqQ_kM_vQ" origin="_-kt6fgsYEeajEecGJ9W2hw" image="_-kt6kwsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_V4VA67RVEeexAvqQ_kM_vQ" origin="_ADxSbgsZEeajEecGJ9W2hw" image="_ADxSgwsZEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_V4VA7LRVEeexAvqQ_kM_vQ" origin="_96zazgsYEeajEecGJ9W2hw" image="_96za4wsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_V4VA7bRVEeexAvqQ_kM_vQ" origin="_-pQcPgsYEeajEecGJ9W2hw" image="_-pQcUwsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_V4VA7rRVEeexAvqQ_kM_vQ" origin="__x6tbgsYEeajEecGJ9W2hw" image="__x6tgwsYEeajEecGJ9W2hw"/>
-    <annotations key="featureConstraint" value="xor(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P)"/>
-    <annotations key="features" value="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P"/>
+    <mappings xmi:id="_H63ioPOJEeqKPbhZweJEtg" origin="_-lLNfgsYEeajEecGJ9W2hw" image="_-lLNkwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H63iofOJEeqKPbhZweJEtg" origin="_96zazgsYEeajEecGJ9W2hw" image="_96za4wsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_H63iovOJEeqKPbhZweJEtg" origin="__x6tbgsYEeajEecGJ9W2hw" image="__x6tgwsYEeajEecGJ9W2hw"/>
   </units>
 </henshin:Module>

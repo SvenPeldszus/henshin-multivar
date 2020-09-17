@@ -9,7 +9,7 @@ import org.eclipse.emf.henshin.interpreter.impl.EGraphImpl;
 import org.eclipse.emf.henshin.model.Module;
 import org.eclipse.emf.henshin.model.resource.HenshinResourceSet;
 import org.eclipse.emf.henshin.variability.InconsistentRuleException;
-import org.eclipse.emf.henshin.variability.matcher.VariabilityAwareMatcher;
+import org.eclipse.emf.henshin.variability.matcher.VBMatcher;
 import org.eclipse.emf.henshin.variability.tests.parameterized.create.TestCreator;
 import org.junit.Test;
 
@@ -26,6 +26,6 @@ public class VBEngineEdgeCasesTest {
 		
 		EGraphImpl graph = new EGraphImpl();
 		
-		new VariabilityAwareMatcher(module.getAllRules().get(0), graph);
+		new VBMatcher(module.getAllRules().get(0), graph);
 	}
 }

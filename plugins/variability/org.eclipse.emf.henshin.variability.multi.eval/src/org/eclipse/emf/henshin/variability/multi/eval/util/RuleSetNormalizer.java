@@ -26,9 +26,9 @@ public class RuleSetNormalizer {
 		newRule.getMappings().addAll(rule.getMappings());
 		newRule.setName(rule.getName());
 		newRule.getParameters().addAll(rule.getParameters());
-		String featureModel = VariabilityHelper.INSTANCE.getFeatureModel(rule);
-		if (featureModel != null) {
-			VariabilityHelper.INSTANCE.setFeatureModel(newRule, featureModel);
+		String featureModel = VariabilityHelper.INSTANCE.getFeatureConstraint(rule);
+		if (featureModel != null && !featureModel.isEmpty()) {
+			VariabilityHelper.INSTANCE.setFeatureConstraint(newRule, featureModel);
 		}
 		Set<String> features = VariabilityHelper.INSTANCE.getFeatures(rule);
 		if (features != null && !features.isEmpty()) {
@@ -38,10 +38,11 @@ public class RuleSetNormalizer {
 			for (Node node : newRule.getLhs().getNodes()) {
 				node.getAttributes().clear();
 			}
+			for (Node node : newRule.getRhs().getNodes()) {
+				node.getAttributes().clear();
+			}
 		}
-		for (Node node : newRule.getRhs().getNodes()) {
-			node.getAttributes().clear();
-		}
+
 		if (module != null) {
 			module.getUnits().remove(rule);
 			module.getUnits().add(newRule);
@@ -50,20 +51,20 @@ public class RuleSetNormalizer {
 	}
 
 	public static List<Rule> prepareRules(Module module) {
-		List<Rule> rules = new ArrayList<>();
-		for (Rule rule : module.getAllRules()) {
-			rules.add(normalizeRule(rule));
-		}
+//		List<Rule> rules = new ArrayList<>();
+//		for (Rule rule : module.getAllRules()) {
+//			rules.add(normalizeRule(rule));
+//		}
 
 		// remove duplicates
-		HashSet<String> usedNames = new HashSet<String>();
+		HashSet<String> usedNames = new HashSet<>();
 		for (Rule rule : module.getAllRules()) {
-			if (usedNames.contains(rule.getName()))
-				rules.remove(rule);
-			else
-				usedNames.add(rule.getName());
+			int i = 0;
+			while (usedNames.contains(rule.getName()))
+				rule.setName(rule.getName() + i++);
+			usedNames.add(rule.getName());
 		}
-		module.getUnits().retainAll(rules);
-		return rules;
+//		module.getUnits().retainAll(rules);
+		return module.getAllRules();
 	}
 }

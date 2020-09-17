@@ -2,7 +2,6 @@ package org.eclipse.emf.henshin.variability.multi.eval;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,7 +14,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -44,18 +42,21 @@ import org.eclipse.emf.henshin.interpreter.impl.ChangeImpl.ObjectChangeImpl;
 import org.eclipse.emf.henshin.interpreter.impl.ChangeImpl.ReferenceChangeImpl;
 import org.eclipse.emf.henshin.interpreter.impl.EGraphImpl;
 import org.eclipse.emf.henshin.interpreter.impl.MatchImpl;
-import org.eclipse.emf.henshin.interpreter.util.InterpreterUtil;
 import org.eclipse.emf.henshin.model.Action;
+import org.eclipse.emf.henshin.model.Action.Type;
 import org.eclipse.emf.henshin.model.Edge;
 import org.eclipse.emf.henshin.model.Module;
 import org.eclipse.emf.henshin.model.Node;
 import org.eclipse.emf.henshin.model.Parameter;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.model.Unit;
-import org.eclipse.emf.henshin.model.Action.Type;
 import org.eclipse.emf.henshin.model.resource.HenshinResourceSet;
+import org.eclipse.emf.henshin.variability.InconsistentRuleException;
+import org.eclipse.emf.henshin.variability.multi.FeatureModelHelper;
 import org.eclipse.emf.henshin.variability.multi.Lifting;
-import org.eclipse.emf.henshin.variability.multi.RuleToProductLineEngine;
+import org.eclipse.emf.henshin.variability.multi.MultiVarEGraph;
+import org.eclipse.emf.henshin.variability.multi.MultiVarEngine;
+import org.eclipse.emf.henshin.variability.multi.MultiVarMatch;
 import org.eclipse.emf.henshin.variability.multi.SecPLUtil;
 import org.eclipse.emf.henshin.variability.multi.eval.util.LoadingHelper;
 import org.eclipse.emf.henshin.variability.multi.eval.util.LoadingHelper.RuleSet;
@@ -68,6 +69,7 @@ import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
 import carisma.profile.umlsec.variability.Conditional_Element;
 import carisma.profile.umlsec.variability.VariabilityPackage;
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
+import de.ovgu.featureide.fm.core.init.FMCoreLibrary;
 import de.ovgu.featureide.fm.core.io.manager.FeatureModelManager;
 import symmetric.AddObject;
 import symmetric.AddReference;
@@ -93,16 +95,17 @@ public class UmlRecogPreparator {
 	static File henshinDirectory = new File("umledit" + File.separator);
 	static File umlFile = new File("models" + File.separator + benchmark + File.separator + "model.uml");
 	static File fmFile = new File("models" + File.separator + benchmark + File.separator + "model.fm.xml");
-	static String outputPathPart1 = "umlrecog" + File.separator;
-	static String outputPathPart2 = "prepared" + File.separator + benchmark + "" + File.separator;
+	static String outputPathPart1 = "umlrecog-test" + File.separator;
+	static String outputPathPart2 = "prepared-test" + File.separator + benchmark + "" + File.separator;
 
 	Resource modelResource;
 	IFeatureModel modelFM;
 	Module module;
 
 	DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
-	
-	public static void main(String[] args) throws FileNotFoundException, IOException {
+
+	public static void main(String[] args) throws IOException {
+		FMCoreLibrary.getInstance().install();
 		// for (int i = 3; i < values.length; i++) {
 
 		UmlRecogPreparator umlRecogPreparator = new UmlRecogPreparator();
@@ -115,38 +118,39 @@ public class UmlRecogPreparator {
 
 		System.out.println("done - " + (System.currentTimeMillis() - start) + "ms");
 
-		Files.copy(umlRecogPreparator.fmFile.toPath(), Paths.get(outputPathPart1 + outputPathPart2 + "model.fm.xml"),
+		Files.copy(UmlRecogPreparator.fmFile.toPath(), Paths.get(outputPathPart1 + outputPathPart2 + "model.fm.xml"),
 				StandardCopyOption.REPLACE_EXISTING);
 		// }
 
 	}
 
-	private void run() throws FileNotFoundException, IOException {
+	private void run() throws IOException {
 		// Initialization
 		loadModelsAndRules();
 		Copier oldModel = copyModel();
 		Map<EObject, String> presenceConditions = new HashMap<>();
-		EGraphImpl graph = new SecPLUtil().createEGraphAndCollectPCs(modelResource.getContents(), presenceConditions);
+		MultiVarEGraph graph = new SecPLUtil().createEGraphAndCollectPCs(this.modelResource.getContents(),
+				presenceConditions, FeatureModelHelper.getFMExpressionAsCNF(this.modelFM));
 		System.out.println("initialization done");
-		
+
 		// Find interesting matches, i.e., those whose Phi-Apply value is not
 		// "true"
-		Map<Rule, Match> matches = findMatchesWherePhiApplyIsNotTrue(presenceConditions, graph);
+		Map<Rule, MultiVarMatch> matches = findMatchesWherePhiApplyIsNotTrue(graph);
 
 		// Perform rule applications and save results
-		List<Change> resultChanges = new ArrayList<Change>();
-		List<Rule> appliedRules = applyRules(graph, presenceConditions, matches, resultChanges);
+		List<Change> resultChanges = new ArrayList<>();
+		List<Rule> appliedRules = applyRules(graph, matches, resultChanges);
 		SymmetricDifference symmetric = createSymmetricDifference(oldModel, resultChanges);
 		saveResults(oldModel, graph, symmetric, appliedRules);
 	}
 
-	private Hashtable<Node, List<EObject>> findElementsWithPC(List<Conditional_Element> pcs, final Rule rule,
-			Hashtable<EClass, LinkedList<EObject>> mapping) {
-		Hashtable<EClass, List<EClass>> subclasses = getInheritanceTree(UMLPackage.eINSTANCE);
+	private Map<Node, List<EObject>> findElementsWithPC(List<Conditional_Element> pcs, final Rule rule,
+			Map<EClass, LinkedList<EObject>> mapping) {
+		Map<EClass, List<EClass>> subclasses = getInheritanceTree(UMLPackage.eINSTANCE);
 
-		Hashtable<Node, List<EObject>> result = new Hashtable<Node, List<EObject>>();
+		Map<Node, List<EObject>> result = new HashMap<>();
 		for (Node node : rule.getLhs().getNodes()) {
-			LinkedList<EObject> nodeResult = new LinkedList<EObject>();
+			LinkedList<EObject> nodeResult = new LinkedList<>();
 			Stack<EClass> todo = new Stack<>();
 			todo.add(node.getType());
 			while (!todo.isEmpty()) {
@@ -161,8 +165,8 @@ public class UmlRecogPreparator {
 		return result;
 	}
 
-	public Hashtable<EClass, List<EClass>> getInheritanceTree(EPackage ePackage) {
-		Hashtable<EClass, List<EClass>> subclasses = new Hashtable<>();
+	public Map<EClass, List<EClass>> getInheritanceTree(EPackage ePackage) {
+		Map<EClass, List<EClass>> subclasses = new HashMap<>();
 		for (EClassifier classifier : ePackage.getEClassifiers()) {
 			if (classifier instanceof EClass) {
 				EClass eclass = (EClass) classifier;
@@ -173,7 +177,7 @@ public class UmlRecogPreparator {
 						if (subclasses.containsKey(e)) {
 							sub = subclasses.get(e);
 						} else {
-							sub = new LinkedList<EClass>();
+							sub = new LinkedList<>();
 							subclasses.put(e, sub);
 						}
 						sub.add(eclass);
@@ -184,12 +188,11 @@ public class UmlRecogPreparator {
 		return subclasses;
 	}
 
-	public List<EObject> findType(Hashtable<EClass, LinkedList<EObject>> mapping, List<Conditional_Element> pcs,
+	public List<EObject> findType(Map<EClass, LinkedList<EObject>> mapping, List<Conditional_Element> pcs,
 			EClass type) {
 		if (mapping.containsKey(type)) {
 			return mapping.get(type);
-		} 
-		else {
+		} else {
 			LinkedList<EObject> matches = new LinkedList<>();
 			for (int i = pcs.size() - 1; i > 0; i--) {
 				Conditional_Element pc = pcs.get(i);
@@ -203,7 +206,7 @@ public class UmlRecogPreparator {
 		}
 	}
 
-	private void loadModelsAndRules() throws IOException, FileNotFoundException {
+	private void loadModelsAndRules() throws IOException {
 		HenshinResourceSet rs = new HenshinResourceSet(henshinDirectory.getPath());
 
 		UMLPackage.eINSTANCE.eClass();
@@ -212,24 +215,23 @@ public class UmlRecogPreparator {
 		rs.getPackageRegistry().put(VariabilityPackage.eINSTANCE.getNsURI(), VariabilityPackage.eINSTANCE);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("uml", new UMLResourceFactoryImpl());
 
-		modelFM = FeatureModelManager.getInstance(fmFile.toPath()).getObject();
-		modelResource = rs.createResource(umlFile.getName());
-		modelResource.load(new FileInputStream(umlFile), Collections.EMPTY_MAP);
+		this.modelFM = FeatureModelManager.getInstance(fmFile.toPath()).getObject();
+		this.modelResource = rs.createResource(umlFile.getName());
+		this.modelResource.load(new FileInputStream(umlFile), Collections.EMPTY_MAP);
 
-		module = LoadingHelper.loadAllRulesAsOneModule(rs, henshinDirectory.getPath(), "rules", RuleSet.NOFILTER);
+		this.module = LoadingHelper.loadAllRulesAsOneModule(rs, henshinDirectory.getPath(), "rules", RuleSet.NOFILTER);
 	}
 
 	private Copier copyModel() {
 		Copier oldModel = new Copier();
-		oldModel.copyAll(modelResource.getContents());
+		oldModel.copyAll(this.modelResource.getContents());
 		oldModel.copyReferences();
 		return oldModel;
 	}
 
 	/**
-	 * Sets parameter values to be filled into attributes of newly created
-	 * objects.
-	 * 
+	 * Sets parameter values to be filled into attributes of newly created objects.
+	 *
 	 * @param match
 	 * @param rule
 	 */
@@ -259,37 +261,42 @@ public class UmlRecogPreparator {
 	}
 
 	@SuppressWarnings("unused")
-	private Map<Rule, Match> findMatchesWherePhiApplyIsNotTrue(Map<EObject, String> presenceConditions,
-			EGraphImpl graph) {
+	private Map<Rule, MultiVarMatch> findMatchesWherePhiApplyIsNotTrue(MultiVarEGraph graph) {
 		int countSuccess = 0;
 		int countFail = 0;
 		int countBaseMatchRules = 0;
 		int countRules = 0;
 
 		// Caches for Elements with PC
-		Hashtable<EClass, LinkedList<EObject>> mapping = new Hashtable<EClass, LinkedList<EObject>>();
+		HashMap<EClass, LinkedList<EObject>> mapping = new HashMap<>();
 		List<Conditional_Element> pcs = getPCs(graph);
 
-		Map<Rule, Match> matches = new LinkedHashMap<Rule, Match>();
+		Map<Rule, MultiVarMatch> matches = new LinkedHashMap<>();
 
 		int engineReinitializations = 0;
-		RuleToProductLineEngine engine = new RuleToProductLineEngine();
-		
-		for (Unit unit : module.getUnits()) {
+		MultiVarEngine engine = new MultiVarEngine();
+
+		for (Unit unit : this.module.getUnits()) {
 			// Skip the following rules which seem to be defective
 			if (unit.getName().startsWith("createConstraint_IN_Transition")
 					|| unit.getName().startsWith("createLiteralInteger")
 					|| unit.getName().startsWith("CREATE_Association")
-					|| unit.getName().equals("setParameterableElement_templateParameter_TO_TemplateParameter") //produces changes which violate UML constraints
-					|| unit.getName().equals("setTypedElement_type_TO_Type") //reason extremely long execution
-					|| unit.getName().equals("createAssociation_IN_Class")  //reason extremely long execution
+					|| unit.getName().equals("setParameterableElement_templateParameter_TO_TemplateParameter") // produces
+					// changes
+					// which
+					// violate
+					// UML
+					// constraints
+					|| unit.getName().equals("setTypedElement_type_TO_Type") // reason extremely long execution
+					|| unit.getName().equals("createAssociation_IN_Class") // reason extremely long execution
 					|| unit.getName().equals("removeFromAssociation_memberEnd_Property") // change not allowed in UML
-					)
+					) {
 				continue;
+			}
 			Rule rule = (Rule) unit;
 			countRules++;
-			
-			Hashtable<Node, List<EObject>> elements = findElementsWithPC(pcs, rule, mapping);
+
+			Map<Node, List<EObject>> elements = findElementsWithPC(pcs, rule, mapping);
 			int size = 0;
 			for (List<EObject> val : elements.values()) {
 				size += val.size();
@@ -297,54 +304,63 @@ public class UmlRecogPreparator {
 			if (size == 0) {
 				continue;
 			}
-			
+
 			long startRule = System.currentTimeMillis();
 			countBaseMatchRules++;
-			
+
 			for (Entry<Node, List<EObject>> entry : elements.entrySet()) {
 				Node node = entry.getKey();
 				for (EObject target : entry.getValue()) {
 					Match baseMatch = new MatchImpl(rule);
 					baseMatch.setNodeTarget(node, target);
 
-					Lifting lifting = new Lifting(engine, graph, modelFM, presenceConditions);
+					Lifting lifting = new Lifting(engine, graph);
 
-					Match usedMatch = null;
+					MultiVarMatch usedMatch = null;
 
-					boolean deep = true;
-					if (deep) {
-						List<Match> allMatches = InterpreterUtil.findAllMatches(engine, rule, graph, baseMatch);
-						for (Match m : allMatches) {
-							String phiApply = lifting.computePhiApply(m).trim();
-							if (!phiApply.equals("true")) {
-								usedMatch = m;
-								break;
-							}
-						}
-					} else {
-						Iterator<Match> it = engine.findMatches(rule, graph, baseMatch).iterator();
+					// boolean deep = true;
+					// if (deep) {
+					// List<Match> allMatches = InterpreterUtil.findAllMatches(engine, rule, graph,
+					// baseMatch);
+					// for (Match m : allMatches) {
+					// String phiApply = lifting.computePhiApply(m).trim();
+					// if (!phiApply.equals("true")) {
+					// usedMatch = m;
+					// break;
+					// }
+					// }
+					// } else {
+					Iterator<? extends MultiVarMatch> it;
+					try {
+						it = engine.findMatches(rule, graph, baseMatch).iterator();
 						if (it.hasNext()) {
-							Match first = it.next();
+							MultiVarMatch first = it.next();
 							String phiApply = lifting.computePhiApply(first).trim();
 							if (!phiApply.equals("true")) {
 								usedMatch = first;
 							}
 						}
+					} catch (InconsistentRuleException e) {
+						e.printStackTrace();
 					}
+
+					// }
 					if (usedMatch != null) {
 						prepareMatch(usedMatch, rule);
 						matches.put(rule, usedMatch);
 						countSuccess++;
-					} else
+					} else {
 						countFail++;
-					
-					
+					}
+
 				}
 			}
-			String message = dateFormat.format(new Date(System.currentTimeMillis()))+" - "+countRules+"/"+module.getUnits().size()+" rule, "+countBaseMatchRules+" baseMatchRules, duration: "+(System.currentTimeMillis()-startRule)+"ms";
+			String message = this.dateFormat.format(new Date(System.currentTimeMillis())) + " - " + countRules + "/"
+					+ this.module.getUnits().size() + " rule, " + countBaseMatchRules + " baseMatchRules, duration: "
+					+ (System.currentTimeMillis() - startRule) + "ms";
 			System.out.println(message);
 		}
-		System.out.println("Rules with base match: "+countBaseMatchRules);
+		System.out.println("Rules with base match: " + countBaseMatchRules);
 		return matches;
 	}
 
@@ -365,16 +381,15 @@ public class UmlRecogPreparator {
 		return pcs;
 	}
 
-	private List<Rule> applyRules(EGraphImpl graph, Map<EObject, String> presenceConditions, Map<Rule, Match> matches,
-			List<Change> resultChanges) {
-		List<Rule> rules = new ArrayList<Rule>(matches.keySet());
-		List<Rule> appliedRules = new ArrayList<Rule>();
+	private List<Rule> applyRules(MultiVarEGraph graph, Map<Rule, MultiVarMatch> matches, List<Change> resultChanges) {
+		List<Rule> rules = new ArrayList<>(matches.keySet());
+		List<Rule> appliedRules = new ArrayList<>();
 		// for (int i = 0; i < 5; i++) {
 		// int index = (int) (rules.size() * Math.random());
 		// Rule rule = rules.get(index);
 
 		for (Rule rule : rules) {
-			Match match = matches.get(rule);
+			MultiVarMatch match = matches.get(rule);
 
 			if (rule.getName().startsWith("move")) {
 				boolean applicible = checkForCycleInContainmentHieracy(rule, match);
@@ -384,20 +399,21 @@ public class UmlRecogPreparator {
 			}
 
 			System.out.println("Applying rule \"" + rule + "\" to match:\n" + match);
-			RuleToProductLineEngine engine = new RuleToProductLineEngine();
-			Lifting lifting = new Lifting(engine, graph, modelFM, presenceConditions);
+			MultiVarEngine engine = new MultiVarEngine();
+			Lifting lifting = new Lifting(engine, graph);
 			Change change = lifting.liftAndApplyRule(match, rule);
 			if (change != null) {
 				CompoundChangeImpl ch = (CompoundChangeImpl) change;
 				boolean isDetectableChange = true;
 				for (Change subChange : ch.getChanges()) {
 					if (subChange instanceof AttributeChangeImpl
-							&& ((AttributeChangeImpl) subChange).getAttribute() == null)
+							&& ((AttributeChangeImpl) subChange).getAttribute() == null) {
 						isDetectableChange = false;
-					// else if (subChange instanceof ReferenceChangeImpl
-					// && ((ReferenceChangeImpl) subChange).getReference() ==
-					// null)
-					// isDetectableChange = false;
+						// else if (subChange instanceof ReferenceChangeImpl
+						// && ((ReferenceChangeImpl) subChange).getReference() ==
+						// null)
+						// isDetectableChange = false;
+					}
 				}
 
 				for (EObject e : match.getNodeTargets()) {
@@ -448,8 +464,8 @@ public class UmlRecogPreparator {
 	private SymmetricDifference createSymmetricDifference(Copier new2old, List<Change> resultChanges) {
 		SymmetricFactory factory = SymmetricFactory.eINSTANCE;
 		SymmetricDifference result = factory.createSymmetricDifference();
-		Map<EObject, EObject> new2cor = new HashMap<EObject, EObject>();
-		Map<EObject, EObject> old2new = new HashMap<EObject, EObject>();
+		Map<EObject, EObject> new2cor = new HashMap<>();
+		Map<EObject, EObject> old2new = new HashMap<>();
 
 		// Init lists
 		for (Entry<EObject, EObject> entry : new2old.entrySet()) {
@@ -463,7 +479,7 @@ public class UmlRecogPreparator {
 		}
 
 		// Create changes
-		List<symmetric.Change> changes = new ArrayList<symmetric.Change>();
+		List<symmetric.Change> changes = new ArrayList<>();
 		for (Change compound : resultChanges) {
 			for (Change change : ((CompoundChangeImpl) compound).getChanges()) {
 				if (change instanceof ObjectChangeImpl) {
@@ -484,13 +500,13 @@ public class UmlRecogPreparator {
 		// Add changes stepwise to enforce proper ordering.
 		result.getChanges().addAll(changes.stream().filter(c -> c instanceof AddObject).collect(Collectors.toList()));
 		result.getChanges()
-				.addAll(changes.stream().filter(c -> c instanceof AddReference).collect(Collectors.toList()));
+		.addAll(changes.stream().filter(c -> c instanceof AddReference).collect(Collectors.toList()));
 		result.getChanges()
-				.addAll(changes.stream().filter(c -> c instanceof RemoveObject).collect(Collectors.toList()));
+		.addAll(changes.stream().filter(c -> c instanceof RemoveObject).collect(Collectors.toList()));
 		result.getChanges()
-				.addAll(changes.stream().filter(c -> c instanceof RemoveReference).collect(Collectors.toList()));
+		.addAll(changes.stream().filter(c -> c instanceof RemoveReference).collect(Collectors.toList()));
 		result.getChanges()
-				.addAll(changes.stream().filter(c -> c instanceof AttributeValueChange).collect(Collectors.toList()));
+		.addAll(changes.stream().filter(c -> c instanceof AttributeValueChange).collect(Collectors.toList()));
 		return result;
 	}
 
@@ -567,7 +583,7 @@ public class UmlRecogPreparator {
 			SymmetricDifference result, Map<EObject, EObject> new2cor, List<symmetric.Change> changes,
 			ObjectChangeImpl ch) {
 		if (!ch.isCreate()) { // negated because object changes are
-								// reversed
+			// reversed
 			AddObject addObject = factory.createAddObject();
 			addObject.setObj(ch.getObject());
 			changes.add(addObject);
@@ -615,15 +631,16 @@ public class UmlRecogPreparator {
 			}
 		}
 		for (EObject old : oldModel.values()) {
-			if (old.eContainer() == null)
+			if (old.eContainer() == null) {
 				res1.getContents().add(old);
+			}
 		}
 
 		res1.save(null);
 		res2.save(null);
 		resourceSet.saveEObject(symmetric, outputPathPart2 + "1-to-2.symmetric");
 		resourceSet.saveEObject(symmetric, "1-to-2.symmetric"); // for easier
-																// debugging
+		// debugging
 	}
 
 }

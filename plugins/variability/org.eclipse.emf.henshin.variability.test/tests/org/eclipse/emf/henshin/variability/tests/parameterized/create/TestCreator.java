@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.henshin.model.Module;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.model.resource.HenshinResourceSet;
-import org.eclipse.emf.henshin.variability.util.RuleUtil;
+import org.eclipse.emf.henshin.variability.util.VBRuleUtil;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 
 import com.google.gson.Gson;
@@ -60,7 +60,7 @@ public class TestCreator {
 				File modelFile = new File(folder, application.getModel());
 				EObject model = rs.getEObject(modelFile.getAbsolutePath());
 				Rule rule = getRule(ruleFile, application.getRule(), rs);
-				if (!RuleUtil.isVarRule(rule)) {
+				if (!VBRuleUtil.isVarRule(rule)) {
 					System.err.println("Skip as it is not a VB rule: " + rule);
 					continue;
 				}

@@ -1,7 +1,8 @@
-<henshin:Module xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmi:id="_rSNrYLRcEeeYUfLk2h7sIw">
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_4iAxAPOCEeqe6s0sCOQVEQ">
   <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
   <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
-  <units xsi:type="henshin:Rule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="_qo96FLRcEeeYUfLk2h7sIw" name="rr:createOpaqueExpression_IN_InstanceSpecification">
+  <units xsi:type="henshin:Rule" xmi:id="_-KRaIQsYEeajEecGJ9W2hw" name="rr:createOpaqueExpression_IN_InstanceSpecification" description="Recognize: creates one OpaqueExpression in the context: InstanceSpecification">
     <parameters xmi:id="_-KRaIgsYEeajEecGJ9W2hw" name="Selected">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
     </parameters>
@@ -69,6 +70,22 @@
       <edges xmi:id="_-KRaOAsYEeajEecGJ9W2hw" source="_-KRaKQsYEeajEecGJ9W2hw" target="_-KRaKwsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification/specification"/>
       </edges>
+      <formula xsi:type="henshin:Not" xmi:id="_-KRaOQsYEeajEecGJ9W2hw">
+        <child xsi:type="henshin:NestedCondition" xmi:id="_-KRaOgsYEeajEecGJ9W2hw">
+          <conclusion xmi:id="_-KRaOwsYEeajEecGJ9W2hw" name="ub0">
+            <nodes xmi:id="_-KRaPAsYEeajEecGJ9W2hw" incoming="_-KRaPgsYEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+            </nodes>
+            <nodes xmi:id="_-KRaPQsYEeajEecGJ9W2hw" name="B.Selected" outgoing="_-KRaPgsYEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+            </nodes>
+            <edges xmi:id="_-KRaPgsYEeajEecGJ9W2hw" source="_-KRaPQsYEeajEecGJ9W2hw" target="_-KRaPAsYEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification/specification"/>
+            </edges>
+          </conclusion>
+          <mappings xmi:id="_-KRaPwsYEeajEecGJ9W2hw" origin="_-KRaKQsYEeajEecGJ9W2hw" image="_-KRaPQsYEeajEecGJ9W2hw"/>
+        </child>
+      </formula>
     </lhs>
     <rhs xmi:id="_-KRaQAsYEeajEecGJ9W2hw" name="Rhs">
       <nodes xmi:id="_-KRaQQsYEeajEecGJ9W2hw" name="B.Selected" incoming="_-KRaUQsYEeajEecGJ9W2hw" outgoing="_-KRaVAsYEeajEecGJ9W2hw">
@@ -88,6 +105,30 @@
       </nodes>
       <nodes xmi:id="_-KRaRgsYEeajEecGJ9W2hw" incoming="_-KRaVwsYEeajEecGJ9W2hw" outgoing="_-KRaVQsYEeajEecGJ9W2hw _-KRaVgsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_-KRaRwsYEeajEecGJ9W2hw" value="&quot;CREATE_OpaqueExpression_IN_InstanceSpecification_(specification)&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-KRaSAsYEeajEecGJ9W2hw" value="&quot;Creates one OpaqueExpression in InstanceSpecification&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-KRaSQsYEeajEecGJ9W2hw" value="&quot;CREATE_OpaqueExpression_IN_InstanceSpecification_(specification)&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-KRaSgsYEeajEecGJ9W2hw" value="&quot;RR: CREATE_OpaqueExpression_IN_InstanceSpecification_(specification)&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-KRaSwsYEeajEecGJ9W2hw" value="1">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-KRaTAsYEeajEecGJ9W2hw" value="1">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-KRaTQsYEeajEecGJ9W2hw" value="6">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-KRaTgsYEeajEecGJ9W2hw" value="16">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="_-KRaTwsYEeajEecGJ9W2hw" name="" outgoing="_-KRaVwsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>

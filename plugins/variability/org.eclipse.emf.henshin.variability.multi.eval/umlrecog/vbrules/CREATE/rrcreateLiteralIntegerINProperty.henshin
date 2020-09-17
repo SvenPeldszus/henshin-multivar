@@ -1,7 +1,8 @@
-<henshin:Module xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmi:id="_rQRxsLRcEeeYUfLk2h7sIw">
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_4lJkkPOCEeqe6s0sCOQVEQ">
   <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
   <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
-  <units xsi:type="henshin:Rule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="_qo62wLRcEeeYUfLk2h7sIw" name="rr:createLiteralInteger_IN_Property">
+  <units xsi:type="henshin:Rule" xmi:id="__frG0QsYEeajEecGJ9W2hw" name="rr:createLiteralInteger_IN_Property" description="Recognize: creates one LiteralInteger in the context: Property">
     <parameters xmi:id="__frG0gsYEeajEecGJ9W2hw" name="Selected">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
     </parameters>
@@ -63,6 +64,22 @@
       <edges xmi:id="__frG5gsYEeajEecGJ9W2hw" source="__frG2AsYEeajEecGJ9W2hw" target="__frG2gsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Property/defaultValue"/>
       </edges>
+      <formula xsi:type="henshin:Not" xmi:id="__frG5wsYEeajEecGJ9W2hw">
+        <child xsi:type="henshin:NestedCondition" xmi:id="__frG6AsYEeajEecGJ9W2hw">
+          <conclusion xmi:id="__frG6QsYEeajEecGJ9W2hw" name="ub0">
+            <nodes xmi:id="__frG6gsYEeajEecGJ9W2hw" incoming="__frG7AsYEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+            </nodes>
+            <nodes xmi:id="__frG6wsYEeajEecGJ9W2hw" name="B.Selected" outgoing="__frG7AsYEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+            </nodes>
+            <edges xmi:id="__frG7AsYEeajEecGJ9W2hw" source="__frG6wsYEeajEecGJ9W2hw" target="__frG6gsYEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Property/defaultValue"/>
+            </edges>
+          </conclusion>
+          <mappings xmi:id="__frG7QsYEeajEecGJ9W2hw" origin="__frG2AsYEeajEecGJ9W2hw" image="__frG6wsYEeajEecGJ9W2hw"/>
+        </child>
+      </formula>
     </lhs>
     <rhs xmi:id="__frG7gsYEeajEecGJ9W2hw" name="Rhs">
       <nodes xmi:id="__frG7wsYEeajEecGJ9W2hw" name="B.Selected" incoming="__frG_wsYEeajEecGJ9W2hw" outgoing="__frHAgsYEeajEecGJ9W2hw">
@@ -82,6 +99,30 @@
       </nodes>
       <nodes xmi:id="__frG9AsYEeajEecGJ9W2hw" incoming="__frHBQsYEeajEecGJ9W2hw" outgoing="__frHAwsYEeajEecGJ9W2hw __frHBAsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="__frG9QsYEeajEecGJ9W2hw" value="&quot;CREATE_LiteralInteger_IN_Property_(defaultValue)&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__frG9gsYEeajEecGJ9W2hw" value="&quot;Creates one LiteralInteger in Property&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__frG9wsYEeajEecGJ9W2hw" value="&quot;CREATE_LiteralInteger_IN_Property_(defaultValue)&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__frG-AsYEeajEecGJ9W2hw" value="&quot;RR: CREATE_LiteralInteger_IN_Property_(defaultValue)&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__frG-QsYEeajEecGJ9W2hw" value="1">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__frG-gsYEeajEecGJ9W2hw" value="1">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__frG-wsYEeajEecGJ9W2hw" value="5">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__frG_AsYEeajEecGJ9W2hw" value="21">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="__frG_QsYEeajEecGJ9W2hw" name="" outgoing="__frHBQsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>

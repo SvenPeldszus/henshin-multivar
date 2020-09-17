@@ -1,12 +1,13 @@
 package org.eclipse.emf.henshin.variability.util;
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * 
- * @author Daniel Strüber, Stefan Schulz
+ * @author Daniel Strï¿½ber, Stefan Schulz
  *
  */
 public class XorEncoderUtil {
@@ -32,12 +33,12 @@ public class XorEncoderUtil {
 	}
 	
 	public static boolean isWellFormed(String expression) {		
-		Stack<Character> stack = new Stack<Character>();		
+		Deque<Character> stack = new LinkedList<>();		
 		for(Character c : expression.toCharArray()) {
 			if (c.equals('(')) {
 				stack.push(c);
 			} else if (c.equals(')')) {
-				if (stack.empty()) {
+				if (stack.isEmpty()) {
 					return false;
 				} else {
 					stack.pop();
@@ -48,7 +49,7 @@ public class XorEncoderUtil {
 	}
 
 	private static String eliminateFirstXor(String expression) {
-		List<String> arguments = new ArrayList<String>();
+		List<String> arguments = new ArrayList<>();
 		int startIndex = expression.indexOf("xor(") + 4;
 		int endIndex = -1;
 
@@ -83,7 +84,7 @@ public class XorEncoderUtil {
 		}
 		String prefix = expression.substring(0, startIndex - 4);
 		String suffix = expression.substring(endIndex + 1, expression.length());
-		return prefix + createEncoding(arguments) + suffix;
+		return prefix + createXorEncodingCNF(arguments) + suffix;
 	}
 
 	/**
@@ -126,8 +127,36 @@ public class XorEncoderUtil {
 			result += offset;
 		return result;
 	}
+	
+	public static String createXorEncodingCNF(List<String> arguments) {
+		int size = arguments.size();			
+		if(size == 0) {
+			return "";
+		}
+		if(size == 1) {
+			return arguments.get(0);
+		}
+		StringBuilder builder = new StringBuilder();
+		builder.append("((");
+		builder.append(arguments.get(0));
+		for(int i = 1 ; i < size; i++) {
+			builder.append(") | (");
+			builder.append(arguments.get(i));
+		}
+		builder.append("))");
+		for(int i = 0 ; i < size; i++) {
+			for(int j = i +1; j < size; j++) {
+				builder.append(" & ( ~(");
+				builder.append(arguments.get(i));
+				builder.append(") | ~(");
+				builder.append(arguments.get(j));
+				builder.append("))");
+			}
+		}
+		return builder.toString();
+	}
 
-	private static String createEncoding(List<String> literals) {
+	public static String createXorEncodingDNF(List<String> literals) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < literals.size(); i++) {
 			sb.append('(');
@@ -150,10 +179,10 @@ public class XorEncoderUtil {
 	}
 
 	public static void main(String[] args) {
+		System.out.println(encodeXor("xor(A, B)"));
 		System.out.println(encodeXor("xor(A, B, C)"));
+		System.out.println(encodeXor("xor(a, b, c, d)"));
 		System.out.println(encodeXor("xor(A, !B, D)"));
 		System.out.println(encodeXor("xor(A, xor(B,C))"));
-		System.out
-				.println(encodeXor("xor(def(tr_e_04_argument),def(tr_e_04_source))"));
 	}
 }

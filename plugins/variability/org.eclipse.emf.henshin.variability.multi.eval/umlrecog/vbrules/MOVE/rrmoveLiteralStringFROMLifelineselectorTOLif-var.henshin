@@ -1,0 +1,825 @@
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_ICMSofOJEeqKPbhZweJEtg">
+  <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
+  <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
+  <units xsi:type="henshin:Rule" xmi:id="__JrBoQsYEeajEecGJ9W2hw" name="rr:moveLiteralString_FROM_Lifeline_selector_TO_Lifeline_Lifeline,rr:moveLiteralString_FROM_Lifeline_selector_TO_Lifeline_Lifeline0,rr:moveLiteralString_FROM_Message_argument_TO_Lifeline_Lifeline,rr:moveLiteralString_FROM_Package_packagedElement_TO_Lifeline_Lifeline,rr:moveLiteralString_FROM_InteractionConstraint_minint_TO_Lifeline_Lifeline,rr:moveLiteralString_FROM_InteractionConstraint_maxint_TO_Lifeline_Lifeline" description="Recognize: Moves LiteralString from Lifeline(Reference:selector) toLifeline(Reference:Lifeline)">
+    <annotations xmi:id="_ICLrp_OJEeqKPbhZweJEtg" key="features" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline, rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline, rrmoveliteralstringfromlifelineselectortolifelinelifeline0, rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline, rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline, rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+    <annotations xmi:id="_ICLrqPOJEeqKPbhZweJEtg" key="featureConstraintIsCNF" value="true"/>
+    <annotations xmi:id="_ICLrqfOJEeqKPbhZweJEtg" key="featureConstraint" value="((rrmoveliteralstringfromlifelineselectortolifelinelifeline) | (rrmoveliteralstringfromlifelineselectortolifelinelifeline0) | (rrmoveliteralstringfrommessageargumenttolifelinelifeline) | (rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline) | (rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline) | (rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline)) &amp; ( ~(rrmoveliteralstringfromlifelineselectortolifelinelifeline) | ~(rrmoveliteralstringfromlifelineselectortolifelinelifeline0)) &amp; ( ~(rrmoveliteralstringfromlifelineselectortolifelinelifeline) | ~(rrmoveliteralstringfrommessageargumenttolifelinelifeline)) &amp; ( ~(rrmoveliteralstringfromlifelineselectortolifelinelifeline) | ~(rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline)) &amp; ( ~(rrmoveliteralstringfromlifelineselectortolifelinelifeline) | ~(rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline)) &amp; ( ~(rrmoveliteralstringfromlifelineselectortolifelinelifeline) | ~(rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline)) &amp; ( ~(rrmoveliteralstringfromlifelineselectortolifelinelifeline0) | ~(rrmoveliteralstringfrommessageargumenttolifelinelifeline)) &amp; ( ~(rrmoveliteralstringfromlifelineselectortolifelinelifeline0) | ~(rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline)) &amp; ( ~(rrmoveliteralstringfromlifelineselectortolifelinelifeline0) | ~(rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline)) &amp; ( ~(rrmoveliteralstringfromlifelineselectortolifelinelifeline0) | ~(rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline)) &amp; ( ~(rrmoveliteralstringfrommessageargumenttolifelinelifeline) | ~(rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline)) &amp; ( ~(rrmoveliteralstringfrommessageargumenttolifelinelifeline) | ~(rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline)) &amp; ( ~(rrmoveliteralstringfrommessageargumenttolifelinelifeline) | ~(rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline)) &amp; ( ~(rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline) | ~(rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline)) &amp; ( ~(rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline) | ~(rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline)) &amp; ( ~(rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline) | ~(rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline))"/>
+    <annotations xmi:id="_ICMSoPOJEeqKPbhZweJEtg" key="originalRules" value="A=Rule rr:moveLiteralString_FROM_Lifeline_selector_TO_Lifeline_Lifeline(Selected:LiteralString, OldSource:Lifeline, NewSource:Lifeline, OldSource:Message, OldSource:Package, OldSource:InteractionConstraint), B=Rule rr:moveLiteralString_FROM_Lifeline_selector_TO_Lifeline_Lifeline0(Selected:LiteralString, OldSource:Lifeline, NewSource:Lifeline), C=Rule rr:moveLiteralString_FROM_Message_argument_TO_Lifeline_Lifeline(Selected:LiteralString, OldSource:Message, NewSource:Lifeline), D=Rule rr:moveLiteralString_FROM_Package_packagedElement_TO_Lifeline_Lifeline(Selected:LiteralString, OldSource:Package, NewSource:Lifeline), E=Rule rr:moveLiteralString_FROM_InteractionConstraint_minint_TO_Lifeline_Lifeline(Selected:LiteralString, OldSource:InteractionConstraint, NewSource:Lifeline), F=Rule rr:moveLiteralString_FROM_InteractionConstraint_maxint_TO_Lifeline_Lifeline(Selected:LiteralString, OldSource:InteractionConstraint, NewSource:Lifeline)"/>
+    <parameters xmi:id="__JrBogsYEeajEecGJ9W2hw" name="Selected">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//LiteralString"/>
+    </parameters>
+    <parameters xmi:id="__JrBowsYEeajEecGJ9W2hw" name="OldSource">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline"/>
+    </parameters>
+    <parameters xmi:id="__JrBpAsYEeajEecGJ9W2hw" name="NewSource">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline"/>
+    </parameters>
+    <parameters xmi:id="_ICDvwPOJEeqKPbhZweJEtg" name="OldSource">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Message"/>
+    </parameters>
+    <parameters xmi:id="_ICEW0POJEeqKPbhZweJEtg" name="OldSource">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+    </parameters>
+    <parameters xmi:id="_ICFk8POJEeqKPbhZweJEtg" name="OldSource">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint"/>
+    </parameters>
+    <lhs xmi:id="__JrBpQsYEeajEecGJ9W2hw" name="Lhs">
+      <nodes xmi:id="__JrBpgsYEeajEecGJ9W2hw" name="B.Selected" incoming="__JrBsQsYEeajEecGJ9W2hw __JrBtwsYEeajEecGJ9W2hw __JrBuQsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//LiteralString"/>
+      </nodes>
+      <nodes xmi:id="__JrBpwsYEeajEecGJ9W2hw" name="A.Selected" incoming="__JrBsAsYEeajEecGJ9W2hw __JrBswsYEeajEecGJ9W2hw __JrBtQsYEeajEecGJ9W2hw __kTvRwsYEeajEecGJ9W2hw _-rAvxwsYEeajEecGJ9W2hw __LHzNwsYEeajEecGJ9W2hw _AJNzJwsZEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//LiteralString"/>
+      </nodes>
+      <nodes xmi:id="__JrBqAsYEeajEecGJ9W2hw" name="" outgoing="__JrBsAsYEeajEecGJ9W2hw __JrBsQsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
+      </nodes>
+      <nodes xmi:id="__JrBqQsYEeajEecGJ9W2hw" name="A.OldSource" incoming="__JrBsgsYEeajEecGJ9W2hw" outgoing="__JrBtQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTgPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline or rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline"/>
+      </nodes>
+      <nodes xmi:id="__JrBqgsYEeajEecGJ9W2hw" name="B.NewSource" incoming="__JrBtgsYEeajEecGJ9W2hw" outgoing="__JrBuQsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline"/>
+      </nodes>
+      <nodes xmi:id="__JrBqwsYEeajEecGJ9W2hw" name="" outgoing="__JrBsgsYEeajEecGJ9W2hw __JrBswsYEeajEecGJ9W2hw __JrBtAsYEeajEecGJ9W2hw __LHzNAsYEeajEecGJ9W2hw __kTvRAsYEeajEecGJ9W2hw __kTvRgsYEeajEecGJ9W2hw _AJNzJAsZEeajEecGJ9W2hw _-rAvxAsYEeajEecGJ9W2hw _-rAvxgsYEeajEecGJ9W2hw __LHzNgsYEeajEecGJ9W2hw _AJNzJgsZEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference"/>
+      </nodes>
+      <nodes xmi:id="__JrBrAsYEeajEecGJ9W2hw" name="" incoming="__JrBtAsYEeajEecGJ9W2hw __JrBuAsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="__JrBrQsYEeajEecGJ9W2hw" value="&quot;selector&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="__QkT3QsYEeajEecGJ9W2hw" value="&quot;selector&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="__LHzMAsYEeajEecGJ9W2hw" value="&quot;selector&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="__kTvQAsYEeajEecGJ9W2hw" value="&quot;selector&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="_AJNzIAsZEeajEecGJ9W2hw" value="&quot;selector&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="_-rAvwAsYEeajEecGJ9W2hw" value="&quot;selector&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__JrBrgsYEeajEecGJ9W2hw" name="" outgoing="__JrBtgsYEeajEecGJ9W2hw __JrBtwsYEeajEecGJ9W2hw __JrBuAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference"/>
+      </nodes>
+      <nodes xmi:id="__JrBrwsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_ICBT2POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="__LHzKQsYEeajEecGJ9W2hw" name="A.OldSource" incoming="__LHzNAsYEeajEecGJ9W2hw" outgoing="__LHzNwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTjPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message"/>
+      </nodes>
+      <nodes xmi:id="__LHzLAsYEeajEecGJ9W2hw" name="" incoming="__LHzNgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTjfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="__LHzLQsYEeajEecGJ9W2hw" value="&quot;argument&quot;">
+          <annotations xmi:id="_ICBTj_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__kTvQQsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_ICBTkPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_AJNzHAsZEeajEecGJ9W2hw" name="" incoming="_AJNzJgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTlPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="_AJNzHQsZEeajEecGJ9W2hw" value="&quot;minint&quot;">
+          <annotations xmi:id="_ICBTl_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_AJNzIQsZEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_ICBTlfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_-rAvuQsYEeajEecGJ9W2hw" name="A.OldSource" incoming="_-rAvxAsYEeajEecGJ9W2hw" outgoing="_-rAvxwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTmPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint"/>
+      </nodes>
+      <nodes xmi:id="_-rAvvAsYEeajEecGJ9W2hw" name="" incoming="_-rAvxgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTmfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="_-rAvvQsYEeajEecGJ9W2hw" value="&quot;maxint&quot;">
+          <annotations xmi:id="_ICBTmvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-rAvwQsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_ICBT2fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="__LHzMQsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_ICBT3fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_AJNzGQsZEeajEecGJ9W2hw" name="A.OldSource" incoming="_AJNzJAsZEeajEecGJ9W2hw" outgoing="_AJNzJwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBT4POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint"/>
+      </nodes>
+      <nodes xmi:id="__kTvOQsYEeajEecGJ9W2hw" name="A.OldSource" incoming="__kTvRAsYEeajEecGJ9W2hw" outgoing="__kTvRwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBT4_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+      </nodes>
+      <nodes xmi:id="__kTvPAsYEeajEecGJ9W2hw" name="" incoming="__kTvRgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBT5POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="__kTvPQsYEeajEecGJ9W2hw" value="&quot;packagedElement&quot;">
+          <annotations xmi:id="_ICBT5fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__QkT3wsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_ICBT5vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <edges xmi:id="__JrBsAsYEeajEecGJ9W2hw" source="__JrBqAsYEeajEecGJ9W2hw" target="__JrBpwsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
+      </edges>
+      <edges xmi:id="__JrBsQsYEeajEecGJ9W2hw" source="__JrBqAsYEeajEecGJ9W2hw" target="__JrBpgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objB"/>
+      </edges>
+      <edges xmi:id="__JrBsgsYEeajEecGJ9W2hw" source="__JrBqwsYEeajEecGJ9W2hw" target="__JrBqQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTm_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline or rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="__JrBswsYEeajEecGJ9W2hw" source="__JrBqwsYEeajEecGJ9W2hw" target="__JrBpwsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/tgt"/>
+      </edges>
+      <edges xmi:id="__JrBtAsYEeajEecGJ9W2hw" source="__JrBqwsYEeajEecGJ9W2hw" target="__JrBrAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBT5_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline or rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="__JrBtQsYEeajEecGJ9W2hw" source="__JrBqQsYEeajEecGJ9W2hw" target="__JrBpwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTnfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline or rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline/selector"/>
+      </edges>
+      <edges xmi:id="__JrBtgsYEeajEecGJ9W2hw" source="__JrBrgsYEeajEecGJ9W2hw" target="__JrBqgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="__JrBtwsYEeajEecGJ9W2hw" source="__JrBrgsYEeajEecGJ9W2hw" target="__JrBpgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/tgt"/>
+      </edges>
+      <edges xmi:id="__JrBuAsYEeajEecGJ9W2hw" source="__JrBrgsYEeajEecGJ9W2hw" target="__JrBrAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="__JrBuQsYEeajEecGJ9W2hw" source="__JrBqgsYEeajEecGJ9W2hw" target="__JrBpgsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline/selector"/>
+      </edges>
+      <edges xmi:id="__LHzNAsYEeajEecGJ9W2hw" source="__JrBqwsYEeajEecGJ9W2hw" target="__LHzKQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTjvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="__kTvRAsYEeajEecGJ9W2hw" source="__JrBqwsYEeajEecGJ9W2hw" target="__kTvOQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTkfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="__kTvRgsYEeajEecGJ9W2hw" source="__JrBqwsYEeajEecGJ9W2hw" target="__kTvPAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTkvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="__kTvRwsYEeajEecGJ9W2hw" source="__kTvOQsYEeajEecGJ9W2hw" target="__JrBpwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTk_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Package/packagedElement"/>
+      </edges>
+      <edges xmi:id="_AJNzJAsZEeajEecGJ9W2hw" source="__JrBqwsYEeajEecGJ9W2hw" target="_AJNzGQsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTlvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="_-rAvxAsYEeajEecGJ9W2hw" source="__JrBqwsYEeajEecGJ9W2hw" target="_-rAvuQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBT2vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="_-rAvxgsYEeajEecGJ9W2hw" source="__JrBqwsYEeajEecGJ9W2hw" target="_-rAvvAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBT2_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="_-rAvxwsYEeajEecGJ9W2hw" source="_-rAvuQsYEeajEecGJ9W2hw" target="__JrBpwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBT3POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint/maxint"/>
+      </edges>
+      <edges xmi:id="__LHzNgsYEeajEecGJ9W2hw" source="__JrBqwsYEeajEecGJ9W2hw" target="__LHzLAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBT3vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="__LHzNwsYEeajEecGJ9W2hw" source="__LHzKQsYEeajEecGJ9W2hw" target="__JrBpwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBT3_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/argument"/>
+      </edges>
+      <edges xmi:id="_AJNzJgsZEeajEecGJ9W2hw" source="__JrBqwsYEeajEecGJ9W2hw" target="_AJNzHAsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBT4fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="_AJNzJwsZEeajEecGJ9W2hw" source="_AJNzGQsZEeajEecGJ9W2hw" target="__JrBpwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBT4vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint/minint"/>
+      </edges>
+      <formula xsi:type="henshin:And" xmi:id="_ICLrpfOJEeqKPbhZweJEtg">
+        <left xsi:type="henshin:And" xmi:id="_ICLro_OJEeqKPbhZweJEtg">
+          <left xsi:type="henshin:And" xmi:id="_ICLrofOJEeqKPbhZweJEtg">
+            <left xsi:type="henshin:And" xmi:id="_ICLrn_OJEeqKPbhZweJEtg">
+              <left xsi:type="henshin:And" xmi:id="_ICLrnfOJEeqKPbhZweJEtg">
+                <left xsi:type="henshin:Not" xmi:id="__JrBugsYEeajEecGJ9W2hw">
+                  <child xsi:type="henshin:NestedCondition" xmi:id="__JrBuwsYEeajEecGJ9W2hw">
+                    <annotations xmi:id="_ICB6t_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+                    <conclusion xmi:id="__JrBvAsYEeajEecGJ9W2hw" name="1">
+                      <nodes xmi:id="__JrBvQsYEeajEecGJ9W2hw" incoming="__JrBvwsYEeajEecGJ9W2hw">
+                        <annotations xmi:id="_ICB6uPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+                        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+                      </nodes>
+                      <nodes xmi:id="__JrBvgsYEeajEecGJ9W2hw" name="B.NewSource" outgoing="__JrBvwsYEeajEecGJ9W2hw">
+                        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline"/>
+                      </nodes>
+                      <edges xmi:id="__JrBvwsYEeajEecGJ9W2hw" source="__JrBvgsYEeajEecGJ9W2hw" target="__JrBvQsYEeajEecGJ9W2hw">
+                        <annotations xmi:id="_ICB6ufOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+                        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline/selector"/>
+                      </edges>
+                    </conclusion>
+                    <mappings xmi:id="__JrBwAsYEeajEecGJ9W2hw" origin="__JrBqgsYEeajEecGJ9W2hw" image="__JrBvgsYEeajEecGJ9W2hw"/>
+                  </child>
+                </left>
+                <right xsi:type="henshin:Not" xmi:id="_ICLrnvOJEeqKPbhZweJEtg">
+                  <child xsi:type="henshin:NestedCondition" xmi:id="_AJNzLQsZEeajEecGJ9W2hw">
+                    <annotations xmi:id="_ICB6uvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+                    <conclusion xmi:id="_AJNzLgsZEeajEecGJ9W2hw" name="2">
+                      <nodes xmi:id="_AJNzLwsZEeajEecGJ9W2hw" incoming="_AJNzMQsZEeajEecGJ9W2hw">
+                        <annotations xmi:id="_ICB6u_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+                        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+                      </nodes>
+                      <nodes xmi:id="_AJNzMAsZEeajEecGJ9W2hw" name="B.NewSource" outgoing="_AJNzMQsZEeajEecGJ9W2hw">
+                        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline"/>
+                      </nodes>
+                      <edges xmi:id="_AJNzMQsZEeajEecGJ9W2hw" source="_AJNzMAsZEeajEecGJ9W2hw" target="_AJNzLwsZEeajEecGJ9W2hw">
+                        <annotations xmi:id="_ICB6vPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+                        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline/selector"/>
+                      </edges>
+                    </conclusion>
+                    <mappings xmi:id="_AJNzMgsZEeajEecGJ9W2hw" origin="__JrBqgsYEeajEecGJ9W2hw" image="_AJNzMAsZEeajEecGJ9W2hw"/>
+                  </child>
+                </right>
+              </left>
+              <right xsi:type="henshin:Not" xmi:id="_ICLroPOJEeqKPbhZweJEtg">
+                <child xsi:type="henshin:NestedCondition" xmi:id="_-rAvzQsYEeajEecGJ9W2hw">
+                  <annotations xmi:id="_ICB6vfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+                  <conclusion xmi:id="_-rAvzgsYEeajEecGJ9W2hw" name="3">
+                    <nodes xmi:id="_-rAvzwsYEeajEecGJ9W2hw" incoming="_-rAv0QsYEeajEecGJ9W2hw">
+                      <annotations xmi:id="_ICB6vvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+                      <type href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+                    </nodes>
+                    <nodes xmi:id="_-rAv0AsYEeajEecGJ9W2hw" name="B.NewSource" outgoing="_-rAv0QsYEeajEecGJ9W2hw">
+                      <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline"/>
+                    </nodes>
+                    <edges xmi:id="_-rAv0QsYEeajEecGJ9W2hw" source="_-rAv0AsYEeajEecGJ9W2hw" target="_-rAvzwsYEeajEecGJ9W2hw">
+                      <annotations xmi:id="_ICB6v_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+                      <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline/selector"/>
+                    </edges>
+                  </conclusion>
+                  <mappings xmi:id="_-rAv0gsYEeajEecGJ9W2hw" origin="__JrBqgsYEeajEecGJ9W2hw" image="_-rAv0AsYEeajEecGJ9W2hw"/>
+                </child>
+              </right>
+            </left>
+            <right xsi:type="henshin:Not" xmi:id="_ICLrovOJEeqKPbhZweJEtg">
+              <child xsi:type="henshin:NestedCondition" xmi:id="__LHzPQsYEeajEecGJ9W2hw">
+                <annotations xmi:id="_ICB6wPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+                <conclusion xmi:id="__LHzPgsYEeajEecGJ9W2hw" name="4">
+                  <nodes xmi:id="__LHzPwsYEeajEecGJ9W2hw" incoming="__LHzQQsYEeajEecGJ9W2hw">
+                    <annotations xmi:id="_ICB6wfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+                    <type href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+                  </nodes>
+                  <nodes xmi:id="__LHzQAsYEeajEecGJ9W2hw" name="B.NewSource" outgoing="__LHzQQsYEeajEecGJ9W2hw">
+                    <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline"/>
+                  </nodes>
+                  <edges xmi:id="__LHzQQsYEeajEecGJ9W2hw" source="__LHzQAsYEeajEecGJ9W2hw" target="__LHzPwsYEeajEecGJ9W2hw">
+                    <annotations xmi:id="_ICB6wvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+                    <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline/selector"/>
+                  </edges>
+                </conclusion>
+                <mappings xmi:id="__LHzQgsYEeajEecGJ9W2hw" origin="__JrBqgsYEeajEecGJ9W2hw" image="__LHzQAsYEeajEecGJ9W2hw"/>
+              </child>
+            </right>
+          </left>
+          <right xsi:type="henshin:Not" xmi:id="_ICLrpPOJEeqKPbhZweJEtg">
+            <child xsi:type="henshin:NestedCondition" xmi:id="__kTvTQsYEeajEecGJ9W2hw">
+              <annotations xmi:id="_ICB6w_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+              <conclusion xmi:id="__kTvTgsYEeajEecGJ9W2hw" name="5">
+                <nodes xmi:id="__kTvTwsYEeajEecGJ9W2hw" incoming="__kTvUQsYEeajEecGJ9W2hw">
+                  <annotations xmi:id="_ICB6xPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+                </nodes>
+                <nodes xmi:id="__kTvUAsYEeajEecGJ9W2hw" name="B.NewSource" outgoing="__kTvUQsYEeajEecGJ9W2hw">
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline"/>
+                </nodes>
+                <edges xmi:id="__kTvUQsYEeajEecGJ9W2hw" source="__kTvUAsYEeajEecGJ9W2hw" target="__kTvTwsYEeajEecGJ9W2hw">
+                  <annotations xmi:id="_ICB6xfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline/selector"/>
+                </edges>
+              </conclusion>
+              <mappings xmi:id="__kTvUgsYEeajEecGJ9W2hw" origin="__JrBqgsYEeajEecGJ9W2hw" image="__kTvUAsYEeajEecGJ9W2hw"/>
+            </child>
+          </right>
+        </left>
+        <right xsi:type="henshin:Not" xmi:id="_ICLrpvOJEeqKPbhZweJEtg">
+          <child xsi:type="henshin:NestedCondition" xmi:id="__QkT6wsYEeajEecGJ9W2hw">
+            <annotations xmi:id="_ICB6xvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+            <conclusion xmi:id="__QkT7AsYEeajEecGJ9W2hw" name="6">
+              <nodes xmi:id="__QkT7QsYEeajEecGJ9W2hw" incoming="__QkT7wsYEeajEecGJ9W2hw">
+                <annotations xmi:id="_ICB6x_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+                <type href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+              </nodes>
+              <nodes xmi:id="__QkT7gsYEeajEecGJ9W2hw" name="B.NewSource" outgoing="__QkT7wsYEeajEecGJ9W2hw">
+                <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline"/>
+              </nodes>
+              <edges xmi:id="__QkT7wsYEeajEecGJ9W2hw" source="__QkT7gsYEeajEecGJ9W2hw" target="__QkT7QsYEeajEecGJ9W2hw">
+                <annotations xmi:id="_ICB6yPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+                <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline/selector"/>
+              </edges>
+            </conclusion>
+            <mappings xmi:id="__QkT8AsYEeajEecGJ9W2hw" origin="__JrBqgsYEeajEecGJ9W2hw" image="__QkT7gsYEeajEecGJ9W2hw"/>
+          </child>
+        </right>
+      </formula>
+    </lhs>
+    <rhs xmi:id="__JrBwQsYEeajEecGJ9W2hw" name="Rhs">
+      <nodes xmi:id="__JrBwgsYEeajEecGJ9W2hw" name="B.Selected" incoming="__JrB1QsYEeajEecGJ9W2hw __JrB2wsYEeajEecGJ9W2hw __JrB3QsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//LiteralString"/>
+      </nodes>
+      <nodes xmi:id="__JrBwwsYEeajEecGJ9W2hw" name="A.Selected" incoming="__JrB1AsYEeajEecGJ9W2hw __JrB1wsYEeajEecGJ9W2hw __JrB2QsYEeajEecGJ9W2hw __kUWVAsYEeajEecGJ9W2hw _AJNzTAsZEeajEecGJ9W2hw _-rAv7AsYEeajEecGJ9W2hw __LHzXAsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//LiteralString"/>
+      </nodes>
+      <nodes xmi:id="__JrBxAsYEeajEecGJ9W2hw" name="" outgoing="__JrB1AsYEeajEecGJ9W2hw __JrB1QsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
+      </nodes>
+      <nodes xmi:id="__JrBxQsYEeajEecGJ9W2hw" name="A.OldSource" incoming="__JrB1gsYEeajEecGJ9W2hw" outgoing="__JrB2QsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBT0fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline or rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline"/>
+      </nodes>
+      <nodes xmi:id="__JrBxgsYEeajEecGJ9W2hw" name="B.NewSource" incoming="__JrB2gsYEeajEecGJ9W2hw" outgoing="__JrB3QsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline"/>
+      </nodes>
+      <nodes xmi:id="__JrBxwsYEeajEecGJ9W2hw" name="" incoming="__JrB3gsYEeajEecGJ9W2hw __QkUDgsYEeajEecGJ9W2hw __LHzYQsYEeajEecGJ9W2hw __kUWWQsYEeajEecGJ9W2hw _AJNzUQsZEeajEecGJ9W2hw _-rAv8QsYEeajEecGJ9W2hw" outgoing="__JrB1gsYEeajEecGJ9W2hw __JrB1wsYEeajEecGJ9W2hw __JrB2AsYEeajEecGJ9W2hw __kUWUQsYEeajEecGJ9W2hw _AJNzSQsZEeajEecGJ9W2hw _AJNzSwsZEeajEecGJ9W2hw _-rAv6QsYEeajEecGJ9W2hw _-rAv6wsYEeajEecGJ9W2hw __LHzWQsYEeajEecGJ9W2hw __LHzWwsYEeajEecGJ9W2hw __kUWUwsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference"/>
+      </nodes>
+      <nodes xmi:id="__JrByAsYEeajEecGJ9W2hw" name="" incoming="__JrB2AsYEeajEecGJ9W2hw __JrB3AsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="__JrByQsYEeajEecGJ9W2hw" name="" incoming="__JrB3wsYEeajEecGJ9W2hw __LHzYgsYEeajEecGJ9W2hw __kUWWgsYEeajEecGJ9W2hw _AJNzUgsZEeajEecGJ9W2hw __QkUDwsYEeajEecGJ9W2hw _-rAv8gsYEeajEecGJ9W2hw" outgoing="__JrB2gsYEeajEecGJ9W2hw __JrB2wsYEeajEecGJ9W2hw __JrB3AsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference"/>
+      </nodes>
+      <nodes xmi:id="__JrBygsYEeajEecGJ9W2hw" incoming="__JrB4AsYEeajEecGJ9W2hw" outgoing="__JrB3gsYEeajEecGJ9W2hw __JrB3wsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6kPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="__JrBywsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_LiteralString_FROM_Lifeline_(selector)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICBThvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__JrBzAsYEeajEecGJ9W2hw" value="&quot;MOVEs LiteralString from Lifeline(Reference:selector) to Lifeline(Reference:selector&quot;">
+          <annotations xmi:id="_ICB6lPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__JrBzQsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_LiteralString_FROM_Lifeline_(selector)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICBT1POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__JrBzgsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_LiteralString_FROM_Lifeline_(selector)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICBT1fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__JrBzwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_ICBT1vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__JrB0AsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_ICBT1_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__JrB0QsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_ICBTh_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__JrB0gsYEeajEecGJ9W2hw" value="17">
+          <annotations xmi:id="_ICBTiPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__JrB0wsYEeajEecGJ9W2hw" name="" outgoing="__JrB4AsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTgvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="__LHzTQsYEeajEecGJ9W2hw" incoming="__LHzYwsYEeajEecGJ9W2hw" outgoing="__LHzYQsYEeajEecGJ9W2hw __LHzYgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTn_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="__LHzTgsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_LiteralString_FROM_Message_(argument)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICBTpPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__LHzTwsYEeajEecGJ9W2hw" value="&quot;MOVEs LiteralString from Message(Reference:argument) to Lifeline(Reference:selector&quot;">
+          <annotations xmi:id="_ICBTpfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__LHzUAsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_LiteralString_FROM_Message_(argument)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICBTpvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__LHzUQsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_LiteralString_FROM_Message_(argument)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICB6ofOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__LHzUgsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_ICB6ovOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__LHzUwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_ICBTp_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__LHzVAsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_ICB6o_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__LHzVQsYEeajEecGJ9W2hw" value="17">
+          <annotations xmi:id="_ICBTqPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__LHzVgsYEeajEecGJ9W2hw" name="" outgoing="__LHzYwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBToPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="__kUWTgsYEeajEecGJ9W2hw" name="" outgoing="__kUWWwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTqfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_AJNzOgsZEeajEecGJ9W2hw" name="" incoming="_AJNzSwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTs_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="_AJNzRgsZEeajEecGJ9W2hw" name="" outgoing="_AJNzUwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTtPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="__QkT-gsYEeajEecGJ9W2hw" incoming="__QkUEAsYEeajEecGJ9W2hw" outgoing="__QkUDgsYEeajEecGJ9W2hw __QkUDwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTv_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="__QkT-wsYEeajEecGJ9W2hw" value="&quot;MOVE_LiteralString_FROM_Lifeline_(selector)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICBTivOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__QkT_AsYEeajEecGJ9W2hw" value="&quot;MOVEs LiteralString from Lifeline(Reference:selector) to Lifeline(Reference:selector&quot;">
+          <annotations xmi:id="_ICBTi_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__QkT_QsYEeajEecGJ9W2hw" value="&quot;MOVE_LiteralString_FROM_Lifeline_(selector)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICBTwvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__QkT_gsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_LiteralString_FROM_Lifeline_(selector)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICBTw_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__QkT_wsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_ICBTxPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__QkUAAsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_ICB6tfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__QkUAQsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_ICB6tvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__QkUAgsYEeajEecGJ9W2hw" value="17">
+          <annotations xmi:id="_ICBTxfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__QkUAwsYEeajEecGJ9W2hw" name="" outgoing="__QkUEAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTwPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_-rAv2gsYEeajEecGJ9W2hw" name="" incoming="_-rAv6wsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTxvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="_-rAv3QsYEeajEecGJ9W2hw" incoming="_-rAv8wsYEeajEecGJ9W2hw" outgoing="_-rAv8QsYEeajEecGJ9W2hw _-rAv8gsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTx_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_-rAv3gsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_LiteralString_FROM_InteractionConstraint_(maxint)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICBTzfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-rAv3wsYEeajEecGJ9W2hw" value="&quot;MOVEs LiteralString from InteractionConstraint(Reference:maxint) to Lifeline(Reference:selector&quot;">
+          <annotations xmi:id="_ICB6mPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-rAv4AsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_LiteralString_FROM_InteractionConstraint_(maxint)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICBTzvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-rAv4QsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_LiteralString_FROM_InteractionConstraint_(maxint)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICB6mfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-rAv4gsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_ICB6mvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-rAv4wsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_ICBTz_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-rAv5AsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_ICB6m_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-rAv5QsYEeajEecGJ9W2hw" value="20">
+          <annotations xmi:id="_ICBT0POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-rAv1wsYEeajEecGJ9W2hw" name="A.OldSource" incoming="_-rAv6QsYEeajEecGJ9W2hw" outgoing="_-rAv7AsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6lfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint"/>
+      </nodes>
+      <nodes xmi:id="_-rAv5gsYEeajEecGJ9W2hw" name="" outgoing="_-rAv8wsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6lvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="__LHzRwsYEeajEecGJ9W2hw" name="A.OldSource" incoming="__LHzWQsYEeajEecGJ9W2hw" outgoing="__LHzXAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6nPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message"/>
+      </nodes>
+      <nodes xmi:id="__LHzSgsYEeajEecGJ9W2hw" name="" incoming="__LHzWwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6nfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="_AJNzNwsZEeajEecGJ9W2hw" name="A.OldSource" incoming="_AJNzSQsZEeajEecGJ9W2hw" outgoing="_AJNzTAsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6pPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint"/>
+      </nodes>
+      <nodes xmi:id="_AJNzPQsZEeajEecGJ9W2hw" incoming="_AJNzUwsZEeajEecGJ9W2hw" outgoing="_AJNzUQsZEeajEecGJ9W2hw _AJNzUgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6pfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_AJNzPgsZEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_LiteralString_FROM_InteractionConstraint_(minint)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICB6pvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_AJNzPwsZEeajEecGJ9W2hw" value="&quot;MOVEs LiteralString from InteractionConstraint(Reference:minint) to Lifeline(Reference:selector&quot;">
+          <annotations xmi:id="_ICBTu_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_AJNzQAsZEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_LiteralString_FROM_InteractionConstraint_(minint)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICBTvPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_AJNzQQsZEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_LiteralString_FROM_InteractionConstraint_(minint)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICB6p_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_AJNzQgsZEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_ICBTvfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_AJNzQwsZEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_ICBTvvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_AJNzRAsZEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_ICB6qPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_AJNzRQsZEeajEecGJ9W2hw" value="20">
+          <annotations xmi:id="_ICB6qfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__kTvVwsYEeajEecGJ9W2hw" name="A.OldSource" incoming="__kUWUQsYEeajEecGJ9W2hw" outgoing="__kUWVAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6qvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+      </nodes>
+      <nodes xmi:id="__kUWQgsYEeajEecGJ9W2hw" name="" incoming="__kUWUwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6q_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="__kUWRQsYEeajEecGJ9W2hw" incoming="__kUWWwsYEeajEecGJ9W2hw" outgoing="__kUWWQsYEeajEecGJ9W2hw __kUWWgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6rPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="__kUWRgsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_LiteralString_FROM_Package_(packagedElement)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICBTrvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__kUWRwsYEeajEecGJ9W2hw" value="&quot;MOVEs LiteralString from Package(Reference:packagedElement) to Lifeline(Reference:selector&quot;">
+          <annotations xmi:id="_ICBTr_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__kUWSAsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_LiteralString_FROM_Package_(packagedElement)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICB6r_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__kUWSQsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_LiteralString_FROM_Package_(packagedElement)_TO_Lifeline_(selector)&quot;">
+          <annotations xmi:id="_ICB6sPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__kUWSgsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_ICBTsPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__kUWSwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_ICB6sfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__kUWTAsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_ICBTsfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__kUWTQsYEeajEecGJ9W2hw" value="21">
+          <annotations xmi:id="_ICBTsvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <edges xmi:id="__JrB1AsYEeajEecGJ9W2hw" source="__JrBxAsYEeajEecGJ9W2hw" target="__JrBwwsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
+      </edges>
+      <edges xmi:id="__JrB1QsYEeajEecGJ9W2hw" source="__JrBxAsYEeajEecGJ9W2hw" target="__JrBwgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objB"/>
+      </edges>
+      <edges xmi:id="__JrB1gsYEeajEecGJ9W2hw" source="__JrBxwsYEeajEecGJ9W2hw" target="__JrBxQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6svOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline or rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="__JrB1wsYEeajEecGJ9W2hw" source="__JrBxwsYEeajEecGJ9W2hw" target="__JrBwwsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/tgt"/>
+      </edges>
+      <edges xmi:id="__JrB2AsYEeajEecGJ9W2hw" source="__JrBxwsYEeajEecGJ9W2hw" target="__JrByAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6kfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline or rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="__JrB2QsYEeajEecGJ9W2hw" source="__JrBxQsYEeajEecGJ9W2hw" target="__JrBwwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTg_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline or rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline/selector"/>
+      </edges>
+      <edges xmi:id="__JrB2gsYEeajEecGJ9W2hw" source="__JrByQsYEeajEecGJ9W2hw" target="__JrBxgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="__JrB2wsYEeajEecGJ9W2hw" source="__JrByQsYEeajEecGJ9W2hw" target="__JrBwgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/tgt"/>
+      </edges>
+      <edges xmi:id="__JrB3AsYEeajEecGJ9W2hw" source="__JrByQsYEeajEecGJ9W2hw" target="__JrByAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="__JrB3QsYEeajEecGJ9W2hw" source="__JrBxgsYEeajEecGJ9W2hw" target="__JrBwgsYEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline/selector"/>
+      </edges>
+      <edges xmi:id="__JrB3gsYEeajEecGJ9W2hw" source="__JrBygsYEeajEecGJ9W2hw" target="__JrBxwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBThfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__JrB3wsYEeajEecGJ9W2hw" source="__JrBygsYEeajEecGJ9W2hw" target="__JrByQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6k_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__JrB4AsYEeajEecGJ9W2hw" source="__JrB0wsYEeajEecGJ9W2hw" target="__JrBygsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBT0_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="__QkUDgsYEeajEecGJ9W2hw" source="__QkT-gsYEeajEecGJ9W2hw" target="__JrBxwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTifOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__LHzYQsYEeajEecGJ9W2hw" source="__LHzTQsYEeajEecGJ9W2hw" target="__JrBxwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTofOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__LHzYgsYEeajEecGJ9W2hw" source="__LHzTQsYEeajEecGJ9W2hw" target="__JrByQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTovOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__LHzYwsYEeajEecGJ9W2hw" source="__LHzVgsYEeajEecGJ9W2hw" target="__LHzTQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTo_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="__kUWUQsYEeajEecGJ9W2hw" source="__JrBxwsYEeajEecGJ9W2hw" target="__kTvVwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTqvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="__kUWVAsYEeajEecGJ9W2hw" source="__kTvVwsYEeajEecGJ9W2hw" target="__JrBwwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTq_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Package/packagedElement"/>
+      </edges>
+      <edges xmi:id="__kUWWQsYEeajEecGJ9W2hw" source="__kUWRQsYEeajEecGJ9W2hw" target="__JrBxwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTrPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__kUWWgsYEeajEecGJ9W2hw" source="__kUWRQsYEeajEecGJ9W2hw" target="__JrByQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTrfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_AJNzSQsZEeajEecGJ9W2hw" source="__JrBxwsYEeajEecGJ9W2hw" target="_AJNzNwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTtfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="_AJNzSwsZEeajEecGJ9W2hw" source="__JrBxwsYEeajEecGJ9W2hw" target="_AJNzOgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTtvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="_AJNzTAsZEeajEecGJ9W2hw" source="_AJNzNwsZEeajEecGJ9W2hw" target="__JrBwwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTt_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint/minint"/>
+      </edges>
+      <edges xmi:id="_AJNzUQsZEeajEecGJ9W2hw" source="_AJNzPQsZEeajEecGJ9W2hw" target="__JrBxwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTuPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_AJNzUgsZEeajEecGJ9W2hw" source="_AJNzPQsZEeajEecGJ9W2hw" target="__JrByQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTufOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_AJNzUwsZEeajEecGJ9W2hw" source="_AJNzRgsZEeajEecGJ9W2hw" target="_AJNzPQsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTuvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmininttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="__QkUDwsYEeajEecGJ9W2hw" source="__QkT-gsYEeajEecGJ9W2hw" target="__JrByQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTwfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-rAv6QsYEeajEecGJ9W2hw" source="__JrBxwsYEeajEecGJ9W2hw" target="_-rAv1wsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTyPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="_-rAv7AsYEeajEecGJ9W2hw" source="_-rAv1wsYEeajEecGJ9W2hw" target="__JrBwwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTyfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionConstraint/maxint"/>
+      </edges>
+      <edges xmi:id="_-rAv8QsYEeajEecGJ9W2hw" source="_-rAv3QsYEeajEecGJ9W2hw" target="__JrBxwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTyvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-rAv8gsYEeajEecGJ9W2hw" source="_-rAv3QsYEeajEecGJ9W2hw" target="__JrByQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTy_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-rAv8wsYEeajEecGJ9W2hw" source="_-rAv5gsYEeajEecGJ9W2hw" target="_-rAv3QsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICBTzPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="_-rAv6wsYEeajEecGJ9W2hw" source="__JrBxwsYEeajEecGJ9W2hw" target="_-rAv2gsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6l_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrominteractionconstraintmaxinttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="__LHzWQsYEeajEecGJ9W2hw" source="__JrBxwsYEeajEecGJ9W2hw" target="__LHzRwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6nvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="__LHzWwsYEeajEecGJ9W2hw" source="__JrBxwsYEeajEecGJ9W2hw" target="__LHzSgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6n_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="__LHzXAsYEeajEecGJ9W2hw" source="__LHzRwsYEeajEecGJ9W2hw" target="__JrBwwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6oPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommessageargumenttolifelinelifeline"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message/argument"/>
+      </edges>
+      <edges xmi:id="__kUWUwsYEeajEecGJ9W2hw" source="__JrBxwsYEeajEecGJ9W2hw" target="__kUWQgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6rfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="__kUWWwsYEeajEecGJ9W2hw" source="__kUWTgsYEeajEecGJ9W2hw" target="__kUWRQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6rvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrompackagepackagedelementtolifelinelifeline"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="__QkUEAsYEeajEecGJ9W2hw" source="__QkUAwsYEeajEecGJ9W2hw" target="__QkT-gsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICB6tPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfromlifelineselectortolifelinelifeline0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+    </rhs>
+    <mappings xmi:id="__JrB4QsYEeajEecGJ9W2hw" origin="__JrBpgsYEeajEecGJ9W2hw" image="__JrBwgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__JrB4gsYEeajEecGJ9W2hw" origin="__JrBpwsYEeajEecGJ9W2hw" image="__JrBwwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__JrB4wsYEeajEecGJ9W2hw" origin="__JrBqAsYEeajEecGJ9W2hw" image="__JrBxAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__JrB5AsYEeajEecGJ9W2hw" origin="__JrBqQsYEeajEecGJ9W2hw" image="__JrBxQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__JrB5QsYEeajEecGJ9W2hw" origin="__JrBqgsYEeajEecGJ9W2hw" image="__JrBxgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__JrB5gsYEeajEecGJ9W2hw" origin="__JrBqwsYEeajEecGJ9W2hw" image="__JrBxwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__JrB5wsYEeajEecGJ9W2hw" origin="__JrBrAsYEeajEecGJ9W2hw" image="__JrByAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__JrB6AsYEeajEecGJ9W2hw" origin="__JrBrgsYEeajEecGJ9W2hw" image="__JrByQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="__JrB6QsYEeajEecGJ9W2hw" origin="__JrBrwsYEeajEecGJ9W2hw" image="__JrB0wsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICLrkPOJEeqKPbhZweJEtg" origin="__QkT3wsYEeajEecGJ9W2hw" image="__QkUAwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICLrkfOJEeqKPbhZweJEtg" origin="__LHzKQsYEeajEecGJ9W2hw" image="__LHzRwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICLrkvOJEeqKPbhZweJEtg" origin="__LHzLAsYEeajEecGJ9W2hw" image="__LHzSgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICLrk_OJEeqKPbhZweJEtg" origin="__LHzMQsYEeajEecGJ9W2hw" image="__LHzVgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICLrlPOJEeqKPbhZweJEtg" origin="__kTvOQsYEeajEecGJ9W2hw" image="__kTvVwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICLrlfOJEeqKPbhZweJEtg" origin="__kTvPAsYEeajEecGJ9W2hw" image="__kUWQgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICLrlvOJEeqKPbhZweJEtg" origin="__kTvQQsYEeajEecGJ9W2hw" image="__kUWTgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICLrl_OJEeqKPbhZweJEtg" origin="_AJNzGQsZEeajEecGJ9W2hw" image="_AJNzNwsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICLrmPOJEeqKPbhZweJEtg" origin="_AJNzHAsZEeajEecGJ9W2hw" image="_AJNzOgsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICLrmfOJEeqKPbhZweJEtg" origin="_AJNzIQsZEeajEecGJ9W2hw" image="_AJNzRgsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICLrmvOJEeqKPbhZweJEtg" origin="_-rAvuQsYEeajEecGJ9W2hw" image="_-rAv1wsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICLrm_OJEeqKPbhZweJEtg" origin="_-rAvvAsYEeajEecGJ9W2hw" image="_-rAv2gsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICLrnPOJEeqKPbhZweJEtg" origin="_-rAvwQsYEeajEecGJ9W2hw" image="_-rAv5gsYEeajEecGJ9W2hw"/>
+  </units>
+</henshin:Module>

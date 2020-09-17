@@ -1,18 +1,21 @@
-<henshin:Module xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmi:id="_AKRC4LReEeeov9OkQ8jWjw">
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_6IqJQPODEeqqCPSqbxOWQA">
   <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
   <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
-  <units xsi:type="henshin:Rule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="__yQLgLRdEeeov9OkQ8jWjw" name="rr:removeFromBehavioralFeature_method_Behavior,rr:setBehavior_specification_TO_BehavioralFeature">
-    <annotations xmi:id="_AKPNsLReEeeov9OkQ8jWjw" key="originalRules" value="A=Rule rr:removeFromBehavioralFeature_method_Behavior(Selected:BehavioralFeature, OldTarget:Behavior, Selected:Behavior, NewTarget:BehavioralFeature), B=Rule rr:setBehavior_specification_TO_BehavioralFeature(Selected:Behavior, NewTarget:BehavioralFeature)"/>
+  <units xsi:type="henshin:Rule" xmi:id="_AUeA0QsZEeajEecGJ9W2hw" name="rr:removeFromBehavioralFeature_method_Behavior,rr:unsetBehavior_specification_TO_BehavioralFeature" description="Recognize: Removes from BehavioralFeature's reference method the target Behavior">
+    <annotations xmi:id="_6IpiMfODEeqqCPSqbxOWQA" key="features" value="rrremovefrombehavioralfeaturemethodbehavior, rrunsetbehaviorspecificationtobehavioralfeature"/>
+    <annotations xmi:id="_6IpiMvODEeqqCPSqbxOWQA" key="featureConstraint" value="((rrremovefrombehavioralfeaturemethodbehavior) | (rrunsetbehaviorspecificationtobehavioralfeature)) &amp; ( ~(rrremovefrombehavioralfeaturemethodbehavior) | ~(rrunsetbehaviorspecificationtobehavioralfeature))"/>
+    <annotations xmi:id="_6IpiM_ODEeqqCPSqbxOWQA" key="originalRules" value="A=Rule rr:removeFromBehavioralFeature_method_Behavior(Selected:BehavioralFeature, OldTarget, Selected:Behavior, NewTarget:BehavioralFeature), B=Rule rr:unsetBehavior_specification_TO_BehavioralFeature(Selected:Behavior, NewTarget:BehavioralFeature)"/>
     <parameters xmi:id="_AUeA0gsZEeajEecGJ9W2hw" name="Selected">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//BehavioralFeature"/>
     </parameters>
     <parameters xmi:id="_AUeA0wsZEeajEecGJ9W2hw" name="OldTarget">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Behavior"/>
     </parameters>
-    <parameters xmi:id="_AKK8QLReEeeov9OkQ8jWjw" name="Selected">
+    <parameters xmi:id="_6Io7IPODEeqqCPSqbxOWQA" name="Selected">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Behavior"/>
     </parameters>
-    <parameters xmi:id="_AKLjULReEeeov9OkQ8jWjw" name="NewTarget">
+    <parameters xmi:id="_6Io7IfODEeqqCPSqbxOWQA" name="NewTarget">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//BehavioralFeature"/>
     </parameters>
     <lhs xmi:id="_AUeA1AsZEeajEecGJ9W2hw" name="Lhs">
@@ -47,12 +50,12 @@
         </attributes>
       </nodes>
       <nodes xmi:id="_AUeA3QsZEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_6IntAPODEeqqCPSqbxOWQA" key="presenceCondition" value="rrremovefrombehavioralfeaturemethodbehavior"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="A"/>
       </nodes>
       <nodes xmi:id="__QL5XQsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_6IntAfODEeqqCPSqbxOWQA" key="presenceCondition" value="rrunsetbehaviorspecificationtobehavioralfeature"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="B"/>
       </nodes>
       <edges xmi:id="_AUeA3gsZEeajEecGJ9W2hw" source="_AUeA1wsZEeajEecGJ9W2hw" target="_AUeA1QsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
@@ -99,20 +102,84 @@
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
       </nodes>
       <nodes xmi:id="_AUeA7QsZEeajEecGJ9W2hw" incoming="_AUeBAQsZEeajEecGJ9W2hw" outgoing="_AUeA_wsZEeajEecGJ9W2hw _AUeBAAsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_6IntAvODEeqqCPSqbxOWQA" key="presenceCondition" value="rrremovefrombehavioralfeaturemethodbehavior"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="A"/>
+        <attributes xmi:id="_AUeA7gsZEeajEecGJ9W2hw" value="&quot;REMOVE_BehavioralFeature_(method)_TGT_Behavior&quot;">
+          <annotations xmi:id="_6IoUFPODEeqqCPSqbxOWQA" key="presenceCondition" value="rrremovefrombehavioralfeaturemethodbehavior"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_AUeA7wsZEeajEecGJ9W2hw" value="&quot;Removes BehavioralFeature's reference method the target Behavior&quot;">
+          <annotations xmi:id="_6IoUFfODEeqqCPSqbxOWQA" key="presenceCondition" value="rrremovefrombehavioralfeaturemethodbehavior"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_AUeA8AsZEeajEecGJ9W2hw" value="&quot;REMOVE_BehavioralFeature_(method)_TGT_Behavior&quot;">
+          <annotations xmi:id="_6IoUFvODEeqqCPSqbxOWQA" key="presenceCondition" value="rrremovefrombehavioralfeaturemethodbehavior"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_AUeA8QsZEeajEecGJ9W2hw" value="&quot;RR: REMOVE_BehavioralFeature_(method)_TGT_Behavior&quot;">
+          <annotations xmi:id="_6IoUF_ODEeqqCPSqbxOWQA" key="presenceCondition" value="rrremovefrombehavioralfeaturemethodbehavior"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_AUeA8gsZEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_6IoUGPODEeqqCPSqbxOWQA" key="presenceCondition" value="rrremovefrombehavioralfeaturemethodbehavior"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_AUeA8wsZEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_6IoUGfODEeqqCPSqbxOWQA" key="presenceCondition" value="rrremovefrombehavioralfeaturemethodbehavior"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_AUeA9AsZEeajEecGJ9W2hw" value="2">
+          <annotations xmi:id="_6IoUGvODEeqqCPSqbxOWQA" key="presenceCondition" value="rrremovefrombehavioralfeaturemethodbehavior"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_AUeA9QsZEeajEecGJ9W2hw" value="22">
+          <annotations xmi:id="_6IoUG_ODEeqqCPSqbxOWQA" key="presenceCondition" value="rrremovefrombehavioralfeaturemethodbehavior"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="_AUeA9gsZEeajEecGJ9W2hw" name="" outgoing="_AUeBAQsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_6IoUEPODEeqqCPSqbxOWQA" key="presenceCondition" value="rrremovefrombehavioralfeaturemethodbehavior"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="A"/>
       </nodes>
       <nodes xmi:id="__QL5bQsYEeajEecGJ9W2hw" incoming="__QL5gQsYEeajEecGJ9W2hw" outgoing="__QL5fwsYEeajEecGJ9W2hw __QL5gAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_6IoUHPODEeqqCPSqbxOWQA" key="presenceCondition" value="rrunsetbehaviorspecificationtobehavioralfeature"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="B"/>
+        <attributes xmi:id="__QL5bgsYEeajEecGJ9W2hw" value="&quot;UNSET_REFERENCE_Behavior_(specification)_TGT_BehavioralFeature&quot;">
+          <annotations xmi:id="_6IoUIfODEeqqCPSqbxOWQA" key="presenceCondition" value="rrunsetbehaviorspecificationtobehavioralfeature"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__QL5bwsYEeajEecGJ9W2hw" value="&quot;Sets Behavior's reference specification the target BehavioralFeature&quot;">
+          <annotations xmi:id="_6IoUIvODEeqqCPSqbxOWQA" key="presenceCondition" value="rrunsetbehaviorspecificationtobehavioralfeature"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__QL5cAsYEeajEecGJ9W2hw" value="&quot;UNSET_REFERENCE_Behavior_(specification)_TGT_BehavioralFeature&quot;">
+          <annotations xmi:id="_6IoUI_ODEeqqCPSqbxOWQA" key="presenceCondition" value="rrunsetbehaviorspecificationtobehavioralfeature"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__QL5cQsYEeajEecGJ9W2hw" value="&quot;RR: UNSET_REFERENCE_Behavior_(specification)_TGT_BehavioralFeature&quot;">
+          <annotations xmi:id="_6IoUJPODEeqqCPSqbxOWQA" key="presenceCondition" value="rrunsetbehaviorspecificationtobehavioralfeature"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__QL5cgsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_6IoUJfODEeqqCPSqbxOWQA" key="presenceCondition" value="rrunsetbehaviorspecificationtobehavioralfeature"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__QL5cwsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_6IoUJvODEeqqCPSqbxOWQA" key="presenceCondition" value="rrunsetbehaviorspecificationtobehavioralfeature"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__QL5dAsYEeajEecGJ9W2hw" value="2">
+          <annotations xmi:id="_6IoUJ_ODEeqqCPSqbxOWQA" key="presenceCondition" value="rrunsetbehaviorspecificationtobehavioralfeature"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__QL5dQsYEeajEecGJ9W2hw" value="22">
+          <annotations xmi:id="_6IoUKPODEeqqCPSqbxOWQA" key="presenceCondition" value="rrunsetbehaviorspecificationtobehavioralfeature"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="__QL5dgsYEeajEecGJ9W2hw" name="" outgoing="__QL5gQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_6IoUHfODEeqqCPSqbxOWQA" key="presenceCondition" value="rrunsetbehaviorspecificationtobehavioralfeature"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="B"/>
       </nodes>
       <edges xmi:id="_AUeA9wsZEeajEecGJ9W2hw" source="_AUeA6QsZEeajEecGJ9W2hw" target="_AUeA5wsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
@@ -139,28 +206,28 @@
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Behavior/specification"/>
       </edges>
       <edges xmi:id="_AUeA_wsZEeajEecGJ9W2hw" source="_AUeA7QsZEeajEecGJ9W2hw" target="_AUeA6QsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_6IoUEfODEeqqCPSqbxOWQA" key="presenceCondition" value="rrremovefrombehavioralfeaturemethodbehavior"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="A"/>
       </edges>
       <edges xmi:id="_AUeBAAsZEeajEecGJ9W2hw" source="_AUeA7QsZEeajEecGJ9W2hw" target="_AUeA6wsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_6IoUEvODEeqqCPSqbxOWQA" key="presenceCondition" value="rrremovefrombehavioralfeaturemethodbehavior"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="A"/>
       </edges>
       <edges xmi:id="_AUeBAQsZEeajEecGJ9W2hw" source="_AUeA9gsZEeajEecGJ9W2hw" target="_AUeA7QsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_6IoUE_ODEeqqCPSqbxOWQA" key="presenceCondition" value="rrremovefrombehavioralfeaturemethodbehavior"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="A"/>
       </edges>
       <edges xmi:id="__QL5fwsYEeajEecGJ9W2hw" source="__QL5bQsYEeajEecGJ9W2hw" target="_AUeA6wsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_6IoUHvODEeqqCPSqbxOWQA" key="presenceCondition" value="rrunsetbehaviorspecificationtobehavioralfeature"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="B"/>
       </edges>
       <edges xmi:id="__QL5gAsYEeajEecGJ9W2hw" source="__QL5bQsYEeajEecGJ9W2hw" target="_AUeA6QsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_6IoUH_ODEeqqCPSqbxOWQA" key="presenceCondition" value="rrunsetbehaviorspecificationtobehavioralfeature"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="B"/>
       </edges>
       <edges xmi:id="__QL5gQsYEeajEecGJ9W2hw" source="__QL5dgsYEeajEecGJ9W2hw" target="__QL5bQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_6IoUIPODEeqqCPSqbxOWQA" key="presenceCondition" value="rrunsetbehaviorspecificationtobehavioralfeature"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="B"/>
       </edges>
     </rhs>
     <mappings xmi:id="_AUeBAgsZEeajEecGJ9W2hw" origin="_AUeA1QsZEeajEecGJ9W2hw" image="_AUeA5wsZEeajEecGJ9W2hw"/>
@@ -170,8 +237,6 @@
     <mappings xmi:id="_AUeBBgsZEeajEecGJ9W2hw" origin="_AUeA2gsZEeajEecGJ9W2hw" image="_AUeA6wsZEeajEecGJ9W2hw"/>
     <mappings xmi:id="_AUeBBwsZEeajEecGJ9W2hw" origin="_AUeA2wsZEeajEecGJ9W2hw" image="_AUeA7AsZEeajEecGJ9W2hw"/>
     <mappings xmi:id="_AUeBCAsZEeajEecGJ9W2hw" origin="_AUeA3QsZEeajEecGJ9W2hw" image="_AUeA9gsZEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_AKMxcLReEeeov9OkQ8jWjw" origin="__QL5XQsYEeajEecGJ9W2hw" image="__QL5dgsYEeajEecGJ9W2hw"/>
-    <annotations key="featureConstraint" value="xor(A,B)"/>
-    <annotations key="features" value="A,B"/>
+    <mappings xmi:id="_6IpiMPODEeqqCPSqbxOWQA" origin="__QL5XQsYEeajEecGJ9W2hw" image="__QL5dgsYEeajEecGJ9W2hw"/>
   </units>
 </henshin:Module>

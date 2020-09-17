@@ -1,7 +1,8 @@
-<henshin:Module xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmi:id="_rP2T4LRcEeeYUfLk2h7sIw">
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_4jJZcPOCEeqe6s0sCOQVEQ">
   <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
   <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
-  <units xsi:type="henshin:Rule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="_qpOYx7RcEeeYUfLk2h7sIw" name="rr:setRegion_extendedRegion_TO_Region">
+  <units xsi:type="henshin:Rule" xmi:id="_ADXpwQsZEeajEecGJ9W2hw" name="rr:setRegion_extendedRegion_TO_Region" description="Recognize: SetRegionRefextendedRegionToRegion">
     <parameters xmi:id="_ADXpwgsZEeajEecGJ9W2hw" name="Selected">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Region"/>
     </parameters>
@@ -39,6 +40,22 @@
       <edges xmi:id="_ADXpzgsZEeajEecGJ9W2hw" source="_ADXpxQsZEeajEecGJ9W2hw" target="_ADXpxgsZEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Region/extendedRegion"/>
       </edges>
+      <formula xsi:type="henshin:Not" xmi:id="_ADXpzwsZEeajEecGJ9W2hw">
+        <child xsi:type="henshin:NestedCondition" xmi:id="_ADXp0AsZEeajEecGJ9W2hw">
+          <conclusion xmi:id="_ADXp0QsZEeajEecGJ9W2hw" name="ub0">
+            <nodes xmi:id="_ADXp0gsZEeajEecGJ9W2hw" incoming="_ADXp1AsZEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Region"/>
+            </nodes>
+            <nodes xmi:id="_ADXp0wsZEeajEecGJ9W2hw" name="B.Selected" outgoing="_ADXp1AsZEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Region"/>
+            </nodes>
+            <edges xmi:id="_ADXp1AsZEeajEecGJ9W2hw" source="_ADXp0wsZEeajEecGJ9W2hw" target="_ADXp0gsZEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Region/extendedRegion"/>
+            </edges>
+          </conclusion>
+          <mappings xmi:id="_ADXp1QsZEeajEecGJ9W2hw" origin="_ADXpxQsZEeajEecGJ9W2hw" image="_ADXp0wsZEeajEecGJ9W2hw"/>
+        </child>
+      </formula>
     </lhs>
     <rhs xmi:id="_ADXp1gsZEeajEecGJ9W2hw" name="Rhs">
       <nodes xmi:id="_ADXp1wsZEeajEecGJ9W2hw" name="B.Selected" incoming="_ADXp5QsZEeajEecGJ9W2hw" outgoing="_ADXp6AsZEeajEecGJ9W2hw">
@@ -55,6 +72,30 @@
       </nodes>
       <nodes xmi:id="_ADXp2wsZEeajEecGJ9W2hw" incoming="_ADXp6gsZEeajEecGJ9W2hw" outgoing="_ADXp6QsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_ADXp3AsZEeajEecGJ9W2hw" value="&quot;SET_REFERENCE_Region_(extendedRegion)_TGT_Region&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_ADXp3QsZEeajEecGJ9W2hw" value="&quot;Sets Region's reference extendedRegion the target Region&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_ADXp3gsZEeajEecGJ9W2hw" value="&quot;SET_REFERENCE_Region_(extendedRegion)_TGT_Region&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_ADXp3wsZEeajEecGJ9W2hw" value="&quot;RR: SET_REFERENCE_Region_(extendedRegion)_TGT_Region&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_ADXp4AsZEeajEecGJ9W2hw" value="1">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_ADXp4QsZEeajEecGJ9W2hw" value="1">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_ADXp4gsZEeajEecGJ9W2hw" value="2">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_ADXp4wsZEeajEecGJ9W2hw" value="12">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="_ADXp5AsZEeajEecGJ9W2hw" name="" outgoing="_ADXp6gsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>

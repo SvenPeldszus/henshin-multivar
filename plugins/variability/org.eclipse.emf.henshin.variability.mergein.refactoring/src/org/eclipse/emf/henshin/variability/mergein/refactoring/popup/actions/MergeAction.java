@@ -43,11 +43,11 @@ public class MergeAction implements IObjectActionDelegate {
 			NewMerger merger = null;
 			if (mergeSuggestion != null) {
 				for (MergeRule mergeRule : mergeSuggestion.getMergeClusters()) {
-					merger = new NewMerger(mergeRule, true);
+					merger = new NewMerger(mergeRule, true, false);
 					merger.merge();
 				}
 			} else if (mergeRule != null) {
-				merger = new NewMerger(mergeRule, true);
+				merger = new NewMerger(mergeRule, true, false);
 				merger.merge();
 			}
 		} catch (MergeInException e) {

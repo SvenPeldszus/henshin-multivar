@@ -35,7 +35,7 @@ public class VBRuleFMValidator extends AbstractVBValidator {
 	public static IStatus validateFeatureModel(Rule rule) {
 		EList<Annotation> annotations = rule.getAnnotations();
 		if (!annotations.isEmpty()) {
-			String fm = VariabilityHelper.INSTANCE.getFeatureModel(rule);
+			String fm = VariabilityHelper.INSTANCE.getFeatureConstraint(rule);
 			Set<String> features = VariabilityHelper.INSTANCE.getFeatures(rule);
 
 			if (features == null && fm == null) {

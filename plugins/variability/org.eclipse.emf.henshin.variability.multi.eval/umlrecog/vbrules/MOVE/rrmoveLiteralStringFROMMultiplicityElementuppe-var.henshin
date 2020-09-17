@@ -1,8 +1,12 @@
-<henshin:Module xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmi:id="_V3FqwbRVEeexAvqQ_kM_vQ">
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_IHJrIPOJEeqKPbhZweJEtg">
   <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
   <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
-  <units xsi:type="henshin:Rule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="_RskLGbRVEeexAvqQ_kM_vQ" name="rr:moveLiteralString_FROM_MultiplicityElement_upperValue_TO_MultiplicityElement_MultiplicityElement,rr:moveLiteralString_FROM_MultiplicityElement_lowerValue_TO_MultiplicityElement_MultiplicityElement">
-    <annotations xmi:id="_V3FqwLRVEeexAvqQ_kM_vQ" key="originalRules" value="A=Rule rr:moveLiteralString_FROM_MultiplicityElement_upperValue_TO_MultiplicityElement_MultiplicityElement(Selected:LiteralString, OldSource:MultiplicityElement, NewSource:MultiplicityElement), B=Rule rr:moveLiteralString_FROM_MultiplicityElement_lowerValue_TO_MultiplicityElement_MultiplicityElement(Selected:LiteralString, OldSource:MultiplicityElement, NewSource:MultiplicityElement)"/>
+  <units xsi:type="henshin:Rule" xmi:id="__ckvgQsYEeajEecGJ9W2hw" name="rr:moveLiteralString_FROM_MultiplicityElement_upperValue_TO_MultiplicityElement_MultiplicityElement,rr:moveLiteralString_FROM_MultiplicityElement_lowerValue_TO_MultiplicityElement_MultiplicityElement" description="Recognize: Moves LiteralString from MultiplicityElement(Reference:upperValue) toMultiplicityElement(Reference:MultiplicityElement)">
+    <annotations xmi:id="_IHJEEfOJEeqKPbhZweJEtg" key="features" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement, rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
+    <annotations xmi:id="_IHJEEvOJEeqKPbhZweJEtg" key="featureConstraintIsCNF" value="true"/>
+    <annotations xmi:id="_IHJEE_OJEeqKPbhZweJEtg" key="featureConstraint" value="((rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement) | (rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement)) &amp; ( ~(rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement) | ~(rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement))"/>
+    <annotations xmi:id="_IHJEFPOJEeqKPbhZweJEtg" key="originalRules" value="A=Rule rr:moveLiteralString_FROM_MultiplicityElement_upperValue_TO_MultiplicityElement_MultiplicityElement(Selected:LiteralString, OldSource:MultiplicityElement, NewSource:MultiplicityElement), B=Rule rr:moveLiteralString_FROM_MultiplicityElement_lowerValue_TO_MultiplicityElement_MultiplicityElement(Selected:LiteralString, OldSource:MultiplicityElement, NewSource:MultiplicityElement)"/>
     <parameters xmi:id="__ckvggsYEeajEecGJ9W2hw" name="Selected">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//LiteralString"/>
     </parameters>
@@ -34,24 +38,24 @@
       <nodes xmi:id="__ckvjAsYEeajEecGJ9W2hw" name="" incoming="__ckvlAsYEeajEecGJ9W2hw __ckvmAsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
         <attributes xmi:id="__ckvjQsYEeajEecGJ9W2hw" value="&quot;upperValue&quot;">
+          <annotations xmi:id="_IHGA1_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
           <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-          <annotations key="presenceCondition" value="A"/>
         </attributes>
         <attributes xmi:id="_-H6pvQsYEeajEecGJ9W2hw" value="&quot;lowerValue&quot;">
+          <annotations xmi:id="_IHGA2fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
           <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-          <annotations key="presenceCondition" value="B"/>
         </attributes>
       </nodes>
       <nodes xmi:id="__ckvjgsYEeajEecGJ9W2hw" name="" outgoing="__ckvlgsYEeajEecGJ9W2hw __ckvlwsYEeajEecGJ9W2hw __ckvmAsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference"/>
       </nodes>
       <nodes xmi:id="__ckvjwsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_IHGAwPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="A"/>
       </nodes>
       <nodes xmi:id="_-H6pvwsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_IHGA2POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="B"/>
       </nodes>
       <edges xmi:id="__ckvkAsYEeajEecGJ9W2hw" source="__ckviAsYEeajEecGJ9W2hw" target="__ckvhwsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
@@ -69,8 +73,8 @@
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
       </edges>
       <edges xmi:id="__ckvlQsYEeajEecGJ9W2hw" source="__ckviQsYEeajEecGJ9W2hw" target="__ckvhwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGA1vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//MultiplicityElement/upperValue"/>
-        <annotations key="presenceCondition" value="A"/>
       </edges>
       <edges xmi:id="__ckvlgsYEeajEecGJ9W2hw" source="__ckvjgsYEeajEecGJ9W2hw" target="__ckvigsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
@@ -82,16 +86,16 @@
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
       </edges>
       <edges xmi:id="__ckvmQsYEeajEecGJ9W2hw" source="__ckvigsYEeajEecGJ9W2hw" target="__ckvhgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGAwfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//MultiplicityElement/upperValue"/>
-        <annotations key="presenceCondition" value="A"/>
       </edges>
       <edges xmi:id="_-H6pxQsYEeajEecGJ9W2hw" source="__ckviQsYEeajEecGJ9W2hw" target="__ckvhwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGAwvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//MultiplicityElement/lowerValue"/>
-        <annotations key="presenceCondition" value="B"/>
       </edges>
       <edges xmi:id="_-H6pyQsYEeajEecGJ9W2hw" source="__ckvigsYEeajEecGJ9W2hw" target="__ckvhgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGAw_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//MultiplicityElement/lowerValue"/>
-        <annotations key="presenceCondition" value="B"/>
       </edges>
     </lhs>
     <rhs xmi:id="__ckvmgsYEeajEecGJ9W2hw" name="Rhs">
@@ -120,20 +124,84 @@
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference"/>
       </nodes>
       <nodes xmi:id="__ckvowsYEeajEecGJ9W2hw" incoming="__ckvuQsYEeajEecGJ9W2hw" outgoing="__ckvtwsYEeajEecGJ9W2hw __ckvuAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGAxPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="A"/>
+        <attributes xmi:id="__ckvpAsYEeajEecGJ9W2hw" value="&quot;MOVE_LiteralString_FROM_MultiplicityElement_(upperValue)_TO_MultiplicityElement_(upperValue)&quot;">
+          <annotations xmi:id="_IHGA2_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__ckvpQsYEeajEecGJ9W2hw" value="&quot;MOVEs LiteralString from MultiplicityElement(Reference:upperValue) to MultiplicityElement(Reference:upperValue&quot;">
+          <annotations xmi:id="_IHGAyvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__ckvpgsYEeajEecGJ9W2hw" value="&quot;MOVE_LiteralString_FROM_MultiplicityElement_(upperValue)_TO_MultiplicityElement_(upperValue)&quot;">
+          <annotations xmi:id="_IHGA3POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__ckvpwsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_LiteralString_FROM_MultiplicityElement_(upperValue)_TO_MultiplicityElement_(upperValue)&quot;">
+          <annotations xmi:id="_IHGA3fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__ckvqAsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IHGA3vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__ckvqQsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_IHGA3_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__ckvqgsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_IHGA4POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__ckvqwsYEeajEecGJ9W2hw" value="15">
+          <annotations xmi:id="_IHGAy_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="__ckvrAsYEeajEecGJ9W2hw" name="" outgoing="__ckvuQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGAxfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="A"/>
       </nodes>
       <nodes xmi:id="_-H6p0wsYEeajEecGJ9W2hw" incoming="_-H6p6QsYEeajEecGJ9W2hw" outgoing="_-H6p5wsYEeajEecGJ9W2hw _-H6p6AsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGAzPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="B"/>
+        <attributes xmi:id="_-H6p1AsYEeajEecGJ9W2hw" value="&quot;MOVE_LiteralString_FROM_MultiplicityElement_(lowerValue)_TO_MultiplicityElement_(lowerValue)&quot;">
+          <annotations xmi:id="_IHGA4_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-H6p1QsYEeajEecGJ9W2hw" value="&quot;MOVEs LiteralString from MultiplicityElement(Reference:lowerValue) to MultiplicityElement(Reference:lowerValue&quot;">
+          <annotations xmi:id="_IHGA5POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-H6p1gsYEeajEecGJ9W2hw" value="&quot;MOVE_LiteralString_FROM_MultiplicityElement_(lowerValue)_TO_MultiplicityElement_(lowerValue)&quot;">
+          <annotations xmi:id="_IHGA0fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-H6p1wsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_LiteralString_FROM_MultiplicityElement_(lowerValue)_TO_MultiplicityElement_(lowerValue)&quot;">
+          <annotations xmi:id="_IHGA0vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-H6p2AsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IHGA5fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-H6p2QsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_IHGA0_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-H6p2gsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_IHGA1POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-H6p2wsYEeajEecGJ9W2hw" value="15">
+          <annotations xmi:id="_IHGA1fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="_-H6p3AsYEeajEecGJ9W2hw" name="" outgoing="_-H6p6QsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGAzfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="B"/>
       </nodes>
       <edges xmi:id="__ckvrQsYEeajEecGJ9W2hw" source="__ckvnQsYEeajEecGJ9W2hw" target="__ckvnAsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
@@ -151,8 +219,8 @@
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
       </edges>
       <edges xmi:id="__ckvsgsYEeajEecGJ9W2hw" source="__ckvngsYEeajEecGJ9W2hw" target="__ckvnAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGAxvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//MultiplicityElement/upperValue"/>
-        <annotations key="presenceCondition" value="A"/>
       </edges>
       <edges xmi:id="__ckvswsYEeajEecGJ9W2hw" source="__ckvogsYEeajEecGJ9W2hw" target="__ckvnwsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
@@ -164,40 +232,40 @@
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
       </edges>
       <edges xmi:id="__ckvtgsYEeajEecGJ9W2hw" source="__ckvnwsYEeajEecGJ9W2hw" target="__ckvmwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGAx_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//MultiplicityElement/upperValue"/>
-        <annotations key="presenceCondition" value="A"/>
       </edges>
       <edges xmi:id="__ckvtwsYEeajEecGJ9W2hw" source="__ckvowsYEeajEecGJ9W2hw" target="__ckvoAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGAyPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="A"/>
       </edges>
       <edges xmi:id="__ckvuAsYEeajEecGJ9W2hw" source="__ckvowsYEeajEecGJ9W2hw" target="__ckvogsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGA2vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="A"/>
       </edges>
       <edges xmi:id="__ckvuQsYEeajEecGJ9W2hw" source="__ckvrAsYEeajEecGJ9W2hw" target="__ckvowsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGAyfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementuppervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="A"/>
       </edges>
       <edges xmi:id="_-H6p5gsYEeajEecGJ9W2hw" source="__ckvnwsYEeajEecGJ9W2hw" target="__ckvmwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGAzvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//MultiplicityElement/lowerValue"/>
-        <annotations key="presenceCondition" value="B"/>
       </edges>
       <edges xmi:id="_-H6p5wsYEeajEecGJ9W2hw" source="_-H6p0wsYEeajEecGJ9W2hw" target="__ckvoAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGAz_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="B"/>
-      </edges>
-      <edges xmi:id="_-H6p6AsYEeajEecGJ9W2hw" source="_-H6p0wsYEeajEecGJ9W2hw" target="__ckvogsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="B"/>
-      </edges>
-      <edges xmi:id="_-H6p4gsYEeajEecGJ9W2hw" source="__ckvngsYEeajEecGJ9W2hw" target="__ckvnAsYEeajEecGJ9W2hw">
-        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//MultiplicityElement/lowerValue"/>
-        <annotations key="presenceCondition" value="B"/>
       </edges>
       <edges xmi:id="_-H6p6QsYEeajEecGJ9W2hw" source="_-H6p3AsYEeajEecGJ9W2hw" target="_-H6p0wsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGA0POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="B"/>
+      </edges>
+      <edges xmi:id="_-H6p4gsYEeajEecGJ9W2hw" source="__ckvngsYEeajEecGJ9W2hw" target="__ckvnAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGA4fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//MultiplicityElement/lowerValue"/>
+      </edges>
+      <edges xmi:id="_-H6p6AsYEeajEecGJ9W2hw" source="_-H6p0wsYEeajEecGJ9W2hw" target="__ckvogsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IHGA4vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveliteralstringfrommultiplicityelementlowervaluetomultiplicityelementmultiplicityelement"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
       </edges>
     </rhs>
     <mappings xmi:id="__ckvugsYEeajEecGJ9W2hw" origin="__ckvhgsYEeajEecGJ9W2hw" image="__ckvmwsYEeajEecGJ9W2hw"/>
@@ -209,8 +277,6 @@
     <mappings xmi:id="__ckvwAsYEeajEecGJ9W2hw" origin="__ckvjAsYEeajEecGJ9W2hw" image="__ckvoQsYEeajEecGJ9W2hw"/>
     <mappings xmi:id="__ckvwQsYEeajEecGJ9W2hw" origin="__ckvjgsYEeajEecGJ9W2hw" image="__ckvogsYEeajEecGJ9W2hw"/>
     <mappings xmi:id="__ckvwgsYEeajEecGJ9W2hw" origin="__ckvjwsYEeajEecGJ9W2hw" image="__ckvrAsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_V3FDsLRVEeexAvqQ_kM_vQ" origin="_-H6pvwsYEeajEecGJ9W2hw" image="_-H6p3AsYEeajEecGJ9W2hw"/>
-    <annotations key="featureConstraint" value="xor(A,B)"/>
-    <annotations key="features" value="A,B"/>
+    <mappings xmi:id="_IHJEEPOJEeqKPbhZweJEtg" origin="_-H6pvwsYEeajEecGJ9W2hw" image="_-H6p3AsYEeajEecGJ9W2hw"/>
   </units>
 </henshin:Module>

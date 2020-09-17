@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_ICvFMPOJEeqKPbhZweJEtg">
+  <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
+  <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
+  <units xsi:type="henshin:Rule" xmi:id="_-mHooQsYEeajEecGJ9W2hw" name="rr:moveInteraction_FROM_Class_nestedClassifier_TO_Class_Class0,rr:moveInteraction_FROM_Class_nestedClassifier_TO_Class_Class,rr:moveInteraction_FROM_Class_nestedClassifier_TO_State_State,rr:moveInteraction_FROM_Class_nestedClassifier_TO_State_State0,rr:moveInteraction_FROM_Class_nestedClassifier_TO_State_State01" description="Recognize: Moves Interaction from Class(Reference:nestedClassifier) toClass(Reference:Class)">
+    <annotations xmi:id="_ICueNfOJEeqKPbhZweJEtg" key="features" value="rrmoveinteractionfromclassnestedclassifiertoclassclass, rrmoveinteractionfromclassnestedclassifiertostatestate, rrmoveinteractionfromclassnestedclassifiertostatestate0, rrmoveinteractionfromclassnestedclassifiertoclassclass0, rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+    <annotations xmi:id="_ICueNvOJEeqKPbhZweJEtg" key="featureConstraintIsCNF" value="true"/>
+    <annotations xmi:id="_ICueN_OJEeqKPbhZweJEtg" key="featureConstraint" value="((rrmoveinteractionfromclassnestedclassifiertoclassclass0) | (rrmoveinteractionfromclassnestedclassifiertoclassclass) | (rrmoveinteractionfromclassnestedclassifiertostatestate) | (rrmoveinteractionfromclassnestedclassifiertostatestate0) | (rrmoveinteractionfromclassnestedclassifiertostatestate01)) &amp; ( ~(rrmoveinteractionfromclassnestedclassifiertoclassclass0) | ~(rrmoveinteractionfromclassnestedclassifiertoclassclass)) &amp; ( ~(rrmoveinteractionfromclassnestedclassifiertoclassclass0) | ~(rrmoveinteractionfromclassnestedclassifiertostatestate)) &amp; ( ~(rrmoveinteractionfromclassnestedclassifiertoclassclass0) | ~(rrmoveinteractionfromclassnestedclassifiertostatestate0)) &amp; ( ~(rrmoveinteractionfromclassnestedclassifiertoclassclass0) | ~(rrmoveinteractionfromclassnestedclassifiertostatestate01)) &amp; ( ~(rrmoveinteractionfromclassnestedclassifiertoclassclass) | ~(rrmoveinteractionfromclassnestedclassifiertostatestate)) &amp; ( ~(rrmoveinteractionfromclassnestedclassifiertoclassclass) | ~(rrmoveinteractionfromclassnestedclassifiertostatestate0)) &amp; ( ~(rrmoveinteractionfromclassnestedclassifiertoclassclass) | ~(rrmoveinteractionfromclassnestedclassifiertostatestate01)) &amp; ( ~(rrmoveinteractionfromclassnestedclassifiertostatestate) | ~(rrmoveinteractionfromclassnestedclassifiertostatestate0)) &amp; ( ~(rrmoveinteractionfromclassnestedclassifiertostatestate) | ~(rrmoveinteractionfromclassnestedclassifiertostatestate01)) &amp; ( ~(rrmoveinteractionfromclassnestedclassifiertostatestate0) | ~(rrmoveinteractionfromclassnestedclassifiertostatestate01))"/>
+    <annotations xmi:id="_ICueOPOJEeqKPbhZweJEtg" key="originalRules" value="A=Rule rr:moveInteraction_FROM_Class_nestedClassifier_TO_Class_Class0(Selected:Interaction, OldSource:Class, NewSource:Class, NewSource:State), B=Rule rr:moveInteraction_FROM_Class_nestedClassifier_TO_Class_Class(Selected:Interaction, OldSource:Class, NewSource:Class), C=Rule rr:moveInteraction_FROM_Class_nestedClassifier_TO_State_State(Selected:Interaction, OldSource:Class, NewSource:State), D=Rule rr:moveInteraction_FROM_Class_nestedClassifier_TO_State_State0(Selected:Interaction, OldSource:Class, NewSource:State), E=Rule rr:moveInteraction_FROM_Class_nestedClassifier_TO_State_State01(Selected:Interaction, OldSource:Class, NewSource:State)"/>
+    <parameters xmi:id="_-mHoogsYEeajEecGJ9W2hw" name="Selected">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Interaction"/>
+    </parameters>
+    <parameters xmi:id="_-mHoowsYEeajEecGJ9W2hw" name="OldSource">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+    </parameters>
+    <parameters xmi:id="_-mHopAsYEeajEecGJ9W2hw" name="NewSource">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+    </parameters>
+    <parameters xmi:id="_ICktIPOJEeqKPbhZweJEtg" name="NewSource">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+    </parameters>
+    <lhs xmi:id="_-mHopQsYEeajEecGJ9W2hw" name="Lhs">
+      <nodes xmi:id="_-mHopgsYEeajEecGJ9W2hw" name="B.Selected" incoming="_-mHosQsYEeajEecGJ9W2hw _-mHotwsYEeajEecGJ9W2hw _-mHouQsYEeajEecGJ9W2hw _ATvBGgsZEeajEecGJ9W2hw _-iXKGwsYEeajEecGJ9W2hw _AHi_OwsZEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Interaction"/>
+      </nodes>
+      <nodes xmi:id="_-mHopwsYEeajEecGJ9W2hw" name="A.Selected" incoming="_-mHosAsYEeajEecGJ9W2hw _-mHoswsYEeajEecGJ9W2hw _-mHotQsYEeajEecGJ9W2hw _ATvBFgsZEeajEecGJ9W2hw _-iXKFwsYEeajEecGJ9W2hw _AHi_NwsZEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Interaction"/>
+      </nodes>
+      <nodes xmi:id="_-mHoqAsYEeajEecGJ9W2hw" name="" outgoing="_-mHosAsYEeajEecGJ9W2hw _-mHosQsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
+      </nodes>
+      <nodes xmi:id="_-mHoqQsYEeajEecGJ9W2hw" name="A.OldSource" incoming="_-mHosgsYEeajEecGJ9W2hw" outgoing="_-mHotQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp0POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+      </nodes>
+      <nodes xmi:id="_-mHoqgsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_-mHotgsYEeajEecGJ9W2hw" outgoing="_-mHouQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqBfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+      </nodes>
+      <nodes xmi:id="_-mHoqwsYEeajEecGJ9W2hw" name="" outgoing="_-mHosgsYEeajEecGJ9W2hw _-mHoswsYEeajEecGJ9W2hw _-mHotAsYEeajEecGJ9W2hw _ATvBEwsZEeajEecGJ9W2hw _ATvBFQsZEeajEecGJ9W2hw _-iXKFAsYEeajEecGJ9W2hw _-iXKFgsYEeajEecGJ9W2hw _AHi_NAsZEeajEecGJ9W2hw _AHi_NgsZEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference"/>
+      </nodes>
+      <nodes xmi:id="_-mHorAsYEeajEecGJ9W2hw" name="" incoming="_-mHotAsYEeajEecGJ9W2hw _-mHouAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp6fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="_-mHorQsYEeajEecGJ9W2hw" value="&quot;nestedClassifier&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="_ACijXQsZEeajEecGJ9W2hw" value="&quot;nestedClassifier&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-mHorgsYEeajEecGJ9W2hw" name="" outgoing="_-mHotgsYEeajEecGJ9W2hw _-mHotwsYEeajEecGJ9W2hw _-mHouAsYEeajEecGJ9W2hw _ATvBFwsZEeajEecGJ9W2hw _ATvBGQsZEeajEecGJ9W2hw _-iXKGAsYEeajEecGJ9W2hw _-iXKGgsYEeajEecGJ9W2hw _AHi_OAsZEeajEecGJ9W2hw _AHi_OgsZEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference"/>
+      </nodes>
+      <nodes xmi:id="_-mHorwsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_IChqB_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_ACijXwsZEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_IChp1vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_ATvBCAsZEeajEecGJ9W2hw" name="A.OldSource" incoming="_ATvBEwsZEeajEecGJ9W2hw" outgoing="_ATvBFgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp-fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+      </nodes>
+      <nodes xmi:id="_ATvBCQsZEeajEecGJ9W2hw" name="B.NewSource" incoming="_ATvBFwsZEeajEecGJ9W2hw" outgoing="_ATvBGgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp-vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+      </nodes>
+      <nodes xmi:id="_ATvBCwsZEeajEecGJ9W2hw" name="" incoming="_ATvBFQsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp-_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="_ATvBDAsZEeajEecGJ9W2hw" value="&quot;nestedClassifier&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_ATvBDgsZEeajEecGJ9W2hw" name="" incoming="_ATvBGQsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp_POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="_ATvBDwsZEeajEecGJ9W2hw" value="&quot;exit&quot;">
+          <annotations xmi:id="_IChqBPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_ATvBEAsZEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_IChp_fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_-iXKCQsYEeajEecGJ9W2hw" name="A.OldSource" incoming="_-iXKFAsYEeajEecGJ9W2hw" outgoing="_-iXKFwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqDPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+      </nodes>
+      <nodes xmi:id="_-iXKCgsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_-iXKGAsYEeajEecGJ9W2hw" outgoing="_-iXKGwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqDfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+      </nodes>
+      <nodes xmi:id="_-iXKDAsYEeajEecGJ9W2hw" name="" incoming="_-iXKFgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqDvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="_-iXKDQsYEeajEecGJ9W2hw" value="&quot;nestedClassifier&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-iXKDwsYEeajEecGJ9W2hw" name="" incoming="_-iXKGgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqD_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="_-iXKEAsYEeajEecGJ9W2hw" value="&quot;doActivity&quot;">
+          <annotations xmi:id="_IChqF_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-iXKEQsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_IChqEPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_AHi_KQsZEeajEecGJ9W2hw" name="A.OldSource" incoming="_AHi_NAsZEeajEecGJ9W2hw" outgoing="_AHi_NwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqGPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+      </nodes>
+      <nodes xmi:id="_AHi_KgsZEeajEecGJ9W2hw" name="B.NewSource" incoming="_AHi_OAsZEeajEecGJ9W2hw" outgoing="_AHi_OwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqGfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+      </nodes>
+      <nodes xmi:id="_AHi_LAsZEeajEecGJ9W2hw" name="" incoming="_AHi_NgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqGvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="_AHi_LQsZEeajEecGJ9W2hw" value="&quot;nestedClassifier&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_AHi_LwsZEeajEecGJ9W2hw" name="" incoming="_AHi_OgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqG_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        <attributes xmi:id="_AHi_MAsZEeajEecGJ9W2hw" value="&quot;entry&quot;">
+          <annotations xmi:id="_IChqI_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_AHi_MQsZEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_IChqHPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <edges xmi:id="_-mHosAsYEeajEecGJ9W2hw" source="_-mHoqAsYEeajEecGJ9W2hw" target="_-mHopwsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
+      </edges>
+      <edges xmi:id="_-mHosQsYEeajEecGJ9W2hw" source="_-mHoqAsYEeajEecGJ9W2hw" target="_-mHopgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objB"/>
+      </edges>
+      <edges xmi:id="_-mHosgsYEeajEecGJ9W2hw" source="_-mHoqwsYEeajEecGJ9W2hw" target="_-mHoqQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp6_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="_-mHoswsYEeajEecGJ9W2hw" source="_-mHoqwsYEeajEecGJ9W2hw" target="_-mHopwsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/tgt"/>
+      </edges>
+      <edges xmi:id="_-mHotAsYEeajEecGJ9W2hw" source="_-mHoqwsYEeajEecGJ9W2hw" target="_-mHorAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqCPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="_-mHotQsYEeajEecGJ9W2hw" source="_-mHoqQsYEeajEecGJ9W2hw" target="_-mHopwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp0vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class/nestedClassifier"/>
+      </edges>
+      <edges xmi:id="_-mHotgsYEeajEecGJ9W2hw" source="_-mHorgsYEeajEecGJ9W2hw" target="_-mHoqgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqCvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_-mHotwsYEeajEecGJ9W2hw" source="_-mHorgsYEeajEecGJ9W2hw" target="_-mHopgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/tgt"/>
+      </edges>
+      <edges xmi:id="_-mHouAsYEeajEecGJ9W2hw" source="_-mHorgsYEeajEecGJ9W2hw" target="_-mHorAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp1POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="_-mHouQsYEeajEecGJ9W2hw" source="_-mHoqgsYEeajEecGJ9W2hw" target="_-mHopgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp7fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class/nestedClassifier"/>
+      </edges>
+      <edges xmi:id="_ATvBEwsZEeajEecGJ9W2hw" source="_-mHoqwsYEeajEecGJ9W2hw" target="_ATvBCAsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp_vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="_ATvBFQsZEeajEecGJ9W2hw" source="_-mHoqwsYEeajEecGJ9W2hw" target="_ATvBCwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp__OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="_ATvBFgsZEeajEecGJ9W2hw" source="_ATvBCAsZEeajEecGJ9W2hw" target="_-mHopwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqAPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class/nestedClassifier"/>
+      </edges>
+      <edges xmi:id="_ATvBFwsZEeajEecGJ9W2hw" source="_-mHorgsYEeajEecGJ9W2hw" target="_ATvBCQsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqAfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_ATvBGQsZEeajEecGJ9W2hw" source="_-mHorgsYEeajEecGJ9W2hw" target="_ATvBDgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqAvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="_ATvBGgsZEeajEecGJ9W2hw" source="_ATvBCQsZEeajEecGJ9W2hw" target="_-mHopgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqA_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/exit"/>
+      </edges>
+      <edges xmi:id="_-iXKFAsYEeajEecGJ9W2hw" source="_-mHoqwsYEeajEecGJ9W2hw" target="_-iXKCQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqEfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="_-iXKFgsYEeajEecGJ9W2hw" source="_-mHoqwsYEeajEecGJ9W2hw" target="_-iXKDAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqEvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="_-iXKFwsYEeajEecGJ9W2hw" source="_-iXKCQsYEeajEecGJ9W2hw" target="_-mHopwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqE_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class/nestedClassifier"/>
+      </edges>
+      <edges xmi:id="_-iXKGAsYEeajEecGJ9W2hw" source="_-mHorgsYEeajEecGJ9W2hw" target="_-iXKCgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqFPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_-iXKGgsYEeajEecGJ9W2hw" source="_-mHorgsYEeajEecGJ9W2hw" target="_-iXKDwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqFfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="_-iXKGwsYEeajEecGJ9W2hw" source="_-iXKCgsYEeajEecGJ9W2hw" target="_-mHopgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqFvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/doActivity"/>
+      </edges>
+      <edges xmi:id="_AHi_NAsZEeajEecGJ9W2hw" source="_-mHoqwsYEeajEecGJ9W2hw" target="_AHi_KQsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqHfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="_AHi_NgsZEeajEecGJ9W2hw" source="_-mHoqwsYEeajEecGJ9W2hw" target="_AHi_LAsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqHvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="_AHi_NwsZEeajEecGJ9W2hw" source="_AHi_KQsZEeajEecGJ9W2hw" target="_-mHopwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqH_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class/nestedClassifier"/>
+      </edges>
+      <edges xmi:id="_AHi_OAsZEeajEecGJ9W2hw" source="_-mHorgsYEeajEecGJ9W2hw" target="_AHi_KgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqIPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_AHi_OgsZEeajEecGJ9W2hw" source="_-mHorgsYEeajEecGJ9W2hw" target="_AHi_LwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqIfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="_AHi_OwsZEeajEecGJ9W2hw" source="_AHi_KgsZEeajEecGJ9W2hw" target="_-mHopgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqIvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/entry"/>
+      </edges>
+      <formula xsi:type="henshin:And" xmi:id="_ICueM_OJEeqKPbhZweJEtg">
+        <left xsi:type="henshin:And" xmi:id="_ICueMfOJEeqKPbhZweJEtg">
+          <left xsi:type="henshin:Not" xmi:id="_ICueMPOJEeqKPbhZweJEtg">
+            <child xsi:type="henshin:NestedCondition" xmi:id="_ATvBHAsZEeajEecGJ9W2hw">
+              <annotations xmi:id="_ICiRDPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+              <conclusion xmi:id="_ATvBHQsZEeajEecGJ9W2hw" name="1">
+                <nodes xmi:id="_ATvBHgsZEeajEecGJ9W2hw" incoming="_ATvBIAsZEeajEecGJ9W2hw">
+                  <annotations xmi:id="_ICiRDfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Behavior"/>
+                </nodes>
+                <nodes xmi:id="_ATvBHwsZEeajEecGJ9W2hw" name="B.NewSource" outgoing="_ATvBIAsZEeajEecGJ9W2hw">
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+                </nodes>
+                <edges xmi:id="_ATvBIAsZEeajEecGJ9W2hw" source="_ATvBHwsZEeajEecGJ9W2hw" target="_ATvBHgsZEeajEecGJ9W2hw">
+                  <annotations xmi:id="_ICiRDvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/exit"/>
+                </edges>
+              </conclusion>
+              <mappings xmi:id="_ATvBIQsZEeajEecGJ9W2hw" origin="_ATvBCQsZEeajEecGJ9W2hw" image="_ATvBHwsZEeajEecGJ9W2hw"/>
+            </child>
+          </left>
+          <right xsi:type="henshin:Not" xmi:id="_ICueMvOJEeqKPbhZweJEtg">
+            <child xsi:type="henshin:NestedCondition" xmi:id="_-iXKHQsYEeajEecGJ9W2hw">
+              <annotations xmi:id="_ICiRD_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+              <conclusion xmi:id="_-iXKHgsYEeajEecGJ9W2hw" name="2">
+                <nodes xmi:id="_-iXKHwsYEeajEecGJ9W2hw" incoming="_-iXKIQsYEeajEecGJ9W2hw">
+                  <annotations xmi:id="_ICiREPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Behavior"/>
+                </nodes>
+                <nodes xmi:id="_-iXKIAsYEeajEecGJ9W2hw" name="B.NewSource" outgoing="_-iXKIQsYEeajEecGJ9W2hw">
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+                </nodes>
+                <edges xmi:id="_-iXKIQsYEeajEecGJ9W2hw" source="_-iXKIAsYEeajEecGJ9W2hw" target="_-iXKHwsYEeajEecGJ9W2hw">
+                  <annotations xmi:id="_ICiREfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/doActivity"/>
+                </edges>
+              </conclusion>
+              <mappings xmi:id="_-iXKIgsYEeajEecGJ9W2hw" origin="_-iXKCgsYEeajEecGJ9W2hw" image="_-iXKIAsYEeajEecGJ9W2hw"/>
+            </child>
+          </right>
+        </left>
+        <right xsi:type="henshin:Not" xmi:id="_ICueNPOJEeqKPbhZweJEtg">
+          <child xsi:type="henshin:NestedCondition" xmi:id="_AHi_PQsZEeajEecGJ9W2hw">
+            <annotations xmi:id="_ICiREvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+            <conclusion xmi:id="_AHi_PgsZEeajEecGJ9W2hw" name="3">
+              <nodes xmi:id="_AHi_PwsZEeajEecGJ9W2hw" incoming="_AHi_QQsZEeajEecGJ9W2hw">
+                <annotations xmi:id="_ICiRE_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+                <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Behavior"/>
+              </nodes>
+              <nodes xmi:id="_AHi_QAsZEeajEecGJ9W2hw" name="B.NewSource" outgoing="_AHi_QQsZEeajEecGJ9W2hw">
+                <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+              </nodes>
+              <edges xmi:id="_AHi_QQsZEeajEecGJ9W2hw" source="_AHi_QAsZEeajEecGJ9W2hw" target="_AHi_PwsZEeajEecGJ9W2hw">
+                <annotations xmi:id="_ICiRFPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+                <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/entry"/>
+              </edges>
+            </conclusion>
+            <mappings xmi:id="_AHi_QgsZEeajEecGJ9W2hw" origin="_AHi_KgsZEeajEecGJ9W2hw" image="_AHi_QAsZEeajEecGJ9W2hw"/>
+          </child>
+        </right>
+      </formula>
+    </lhs>
+    <rhs xmi:id="_-mHougsYEeajEecGJ9W2hw" name="Rhs">
+      <nodes xmi:id="_-mHouwsYEeajEecGJ9W2hw" name="B.Selected" incoming="_-mHozgsYEeajEecGJ9W2hw _-mHo1AsYEeajEecGJ9W2hw _-mHo1gsYEeajEecGJ9W2hw _ATvBPwsZEeajEecGJ9W2hw _-iXKQAsYEeajEecGJ9W2hw _AHi_YAsZEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Interaction"/>
+      </nodes>
+      <nodes xmi:id="_-mHovAsYEeajEecGJ9W2hw" name="A.Selected" incoming="_-mHozQsYEeajEecGJ9W2hw _-mHo0AsYEeajEecGJ9W2hw _-mHo0gsYEeajEecGJ9W2hw _ATvBOwsZEeajEecGJ9W2hw _-iXKPAsYEeajEecGJ9W2hw _AHi_XAsZEeajEecGJ9W2hw">
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Interaction"/>
+      </nodes>
+      <nodes xmi:id="_-mHovQsYEeajEecGJ9W2hw" name="" outgoing="_-mHozQsYEeajEecGJ9W2hw _-mHozgsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
+      </nodes>
+      <nodes xmi:id="_-mHovgsYEeajEecGJ9W2hw" name="A.OldSource" incoming="_-mHozwsYEeajEecGJ9W2hw" outgoing="_-mHo0gsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp1_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+      </nodes>
+      <nodes xmi:id="_-mHovwsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_-mHo0wsYEeajEecGJ9W2hw" outgoing="_-mHo1gsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqO_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+      </nodes>
+      <nodes xmi:id="_-mHowAsYEeajEecGJ9W2hw" name="" incoming="_-mHo1wsYEeajEecGJ9W2hw _ATvBQAsZEeajEecGJ9W2hw _ACijhwsZEeajEecGJ9W2hw _-iXKQQsYEeajEecGJ9W2hw _AHi_YQsZEeajEecGJ9W2hw" outgoing="_-mHozwsYEeajEecGJ9W2hw _-mHo0AsYEeajEecGJ9W2hw _-mHo0QsYEeajEecGJ9W2hw _ATvBOAsZEeajEecGJ9W2hw _ATvBOgsZEeajEecGJ9W2hw _-iXKOQsYEeajEecGJ9W2hw _-iXKOwsYEeajEecGJ9W2hw _AHi_WQsZEeajEecGJ9W2hw _AHi_WwsZEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference"/>
+      </nodes>
+      <nodes xmi:id="_-mHowQsYEeajEecGJ9W2hw" name="" incoming="_-mHo0QsYEeajEecGJ9W2hw _-mHo1QsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp7_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="_-mHowgsYEeajEecGJ9W2hw" name="" incoming="_-mHo2AsYEeajEecGJ9W2hw _ACijiAsZEeajEecGJ9W2hw _ATvBQQsZEeajEecGJ9W2hw _-iXKQgsYEeajEecGJ9W2hw _AHi_YgsZEeajEecGJ9W2hw" outgoing="_-mHo0wsYEeajEecGJ9W2hw _-mHo1AsYEeajEecGJ9W2hw _-mHo1QsYEeajEecGJ9W2hw _ATvBPAsZEeajEecGJ9W2hw _ATvBPgsZEeajEecGJ9W2hw _-iXKPQsYEeajEecGJ9W2hw _-iXKPwsYEeajEecGJ9W2hw _AHi_XQsZEeajEecGJ9W2hw _AHi_XwsZEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference"/>
+      </nodes>
+      <nodes xmi:id="_-mHowwsYEeajEecGJ9W2hw" incoming="_-mHo2QsYEeajEecGJ9W2hw" outgoing="_-mHo1wsYEeajEecGJ9W2hw _-mHo2AsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqRPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_-mHoxAsYEeajEecGJ9W2hw" value="&quot;MOVE_Interaction_FROM_Class_(nestedClassifier)_TO_Class_(nestedClassifier)&quot;">
+          <annotations xmi:id="_IChqSPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-mHoxQsYEeajEecGJ9W2hw" value="&quot;MOVEs Interaction from Class(Reference:nestedClassifier) to Class(Reference:nestedClassifier&quot;">
+          <annotations xmi:id="_IChqSfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-mHoxgsYEeajEecGJ9W2hw" value="&quot;MOVE_Interaction_FROM_Class_(nestedClassifier)_TO_Class_(nestedClassifier)&quot;">
+          <annotations xmi:id="_IChp4vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-mHoxwsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_Interaction_FROM_Class_(nestedClassifier)_TO_Class_(nestedClassifier)&quot;">
+          <annotations xmi:id="_IChp4_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-mHoyAsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IChqSvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-mHoyQsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_IChp8_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-mHoygsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_IChp5POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-mHoywsYEeajEecGJ9W2hw" value="45">
+          <annotations xmi:id="_IChp5fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-mHozAsYEeajEecGJ9W2hw" name="" outgoing="_-mHo2QsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp2fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_ATvBJgsZEeajEecGJ9W2hw" name="A.OldSource" incoming="_ATvBOAsZEeajEecGJ9W2hw" outgoing="_ATvBOwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqJPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+      </nodes>
+      <nodes xmi:id="_ATvBJwsZEeajEecGJ9W2hw" name="B.NewSource" incoming="_ATvBPAsZEeajEecGJ9W2hw" outgoing="_ATvBPwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqJfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+      </nodes>
+      <nodes xmi:id="_ATvBKQsZEeajEecGJ9W2hw" name="" incoming="_ATvBOgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqJvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="_ATvBKwsZEeajEecGJ9W2hw" name="" incoming="_ATvBPgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqJ_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="_ATvBLAsZEeajEecGJ9W2hw" incoming="_ATvBQgsZEeajEecGJ9W2hw" outgoing="_ATvBQAsZEeajEecGJ9W2hw _ATvBQQsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqKPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_ATvBLQsZEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_Interaction_FROM_Class_(nestedClassifier)_TO_State_(exit)&quot;">
+          <annotations xmi:id="_IChqM_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_ATvBLgsZEeajEecGJ9W2hw" value="&quot;MOVEs Interaction from Class(Reference:nestedClassifier) to State(Reference:exit&quot;">
+          <annotations xmi:id="_IChqNPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_ATvBLwsZEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_Interaction_FROM_Class_(nestedClassifier)_TO_State_(exit)&quot;">
+          <annotations xmi:id="_IChqNfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_ATvBMAsZEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_Interaction_FROM_Class_(nestedClassifier)_TO_State_(exit)&quot;">
+          <annotations xmi:id="_IChqNvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_ATvBMQsZEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IChqN_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_ATvBMgsZEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IChqOPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_ATvBMwsZEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_IChqOfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_ATvBNAsZEeajEecGJ9W2hw" value="38">
+          <annotations xmi:id="_IChqOvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_ATvBNQsZEeajEecGJ9W2hw" name="" outgoing="_ATvBQgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqKfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_ACijcwsZEeajEecGJ9W2hw" incoming="_ACijiQsZEeajEecGJ9W2hw" outgoing="_ACijhwsZEeajEecGJ9W2hw _ACijiAsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqPfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_ACijdAsZEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_Interaction_FROM_Class_(nestedClassifier)_TO_Class_(nestedClassifier)&quot;">
+          <annotations xmi:id="_IChp5_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_ACijdQsZEeajEecGJ9W2hw" value="&quot;MOVEs Interaction from Class(Reference:nestedClassifier) to Class(Reference:nestedClassifier&quot;">
+          <annotations xmi:id="_IChp9fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_ACijdgsZEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_Interaction_FROM_Class_(nestedClassifier)_TO_Class_(nestedClassifier)&quot;">
+          <annotations xmi:id="_IChqQvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_ACijdwsZEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_Interaction_FROM_Class_(nestedClassifier)_TO_Class_(nestedClassifier)&quot;">
+          <annotations xmi:id="_IChqQ_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_ACijeAsZEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IChp6POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_ACijeQsZEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_IChp9vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_ACijegsZEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_IChp9_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_ACijewsZEeajEecGJ9W2hw" value="45">
+          <annotations xmi:id="_IChp-POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_ACijfAsZEeajEecGJ9W2hw" name="" outgoing="_ACijiQsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqPvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_-iXKJwsYEeajEecGJ9W2hw" name="A.OldSource" incoming="_-iXKOQsYEeajEecGJ9W2hw" outgoing="_-iXKPAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqS_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+      </nodes>
+      <nodes xmi:id="_-iXKKAsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_-iXKPQsYEeajEecGJ9W2hw" outgoing="_-iXKQAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqTPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+      </nodes>
+      <nodes xmi:id="_-iXKKgsYEeajEecGJ9W2hw" name="" incoming="_-iXKOwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ4POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="_-iXKLAsYEeajEecGJ9W2hw" name="" incoming="_-iXKPwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ4fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="_-iXKLQsYEeajEecGJ9W2hw" incoming="_-iXKQwsYEeajEecGJ9W2hw" outgoing="_-iXKQQsYEeajEecGJ9W2hw _-iXKQgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ4vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_-iXKLgsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_Interaction_FROM_Class_(nestedClassifier)_TO_State_(doActivity)&quot;">
+          <annotations xmi:id="_ICiQ7fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-iXKLwsYEeajEecGJ9W2hw" value="&quot;MOVEs Interaction from Class(Reference:nestedClassifier) to State(Reference:doActivity&quot;">
+          <annotations xmi:id="_ICiQ7vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-iXKMAsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_Interaction_FROM_Class_(nestedClassifier)_TO_State_(doActivity)&quot;">
+          <annotations xmi:id="_ICiQ7_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-iXKMQsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_Interaction_FROM_Class_(nestedClassifier)_TO_State_(doActivity)&quot;">
+          <annotations xmi:id="_ICiQ8POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-iXKMgsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_ICiQ8fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-iXKMwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_ICiQ8vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-iXKNAsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_ICiQ8_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-iXKNQsYEeajEecGJ9W2hw" value="38">
+          <annotations xmi:id="_ICiQ9POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-iXKNgsYEeajEecGJ9W2hw" name="" outgoing="_-iXKQwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ4_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_AHi_RwsZEeajEecGJ9W2hw" name="A.OldSource" incoming="_AHi_WQsZEeajEecGJ9W2hw" outgoing="_AHi_XAsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ9fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+      </nodes>
+      <nodes xmi:id="_AHi_SAsZEeajEecGJ9W2hw" name="B.NewSource" incoming="_AHi_XQsZEeajEecGJ9W2hw" outgoing="_AHi_YAsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ9vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+      </nodes>
+      <nodes xmi:id="_AHi_SgsZEeajEecGJ9W2hw" name="" incoming="_AHi_WwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ9_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="_AHi_TAsZEeajEecGJ9W2hw" name="" incoming="_AHi_XwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ-POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </nodes>
+      <nodes xmi:id="_AHi_TQsZEeajEecGJ9W2hw" incoming="_AHi_YwsZEeajEecGJ9W2hw" outgoing="_AHi_YQsZEeajEecGJ9W2hw _AHi_YgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ-fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_AHi_TgsZEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_Interaction_FROM_Class_(nestedClassifier)_TO_State_(entry)&quot;">
+          <annotations xmi:id="_ICiRBPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_AHi_TwsZEeajEecGJ9W2hw" value="&quot;MOVEs Interaction from Class(Reference:nestedClassifier) to State(Reference:entry&quot;">
+          <annotations xmi:id="_ICiRBfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_AHi_UAsZEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_Interaction_FROM_Class_(nestedClassifier)_TO_State_(entry)&quot;">
+          <annotations xmi:id="_ICiRBvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_AHi_UQsZEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_Interaction_FROM_Class_(nestedClassifier)_TO_State_(entry)&quot;">
+          <annotations xmi:id="_ICiRB_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_AHi_UgsZEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_ICiRCPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_AHi_UwsZEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_ICiRCfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_AHi_VAsZEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_ICiRCvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_AHi_VQsZEeajEecGJ9W2hw" value="38">
+          <annotations xmi:id="_ICiRC_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_AHi_VgsZEeajEecGJ9W2hw" name="" outgoing="_AHi_YwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ-vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <edges xmi:id="_-mHozQsYEeajEecGJ9W2hw" source="_-mHovQsYEeajEecGJ9W2hw" target="_-mHovAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
+      </edges>
+      <edges xmi:id="_-mHozgsYEeajEecGJ9W2hw" source="_-mHovQsYEeajEecGJ9W2hw" target="_-mHouwsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objB"/>
+      </edges>
+      <edges xmi:id="_-mHozwsYEeajEecGJ9W2hw" source="_-mHowAsYEeajEecGJ9W2hw" target="_-mHovgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp2vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="_-mHo0AsYEeajEecGJ9W2hw" source="_-mHowAsYEeajEecGJ9W2hw" target="_-mHovAsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/tgt"/>
+      </edges>
+      <edges xmi:id="_-mHo0QsYEeajEecGJ9W2hw" source="_-mHowAsYEeajEecGJ9W2hw" target="_-mHowQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqRfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="_-mHo0gsYEeajEecGJ9W2hw" source="_-mHovgsYEeajEecGJ9W2hw" target="_-mHovAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp3POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class/nestedClassifier"/>
+      </edges>
+      <edges xmi:id="_-mHo0wsYEeajEecGJ9W2hw" source="_-mHowgsYEeajEecGJ9W2hw" target="_-mHovwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp8fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_-mHo1AsYEeajEecGJ9W2hw" source="_-mHowgsYEeajEecGJ9W2hw" target="_-mHouwsYEeajEecGJ9W2hw">
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/tgt"/>
+      </edges>
+      <edges xmi:id="_-mHo1QsYEeajEecGJ9W2hw" source="_-mHowgsYEeajEecGJ9W2hw" target="_-mHowQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqP_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="_-mHo1gsYEeajEecGJ9W2hw" source="_-mHovwsYEeajEecGJ9W2hw" target="_-mHouwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp3vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0 or rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class/nestedClassifier"/>
+      </edges>
+      <edges xmi:id="_-mHo1wsYEeajEecGJ9W2hw" source="_-mHowwsYEeajEecGJ9W2hw" target="_-mHowAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqR_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-mHo2AsYEeajEecGJ9W2hw" source="_-mHowwsYEeajEecGJ9W2hw" target="_-mHowgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp4POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-mHo2QsYEeajEecGJ9W2hw" source="_-mHozAsYEeajEecGJ9W2hw" target="_-mHowwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp4fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="_ACijiAsZEeajEecGJ9W2hw" source="_ACijcwsZEeajEecGJ9W2hw" target="_-mHowgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp5vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_ACijiQsZEeajEecGJ9W2hw" source="_ACijfAsZEeajEecGJ9W2hw" target="_ACijcwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChp9POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="_ATvBOAsZEeajEecGJ9W2hw" source="_-mHowAsYEeajEecGJ9W2hw" target="_ATvBJgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqKvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="_ATvBOgsZEeajEecGJ9W2hw" source="_-mHowAsYEeajEecGJ9W2hw" target="_ATvBKQsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqK_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="_ATvBOwsZEeajEecGJ9W2hw" source="_ATvBJgsZEeajEecGJ9W2hw" target="_-mHovAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqLPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class/nestedClassifier"/>
+      </edges>
+      <edges xmi:id="_ATvBPAsZEeajEecGJ9W2hw" source="_-mHowgsYEeajEecGJ9W2hw" target="_ATvBJwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqLfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_ATvBPgsZEeajEecGJ9W2hw" source="_-mHowgsYEeajEecGJ9W2hw" target="_ATvBKwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqLvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="_ATvBPwsZEeajEecGJ9W2hw" source="_ATvBJwsZEeajEecGJ9W2hw" target="_-mHouwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqL_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/exit"/>
+      </edges>
+      <edges xmi:id="_ATvBQAsZEeajEecGJ9W2hw" source="_ATvBLAsZEeajEecGJ9W2hw" target="_-mHowAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqMPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_ATvBQQsZEeajEecGJ9W2hw" source="_ATvBLAsZEeajEecGJ9W2hw" target="_-mHowgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqMfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_ATvBQgsZEeajEecGJ9W2hw" source="_ATvBNQsZEeajEecGJ9W2hw" target="_ATvBLAsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqMvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="_ACijhwsZEeajEecGJ9W2hw" source="_ACijcwsZEeajEecGJ9W2hw" target="_-mHowAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IChqQfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-iXKOQsYEeajEecGJ9W2hw" source="_-mHowAsYEeajEecGJ9W2hw" target="_-iXKJwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ5POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="_-iXKOwsYEeajEecGJ9W2hw" source="_-mHowAsYEeajEecGJ9W2hw" target="_-iXKKgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ5fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="_-iXKPAsYEeajEecGJ9W2hw" source="_-iXKJwsYEeajEecGJ9W2hw" target="_-mHovAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ5vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class/nestedClassifier"/>
+      </edges>
+      <edges xmi:id="_-iXKPQsYEeajEecGJ9W2hw" source="_-mHowgsYEeajEecGJ9W2hw" target="_-iXKKAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ5_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_-iXKPwsYEeajEecGJ9W2hw" source="_-mHowgsYEeajEecGJ9W2hw" target="_-iXKLAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ6POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="_-iXKQAsYEeajEecGJ9W2hw" source="_-iXKKAsYEeajEecGJ9W2hw" target="_-mHouwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ6fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/doActivity"/>
+      </edges>
+      <edges xmi:id="_-iXKQQsYEeajEecGJ9W2hw" source="_-iXKLQsYEeajEecGJ9W2hw" target="_-mHowAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ6vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-iXKQgsYEeajEecGJ9W2hw" source="_-iXKLQsYEeajEecGJ9W2hw" target="_-mHowgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ6_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-iXKQwsYEeajEecGJ9W2hw" source="_-iXKNgsYEeajEecGJ9W2hw" target="_-iXKLQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ7POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="_AHi_WQsZEeajEecGJ9W2hw" source="_-mHowAsYEeajEecGJ9W2hw" target="_AHi_RwsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ-_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
+      </edges>
+      <edges xmi:id="_AHi_WwsZEeajEecGJ9W2hw" source="_-mHowAsYEeajEecGJ9W2hw" target="_AHi_SgsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ_POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
+      </edges>
+      <edges xmi:id="_AHi_XAsZEeajEecGJ9W2hw" source="_AHi_RwsZEeajEecGJ9W2hw" target="_-mHovAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ_fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class/nestedClassifier"/>
+      </edges>
+      <edges xmi:id="_AHi_XQsZEeajEecGJ9W2hw" source="_-mHowgsYEeajEecGJ9W2hw" target="_AHi_SAsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ_vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
+      </edges>
+      <edges xmi:id="_AHi_XwsZEeajEecGJ9W2hw" source="_-mHowgsYEeajEecGJ9W2hw" target="_AHi_TAsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiQ__OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
+      </edges>
+      <edges xmi:id="_AHi_YAsZEeajEecGJ9W2hw" source="_AHi_SAsZEeajEecGJ9W2hw" target="_-mHouwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiRAPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/entry"/>
+      </edges>
+      <edges xmi:id="_AHi_YQsZEeajEecGJ9W2hw" source="_AHi_TQsZEeajEecGJ9W2hw" target="_-mHowAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiRAfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_AHi_YgsZEeajEecGJ9W2hw" source="_AHi_TQsZEeajEecGJ9W2hw" target="_-mHowgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiRAvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_AHi_YwsZEeajEecGJ9W2hw" source="_AHi_VgsZEeajEecGJ9W2hw" target="_AHi_TQsZEeajEecGJ9W2hw">
+        <annotations xmi:id="_ICiRA_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveinteractionfromclassnestedclassifiertostatestate01"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+    </rhs>
+    <mappings xmi:id="_-mHo2gsYEeajEecGJ9W2hw" origin="_-mHopgsYEeajEecGJ9W2hw" image="_-mHouwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-mHo2wsYEeajEecGJ9W2hw" origin="_-mHopwsYEeajEecGJ9W2hw" image="_-mHovAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-mHo3AsYEeajEecGJ9W2hw" origin="_-mHoqAsYEeajEecGJ9W2hw" image="_-mHovQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-mHo3QsYEeajEecGJ9W2hw" origin="_-mHoqQsYEeajEecGJ9W2hw" image="_-mHovgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-mHo3gsYEeajEecGJ9W2hw" origin="_-mHoqgsYEeajEecGJ9W2hw" image="_-mHovwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-mHo3wsYEeajEecGJ9W2hw" origin="_-mHoqwsYEeajEecGJ9W2hw" image="_-mHowAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-mHo4AsYEeajEecGJ9W2hw" origin="_-mHorAsYEeajEecGJ9W2hw" image="_-mHowQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-mHo4QsYEeajEecGJ9W2hw" origin="_-mHorgsYEeajEecGJ9W2hw" image="_-mHowgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-mHo4gsYEeajEecGJ9W2hw" origin="_-mHorwsYEeajEecGJ9W2hw" image="_-mHozAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICueIPOJEeqKPbhZweJEtg" origin="_ACijXwsZEeajEecGJ9W2hw" image="_ACijfAsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICueIfOJEeqKPbhZweJEtg" origin="_ATvBCAsZEeajEecGJ9W2hw" image="_ATvBJgsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICueIvOJEeqKPbhZweJEtg" origin="_ATvBCQsZEeajEecGJ9W2hw" image="_ATvBJwsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICueI_OJEeqKPbhZweJEtg" origin="_ATvBCwsZEeajEecGJ9W2hw" image="_ATvBKQsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICueJPOJEeqKPbhZweJEtg" origin="_ATvBDgsZEeajEecGJ9W2hw" image="_ATvBKwsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICueJfOJEeqKPbhZweJEtg" origin="_ATvBEAsZEeajEecGJ9W2hw" image="_ATvBNQsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICueJvOJEeqKPbhZweJEtg" origin="_-iXKCQsYEeajEecGJ9W2hw" image="_-iXKJwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICueJ_OJEeqKPbhZweJEtg" origin="_-iXKCgsYEeajEecGJ9W2hw" image="_-iXKKAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICueKPOJEeqKPbhZweJEtg" origin="_-iXKDAsYEeajEecGJ9W2hw" image="_-iXKKgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICueKfOJEeqKPbhZweJEtg" origin="_-iXKDwsYEeajEecGJ9W2hw" image="_-iXKLAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICueKvOJEeqKPbhZweJEtg" origin="_-iXKEQsYEeajEecGJ9W2hw" image="_-iXKNgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICueK_OJEeqKPbhZweJEtg" origin="_AHi_KQsZEeajEecGJ9W2hw" image="_AHi_RwsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICueLPOJEeqKPbhZweJEtg" origin="_AHi_KgsZEeajEecGJ9W2hw" image="_AHi_SAsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICueLfOJEeqKPbhZweJEtg" origin="_AHi_LAsZEeajEecGJ9W2hw" image="_AHi_SgsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICueLvOJEeqKPbhZweJEtg" origin="_AHi_LwsZEeajEecGJ9W2hw" image="_AHi_TAsZEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_ICueL_OJEeqKPbhZweJEtg" origin="_AHi_MQsZEeajEecGJ9W2hw" image="_AHi_VgsZEeajEecGJ9W2hw"/>
+  </units>
+</henshin:Module>

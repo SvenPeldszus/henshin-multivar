@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,27 +21,20 @@ public class LoadingHelper {
 	}
 
 	public static List<String> getRuleLocations(String filePath, String filePathRules, int nestingLevel, RuleSet set) {
+		Path root = Paths.get(filePath);
 		Path folder = Paths.get(filePath + "/" + filePathRules);
-		Stream<Path> paths;
+		if (!folder.toFile().exists()) {
+			return Collections.emptyList();
+		}
+		Stream<String> result;
 		try {
-			paths = Files.walk(folder).filter(Files::isRegularFile);
+			result = Files.walk(folder).filter(Files::isRegularFile).map(path -> root.relativize(path).toString())
+					.filter(s -> s.endsWith(".henshin"));
+
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
 		}
-		Stream<String> result = paths.map(path -> {
-			if (nestingLevel == 2) {
-				return filePathRules + "/" + path.getParent().getParent().getFileName() + "/"
-						+ path.getParent().getFileName() + "/" + path.getFileName();
-			}
-			if (nestingLevel == 1) {
-				return filePathRules + "/" + path.getParent().getFileName() + "/" + path.getFileName();
-			}
-			if (nestingLevel == 0) {
-				return filePathRules + "/" + path.getFileName();
-			}
-			throw new RuntimeException();
-		}).filter(s -> s.endsWith(".henshin"));
 
 		switch (set) {
 		case CREATE:
@@ -50,7 +44,7 @@ public class LoadingHelper {
 		case MOVE:
 			return result.filter(s -> isMOVE(s)).collect(Collectors.toList());
 		case ALL:
-			return result.filter(s -> isCREATE(s) && isMOVE(s) && isMOVE(s)).collect(Collectors.toList());
+			return result.filter(s -> isCREATE(s) || isMOVE(s) || isDELETE(s)).collect(Collectors.toList());
 		case NOFILTER:
 			return result.collect(Collectors.toList());
 		}
@@ -105,7 +99,11 @@ public class LoadingHelper {
 	public static Module loadAllRulesAsOneModule(HenshinResourceSet rs, String filePath, String filePathRules,
 			int depth, RuleSet set) {
 		Module module = null;
-		for (String location : getRuleLocations(filePath, filePathRules, depth, set)) {
+		List<String> ruleLocations = getRuleLocations(filePath, filePathRules, depth, set);
+		if (ruleLocations == null) {
+			return module;
+		}
+		for (String location : ruleLocations) {
 			if (module == null) {
 				module = rs.getModule(location, false);
 			} else {
@@ -113,10 +111,10 @@ public class LoadingHelper {
 				module.getUnits().addAll(mod.getUnits());
 			}
 		}
-		if(module == null) {
-			throw new IllegalStateException("No rule loaded!");
+		if (module == null) {
+			return null;
 		}
-		
+
 		module.getUnits()
 				.retainAll(module.getUnits().stream().filter(u -> u instanceof Rule).collect(Collectors.toSet()));
 		RuleSetNormalizer.prepareRules(module);

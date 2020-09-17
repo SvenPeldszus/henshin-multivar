@@ -1,311 +1,514 @@
-<henshin:Module xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmi:id="_VljO0LRVEeexAvqQ_kM_vQ">
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_IGSvgPOJEeqKPbhZweJEtg">
   <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
   <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
-  <units xsi:type="henshin:Rule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="_RtCsMLRVEeexAvqQ_kM_vQ" name="rr:moveOpaqueBehavior_FROM_Package_packagedElement_TO_Transition_Transition,rr:moveOpaqueBehavior_FROM_Package_packagedElement_TO_State_State,rr:moveOpaqueBehavior_FROM_Package_packagedElement_TO_Package_Package">
-    <annotations xmi:id="_VlinxLRVEeexAvqQ_kM_vQ" key="originalRules" value="A=Rule rr:moveOpaqueBehavior_FROM_Package_packagedElement_TO_Transition_Transition(Selected:OpaqueBehavior, OldSource:Package, NewSource:Transition, NewSource:State, NewSource:Package), B=Rule rr:moveOpaqueBehavior_FROM_Package_packagedElement_TO_State_State(Selected:OpaqueBehavior, OldSource:Package, NewSource:State), C=Rule rr:moveOpaqueBehavior_FROM_Package_packagedElement_TO_Package_Package(Selected:OpaqueBehavior, OldSource:Package, NewSource:Package)"/>
-    <parameters xmi:id="_9_BzcgsYEeajEecGJ9W2hw" name="Selected">
+  <units xsi:type="henshin:Rule" xmi:id="_-jvqEQsYEeajEecGJ9W2hw" name="rr:moveOpaqueBehavior_FROM_Package_packagedElement_TO_State_State01,rr:moveOpaqueBehavior_FROM_Package_packagedElement_TO_State_State,rr:moveOpaqueBehavior_FROM_Package_packagedElement_TO_State_State0,rr:moveOpaqueBehavior_FROM_Package_packagedElement_TO_Class_Class" description="Recognize: Moves OpaqueBehavior from Package(Reference:packagedElement) toState(Reference:State)">
+    <annotations xmi:id="_IGSIcvOJEeqKPbhZweJEtg" key="features" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass, rrmoveopaquebehaviorfrompackagepackagedelementtostatestate, rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0, rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
+    <annotations xmi:id="_IGSIc_OJEeqKPbhZweJEtg" key="featureConstraintIsCNF" value="true"/>
+    <annotations xmi:id="_IGSIdPOJEeqKPbhZweJEtg" key="featureConstraint" value="((rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01) | (rrmoveopaquebehaviorfrompackagepackagedelementtostatestate) | (rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0) | (rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass)) &amp; ( ~(rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01) | ~(rrmoveopaquebehaviorfrompackagepackagedelementtostatestate)) &amp; ( ~(rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01) | ~(rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0)) &amp; ( ~(rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01) | ~(rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass)) &amp; ( ~(rrmoveopaquebehaviorfrompackagepackagedelementtostatestate) | ~(rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0)) &amp; ( ~(rrmoveopaquebehaviorfrompackagepackagedelementtostatestate) | ~(rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass)) &amp; ( ~(rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0) | ~(rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass))"/>
+    <annotations xmi:id="_IGSIdfOJEeqKPbhZweJEtg" key="originalRules" value="A=Rule rr:moveOpaqueBehavior_FROM_Package_packagedElement_TO_State_State01(Selected:OpaqueBehavior, OldSource:Package, NewSource:State, NewSource:Class), B=Rule rr:moveOpaqueBehavior_FROM_Package_packagedElement_TO_State_State(Selected:OpaqueBehavior, OldSource:Package, NewSource:State), C=Rule rr:moveOpaqueBehavior_FROM_Package_packagedElement_TO_State_State0(Selected:OpaqueBehavior, OldSource:Package, NewSource:State), D=Rule rr:moveOpaqueBehavior_FROM_Package_packagedElement_TO_Class_Class(Selected:OpaqueBehavior, OldSource:Package, NewSource:Class)"/>
+    <parameters xmi:id="_-jvqEgsYEeajEecGJ9W2hw" name="Selected">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//OpaqueBehavior"/>
     </parameters>
-    <parameters xmi:id="_9_BzcwsYEeajEecGJ9W2hw" name="OldSource">
+    <parameters xmi:id="_-jvqEwsYEeajEecGJ9W2hw" name="OldSource">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
     </parameters>
-    <parameters xmi:id="_9_BzdAsYEeajEecGJ9W2hw" name="NewSource">
-      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition"/>
-    </parameters>
-    <parameters xmi:id="_VleWULRVEeexAvqQ_kM_vQ" name="NewSource">
+    <parameters xmi:id="_-jvqFAsYEeajEecGJ9W2hw" name="NewSource">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
     </parameters>
-    <parameters xmi:id="_VlfkcLRVEeexAvqQ_kM_vQ" name="NewSource">
-      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+    <parameters xmi:id="_IGN3APOJEeqKPbhZweJEtg" name="NewSource">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
     </parameters>
-    <lhs xmi:id="_9_BzdQsYEeajEecGJ9W2hw" name="Lhs">
-      <nodes xmi:id="_9_BzdgsYEeajEecGJ9W2hw" name="B.Selected" incoming="_9_BzgwsYEeajEecGJ9W2hw _9_BziQsYEeajEecGJ9W2hw _9_BziwsYEeajEecGJ9W2hw _-jvqKwsYEeajEecGJ9W2hw _-k_ASAsYEeajEecGJ9W2hw">
+    <lhs xmi:id="_-jvqFQsYEeajEecGJ9W2hw" name="Lhs">
+      <nodes xmi:id="_-jvqFgsYEeajEecGJ9W2hw" name="B.Selected" incoming="_-jvqIwsYEeajEecGJ9W2hw _-jvqKQsYEeajEecGJ9W2hw _-jvqKwsYEeajEecGJ9W2hw _91Bi-wsYEeajEecGJ9W2hw __Vi6iwsYEeajEecGJ9W2hw _-jDtqwsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//OpaqueBehavior"/>
       </nodes>
-      <nodes xmi:id="_9_BzdwsYEeajEecGJ9W2hw" name="A.Selected" incoming="_9_BzggsYEeajEecGJ9W2hw _9_BzhQsYEeajEecGJ9W2hw _9_BzhwsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_-jvqFwsYEeajEecGJ9W2hw" name="A.Selected" incoming="_-jvqIgsYEeajEecGJ9W2hw _-jvqJQsYEeajEecGJ9W2hw _-jvqJwsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//OpaqueBehavior"/>
       </nodes>
-      <nodes xmi:id="_9_BzeAsYEeajEecGJ9W2hw" name="" outgoing="_9_BzggsYEeajEecGJ9W2hw _9_BzgwsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_-jvqGAsYEeajEecGJ9W2hw" name="" outgoing="_-jvqIgsYEeajEecGJ9W2hw _-jvqIwsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
       </nodes>
-      <nodes xmi:id="_9_BzeQsYEeajEecGJ9W2hw" name="A.OldSource" incoming="_9_BzhAsYEeajEecGJ9W2hw" outgoing="_9_BzhwsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_-jvqGQsYEeajEecGJ9W2hw" name="A.OldSource" incoming="_-jvqJAsYEeajEecGJ9W2hw" outgoing="_-jvqJwsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
       </nodes>
-      <nodes xmi:id="_9_BzegsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_9_BziAsYEeajEecGJ9W2hw" outgoing="_9_BziwsYEeajEecGJ9W2hw">
-        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition"/>
-        <annotations key="presenceCondition" value="A"/>
+      <nodes xmi:id="_-jvqGgsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_-jvqKAsYEeajEecGJ9W2hw" outgoing="_-jvqKwsYEeajEecGJ9W2hw __Vi6iwsYEeajEecGJ9W2hw _-jDtqwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKM1fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01 or rrmoveopaquebehaviorfrompackagepackagedelementtostatestate or rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
       </nodes>
-      <nodes xmi:id="_9_BzewsYEeajEecGJ9W2hw" name="" outgoing="_9_BzhAsYEeajEecGJ9W2hw _9_BzhQsYEeajEecGJ9W2hw _9_BzhgsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_-jvqGwsYEeajEecGJ9W2hw" name="" outgoing="_-jvqJAsYEeajEecGJ9W2hw _-jvqJQsYEeajEecGJ9W2hw _-jvqJgsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference"/>
       </nodes>
-      <nodes xmi:id="_9_BzfAsYEeajEecGJ9W2hw" name="" incoming="_9_BzhgsYEeajEecGJ9W2hw _-k_ARwsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_-jvqHAsYEeajEecGJ9W2hw" name="" incoming="_-jvqJgsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
-        <attributes xmi:id="_9_BzfQsYEeajEecGJ9W2hw" value="&quot;packagedElement&quot;">
-          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-        </attributes>
         <attributes xmi:id="_-jvqHQsYEeajEecGJ9W2hw" value="&quot;packagedElement&quot;">
           <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
         </attributes>
-        <attributes xmi:id="_-k_APAsYEeajEecGJ9W2hw" value="&quot;packagedElement&quot;">
+        <attributes xmi:id="_-jDtnQsYEeajEecGJ9W2hw" value="&quot;packagedElement&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="__Vi6fQsYEeajEecGJ9W2hw" value="&quot;packagedElement&quot;">
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="_91Bi7QsYEeajEecGJ9W2hw" value="&quot;packagedElement&quot;">
           <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
         </attributes>
       </nodes>
-      <nodes xmi:id="_9_BzfgsYEeajEecGJ9W2hw" name="" outgoing="_9_BziAsYEeajEecGJ9W2hw _9_BziQsYEeajEecGJ9W2hw _9_BzigsYEeajEecGJ9W2hw _-jvqKAsYEeajEecGJ9W2hw _-k_ARQsYEeajEecGJ9W2hw _-k_ARwsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_-jvqHgsYEeajEecGJ9W2hw" name="" outgoing="_-jvqKAsYEeajEecGJ9W2hw _-jvqKQsYEeajEecGJ9W2hw _-jvqKgsYEeajEecGJ9W2hw _91Bi-AsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference"/>
       </nodes>
-      <nodes xmi:id="_9_BzfwsYEeajEecGJ9W2hw" name="" incoming="_9_BzigsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_-jvqHwsYEeajEecGJ9W2hw" name="" incoming="_-jvqKgsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
-        <attributes xmi:id="_9_BzgAsYEeajEecGJ9W2hw" value="&quot;effect&quot;">
-          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-          <annotations key="presenceCondition" value="A"/>
-        </attributes>
         <attributes xmi:id="_-jvqIAsYEeajEecGJ9W2hw" value="&quot;doActivity&quot;">
+          <annotations xmi:id="_IGKMuvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
           <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
-          <annotations key="presenceCondition" value="B"/>
         </attributes>
-        <annotations key="presenceCondition" value="A or B"/>
-      </nodes>
-      <nodes xmi:id="_9_BzgQsYEeajEecGJ9W2hw" name="">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="A"/>
+        <attributes xmi:id="__Vi6gAsYEeajEecGJ9W2hw" value="&quot;exit&quot;">
+          <annotations xmi:id="_IGKMovOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="_91Bi8AsYEeajEecGJ9W2hw" value="&quot;nestedClassifier&quot;">
+          <annotations xmi:id="_IGKMpfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
+        <attributes xmi:id="_-jDtoAsYEeajEecGJ9W2hw" value="&quot;entry&quot;">
+          <annotations xmi:id="_IGKM1POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+          <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="_-jvqIQsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_IGKMuPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="B"/>
       </nodes>
-      <nodes xmi:id="_-jvqGgsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_-jvqKAsYEeajEecGJ9W2hw" outgoing="_-jvqKwsYEeajEecGJ9W2hw">
-        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
-        <annotations key="presenceCondition" value="B"/>
-      </nodes>
-      <nodes xmi:id="_-k_AOQsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_-k_ARQsYEeajEecGJ9W2hw" outgoing="_-k_ASAsYEeajEecGJ9W2hw">
-        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
-        <annotations key="presenceCondition" value="C"/>
-      </nodes>
-      <nodes xmi:id="_-k_APgsYEeajEecGJ9W2hw" name="">
+      <nodes xmi:id="_-jDtoQsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_IGJlkPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="C"/>
       </nodes>
-      <edges xmi:id="_9_BzggsYEeajEecGJ9W2hw" source="_9_BzeAsYEeajEecGJ9W2hw" target="_9_BzdwsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_91Bi8QsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_IGKMo_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="__Vi6gQsYEeajEecGJ9W2hw" name="">
+        <annotations xmi:id="_IGKMtfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_91Bi6gsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_91Bi-AsYEeajEecGJ9W2hw" outgoing="_91Bi-wsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKM0vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+      </nodes>
+      <edges xmi:id="_-jvqIgsYEeajEecGJ9W2hw" source="_-jvqGAsYEeajEecGJ9W2hw" target="_-jvqFwsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
       </edges>
-      <edges xmi:id="_9_BzgwsYEeajEecGJ9W2hw" source="_9_BzeAsYEeajEecGJ9W2hw" target="_9_BzdgsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqIwsYEeajEecGJ9W2hw" source="_-jvqGAsYEeajEecGJ9W2hw" target="_-jvqFgsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objB"/>
       </edges>
-      <edges xmi:id="_9_BzhAsYEeajEecGJ9W2hw" source="_9_BzewsYEeajEecGJ9W2hw" target="_9_BzeQsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqJAsYEeajEecGJ9W2hw" source="_-jvqGwsYEeajEecGJ9W2hw" target="_-jvqGQsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
       </edges>
-      <edges xmi:id="_9_BzhQsYEeajEecGJ9W2hw" source="_9_BzewsYEeajEecGJ9W2hw" target="_9_BzdwsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqJQsYEeajEecGJ9W2hw" source="_-jvqGwsYEeajEecGJ9W2hw" target="_-jvqFwsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/tgt"/>
       </edges>
-      <edges xmi:id="_9_BzhgsYEeajEecGJ9W2hw" source="_9_BzewsYEeajEecGJ9W2hw" target="_9_BzfAsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqJgsYEeajEecGJ9W2hw" source="_-jvqGwsYEeajEecGJ9W2hw" target="_-jvqHAsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
       </edges>
-      <edges xmi:id="_9_BzhwsYEeajEecGJ9W2hw" source="_9_BzeQsYEeajEecGJ9W2hw" target="_9_BzdwsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqJwsYEeajEecGJ9W2hw" source="_-jvqGQsYEeajEecGJ9W2hw" target="_-jvqFwsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Package/packagedElement"/>
       </edges>
-      <edges xmi:id="_9_BziAsYEeajEecGJ9W2hw" source="_9_BzfgsYEeajEecGJ9W2hw" target="_9_BzegsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqKAsYEeajEecGJ9W2hw" source="_-jvqHgsYEeajEecGJ9W2hw" target="_-jvqGgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGJlnvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01 or rrmoveopaquebehaviorfrompackagepackagedelementtostatestate or rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
-        <annotations key="presenceCondition" value="A"/>
       </edges>
-      <edges xmi:id="_9_BziQsYEeajEecGJ9W2hw" source="_9_BzfgsYEeajEecGJ9W2hw" target="_9_BzdgsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqKQsYEeajEecGJ9W2hw" source="_-jvqHgsYEeajEecGJ9W2hw" target="_-jvqFgsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/tgt"/>
       </edges>
-      <edges xmi:id="_9_BzigsYEeajEecGJ9W2hw" source="_9_BzfgsYEeajEecGJ9W2hw" target="_9_BzfwsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqKgsYEeajEecGJ9W2hw" source="_-jvqHgsYEeajEecGJ9W2hw" target="_-jvqHwsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
-        <annotations key="presenceCondition" value="A or B"/>
       </edges>
-      <edges xmi:id="_9_BziwsYEeajEecGJ9W2hw" source="_9_BzegsYEeajEecGJ9W2hw" target="_9_BzdgsYEeajEecGJ9W2hw">
-        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition/effect"/>
-        <annotations key="presenceCondition" value="A"/>
-      </edges>
-      <edges xmi:id="_-jvqKAsYEeajEecGJ9W2hw" source="_9_BzfgsYEeajEecGJ9W2hw" target="_-jvqGgsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
-        <annotations key="presenceCondition" value="B"/>
-      </edges>
-      <edges xmi:id="_-jvqKwsYEeajEecGJ9W2hw" source="_-jvqGgsYEeajEecGJ9W2hw" target="_9_BzdgsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqKwsYEeajEecGJ9W2hw" source="_-jvqGgsYEeajEecGJ9W2hw" target="_-jvqFgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMufOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/doActivity"/>
-        <annotations key="presenceCondition" value="B"/>
       </edges>
-      <edges xmi:id="_-k_ARQsYEeajEecGJ9W2hw" source="_9_BzfgsYEeajEecGJ9W2hw" target="_-k_AOQsYEeajEecGJ9W2hw">
+      <edges xmi:id="_91Bi-wsYEeajEecGJ9W2hw" source="_91Bi6gsYEeajEecGJ9W2hw" target="_-jvqFgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMpPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class/nestedClassifier"/>
+      </edges>
+      <edges xmi:id="__Vi6iwsYEeajEecGJ9W2hw" source="_-jvqGgsYEeajEecGJ9W2hw" target="_-jvqFgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMtvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/exit"/>
+      </edges>
+      <edges xmi:id="_91Bi-AsYEeajEecGJ9W2hw" source="_-jvqHgsYEeajEecGJ9W2hw" target="_91Bi6gsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMt_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
-        <annotations key="presenceCondition" value="C"/>
       </edges>
-      <edges xmi:id="_-k_ASAsYEeajEecGJ9W2hw" source="_-k_AOQsYEeajEecGJ9W2hw" target="_9_BzdgsYEeajEecGJ9W2hw">
-        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Package/packagedElement"/>
-        <annotations key="presenceCondition" value="C"/>
+      <edges xmi:id="_-jDtqwsYEeajEecGJ9W2hw" source="_-jvqGgsYEeajEecGJ9W2hw" target="_-jvqFgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKM0_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/entry"/>
       </edges>
-      <edges xmi:id="_-k_ARwsYEeajEecGJ9W2hw" source="_9_BzfgsYEeajEecGJ9W2hw" target="_9_BzfAsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
-        <annotations key="presenceCondition" value="C"/>
-      </edges>
+      <formula xsi:type="henshin:And" xmi:id="_IGSIcPOJEeqKPbhZweJEtg">
+        <left xsi:type="henshin:And" xmi:id="_IGRhZPOJEeqKPbhZweJEtg">
+          <left xsi:type="henshin:Not" xmi:id="_-jvqLAsYEeajEecGJ9W2hw">
+            <child xsi:type="henshin:NestedCondition" xmi:id="_-jvqLQsYEeajEecGJ9W2hw">
+              <annotations xmi:id="_IGKM6POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
+              <conclusion xmi:id="_-jvqLgsYEeajEecGJ9W2hw" name="1">
+                <nodes xmi:id="_-jvqLwsYEeajEecGJ9W2hw" incoming="_-jvqMQsYEeajEecGJ9W2hw">
+                  <annotations xmi:id="_IGKM6fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Behavior"/>
+                </nodes>
+                <nodes xmi:id="_-jvqMAsYEeajEecGJ9W2hw" name="B.NewSource" outgoing="_-jvqMQsYEeajEecGJ9W2hw">
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+                </nodes>
+                <edges xmi:id="_-jvqMQsYEeajEecGJ9W2hw" source="_-jvqMAsYEeajEecGJ9W2hw" target="_-jvqLwsYEeajEecGJ9W2hw">
+                  <annotations xmi:id="_IGKM6vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/doActivity"/>
+                </edges>
+              </conclusion>
+              <mappings xmi:id="_-jvqMgsYEeajEecGJ9W2hw" origin="_-jvqGgsYEeajEecGJ9W2hw" image="_-jvqMAsYEeajEecGJ9W2hw"/>
+            </child>
+          </left>
+          <right xsi:type="henshin:Not" xmi:id="_IGRhZfOJEeqKPbhZweJEtg">
+            <child xsi:type="henshin:NestedCondition" xmi:id="__Vi6jQsYEeajEecGJ9W2hw">
+              <annotations xmi:id="_IGKM5fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+              <conclusion xmi:id="__Vi6jgsYEeajEecGJ9W2hw" name="2">
+                <nodes xmi:id="__Vi6jwsYEeajEecGJ9W2hw" incoming="__Vi6kQsYEeajEecGJ9W2hw">
+                  <annotations xmi:id="_IGKM5vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Behavior"/>
+                </nodes>
+                <nodes xmi:id="__Vi6kAsYEeajEecGJ9W2hw" name="B.NewSource" outgoing="__Vi6kQsYEeajEecGJ9W2hw">
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+                </nodes>
+                <edges xmi:id="__Vi6kQsYEeajEecGJ9W2hw" source="__Vi6kAsYEeajEecGJ9W2hw" target="__Vi6jwsYEeajEecGJ9W2hw">
+                  <annotations xmi:id="_IGKM5_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+                  <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/exit"/>
+                </edges>
+              </conclusion>
+              <mappings xmi:id="__Vi6kgsYEeajEecGJ9W2hw" origin="_-jvqGgsYEeajEecGJ9W2hw" image="__Vi6kAsYEeajEecGJ9W2hw"/>
+            </child>
+          </right>
+        </left>
+        <right xsi:type="henshin:Not" xmi:id="_IGSIcfOJEeqKPbhZweJEtg">
+          <child xsi:type="henshin:NestedCondition" xmi:id="_-jDtrQsYEeajEecGJ9W2hw">
+            <annotations xmi:id="_IGKM6_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+            <conclusion xmi:id="_-jDtrgsYEeajEecGJ9W2hw" name="3">
+              <nodes xmi:id="_-jDtrwsYEeajEecGJ9W2hw" incoming="_-jDtsQsYEeajEecGJ9W2hw">
+                <annotations xmi:id="_IGKM7POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+                <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Behavior"/>
+              </nodes>
+              <nodes xmi:id="_-jDtsAsYEeajEecGJ9W2hw" name="B.NewSource" outgoing="_-jDtsQsYEeajEecGJ9W2hw">
+                <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
+              </nodes>
+              <edges xmi:id="_-jDtsQsYEeajEecGJ9W2hw" source="_-jDtsAsYEeajEecGJ9W2hw" target="_-jDtrwsYEeajEecGJ9W2hw">
+                <annotations xmi:id="_IGKM7fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+                <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/entry"/>
+              </edges>
+            </conclusion>
+            <mappings xmi:id="_-jDtsgsYEeajEecGJ9W2hw" origin="_-jvqGgsYEeajEecGJ9W2hw" image="_-jDtsAsYEeajEecGJ9W2hw"/>
+          </child>
+        </right>
+      </formula>
     </lhs>
-    <rhs xmi:id="_9_BzkwsYEeajEecGJ9W2hw" name="Rhs">
-      <nodes xmi:id="_9_BzlAsYEeajEecGJ9W2hw" name="B.Selected" incoming="_9_BzqAsYEeajEecGJ9W2hw _9_BzrgsYEeajEecGJ9W2hw _9_BzsAsYEeajEecGJ9W2hw _-jvqUAsYEeajEecGJ9W2hw _-k_AZQsYEeajEecGJ9W2hw">
+    <rhs xmi:id="_-jvqMwsYEeajEecGJ9W2hw" name="Rhs">
+      <nodes xmi:id="_-jvqNAsYEeajEecGJ9W2hw" name="B.Selected" incoming="_-jvqSAsYEeajEecGJ9W2hw _-jvqTgsYEeajEecGJ9W2hw _-jvqUAsYEeajEecGJ9W2hw _-jDt0AsYEeajEecGJ9W2hw __Vi6sAsYEeajEecGJ9W2hw _91BjGQsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//OpaqueBehavior"/>
       </nodes>
-      <nodes xmi:id="_9_BzlQsYEeajEecGJ9W2hw" name="A.Selected" incoming="_9_BzpwsYEeajEecGJ9W2hw _9_BzqgsYEeajEecGJ9W2hw _9_BzrAsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_-jvqNQsYEeajEecGJ9W2hw" name="A.Selected" incoming="_-jvqRwsYEeajEecGJ9W2hw _-jvqSgsYEeajEecGJ9W2hw _-jvqTAsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//OpaqueBehavior"/>
       </nodes>
-      <nodes xmi:id="_9_BzlgsYEeajEecGJ9W2hw" name="" outgoing="_9_BzpwsYEeajEecGJ9W2hw _9_BzqAsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_-jvqNgsYEeajEecGJ9W2hw" name="" outgoing="_-jvqRwsYEeajEecGJ9W2hw _-jvqSAsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
       </nodes>
-      <nodes xmi:id="_9_BzlwsYEeajEecGJ9W2hw" name="A.OldSource" incoming="_9_BzqQsYEeajEecGJ9W2hw" outgoing="_9_BzrAsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_-jvqNwsYEeajEecGJ9W2hw" name="A.OldSource" incoming="_-jvqSQsYEeajEecGJ9W2hw" outgoing="_-jvqTAsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
       </nodes>
-      <nodes xmi:id="_9_BzmAsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_9_BzrQsYEeajEecGJ9W2hw" outgoing="_9_BzsAsYEeajEecGJ9W2hw">
-        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition"/>
-        <annotations key="presenceCondition" value="A"/>
+      <nodes xmi:id="_-jvqOAsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_-jvqTQsYEeajEecGJ9W2hw" outgoing="_-jvqUAsYEeajEecGJ9W2hw _-jDt0AsYEeajEecGJ9W2hw __Vi6sAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMwPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01 or rrmoveopaquebehaviorfrompackagepackagedelementtostatestate or rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
       </nodes>
-      <nodes xmi:id="_9_BzmQsYEeajEecGJ9W2hw" name="" incoming="_9_BzsQsYEeajEecGJ9W2hw _-jvqUQsYEeajEecGJ9W2hw _-k_AZgsYEeajEecGJ9W2hw" outgoing="_9_BzqQsYEeajEecGJ9W2hw _9_BzqgsYEeajEecGJ9W2hw _9_BzqwsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_-jvqOQsYEeajEecGJ9W2hw" name="" incoming="_-jvqUQsYEeajEecGJ9W2hw __Vi6sQsYEeajEecGJ9W2hw _91BjGgsYEeajEecGJ9W2hw _-jDt0QsYEeajEecGJ9W2hw" outgoing="_-jvqSQsYEeajEecGJ9W2hw _-jvqSgsYEeajEecGJ9W2hw _-jvqSwsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference"/>
       </nodes>
-      <nodes xmi:id="_9_BzmgsYEeajEecGJ9W2hw" name="" incoming="_9_BzqwsYEeajEecGJ9W2hw _-k_AZAsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_-jvqOgsYEeajEecGJ9W2hw" name="" incoming="_-jvqSwsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
       </nodes>
-      <nodes xmi:id="_9_BzmwsYEeajEecGJ9W2hw" name="" incoming="_9_BzsgsYEeajEecGJ9W2hw _-jvqUgsYEeajEecGJ9W2hw _-k_AZwsYEeajEecGJ9W2hw" outgoing="_9_BzrQsYEeajEecGJ9W2hw _9_BzrgsYEeajEecGJ9W2hw _9_BzrwsYEeajEecGJ9W2hw _-jvqTQsYEeajEecGJ9W2hw _-k_AZAsYEeajEecGJ9W2hw _-k_AYgsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_-jvqOwsYEeajEecGJ9W2hw" name="" incoming="_-jvqUgsYEeajEecGJ9W2hw _91BjGwsYEeajEecGJ9W2hw _-jDt0gsYEeajEecGJ9W2hw __Vi6sgsYEeajEecGJ9W2hw" outgoing="_-jvqTQsYEeajEecGJ9W2hw _-jvqTgsYEeajEecGJ9W2hw _-jvqTwsYEeajEecGJ9W2hw _91BjFgsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference"/>
       </nodes>
-      <nodes xmi:id="_9_BznAsYEeajEecGJ9W2hw" name="" incoming="_9_BzrwsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_-jvqPAsYEeajEecGJ9W2hw" name="" incoming="_-jvqTwsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
-        <annotations key="presenceCondition" value="A or B"/>
-      </nodes>
-      <nodes xmi:id="_9_BznQsYEeajEecGJ9W2hw" incoming="_9_BzswsYEeajEecGJ9W2hw" outgoing="_9_BzsQsYEeajEecGJ9W2hw _9_BzsgsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="A"/>
-      </nodes>
-      <nodes xmi:id="_9_BzpgsYEeajEecGJ9W2hw" name="" outgoing="_9_BzswsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="A"/>
-      </nodes>
-      <nodes xmi:id="_-jvqOAsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_-jvqTQsYEeajEecGJ9W2hw" outgoing="_-jvqUAsYEeajEecGJ9W2hw">
-        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
-        <annotations key="presenceCondition" value="B"/>
-      </nodes>
-      <nodes xmi:id="_-k_AUgsYEeajEecGJ9W2hw" incoming="_-k_AaAsYEeajEecGJ9W2hw" outgoing="_-k_AZgsYEeajEecGJ9W2hw _-k_AZwsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="C"/>
       </nodes>
       <nodes xmi:id="_-jvqPQsYEeajEecGJ9W2hw" incoming="_-jvqUwsYEeajEecGJ9W2hw" outgoing="_-jvqUQsYEeajEecGJ9W2hw _-jvqUgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKM3fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
-        <annotations key="presenceCondition" value="B"/>
+        <attributes xmi:id="_-jvqPgsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueBehavior_FROM_Package_(packagedElement)_TO_State_(doActivity)&quot;">
+          <annotations xmi:id="_IGKM0POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-jvqPwsYEeajEecGJ9W2hw" value="&quot;MOVEs OpaqueBehavior from Package(Reference:packagedElement) to State(Reference:doActivity&quot;">
+          <annotations xmi:id="_IGKMr_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-jvqQAsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueBehavior_FROM_Package_(packagedElement)_TO_State_(doActivity)&quot;">
+          <annotations xmi:id="_IGJllvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-jvqQQsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_OpaqueBehavior_FROM_Package_(packagedElement)_TO_State_(doActivity)&quot;">
+          <annotations xmi:id="_IGKM3vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-jvqQgsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IGKM0fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-jvqQwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IGJll_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-jvqRAsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_IGKMsPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-jvqRQsYEeajEecGJ9W2hw" value="31">
+          <annotations xmi:id="_IGKMsfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="_-jvqRgsYEeajEecGJ9W2hw" name="" outgoing="_-jvqUwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMzfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="B"/>
       </nodes>
-      <nodes xmi:id="_-k_ATgsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_-k_AYgsYEeajEecGJ9W2hw" outgoing="_-k_AZQsYEeajEecGJ9W2hw">
-        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
-        <annotations key="presenceCondition" value="C"/>
-      </nodes>
-      <nodes xmi:id="_-k_AWwsYEeajEecGJ9W2hw" name="" outgoing="_-k_AaAsYEeajEecGJ9W2hw">
+      <nodes xmi:id="_-jDtxgsYEeajEecGJ9W2hw" name="" outgoing="_-jDt0wsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGJlmPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
-        <annotations key="presenceCondition" value="C"/>
       </nodes>
-      <edges xmi:id="_9_BzpwsYEeajEecGJ9W2hw" source="_9_BzlgsYEeajEecGJ9W2hw" target="_9_BzlQsYEeajEecGJ9W2hw">
+      <nodes xmi:id="__Vi6nQsYEeajEecGJ9W2hw" incoming="__Vi6swsYEeajEecGJ9W2hw" outgoing="__Vi6sQsYEeajEecGJ9W2hw __Vi6sgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMpvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="__Vi6ngsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueBehavior_FROM_Package_(packagedElement)_TO_State_(exit)&quot;">
+          <annotations xmi:id="_IGKMp_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__Vi6nwsYEeajEecGJ9W2hw" value="&quot;MOVEs OpaqueBehavior from Package(Reference:packagedElement) to State(Reference:exit&quot;">
+          <annotations xmi:id="_IGKMvvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__Vi6oAsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueBehavior_FROM_Package_(packagedElement)_TO_State_(exit)&quot;">
+          <annotations xmi:id="_IGKMqPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__Vi6oQsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_OpaqueBehavior_FROM_Package_(packagedElement)_TO_State_(exit)&quot;">
+          <annotations xmi:id="_IGKM4vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__Vi6ogsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IGJlnfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__Vi6owsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IGKMv_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__Vi6pAsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_IGKM4_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__Vi6pQsYEeajEecGJ9W2hw" value="31">
+          <annotations xmi:id="_IGKM5POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_91BjAQsYEeajEecGJ9W2hw" name="B.NewSource" incoming="_91BjFgsYEeajEecGJ9W2hw" outgoing="_91BjGQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMqfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+      </nodes>
+      <nodes xmi:id="_91BjDwsYEeajEecGJ9W2hw" name="" outgoing="_91BjHAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMqvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_-jDtvQsYEeajEecGJ9W2hw" incoming="_-jDt0wsYEeajEecGJ9W2hw" outgoing="_-jDt0QsYEeajEecGJ9W2hw _-jDt0gsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMsvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_-jDtvgsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueBehavior_FROM_Package_(packagedElement)_TO_State_(entry)&quot;">
+          <annotations xmi:id="_IGJlmvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-jDtvwsYEeajEecGJ9W2hw" value="&quot;MOVEs OpaqueBehavior from Package(Reference:packagedElement) to State(Reference:entry&quot;">
+          <annotations xmi:id="_IGJlm_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-jDtwAsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueBehavior_FROM_Package_(packagedElement)_TO_State_(entry)&quot;">
+          <annotations xmi:id="_IGKMs_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-jDtwQsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_OpaqueBehavior_FROM_Package_(packagedElement)_TO_State_(entry)&quot;">
+          <annotations xmi:id="_IGKMxPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-jDtwgsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IGKMtPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-jDtwwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IGKMxfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-jDtxAsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_IGKMxvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-jDtxQsYEeajEecGJ9W2hw" value="31">
+          <annotations xmi:id="_IGKMx_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="__Vi6pgsYEeajEecGJ9W2hw" name="" outgoing="__Vi6swsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMu_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>
+      </nodes>
+      <nodes xmi:id="_91BjBgsYEeajEecGJ9W2hw" incoming="_91BjHAsYEeajEecGJ9W2hw" outgoing="_91BjGgsYEeajEecGJ9W2hw _91BjGwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMyPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_91BjBwsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueBehavior_FROM_Package_(packagedElement)_TO_Class_(nestedClassifier)&quot;">
+          <annotations xmi:id="_IGKM2vOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_91BjCAsYEeajEecGJ9W2hw" value="&quot;MOVEs OpaqueBehavior from Package(Reference:packagedElement) to Class(Reference:nestedClassifier&quot;">
+          <annotations xmi:id="_IGKMyvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_91BjCQsYEeajEecGJ9W2hw" value="&quot;MOVE_REF_COMBI_OpaqueBehavior_FROM_Package_(packagedElement)_TO_Class_(nestedClassifier)&quot;">
+          <annotations xmi:id="_IGKMrfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_91BjCgsYEeajEecGJ9W2hw" value="&quot;RR: MOVE_REF_COMBI_OpaqueBehavior_FROM_Package_(packagedElement)_TO_Class_(nestedClassifier)&quot;">
+          <annotations xmi:id="_IGKM2_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_91BjCwsYEeajEecGJ9W2hw" value="1">
+          <annotations xmi:id="_IGKMy_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_91BjDAsYEeajEecGJ9W2hw" value="0">
+          <annotations xmi:id="_IGKMzPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_91BjDQsYEeajEecGJ9W2hw" value="3">
+          <annotations xmi:id="_IGKM3POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_91BjDgsYEeajEecGJ9W2hw" value="38">
+          <annotations xmi:id="_IGKMrvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
+      </nodes>
+      <edges xmi:id="_-jvqRwsYEeajEecGJ9W2hw" source="_-jvqNgsYEeajEecGJ9W2hw" target="_-jvqNQsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
       </edges>
-      <edges xmi:id="_9_BzqAsYEeajEecGJ9W2hw" source="_9_BzlgsYEeajEecGJ9W2hw" target="_9_BzlAsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqSAsYEeajEecGJ9W2hw" source="_-jvqNgsYEeajEecGJ9W2hw" target="_-jvqNAsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objB"/>
       </edges>
-      <edges xmi:id="_9_BzqQsYEeajEecGJ9W2hw" source="_9_BzmQsYEeajEecGJ9W2hw" target="_9_BzlwsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqSQsYEeajEecGJ9W2hw" source="_-jvqOQsYEeajEecGJ9W2hw" target="_-jvqNwsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/src"/>
       </edges>
-      <edges xmi:id="_9_BzqgsYEeajEecGJ9W2hw" source="_9_BzmQsYEeajEecGJ9W2hw" target="_9_BzlQsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqSgsYEeajEecGJ9W2hw" source="_-jvqOQsYEeajEecGJ9W2hw" target="_-jvqNQsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/tgt"/>
       </edges>
-      <edges xmi:id="_9_BzqwsYEeajEecGJ9W2hw" source="_9_BzmQsYEeajEecGJ9W2hw" target="_9_BzmgsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqSwsYEeajEecGJ9W2hw" source="_-jvqOQsYEeajEecGJ9W2hw" target="_-jvqOgsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//RemoveReference/type"/>
       </edges>
-      <edges xmi:id="_9_BzrAsYEeajEecGJ9W2hw" source="_9_BzlwsYEeajEecGJ9W2hw" target="_9_BzlQsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqTAsYEeajEecGJ9W2hw" source="_-jvqNwsYEeajEecGJ9W2hw" target="_-jvqNQsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Package/packagedElement"/>
       </edges>
-      <edges xmi:id="_9_BzrQsYEeajEecGJ9W2hw" source="_9_BzmwsYEeajEecGJ9W2hw" target="_9_BzmAsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqTQsYEeajEecGJ9W2hw" source="_-jvqOwsYEeajEecGJ9W2hw" target="_-jvqOAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGJlkfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01 or rrmoveopaquebehaviorfrompackagepackagedelementtostatestate or rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
-        <annotations key="presenceCondition" value="A"/>
       </edges>
-      <edges xmi:id="_9_BzrgsYEeajEecGJ9W2hw" source="_9_BzmwsYEeajEecGJ9W2hw" target="_9_BzlAsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqTgsYEeajEecGJ9W2hw" source="_-jvqOwsYEeajEecGJ9W2hw" target="_-jvqNAsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/tgt"/>
       </edges>
-      <edges xmi:id="_9_BzrwsYEeajEecGJ9W2hw" source="_9_BzmwsYEeajEecGJ9W2hw" target="_9_BznAsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqTwsYEeajEecGJ9W2hw" source="_-jvqOwsYEeajEecGJ9W2hw" target="_-jvqPAsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
-        <annotations key="presenceCondition" value="A or B"/>
       </edges>
-      <edges xmi:id="_9_BzsAsYEeajEecGJ9W2hw" source="_9_BzmAsYEeajEecGJ9W2hw" target="_9_BzlAsYEeajEecGJ9W2hw">
-        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Transition/effect"/>
-        <annotations key="presenceCondition" value="A"/>
+      <edges xmi:id="_-jvqUAsYEeajEecGJ9W2hw" source="_-jvqOAsYEeajEecGJ9W2hw" target="_-jvqNAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGJllPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/doActivity"/>
       </edges>
-      <edges xmi:id="_9_BzsQsYEeajEecGJ9W2hw" source="_9_BznQsYEeajEecGJ9W2hw" target="_9_BzmQsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqUQsYEeajEecGJ9W2hw" source="_-jvqPQsYEeajEecGJ9W2hw" target="_-jvqOQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMzvOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="A"/>
       </edges>
-      <edges xmi:id="_9_BzsgsYEeajEecGJ9W2hw" source="_9_BznQsYEeajEecGJ9W2hw" target="_9_BzmwsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jvqUgsYEeajEecGJ9W2hw" source="_-jvqPQsYEeajEecGJ9W2hw" target="_-jvqOwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMz_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="A"/>
-      </edges>
-      <edges xmi:id="_9_BzswsYEeajEecGJ9W2hw" source="_9_BzpgsYEeajEecGJ9W2hw" target="_9_BznQsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="A"/>
-      </edges>
-      <edges xmi:id="_-jvqUgsYEeajEecGJ9W2hw" source="_-jvqPQsYEeajEecGJ9W2hw" target="_9_BzmwsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="B"/>
-      </edges>
-      <edges xmi:id="_-jvqTQsYEeajEecGJ9W2hw" source="_9_BzmwsYEeajEecGJ9W2hw" target="_-jvqOAsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
-        <annotations key="presenceCondition" value="B"/>
-      </edges>
-      <edges xmi:id="_-jvqUQsYEeajEecGJ9W2hw" source="_-jvqPQsYEeajEecGJ9W2hw" target="_9_BzmQsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="B"/>
       </edges>
       <edges xmi:id="_-jvqUwsYEeajEecGJ9W2hw" source="_-jvqRgsYEeajEecGJ9W2hw" target="_-jvqPQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGJllfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate01"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="B"/>
       </edges>
-      <edges xmi:id="_-k_AZAsYEeajEecGJ9W2hw" source="_9_BzmwsYEeajEecGJ9W2hw" target="_9_BzmgsYEeajEecGJ9W2hw">
-        <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/type"/>
-        <annotations key="presenceCondition" value="C"/>
+      <edges xmi:id="_-jDt0AsYEeajEecGJ9W2hw" source="_-jvqOAsYEeajEecGJ9W2hw" target="_-jvqNAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGJlmfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/entry"/>
       </edges>
-      <edges xmi:id="_-k_AaAsYEeajEecGJ9W2hw" source="_-k_AWwsYEeajEecGJ9W2hw" target="_-k_AUgsYEeajEecGJ9W2hw">
+      <edges xmi:id="__Vi6swsYEeajEecGJ9W2hw" source="__Vi6pgsYEeajEecGJ9W2hw" target="__Vi6nQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGJlnPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
-        <annotations key="presenceCondition" value="C"/>
       </edges>
-      <edges xmi:id="_-jvqUAsYEeajEecGJ9W2hw" source="_-jvqOAsYEeajEecGJ9W2hw" target="_9_BzlAsYEeajEecGJ9W2hw">
-        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/doActivity"/>
-        <annotations key="presenceCondition" value="B"/>
-      </edges>
-      <edges xmi:id="_-k_AYgsYEeajEecGJ9W2hw" source="_9_BzmwsYEeajEecGJ9W2hw" target="_-k_ATgsYEeajEecGJ9W2hw">
+      <edges xmi:id="_91BjFgsYEeajEecGJ9W2hw" source="_-jvqOwsYEeajEecGJ9W2hw" target="_91BjAQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMq_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//AddReference/src"/>
-        <annotations key="presenceCondition" value="C"/>
       </edges>
-      <edges xmi:id="_-k_AZQsYEeajEecGJ9W2hw" source="_-k_ATgsYEeajEecGJ9W2hw" target="_9_BzlAsYEeajEecGJ9W2hw">
-        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Package/packagedElement"/>
-        <annotations key="presenceCondition" value="C"/>
+      <edges xmi:id="_91BjHAsYEeajEecGJ9W2hw" source="_91BjDwsYEeajEecGJ9W2hw" target="_91BjBgsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMrPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
       </edges>
-      <edges xmi:id="_-k_AZgsYEeajEecGJ9W2hw" source="_-k_AUgsYEeajEecGJ9W2hw" target="_9_BzmQsYEeajEecGJ9W2hw">
+      <edges xmi:id="__Vi6sAsYEeajEecGJ9W2hw" source="_-jvqOAsYEeajEecGJ9W2hw" target="_-jvqNAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMvPOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//State/exit"/>
+      </edges>
+      <edges xmi:id="__Vi6sQsYEeajEecGJ9W2hw" source="__Vi6nQsYEeajEecGJ9W2hw" target="_-jvqOQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMvfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="C"/>
       </edges>
-      <edges xmi:id="_-k_AZwsYEeajEecGJ9W2hw" source="_-k_AUgsYEeajEecGJ9W2hw" target="_9_BzmwsYEeajEecGJ9W2hw">
+      <edges xmi:id="_-jDt0wsYEeajEecGJ9W2hw" source="_-jDtxgsYEeajEecGJ9W2hw" target="_-jDtvQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMw_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference/changeSets"/>
+      </edges>
+      <edges xmi:id="_91BjGgsYEeajEecGJ9W2hw" source="_91BjBgsYEeajEecGJ9W2hw" target="_-jvqOQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKMyfOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
-        <annotations key="presenceCondition" value="C"/>
+      </edges>
+      <edges xmi:id="_91BjGQsYEeajEecGJ9W2hw" source="_91BjAQsYEeajEecGJ9W2hw" target="_-jvqNAsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKM2POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+        <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Class/nestedClassifier"/>
+      </edges>
+      <edges xmi:id="_91BjGwsYEeajEecGJ9W2hw" source="_91BjBgsYEeajEecGJ9W2hw" target="_-jvqOwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKM2fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtoclassclass"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-jDt0QsYEeajEecGJ9W2hw" source="_-jDtvQsYEeajEecGJ9W2hw" target="_-jvqOQsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKM3_OJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="_-jDt0gsYEeajEecGJ9W2hw" source="_-jDtvQsYEeajEecGJ9W2hw" target="_-jvqOwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKM4POJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
+      </edges>
+      <edges xmi:id="__Vi6sgsYEeajEecGJ9W2hw" source="__Vi6nQsYEeajEecGJ9W2hw" target="_-jvqOwsYEeajEecGJ9W2hw">
+        <annotations xmi:id="_IGKM4fOJEeqKPbhZweJEtg" key="presenceCondition" value="rrmoveopaquebehaviorfrompackagepackagedelementtostatestate0"/>
+        <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/changes"/>
       </edges>
     </rhs>
-    <mappings xmi:id="_9_BztAsYEeajEecGJ9W2hw" origin="_9_BzdgsYEeajEecGJ9W2hw" image="_9_BzlAsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_9_BztQsYEeajEecGJ9W2hw" origin="_9_BzdwsYEeajEecGJ9W2hw" image="_9_BzlQsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_9_BztgsYEeajEecGJ9W2hw" origin="_9_BzeAsYEeajEecGJ9W2hw" image="_9_BzlgsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_9_BztwsYEeajEecGJ9W2hw" origin="_9_BzeQsYEeajEecGJ9W2hw" image="_9_BzlwsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_9_BzuAsYEeajEecGJ9W2hw" origin="_9_BzegsYEeajEecGJ9W2hw" image="_9_BzmAsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_9_BzuQsYEeajEecGJ9W2hw" origin="_9_BzewsYEeajEecGJ9W2hw" image="_9_BzmQsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_9_BzugsYEeajEecGJ9W2hw" origin="_9_BzfAsYEeajEecGJ9W2hw" image="_9_BzmgsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_9_BzuwsYEeajEecGJ9W2hw" origin="_9_BzfgsYEeajEecGJ9W2hw" image="_9_BzmwsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_9_BzvAsYEeajEecGJ9W2hw" origin="_9_BzfwsYEeajEecGJ9W2hw" image="_9_BznAsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_9_BzvQsYEeajEecGJ9W2hw" origin="_9_BzgQsYEeajEecGJ9W2hw" image="_9_BzpgsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_VlinwLRVEeexAvqQ_kM_vQ" origin="_-jvqGgsYEeajEecGJ9W2hw" image="_-jvqOAsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_VlinwbRVEeexAvqQ_kM_vQ" origin="_-jvqIQsYEeajEecGJ9W2hw" image="_-jvqRgsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_VlinwrRVEeexAvqQ_kM_vQ" origin="_-k_AOQsYEeajEecGJ9W2hw" image="_-k_ATgsYEeajEecGJ9W2hw"/>
-    <mappings xmi:id="_Vlinw7RVEeexAvqQ_kM_vQ" origin="_-k_APgsYEeajEecGJ9W2hw" image="_-k_AWwsYEeajEecGJ9W2hw"/>
-    <annotations key="featureConstraint" value="xor(A,B,C)"/>
-    <annotations key="features" value="A,B,C"/>
+    <mappings xmi:id="_-jvqVAsYEeajEecGJ9W2hw" origin="_-jvqFgsYEeajEecGJ9W2hw" image="_-jvqNAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-jvqVQsYEeajEecGJ9W2hw" origin="_-jvqFwsYEeajEecGJ9W2hw" image="_-jvqNQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-jvqVgsYEeajEecGJ9W2hw" origin="_-jvqGAsYEeajEecGJ9W2hw" image="_-jvqNgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-jvqVwsYEeajEecGJ9W2hw" origin="_-jvqGQsYEeajEecGJ9W2hw" image="_-jvqNwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-jvqWAsYEeajEecGJ9W2hw" origin="_-jvqGgsYEeajEecGJ9W2hw" image="_-jvqOAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-jvqWQsYEeajEecGJ9W2hw" origin="_-jvqGwsYEeajEecGJ9W2hw" image="_-jvqOQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-jvqWgsYEeajEecGJ9W2hw" origin="_-jvqHAsYEeajEecGJ9W2hw" image="_-jvqOgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-jvqWwsYEeajEecGJ9W2hw" origin="_-jvqHgsYEeajEecGJ9W2hw" image="_-jvqOwsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-jvqXAsYEeajEecGJ9W2hw" origin="_-jvqHwsYEeajEecGJ9W2hw" image="_-jvqPAsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_-jvqXQsYEeajEecGJ9W2hw" origin="_-jvqIQsYEeajEecGJ9W2hw" image="_-jvqRgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_IGRhYPOJEeqKPbhZweJEtg" origin="_-jDtoQsYEeajEecGJ9W2hw" image="_-jDtxgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_IGRhYfOJEeqKPbhZweJEtg" origin="__Vi6gQsYEeajEecGJ9W2hw" image="__Vi6pgsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_IGRhYvOJEeqKPbhZweJEtg" origin="_91Bi6gsYEeajEecGJ9W2hw" image="_91BjAQsYEeajEecGJ9W2hw"/>
+    <mappings xmi:id="_IGRhY_OJEeqKPbhZweJEtg" origin="_91Bi8QsYEeajEecGJ9W2hw" image="_91BjDwsYEeajEecGJ9W2hw"/>
   </units>
 </henshin:Module>

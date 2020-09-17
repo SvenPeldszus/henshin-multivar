@@ -15,7 +15,7 @@ import aima.core.logic.propositional.parsing.ast.Sentence;
 /**
  * This class serves as a cache for SAT evaluation results, helping to avoid
  * performing the same computations repeatedly.
- * 
+ *
  * @author Daniel Strüber
  *
  */
@@ -24,14 +24,14 @@ public class FeatureExpression {
 
 	public static final Sentence TRUE = parser.parse(Logic.TRUE);
 
-	static Map<Sentence, Map<Sentence, Boolean>> implies = new HashMap<Sentence, Map<Sentence, Boolean>>();
-	static Map<Sentence, Map<Sentence, Boolean>> contradicts = new HashMap<Sentence, Map<Sentence, Boolean>>();
-	static Map<Sentence, Map<Sentence, Sentence>> and = new HashMap<Sentence, Map<Sentence, Sentence>>();
-	static Map<Sentence, Map<Sentence, Sentence>> andNot = new HashMap<Sentence, Map<Sentence, Sentence>>();
+	static Map<Sentence, Map<Sentence, Boolean>> implies = new HashMap<>();
+	static Map<Sentence, Map<Sentence, Boolean>> contradicts = new HashMap<>();
+	static Map<Sentence, Map<Sentence, Sentence>> and = new HashMap<>();
+	static Map<Sentence, Map<Sentence, Sentence>> andNot = new HashMap<>();
 
 	/**
 	 * Does expression 1 imply expression 2?
-	 * 
+	 *
 	 * @param expr1
 	 * @param expr2
 	 * @return
@@ -88,7 +88,7 @@ public class FeatureExpression {
 
 	/**
 	 * Does expression 1 contradict expression 2?
-	 * 
+	 *
 	 * @param expr1
 	 * @param expr2
 	 * @return
@@ -109,7 +109,7 @@ public class FeatureExpression {
 	}
 
 	/**
-	 * 
+	 *
 	 * @author speldszus
 	 */
 	private static class PropositionalParser extends PLParser {
@@ -143,14 +143,14 @@ public class FeatureExpression {
 			return sentence;
 		}
 
-		private static String resolveSynonyms(String expression) {
-			expression = expression.replaceAll("\\)", " ) ");
-			expression = expression.replaceAll("\\(", " ( ");
-			expression = expression.replaceAll(" (XOR) ", "xor");
-			expression = expression.replaceAll(" (or|OR|\\|\\|)", ' ' + OR + ' ');
-			expression = expression.replaceAll(" (and|AND|\\&\\&) ", ' ' + AND + ' ');
-			expression = expression.replaceAll("!", ' ' + NOT + ' ');
-			expression = expression.replaceAll(" (not|NOT) ", ' ' + NOT + ' ');
+		public static String resolveSynonyms(String expression) {
+			expression = expression.replace("\\)", " ) ");
+			expression = expression.replace("\\(", " ( ");
+			expression = expression.replace(" (XOR) ", "xor");
+			expression = expression.replaceAll(" (or|OR|\\|(\\|)?)", ' ' + OR + ' ');
+			expression = expression.replaceAll(" (and|AND|\\&(\\&)?) ", ' ' + AND + ' ');
+			expression = expression.replace("!", ' ' + NOT + ' ');
+			expression = expression.replaceAll(" *(not|NOT|~) *", ' ' + NOT + ' ');
 			return expression;
 		}
 	}

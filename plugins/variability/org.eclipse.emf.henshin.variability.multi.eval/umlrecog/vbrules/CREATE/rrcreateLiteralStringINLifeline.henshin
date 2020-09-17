@@ -1,7 +1,8 @@
-<henshin:Module xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmi:id="_rRxmgLRcEeeYUfLk2h7sIw">
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_4jA2kPOCEeqe6s0sCOQVEQ">
   <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
   <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
-  <units xsi:type="henshin:Rule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="_qo7d0LRcEeeYUfLk2h7sIw" name="rr:createLiteralString_IN_Lifeline">
+  <units xsi:type="henshin:Rule" xmi:id="_-Zs9QQsYEeajEecGJ9W2hw" name="rr:createLiteralString_IN_Lifeline" description="Recognize: creates one LiteralString in the context: Lifeline">
     <parameters xmi:id="_-Zs9QgsYEeajEecGJ9W2hw" name="Selected">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline"/>
     </parameters>
@@ -63,6 +64,22 @@
       <edges xmi:id="_-Zs9VgsYEeajEecGJ9W2hw" source="_-Zs9SAsYEeajEecGJ9W2hw" target="_-Zs9SgsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline/selector"/>
       </edges>
+      <formula xsi:type="henshin:Not" xmi:id="_-Zs9VwsYEeajEecGJ9W2hw">
+        <child xsi:type="henshin:NestedCondition" xmi:id="_-Zs9WAsYEeajEecGJ9W2hw">
+          <conclusion xmi:id="_-Zs9WQsYEeajEecGJ9W2hw" name="ub0">
+            <nodes xmi:id="_-Zs9WgsYEeajEecGJ9W2hw" incoming="_-Zs9XAsYEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+            </nodes>
+            <nodes xmi:id="_-Zs9WwsYEeajEecGJ9W2hw" name="B.Selected" outgoing="_-Zs9XAsYEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline"/>
+            </nodes>
+            <edges xmi:id="_-Zs9XAsYEeajEecGJ9W2hw" source="_-Zs9WwsYEeajEecGJ9W2hw" target="_-Zs9WgsYEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Lifeline/selector"/>
+            </edges>
+          </conclusion>
+          <mappings xmi:id="_-Zs9XQsYEeajEecGJ9W2hw" origin="_-Zs9SAsYEeajEecGJ9W2hw" image="_-Zs9WwsYEeajEecGJ9W2hw"/>
+        </child>
+      </formula>
     </lhs>
     <rhs xmi:id="_-Zs9XgsYEeajEecGJ9W2hw" name="Rhs">
       <nodes xmi:id="_-Zs9XwsYEeajEecGJ9W2hw" name="B.Selected" incoming="_-Zs9bwsYEeajEecGJ9W2hw" outgoing="_-ZtkUgsYEeajEecGJ9W2hw">
@@ -82,6 +99,30 @@
       </nodes>
       <nodes xmi:id="_-Zs9ZAsYEeajEecGJ9W2hw" incoming="_-ZtkVQsYEeajEecGJ9W2hw" outgoing="_-ZtkUwsYEeajEecGJ9W2hw _-ZtkVAsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_-Zs9ZQsYEeajEecGJ9W2hw" value="&quot;CREATE_LiteralString_IN_Lifeline_(selector)&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_-Zs9ZgsYEeajEecGJ9W2hw" value="&quot;Creates one LiteralString in Lifeline&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_-Zs9ZwsYEeajEecGJ9W2hw" value="&quot;CREATE_LiteralString_IN_Lifeline_(selector)&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_-Zs9aAsYEeajEecGJ9W2hw" value="&quot;RR: CREATE_LiteralString_IN_Lifeline_(selector)&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_-Zs9aQsYEeajEecGJ9W2hw" value="1">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_-Zs9agsYEeajEecGJ9W2hw" value="1">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_-Zs9awsYEeajEecGJ9W2hw" value="5">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_-Zs9bAsYEeajEecGJ9W2hw" value="13">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="_-Zs9bQsYEeajEecGJ9W2hw" name="" outgoing="_-ZtkVQsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>

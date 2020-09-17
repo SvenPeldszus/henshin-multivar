@@ -37,8 +37,8 @@ import org.eclipse.emf.henshin.model.resource.HenshinResourceSet;
 import org.eclipse.emf.henshin.trace.Trace;
 import org.eclipse.emf.henshin.variability.MatchingLog;
 import org.eclipse.emf.henshin.variability.MatchingLogEntry;
-import org.eclipse.emf.henshin.variability.VarUnitApplicationImpl;
-import org.eclipse.emf.henshin.variability.util.RuleUtil;
+import org.eclipse.emf.henshin.variability.VBUnitApplicationImpl;
+import org.eclipse.emf.henshin.variability.util.VBRuleUtil;
 
 import GraphConstraint.GraphConstraintPackage;
 import GraphConstraint.NestedGraphConstraint;
@@ -211,10 +211,10 @@ public class OclBenchmark {
 
 		UnitApplication mainUnitApplication = null;
 		if (theMode == mode.HANDCRAFTED || theMode == mode.MERGED)
-			mainUnitApplication = new VarUnitApplicationImpl(engine, graph,
+			mainUnitApplication = new VBUnitApplicationImpl(engine, graph,
 					mainUnit, null);
 		else
-			mainUnitApplication = new VarUnitApplicationImpl(engine, graph,
+			mainUnitApplication = new VBUnitApplicationImpl(engine, graph,
 					mainUnit, null);
 
 		System.gc();
@@ -257,7 +257,7 @@ public class OclBenchmark {
 		int classicFailed = 0;
 
 		for (MatchingLogEntry e : MatchingLog.getEntries()) {
-			if (RuleUtil.isVarRule(e.getUnit())) {
+			if (VBRuleUtil.isVarRule(e.getUnit())) {
 				if (e.isSuccessful())
 					varSuccessfully++;
 				else

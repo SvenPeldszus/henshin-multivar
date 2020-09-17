@@ -1,7 +1,8 @@
-<henshin:Module xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmi:id="_rR9MsLRcEeeYUfLk2h7sIw">
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_4ipDIPOCEeqe6s0sCOQVEQ">
   <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
   <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
-  <units xsi:type="henshin:Rule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="_qpNxt7RcEeeYUfLk2h7sIw" name="rr:setMessageEnd_message_TO_Message">
+  <units xsi:type="henshin:Rule" xmi:id="__tmOEQsYEeajEecGJ9W2hw" name="rr:setMessageEnd_message_TO_Message" description="Recognize: SetMessageEndRefmessageToMessage">
     <parameters xmi:id="__tmOEgsYEeajEecGJ9W2hw" name="Selected">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//MessageEnd"/>
     </parameters>
@@ -39,6 +40,22 @@
       <edges xmi:id="__tmOHgsYEeajEecGJ9W2hw" source="__tmOFQsYEeajEecGJ9W2hw" target="__tmOFgsYEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//MessageEnd/message"/>
       </edges>
+      <formula xsi:type="henshin:Not" xmi:id="__tmOHwsYEeajEecGJ9W2hw">
+        <child xsi:type="henshin:NestedCondition" xmi:id="__tmOIAsYEeajEecGJ9W2hw">
+          <conclusion xmi:id="__tmOIQsYEeajEecGJ9W2hw" name="ub0">
+            <nodes xmi:id="__tmOIgsYEeajEecGJ9W2hw" incoming="__tmOJAsYEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//Message"/>
+            </nodes>
+            <nodes xmi:id="__tmOIwsYEeajEecGJ9W2hw" name="B.Selected" outgoing="__tmOJAsYEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//MessageEnd"/>
+            </nodes>
+            <edges xmi:id="__tmOJAsYEeajEecGJ9W2hw" source="__tmOIwsYEeajEecGJ9W2hw" target="__tmOIgsYEeajEecGJ9W2hw">
+              <type href="http://www.eclipse.org/uml2/5.0.0/UML#//MessageEnd/message"/>
+            </edges>
+          </conclusion>
+          <mappings xmi:id="__tmOJQsYEeajEecGJ9W2hw" origin="__tmOFQsYEeajEecGJ9W2hw" image="__tmOIwsYEeajEecGJ9W2hw"/>
+        </child>
+      </formula>
     </lhs>
     <rhs xmi:id="__tmOJgsYEeajEecGJ9W2hw" name="Rhs">
       <nodes xmi:id="__tmOJwsYEeajEecGJ9W2hw" name="B.Selected" incoming="__tmONQsYEeajEecGJ9W2hw" outgoing="__tmOOAsYEeajEecGJ9W2hw">
@@ -55,6 +72,30 @@
       </nodes>
       <nodes xmi:id="__tmOKwsYEeajEecGJ9W2hw" incoming="__tmOOgsYEeajEecGJ9W2hw" outgoing="__tmOOQsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="__tmOLAsYEeajEecGJ9W2hw" value="&quot;SET_REFERENCE_MessageEnd_(message)_TGT_Message&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="__tmOLQsYEeajEecGJ9W2hw" value="&quot;Sets MessageEnd's reference message the target Message&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="__tmOLgsYEeajEecGJ9W2hw" value="&quot;SET_REFERENCE_MessageEnd_(message)_TGT_Message&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="__tmOLwsYEeajEecGJ9W2hw" value="&quot;RR: SET_REFERENCE_MessageEnd_(message)_TGT_Message&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="__tmOMAsYEeajEecGJ9W2hw" value="1">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="__tmOMQsYEeajEecGJ9W2hw" value="1">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="__tmOMgsYEeajEecGJ9W2hw" value="2">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="__tmOMwsYEeajEecGJ9W2hw" value="8">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="__tmONAsYEeajEecGJ9W2hw" name="" outgoing="__tmOOgsYEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>

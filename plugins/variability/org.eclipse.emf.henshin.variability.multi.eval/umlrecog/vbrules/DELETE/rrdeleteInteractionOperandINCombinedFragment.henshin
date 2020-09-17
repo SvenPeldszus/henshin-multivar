@@ -1,7 +1,8 @@
-<henshin:Module xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmi:id="_AOFy8LReEeeov9OkQ8jWjw">
+<?xml version="1.0" encoding="ASCII"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_6LKqsPODEeqqCPSqbxOWQA">
   <imports href="http://www.sidiff.org/difference/symmetric/1.0#/"/>
   <imports href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
-  <units xsi:type="henshin:Rule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:id="__yHBkLRdEeeov9OkQ8jWjw" name="rr:deleteInteractionOperand_IN_CombinedFragment">
+  <units xsi:type="henshin:Rule" xmi:id="_ASdOoQsZEeajEecGJ9W2hw" name="rr:deleteInteractionOperand_IN_CombinedFragment" description="Recognize: deletes one InteractionOperand in the context: CombinedFragment">
     <parameters xmi:id="_ASdOogsZEeajEecGJ9W2hw" name="Selected">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//CombinedFragment"/>
     </parameters>
@@ -45,6 +46,32 @@
       <edges xmi:id="_ASdOsAsZEeajEecGJ9W2hw" source="_ASdOpQsZEeajEecGJ9W2hw" target="_ASdOpwsZEeajEecGJ9W2hw">
         <type href="http://www.eclipse.org/uml2/5.0.0/UML#//CombinedFragment/operand"/>
       </edges>
+      <formula xsi:type="henshin:NestedCondition" xmi:id="_ASdOsQsZEeajEecGJ9W2hw">
+        <conclusion xmi:id="_ASdOsgsZEeajEecGJ9W2hw" name="lb0">
+          <nodes xmi:id="_ASdOswsZEeajEecGJ9W2hw" incoming="_ASdOuQsZEeajEecGJ9W2hw">
+            <type href="http://www.eclipse.org/uml2/5.0.0/UML#//InteractionOperand"/>
+          </nodes>
+          <nodes xmi:id="_ASdOtAsZEeajEecGJ9W2hw" name="A.Selected" incoming="_ASdOtwsZEeajEecGJ9W2hw">
+            <type href="http://www.eclipse.org/uml2/5.0.0/UML#//CombinedFragment"/>
+          </nodes>
+          <nodes xmi:id="_ASdOtQsZEeajEecGJ9W2hw" name="" incoming="_ASdOuAsZEeajEecGJ9W2hw" outgoing="_ASdOuQsZEeajEecGJ9W2hw">
+            <type href="http://www.eclipse.org/uml2/5.0.0/UML#//CombinedFragment"/>
+          </nodes>
+          <nodes xmi:id="_ASdOtgsZEeajEecGJ9W2hw" name="" outgoing="_ASdOtwsZEeajEecGJ9W2hw _ASdOuAsZEeajEecGJ9W2hw">
+            <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence"/>
+          </nodes>
+          <edges xmi:id="_ASdOtwsZEeajEecGJ9W2hw" source="_ASdOtgsZEeajEecGJ9W2hw" target="_ASdOtAsZEeajEecGJ9W2hw">
+            <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objA"/>
+          </edges>
+          <edges xmi:id="_ASdOuAsZEeajEecGJ9W2hw" source="_ASdOtgsZEeajEecGJ9W2hw" target="_ASdOtQsZEeajEecGJ9W2hw">
+            <type href="http://www.sidiff.org/difference/symmetric/1.0#//Correspondence/objB"/>
+          </edges>
+          <edges xmi:id="_ASdOuQsZEeajEecGJ9W2hw" source="_ASdOtQsZEeajEecGJ9W2hw" target="_ASdOswsZEeajEecGJ9W2hw">
+            <type href="http://www.eclipse.org/uml2/5.0.0/UML#//CombinedFragment/operand"/>
+          </edges>
+        </conclusion>
+        <mappings xmi:id="_ASdOugsZEeajEecGJ9W2hw" origin="_ASdOpQsZEeajEecGJ9W2hw" image="_ASdOtAsZEeajEecGJ9W2hw"/>
+      </formula>
     </lhs>
     <rhs xmi:id="_ASdOuwsZEeajEecGJ9W2hw" name="Rhs">
       <nodes xmi:id="_ASdOvAsZEeajEecGJ9W2hw" name="A.Selected" incoming="_ASdOzAsZEeajEecGJ9W2hw" outgoing="_ASdOzwsZEeajEecGJ9W2hw">
@@ -64,6 +91,30 @@
       </nodes>
       <nodes xmi:id="_ASdOwQsZEeajEecGJ9W2hw" incoming="_ASdO0gsZEeajEecGJ9W2hw" outgoing="_ASdO0AsZEeajEecGJ9W2hw _ASdO0QsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet"/>
+        <attributes xmi:id="_ASdOwgsZEeajEecGJ9W2hw" value="&quot;DELETE_InteractionOperand_IN_CombinedFragment_(operand)&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/name"/>
+        </attributes>
+        <attributes xmi:id="_ASdOwwsZEeajEecGJ9W2hw" value="&quot;Deletes one InteractionOperand in CombinedFragment&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/description"/>
+        </attributes>
+        <attributes xmi:id="_ASdOxAsZEeajEecGJ9W2hw" value="&quot;DELETE_InteractionOperand_IN_CombinedFragment_(operand)&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/editRName"/>
+        </attributes>
+        <attributes xmi:id="_ASdOxQsZEeajEecGJ9W2hw" value="&quot;RR: DELETE_InteractionOperand_IN_CombinedFragment_(operand)&quot;">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/recognitionRName"/>
+        </attributes>
+        <attributes xmi:id="_ASdOxgsZEeajEecGJ9W2hw" value="1">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/priority"/>
+        </attributes>
+        <attributes xmi:id="_ASdOxwsZEeajEecGJ9W2hw" value="1">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfACs"/>
+        </attributes>
+        <attributes xmi:id="_ASdOyAsZEeajEecGJ9W2hw" value="2">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/numberOfParams"/>
+        </attributes>
+        <attributes xmi:id="_ASdOyQsZEeajEecGJ9W2hw" value="11">
+          <type href="http://www.sidiff.org/difference/symmetric/1.0#//SemanticChangeSet/refinementLevel"/>
+        </attributes>
       </nodes>
       <nodes xmi:id="_ASdOygsZEeajEecGJ9W2hw" name="" outgoing="_ASdO0gsZEeajEecGJ9W2hw">
         <type href="http://www.sidiff.org/difference/symmetric/1.0#//SymmetricDifference"/>

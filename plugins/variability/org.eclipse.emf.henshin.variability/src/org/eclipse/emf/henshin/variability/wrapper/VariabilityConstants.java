@@ -8,9 +8,10 @@ package org.eclipse.emf.henshin.variability.wrapper;
  */
 public enum VariabilityConstants {
 	PRESENCE_CONDITION("presenceCondition"), 
-	FEATURE_MODEL("featureModel"),
+	FEATURE_CONSTRAINT("featureConstraint"),
 	INJECTIVE_MATCHING_PC("injectiveMatchingPresenceCondition"), 
-	FEATURES("features");
+	FEATURES("features"), 
+	FEATURE_CONSTRAINT_CNF("featureConstraintIsCNF");
 
 	private final String value;
 

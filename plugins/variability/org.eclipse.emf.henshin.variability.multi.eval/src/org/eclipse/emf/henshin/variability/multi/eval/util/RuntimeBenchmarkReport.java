@@ -1,6 +1,8 @@
 package org.eclipse.emf.henshin.variability.multi.eval.util;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -12,12 +14,18 @@ import java.util.List;
 
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.model.Unit;
+import org.eclipse.emf.henshin.variability.multi.eval.util.LoadingHelper.RuleSet;
 
-public class RuntimeBenchmarkReport {
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+
+public class RuntimeBenchmarkReport implements IBenchmarkReport {
 	private int count = 0;
 	String name = "";
 	File logfilePath;
 	File runtimefilePath;
+	private File projectPath;
 	PrintWriter out;
 	String date;
 
@@ -29,7 +37,7 @@ public class RuntimeBenchmarkReport {
 		this.date = date;
 	}
 
-	public RuntimeBenchmarkReport(String name, String logDirectory) {
+	public RuntimeBenchmarkReport(File projectPath, String name, String logDirectory) {
 		File file = new File(logDirectory);
 		if(!file.exists()){
 			file.mkdirs();
@@ -37,14 +45,15 @@ public class RuntimeBenchmarkReport {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmss");
 		do {
 			this.date = sdf.format(new Date());
-			logfilePath = new File(logDirectory, date + ".log");
+			this.logfilePath = new File(logDirectory, date + ".log");
 		}
 		while(logfilePath.exists());
-		runtimefilePath = new File(logDirectory, "/runtimes.log");
+		this.runtimefilePath = new File(logDirectory, "/runtimes.log");
+		this.projectPath = projectPath;
 	}
 
 	private boolean PRINT_TO_CONSOLE = false;
-
+	
 	public void start() {
 		createReport();
 		String start = " Starting runtime benchmark: " + name + " ";
@@ -85,17 +94,44 @@ public class RuntimeBenchmarkReport {
 		addToReport(info);
 	}
 
-	public void finishEntry(int before, int after, long runtime, List<Rule> detectedRules) {
+	public void finishEntry(int before, int after, long runtime, List<Rule> detectedRules, RuleSet set) {
 		StringBuilder info = new StringBuilder();
 		info.append("Execution time: " + sec(runtime) + " sec\n");
-		info.append("Performed change: " + before + " -> " + after + " nodes (delta = " + (after - before) + ")\n");
-		info.append("\n\nDetected rules (" + detectedRules.size() + "):\n");
+		info.append("Performed change: " + before + " -> " + after + " nodes (delta = " + (after - before) + "): ");
+		try {
+			int expectedCanges = expectedCanges(projectPath, set);
+			if((after - before) == expectedCanges) {
+				info.append("SUCCESS\n");
+			}
+			else {
+				info.append("FAILURE expected "+expectedCanges+"\n");
+			}
+		} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		info.append("Detected rules (" + detectedRules.size() + "):\n");
 		for (Rule rule : detectedRules) {
 			info.append("   " + rule.getName() + "\n");
 		}
+		info.append('\n');
 		System.out.println(info.toString());
 		addToReport(info);
 		addToRuntimelog(runtime);
+	}
+
+	private int expectedCanges(File project, RuleSet set) throws FileNotFoundException {
+		ExpectedApplications expect = new Gson().fromJson(new FileReader(new File(project, "expect.json")), ExpectedApplications.class);
+		switch (set) {
+		case ALL:
+			return expect.create + expect.delete + expect.move;
+		case CREATE:
+			return expect.create;
+		case DELETE:
+			return expect.delete;
+		case MOVE:
+			return expect.move;
+		}
+		return -1;
 	}
 
 	private void addToRuntimelog(long runtime) {

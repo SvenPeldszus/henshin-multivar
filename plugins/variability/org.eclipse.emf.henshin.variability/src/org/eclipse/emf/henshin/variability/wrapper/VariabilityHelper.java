@@ -1,9 +1,7 @@
 package org.eclipse.emf.henshin.variability.wrapper;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -22,20 +20,8 @@ import aima.core.logic.propositional.parsing.ast.Sentence;
 import aima.core.logic.propositional.visitors.SymbolCollector;
 
 public class VariabilityHelper {
-	
+
 	public static final VariabilityHelper INSTANCE = new VariabilityHelper();
-	
-	private HashMap<ModelElement, Annotation> fmCache;
-	private HashMap<ModelElement, Annotation> featureCache;
-	private HashMap<ModelElement, Annotation> injCache;
-	private HashMap<ModelElement, Annotation> pcCache;
-	
-	public VariabilityHelper() {
-		fmCache = new HashMap<>();
-		featureCache = new HashMap<>();
-		injCache = new HashMap<>();
-		pcCache = new HashMap<>();
-	}
 
 	Annotation addAnnotation(ModelElement modelElement, VariabilityConstants annotationKey, String value) {
 		Annotation anno = HenshinFactory.eINSTANCE.createAnnotation();
@@ -56,23 +42,10 @@ public class VariabilityHelper {
 	}
 
 	Annotation getAnnotation(ModelElement modelElement, VariabilityConstants annotationKey) {
-		Map<ModelElement, Annotation> map;
-		switch(annotationKey) {
-			case FEATURE_MODEL: map = fmCache;break;
-			case FEATURES: map = featureCache;break;
-			case INJECTIVE_MATCHING_PC: map = injCache;break;
-			case PRESENCE_CONDITION: map = pcCache;break;
-			default: throw new IllegalStateException();
-		}
-		Annotation annotation = map.get(modelElement);
-		if(annotation != null) {
-			return annotation;
-		}
 		EList<Annotation> annotations = modelElement.getAnnotations();
 		if (annotations != null) {
 			for (Annotation anno : annotations) {
 				if (anno.getKey().equals(annotationKey.toString())) {
-					map.put(modelElement, anno);
 					return anno;
 				}
 			}
@@ -101,8 +74,7 @@ public class VariabilityHelper {
 		Annotation annotation = getAnnotation(element, presenceCondition);
 		if (annotation == null) {
 			addAnnotation(element, presenceCondition, value);
-		}
-		else {
+		} else {
 			setAnnotationValue(annotation, value);
 		}
 	}
@@ -114,12 +86,12 @@ public class VariabilityHelper {
 		throw new IllegalStateException();
 	}
 
-	public void setFeatureModel(Rule rule, String featureModel) {
-		setAnnotation(rule, VariabilityConstants.FEATURE_MODEL, featureModel);
+	public void setFeatureConstraint(Rule rule, String featureModel) {
+		setAnnotation(rule, VariabilityConstants.FEATURE_CONSTRAINT, featureModel);
 	}
 
-	public String getFeatureModel(Rule rule) {
-		Annotation annotation = getAnnotation(rule, VariabilityConstants.FEATURE_MODEL);
+	public String getFeatureConstraint(Rule rule) {
+		Annotation annotation = getAnnotation(rule, VariabilityConstants.FEATURE_CONSTRAINT);
 		if (annotation != null) {
 			return annotation.getValue();
 		}
@@ -132,10 +104,9 @@ public class VariabilityHelper {
 
 	public void addFeature(Rule rule, String name) {
 		Annotation annotation = getAnnotation(rule, VariabilityConstants.FEATURES);
-		if(annotation == null) {
+		if (annotation == null) {
 			addAnnotation(rule, VariabilityConstants.FEATURES, name);
-		}
-		else {
+		} else {
 			setAnnotationValue(annotation, name);
 		}
 	}
@@ -147,9 +118,9 @@ public class VariabilityHelper {
 		}
 		return Collections.emptySet();
 	}
-	
+
 	private static final Pattern featureSeparatorPattern = Pattern.compile("\\s*,\\s*");
-	
+
 	/**
 	 * Converts a comma separated string of features into a set
 	 * 
@@ -177,12 +148,17 @@ public class VariabilityHelper {
 		setAnnotation(rule, VariabilityConstants.INJECTIVE_MATCHING_PC, pc);
 
 	}
-	
+
 	public static boolean isVariabilityRule(Rule rule) {
-		return rule.getAnnotations().parallelStream().map(Annotation::getKey)
-				.anyMatch(key -> (VariabilityConstants.FEATURES.toString().equals(key)
-						|| VariabilityConstants.FEATURE_MODEL.toString().equals(key)
-						|| VariabilityConstants.INJECTIVE_MATCHING_PC.toString().equals(key)));
+		return rule.getAnnotations().parallelStream().filter(annotation -> {
+			String key = annotation.getKey();
+			return (VariabilityConstants.FEATURES.toString().equals(key)
+					|| VariabilityConstants.FEATURE_CONSTRAINT.toString().equals(key)
+					|| VariabilityConstants.INJECTIVE_MATCHING_PC.toString().equals(key));
+		}).anyMatch(annotation -> {
+			String value = annotation.getValue();
+			return value != null && !value.isEmpty();
+		});
 	}
 
 	public boolean hasMissingFeatures(Rule rule) {
@@ -194,7 +170,7 @@ public class VariabilityHelper {
 	}
 
 	private Set<String> calculateMissingFeatureNames(Rule rule) {
-		String currentModel = getFeatureModel(rule);
+		String currentModel = getFeatureConstraint(rule);
 		Sentence sentence = FeatureExpression.getExpr(currentModel);
 		Set<PropositionSymbol> symbols = SymbolCollector.getSymbolsFrom(sentence);
 		Set<String> missingFeatures = new HashSet<>();
@@ -216,10 +192,26 @@ public class VariabilityHelper {
 	}
 
 	public static boolean isFeatureModelAnnotation(Annotation annotation) {
-		return isAnnotation(annotation, VariabilityConstants.FEATURE_MODEL);
+		return isAnnotation(annotation, VariabilityConstants.FEATURE_CONSTRAINT);
 	}
 
 	public static boolean isPresenceConditionAnnotation(Annotation annotation) {
 		return isAnnotation(annotation, VariabilityConstants.PRESENCE_CONDITION);
+	}
+
+	public boolean isFeatureConstraintCNF(Rule rule) {
+		Annotation constraintAnnotation = getAnnotation(rule, VariabilityConstants.FEATURE_CONSTRAINT_CNF);
+		if (constraintAnnotation == null) {
+			return false;
+		}
+		String value = constraintAnnotation.getValue();
+		if (value == null) {
+			return false;
+		}
+		return Boolean.parseBoolean(value);
+	}
+
+	public void setFeatureConstraintIsCNF(Rule rule, boolean value) {
+		setAnnotation(rule, VariabilityConstants.FEATURE_CONSTRAINT_CNF, Boolean.toString(value));
 	}
 }
