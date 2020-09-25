@@ -33,24 +33,25 @@ public class RuleApplicationTests {
 	@Test
 	public void testSimpleVarNAC() throws InconsistentRuleException {
 		MultiVarEngine engine = init("Inheritance.uml", "nac.henshin");
-		Collection<? extends MultiVarMatch> matches = (Collection<? extends MultiVarMatch>) engine.findMatches(this.rule, this.graph, null);
+		Collection<? extends MultiVarMatch> matches = (Collection<? extends MultiVarMatch>) engine
+				.findMatches(this.rule, this.graph, null);
 		assertEquals(7, matches.size());
 	}
 
 	@Test
 	public void testBaseVarNAC() throws InconsistentRuleException {
 		MultiVarEngine engine = init("Inheritance.uml", "baseNac.henshin");
-		Collection<? extends MultiVarMatch> matches = (Collection<? extends MultiVarMatch>) engine.findMatches(this.rule, this.graph, null);
+		Collection<? extends MultiVarMatch> matches = (Collection<? extends MultiVarMatch>) engine
+				.findMatches(this.rule, this.graph, null);
 		assertEquals(4, matches.size());
 	}
-
 
 	@Test
 	public void testVarEdge() throws InconsistentRuleException {
 		MultiVarEngine engine = init("Inheritance.uml", "VarEdge.henshin");
 		Iterable<? extends MultiVarMatch> matches = engine.findMatches(this.rule, this.graph, null);
 		Collection<Change> changes = new LinkedList<>();
-		for(MultiVarMatch m : matches) {
+		for (MultiVarMatch m : matches) {
 			changes.add(engine.createChange(this.rule, this.graph, m, null));
 		}
 	}
@@ -65,17 +66,11 @@ public class RuleApplicationTests {
 		rs.getPackageRegistry().put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
 		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("uml", new XMIResourceFactoryImpl());
 
-		this.model = rs.getResource("models/"+modelName);
-		Module module = rs.getModule("rules/"+ruleName);
+		this.model = rs.getResource("models/" + modelName);
+		Module module = rs.getModule("rules/" + ruleName);
 		this.rule = module.getAllRules().get(0);
 
 		this.graph = new MultiVarProcessor() {
-
-			@Override
-			public void deleteObsoleteVariabilityAnnotations(List<EObject> roots, Map<EObject, String> pcsP) {}
-
-			@Override
-			public void createNewVariabilityAnnotations(List<EObject> roots, Map<EObject, String> pcsP) {}
 
 			@Override
 			public MultiVarEGraph createEGraphAndCollectPCs(List<EObject> roots, Map<EObject, String> pcsP, String fm) {
@@ -84,6 +79,10 @@ public class RuleApplicationTests {
 
 			private MultiVarEGraph createEGraph(List<EObject> roots) {
 				return new MultiVarEGraph(roots, Collections.emptyMap(), Logic.TRUE);
+			}
+
+			@Override
+			public void writePCsToModel(MultiVarEGraph graphP) {
 			}
 		}.createEGraph(this.model.getContents());
 		return new MultiVarEngine();

@@ -1,8 +1,6 @@
 package org.eclipse.emf.henshin.variability.matcher;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.henshin.interpreter.Match;
@@ -10,8 +8,6 @@ import org.eclipse.emf.henshin.model.Node;
 import org.eclipse.emf.henshin.model.Parameter;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.model.Unit;
-
-import aima.core.logic.propositional.parsing.ast.Sentence;
 
 /**
  * One match as yielded by variability-aware matching, comprising a regular
@@ -25,23 +21,17 @@ public class VBMatch implements Match {
 
 	private final Rule rule;
 	private final Match match;
-	private final Set<Sentence> selected;
 
 	private final VBRulePreparator rulePreperator;
 
-	public VBMatch(Match match, Set<Sentence> selected, Rule rule, VBRulePreparator rulePreparator) {
+	public VBMatch(Match match, Rule rule, VBRulePreparator rulePreparator) {
 		this.match = match;
-		this.selected = new HashSet<>(selected);
 		this.rule = rule;
 		this.rulePreperator = rulePreparator;
 	}
 
 	public Match getMatch() {
 		return this.match;
-	}
-
-	public Set<Sentence> getSelected() {
-		return this.selected;
 	}
 
 	public VBRulePreparator getPreparator() {

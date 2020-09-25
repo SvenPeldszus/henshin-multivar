@@ -12,7 +12,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.henshin.model.Annotation;
 import org.eclipse.emf.henshin.model.Rule;
-import org.eclipse.emf.henshin.variability.matcher.FeatureExpression;
+import org.eclipse.emf.henshin.variability.util.FeatureExpression;
 import org.eclipse.emf.validation.AbstractModelConstraint;
 import org.eclipse.emf.validation.IValidationContext;
 import org.eclipse.emf.validation.model.IConstraintStatus;

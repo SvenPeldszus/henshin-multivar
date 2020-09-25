@@ -2,35 +2,30 @@ package org.eclipse.emf.henshin.variability.multi;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.henshin.interpreter.Change;
 import org.eclipse.emf.henshin.interpreter.Match;
-import org.eclipse.emf.henshin.interpreter.impl.MatchImpl;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.variability.util.Logic;
 import org.eclipse.emf.henshin.variability.util.SatChecker;
 
 public class Lifting {
-	private final MultiVarEGraph graph;
-	private final MultiVarEngine engine;
 
-	public Lifting(MultiVarEngine engine, MultiVarEGraph graph) {
-		this.engine = engine;
-		this.graph = graph;
+	private final String fm;
+	private final Map<EObject, String> pcs;
+
+	public Lifting(MultiVarEGraph graph) {
+		this.pcs = graph.getPCS();
+		this.fm = graph.getFM();
 	}
 
-	public Change liftAndApplyRule(MultiVarMatch match, Rule rule) {
-		MultiVarMatch resultMatch = liftMatch(match);
-		if (resultMatch != null) {
-			Change change = this.engine.createChange(rule, this.graph, match, new MatchImpl(rule, true));
-			change.applyAndReverse();
-			return change;
-		}
-		return null;
+	public Lifting(Map<EObject, String> pcs, String fm) {
+		this.pcs = pcs;
+		this.fm = fm;
 	}
 
 	public MultiVarMatch liftMatch(MultiVarMatch match) {
@@ -47,9 +42,8 @@ public class Lifting {
 	}
 
 	public String calculatePhiApply(Match match, Map<Rule, List<Match>> nacs, Map<Rule, List<Match>> pacs) {
-		return Logic.and(computePhiApply(match), this.graph.getFM(), getPhiApplyPACs(pacs), getPhiApplyNACs(nacs));
+		return Logic.and(computePhiApply(match), this.fm, getPhiApplyPACs(pacs), getPhiApplyNACs(nacs));
 	}
-
 
 	private String getPhiApplyNACs(Map<Rule, List<Match>> nacs) {
 		List<String> nacPhiApplies = nacs.values().parallelStream().flatMap(Collection::parallelStream)
@@ -67,13 +61,17 @@ public class Lifting {
 	}
 
 	public String computePhiApply(Match match) {
-		Map<EObject, String> pcsP = this.graph.getPCS();
-		String phiApply = Logic.TRUE;
+		List<String> pcs = new LinkedList<>();
 		for (EObject eObject : match.getNodeTargets()) {
-			if (pcsP.containsKey(eObject)) {
-				phiApply = Logic.and(phiApply, pcsP.getOrDefault(eObject, Logic.TRUE));
+			EObject next = eObject;
+			while (next instanceof EObject) {
+				String pc = this.pcs.get(next);
+				if (pc != null && !pc.isEmpty()) {
+					pcs.add(pc);
+				}
+				next = next.eContainer();
 			}
 		}
-		return phiApply;
+		return Logic.and(pcs);
 	}
 }

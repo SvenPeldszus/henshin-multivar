@@ -20,6 +20,7 @@ import org.eclipse.emf.henshin.model.Module;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.model.Unit;
 import org.eclipse.emf.henshin.model.resource.HenshinResourceSet;
+import org.eclipse.emf.henshin.variability.InconsistentRuleException;
 import org.eclipse.emf.henshin.variability.multi.FeatureModelHelper;
 import org.eclipse.emf.henshin.variability.multi.MultiVarEGraph;
 import org.eclipse.emf.henshin.variability.multi.MultiVarEngine;
@@ -40,7 +41,7 @@ import de.ovgu.featureide.fm.core.io.manager.FeatureModelManager;
 public class UmlRecogBenchmarkLifted extends UmlRecogBenchmark {
 
 	public static final String mode = "LIFTED";
-	private static final boolean SAVE = true;
+	private static final boolean SAVE = false;
 
 	static {
 		FILE_PATH_OUTPUT = "output/lifted/";
@@ -137,8 +138,12 @@ public class UmlRecogBenchmarkLifted extends UmlRecogBenchmark {
 			long currentRunTime = System.currentTimeMillis();
 			int graphInitial = graph.size();
 
-			Collection<Change> changes = new MultiVarExecution(new SecPLUtil()).transformSPLWithClassicRule(roots,
-					rule, engine, graph);
+			Collection<Change> changes;
+			try {
+				changes = new MultiVarExecution(new SecPLUtil(), engine).transformSPL(rule, graph);
+			} catch (InconsistentRuleException e) {
+				throw new IllegalStateException(e);
+			}
 
 			long runtime = (System.currentTimeMillis() - currentRunTime);
 			int graphChanged = graph.size();
@@ -175,5 +180,9 @@ public class UmlRecogBenchmarkLifted extends UmlRecogBenchmark {
 
 		report.finishEntry(graphInitially, graphChanged, runtime, detectedRules, set);
 
+
+		graph.clear();
+		res1.unload();
+		res2.unload();
 	}
 }

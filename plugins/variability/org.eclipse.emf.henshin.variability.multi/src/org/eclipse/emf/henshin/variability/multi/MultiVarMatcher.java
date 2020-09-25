@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -14,7 +13,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,91 +21,139 @@ import javax.script.ScriptException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.henshin.interpreter.Change;
 import org.eclipse.emf.henshin.interpreter.Match;
 import org.eclipse.emf.henshin.interpreter.impl.EngineImpl;
-import org.eclipse.emf.henshin.interpreter.impl.MatchImpl;
-import org.eclipse.emf.henshin.model.And;
 import org.eclipse.emf.henshin.model.Attribute;
 import org.eclipse.emf.henshin.model.Edge;
-import org.eclipse.emf.henshin.model.Formula;
 import org.eclipse.emf.henshin.model.NestedCondition;
 import org.eclipse.emf.henshin.model.Node;
-import org.eclipse.emf.henshin.model.Not;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.variability.InconsistentRuleException;
 import org.eclipse.emf.henshin.variability.matcher.VBMatcher;
 import org.eclipse.emf.henshin.variability.matcher.VBRulePreparator;
 import org.eclipse.emf.henshin.variability.util.Logic;
 import org.eclipse.emf.henshin.variability.util.SatChecker;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 
 import aima.core.logic.propositional.parsing.ast.Sentence;
 
 public class MultiVarMatcher extends VBMatcher {
 
 	private final Lifting lifting;
-	private final Map<NestedCondition, Object[]> acCache;
-	private final List<NestedCondition> nacs;
-	private final List<NestedCondition> pacs;
-
 	private List<Node> baseNodes;
+	private final ApplicationConditionMatcher acMatcher;
 
 	public MultiVarMatcher(Rule rule, MultiVarEGraph graphP, MultiVarEngine varEngine)
 			throws InconsistentRuleException {
 		super(rule, graphP);
-		this.nacs = new LinkedList<>();
-		this.pacs = new LinkedList<>();
-		Deque<Formula> formulas = new LinkedList<>();
-		formulas.add(rule.getLhs().getFormula());
-		while (!formulas.isEmpty()) {
-			Formula next = formulas.pop();
-			if (next instanceof Not) {
-				this.nacs.add((NestedCondition) ((Not) next).getChild());
-			} else if (next instanceof And) {
-				formulas.push(((And) next).getLeft());
-				formulas.push(((And) next).getRight());
-			} else if (next instanceof NestedCondition) {
-				this.pacs.add((NestedCondition) next);
-			}
-		}
 		this.engine = new EngineImpl(varEngine.getGlobalJavaImports());
 		this.engine.getOptions().putAll(varEngine.getOptions());
-		this.acCache = new ConcurrentHashMap<>();
-		this.lifting = new Lifting(varEngine, graphP);
-	}
-
-	public Collection<Change> transform() {
-		return liftAndAppy(findMatches());
-	}
-
-	public Collection<Change> liftAndAppy(Iterable<MultiVarMatch> matches) {
-		Collection<Change> changes = new LinkedList<>();
-		for (MultiVarMatch match : matches) {
-			match.prepareRule();
-			changes.add(this.lifting.liftAndApplyRule(match, this.rule));
-			match.undoPreparation();
-		}
-		return changes;
+		this.acMatcher = new ApplicationConditionMatcher(this.engine, rule);
+		this.lifting = new Lifting(graphP);
 	}
 
 	@Override
 	public Set<MultiVarMatch> findMatches() {
-
 		Set<MultiVarMatch> matches = new HashSet<>();
 
 		// Line 1: findBasePreMatches
 		Set<Match> baseMatches = findBasePreMatches();
+		if (baseMatches.isEmpty()) {
+			return Collections.emptySet();
+		}
 
-		// Create rules for the base PACs and NACs
-		Map<Node, Node> nodeMapping = new HashMap<>();
-		Map<Rule, List<Node>> baseNacRules = createACRules(getBaseNACs(), nodeMapping);
-		Map<Rule, List<Node>> basePACRules = createACRules(getBasePACs(), nodeMapping);
+		Map<Match, Map<Rule, List<Match>>> liftableBaseMatches = findLiftableBaseMatches(baseMatches);
+		if (liftableBaseMatches.isEmpty()) {
+			return Collections.emptySet();
+		}
 
-		List<VBRulePreparator> preparators = null;
-		List<Set<Sentence>> assumedTrue = null;
+		// Prepare the rule preparators
+		List<VBRulePreparator> preparators;
+		try {
+			preparators = prepareRulePreparators();
+		} catch (ScriptException e) {
+			throw new RuntimeException(e);
+		}
+
+		for (VBRulePreparator prep : preparators) {
+			for (Entry<Match, Map<Rule, List<Match>>> baseMatchEntry : liftableBaseMatches.entrySet()) {
+				Match basePreMatch = baseMatchEntry.getKey();
+
+				// Create the rules for NACs and PACs
+				Map<Rule, List<Node>> nacRules = this.acMatcher.createACRules(getNotRejectedConditions(prep, this.acMatcher.getNACs()));
+				for (Entry<Rule, List<Match>> entry : baseMatchEntry.getValue().entrySet()) {
+					if (entry.getValue().isEmpty()) {
+						nacRules.remove(entry.getKey());
+					}
+				}
+				Map<Rule, List<Node>> pacRules = this.acMatcher.createACRules(getNotRejectedConditions(prep, this.acMatcher.getPACs()));
+
+				// Line 8: Get and collect matches for concrete rule
+				matches.addAll(extendAndLiftBaseMatches(prep, basePreMatch, nacRules, pacRules));
+
+			}
+
+		}
+		return matches;
+	}
+
+	private Collection<MultiVarMatch> extendAndLiftBaseMatches(VBRulePreparator preparator, Match basePreMatch,
+			Map<Rule, List<Node>> nacRules, Map<Rule, List<Node>> pacRules) {
+		preparator.doPreparation();
+
+		if (!checkVariableEdgesAndAttributesWithinBasePart(basePreMatch)) {
+			preparator.undo();
+			return Collections.emptySet();
+		}
+		Collection<MultiVarMatch> matches = new LinkedList<>();
+		Iterator<Match> classicMatches = this.engine.findMatches(this.rule, this.graph, basePreMatch).iterator();
+		while (classicMatches.hasNext()) {
+			Match nextMatch = classicMatches.next();
+			MultiVarMatch liftedMatch = liftMatch(nextMatch, nacRules, pacRules, preparator);
+			if (liftedMatch != null) {
+				matches.add(liftedMatch);
+			}
+		}
+		preparator.undo();
+		return matches;
+	}
+
+	/**
+	 * Lifts the match if possible
+	 *
+	 * @param match      The match to lift
+	 * @param nacRules   The NACs to lift
+	 * @param pacRules   The PACs to lift
+	 * @param preparator The rule preparator of the rule to lift
+	 * @return The lifted match or null if the match is not liftable
+	 */
+	private MultiVarMatch liftMatch(Match match, Map<Rule, List<Node>> nacRules, Map<Rule, List<Node>> pacRules,
+			VBRulePreparator preparator) {
+		if (!checkVariableExtensionsOfBasePart(match)) {
+			return null;
+		}
+
+		Map<Rule, List<Match>> pacMatchMap = this.acMatcher.getPACMatches(pacRules, match, this.graph);
+		if (pacMatchMap == null) {
+			return null;
+		}
+		Map<Rule, List<Match>> nacMatchMap = this.acMatcher.getNACMatches(nacRules, match, this.graph);
+
+		return this.getLifting().liftMatch(new MultiVarMatch(match, this.rule, preparator, pacMatchMap, nacMatchMap));
+	}
+
+	/**
+	 * @param baseMatches
+	 * @param acMatcher.nodeMapping
+	 * @param baseNacRules
+	 * @param basePACRules
+	 * @return
+	 */
+	private Map<Match, Map<Rule, List<Match>>> findLiftableBaseMatches(Set<Match> baseMatches) {
+		Map<Rule, List<Node>> baseNacRules = this.acMatcher.createACRules(getBaseNACs());
+		Map<Rule, List<Node>> basePACRules = this.acMatcher.createACRules(getBasePACs());
 
 		// Line 2: iterate over all base-matches
+		Map<Match, Map<Rule, List<Match>>> liftableBaseMatches = new HashMap<>(baseMatches.size());
 		for (Match basePreMatch : baseMatches) {
 			boolean isLiftAble = true;
 			Map<Rule, List<Match>> nacMatches;
@@ -115,11 +161,11 @@ public class MultiVarMatcher extends VBMatcher {
 			// If there is no base-match the rule is liftable in all cases
 			// (optimization for too many base-matches)
 			if (basePreMatch != null) {
-				// Line 3: calculate Phi_apply and AND FM from Line 4
+				nacMatches = this.acMatcher.getNACMatches(baseNacRules, basePreMatch, this.graph);
 
-				String phiApply = this.lifting.calculatePhiApply(basePreMatch,
-						nacMatches = getNACMatches(nodeMapping, baseNacRules, basePreMatch),
-						getPACMatches(nodeMapping, basePACRules, basePreMatch));
+				// Line 3: calculate Phi_apply and AND FM from Line 4
+				String phiApply = this.getLifting().calculatePhiApply(basePreMatch, nacMatches,
+						this.acMatcher.getPACMatches(basePACRules, basePreMatch, this.graph));
 
 				// Line 4: check if Phi_apply & FM is SAT
 				SatChecker satChecker = new SatChecker();
@@ -129,65 +175,10 @@ public class MultiVarMatcher extends VBMatcher {
 			}
 
 			if (isLiftAble) {
-				if (preparators == null) {
-					preparators = new ArrayList<>();
-					assumedTrue = new ArrayList<>();
-					try {
-						prepareRulePreparators(preparators, assumedTrue);
-					} catch (ScriptException e) {
-						throw new RuntimeException(e);
-					}
-				}
-
-				for (int i = 0; i < preparators.size(); i++) {
-					VBRulePreparator prep = preparators.get(i);
-					Set<Sentence> theTrue = assumedTrue.get(i);
-
-					Map<Rule, List<Node>> nacRules = createACRules(getNotRejectedConditions(prep, this.nacs),
-							nodeMapping);
-					for(Entry<Rule, List<Match>> entry : nacMatches.entrySet()) {
-						if(entry.getValue().isEmpty()) {
-							nacRules.remove(entry.getKey());
-						}
-					}
-					Map<Rule, List<Node>> pacRules = createACRules(getNotRejectedConditions(prep, this.pacs),
-							nodeMapping);
-
-					// Line 8: Get and collect matches for concrete rule
-					prep.doPreparation();
-
-					if (!checkBasePart(basePreMatch)) {
-						prep.undo();
-						continue;
-					}
-
-					Iterator<Match> classicMatches = this.engine.findMatches(this.rule, this.graph, basePreMatch)
-							.iterator();
-					while (classicMatches.hasNext()) {
-						Match nextMatch = classicMatches.next();
-						if (!checkVariableBasePart(nextMatch)) {
-							continue;
-						}
-
-						Map<Rule, List<Match>> pacMatchMap = getPACMatches(nodeMapping, pacRules, nextMatch);
-						if (pacMatchMap == null) {
-							continue;
-						}
-						Map<Rule, List<Match>> nacMatchMap = getNACMatches(nodeMapping, nacRules, nextMatch);
-
-						MultiVarMatch liftedMatch = this.lifting.liftMatch(
-								new MultiVarMatch(nextMatch, theTrue, this.rule, prep, pacMatchMap, nacMatchMap));
-						if (liftedMatch != null) {
-							matches.add(liftedMatch);
-						}
-					}
-					prep.undo();
-
-				}
-
+				liftableBaseMatches.put(basePreMatch, nacMatches);
 			}
 		}
-		return matches;
+		return liftableBaseMatches;
 	}
 
 	/**
@@ -197,7 +188,7 @@ public class MultiVarMatcher extends VBMatcher {
 	 */
 	private Collection<NestedCondition> getNotRejectedConditions(VBRulePreparator prep,
 			Collection<NestedCondition> conditions) {
-		List<NestedCondition> collect = conditions.parallelStream().filter(ac -> {
+		return conditions.parallelStream().filter(ac -> {
 			String pc = getPC(ac);
 			if (pc == null) {
 				return true;
@@ -208,11 +199,10 @@ public class MultiVarMatcher extends VBMatcher {
 				throw new IllegalStateException(e);
 			}
 		}).collect(Collectors.toList());
-		return collect;
 	}
 
 	private Collection<NestedCondition> getBasePACs() {
-		return this.pacs.parallelStream().filter(this::hasNoPC).collect(Collectors.toList());
+		return this.acMatcher.getPACs().parallelStream().filter(this::hasNoPC).collect(Collectors.toList());
 	}
 
 	/**
@@ -221,7 +211,7 @@ public class MultiVarMatcher extends VBMatcher {
 	private List<NestedCondition> getBaseNACs() {
 		List<NestedCondition> baseNACs = new LinkedList<>();
 		Stream<Node> vbNodes = this.rulePreparator.removeNodes.parallelStream();
-		for (NestedCondition nac : this.nacs) {
+		for (NestedCondition nac : this.acMatcher.getNACs()) {
 			if (hasNoPC(nac)) {
 				baseNACs.add(nac);
 			} else {
@@ -255,86 +245,11 @@ public class MultiVarMatcher extends VBMatcher {
 	 * @return
 	 */
 	private String getPC(NestedCondition nc) {
-		return nc.getConclusion().getNodes().stream().map(VariabilityHelper.INSTANCE::getPresenceCondition)
-				.filter(Objects::nonNull).filter(value -> !value.isEmpty()).findAny().orElse(null);
+		return nc.getConclusion().getNodes().stream().map(this.ruleInfo::getPC).filter(Objects::nonNull)
+				.filter(value -> !value.isEmpty()).findAny().orElse(null);
 	}
 
-	/**
-	 * @param rulePreparator The rule preparator
-	 * @param nodeMapping    A map to which a mapping from the nodes of the new
-	 *                       rules to the nodes of original rule should be added
-	 * @param trueFeatures   The feature conditions of the rule that evaluate to
-	 *                       true
-	 * @return A map of the crated rules and their context nodes
-	 */
-	@SuppressWarnings("unchecked")
-	private Map<Rule, List<Node>> createACRules(Collection<NestedCondition> acs, Map<Node, Node> nodeMapping) {
-		Map<Rule, List<Node>> map = new HashMap<>();
-		for (NestedCondition ac : acs) {
-			Object[] entry = this.acCache.computeIfAbsent(ac, key -> {
-				List<Node> context = new LinkedList<>();
-				Rule nacRule = MultiVarRuleUtil.createPreserveRuleForAC(key, context, nodeMapping);
-				return new Object[] { nacRule, context };
-			});
-			map.put((Rule) entry[0], (List<Node>) entry[1]);
-		}
-		return map;
-	}
-
-	/**
-	 * @param nodeMapping A mapping between the nodes of the extracted NAC rules and
-	 *                    the corresponding nodes from the original rule
-	 * @param nacs        A mapping between the extracted NAC rules and the context
-	 *                    nodes of the NACs
-	 * @param match       The match of the original rule
-	 * @return The matches for the NAC rules or null, if there have been no matches
-	 *         for a rule
-	 */
-	private Map<Rule, List<Match>> getNACMatches(Map<Node, Node> nodeMapping, Map<Rule, List<Node>> nacs, Match match) {
-		Map<Rule, List<Match>> matches = new HashMap<>();
-		for (Entry<Rule, List<Node>> entry : nacs.entrySet()) {
-			Match preMatch = new MatchImpl(entry.getKey());
-			for (Node contextNode : entry.getValue()) {
-				EObject value = match.getNodeTarget(nodeMapping.get(contextNode));
-				preMatch.setNodeTarget(contextNode, value);
-			}
-			List<Match> nacMatches = new LinkedList<>();
-			this.engine.findMatches(entry.getKey(), this.graph, preMatch).forEach(nacMatches::add);
-			matches.put(entry.getKey(), nacMatches);
-
-		}
-		return matches;
-	}
-
-	/**
-	 * @param nodeMapping A mapping between the nodes of the extracted NAC rules and
-	 *                    the corresponding nodes from the original rule
-	 * @param pacs        A mapping between the extracted PAC rules and the context
-	 *                    nodes of the PACs
-	 * @param match       The match of the original rule
-	 * @return The matches for the PAC rules or null, if there have been no matches
-	 *         for a rule
-	 */
-	private Map<Rule, List<Match>> getPACMatches(Map<Node, Node> nodeMapping, Map<Rule, List<Node>> pacs, Match match) {
-		Map<Rule, List<Match>> pacMatchMap = new HashMap<>();
-		for (Entry<Rule, List<Node>> entry : pacs.entrySet()) {
-			Match preMatch = new MatchImpl(entry.getKey());
-			for (Node contextNode : entry.getValue()) {
-				EObject value = match.getNodeTarget(nodeMapping.get(contextNode));
-				preMatch.setNodeTarget(contextNode, value);
-			}
-			List<Match> pacMatches = new LinkedList<>();
-			this.engine.findMatches(entry.getKey(), this.graph, preMatch).forEach(pacMatches::add);
-			if (pacMatches.isEmpty()) {
-				return null;
-			} else {
-				pacMatchMap.put(entry.getKey(), pacMatches);
-			}
-		}
-		return pacMatchMap;
-	}
-
-	private boolean checkVariableBasePart(Match match) {
+	private boolean checkVariableExtensionsOfBasePart(Match match) {
 		for (Node node : this.baseNodes) {
 			EObject src = match.getNodeTarget(node);
 			for (Edge edge : node.getOutgoing()) {
@@ -361,7 +276,7 @@ public class MultiVarMatcher extends VBMatcher {
 	/**
 	 * @param basePreMatch
 	 */
-	private boolean checkBasePart(Match basePreMatch) {
+	private boolean checkVariableEdgesAndAttributesWithinBasePart(Match basePreMatch) {
 		if (basePreMatch == null) {
 			// Nothing to check
 			return true;
@@ -370,7 +285,7 @@ public class MultiVarMatcher extends VBMatcher {
 			EObject src = basePreMatch.getNodeTarget(node);
 			for (Edge edge : node.getOutgoing()) {
 				// Check variable edges pointing to base nodes
-				if (this.baseNodes.contains(edge.getTarget())) { // TODO: Check if is baseEdge
+				if (this.baseNodes.contains(edge.getTarget()) && this.ruleInfo.getPC(edge) != null) {
 					EObject expect = basePreMatch.getNodeTarget(edge.getTarget());
 					EReference type = edge.getType();
 					Object is = src.eGet(type);
@@ -406,15 +321,14 @@ public class MultiVarMatcher extends VBMatcher {
 		return true;
 	}
 
-	public void prepareRulePreparators(List<VBRulePreparator> preparators, List<Set<Sentence>> assumedTrue)
-			throws ScriptException {
-
+	private List<VBRulePreparator> prepareRulePreparators() throws ScriptException {
 		// Calculate all possible configurations of concrete rule
 		LinkedList<List<String>> trueFeatureList = new LinkedList<>();
 		LinkedList<List<String>> falseFeatureList = new LinkedList<>();
-		MultiVarRuleUtil.calculateTrueAndFalseFeatures(this.rule, this.ruleInfo, trueFeatureList, falseFeatureList);
+		MultiVarRuleUtil.calculateTrueAndFalseFeatures(this.ruleInfo, trueFeatureList, falseFeatureList);
 
 		// Iterate over all concrete rules and collect matches
+		List<VBRulePreparator> preparators = new ArrayList<>(trueFeatureList.size());
 		for (int i = 0; i < trueFeatureList.size(); i++) {
 			List<String> trueFeatures = trueFeatureList.get(i);
 			List<String> falseFeatures = falseFeatureList.get(i);
@@ -424,25 +338,20 @@ public class MultiVarMatcher extends VBMatcher {
 					falseFeatures);
 			VBMatchingInfo matchingInfo = new VBMatchingInfo(new ArrayList<>(this.expressions.values()), this.ruleInfo,
 					Collections.emptyList(), Collections.emptyList());
-			VBRulePreparator preparator = new VBRulePreparator(this.rule, trueFeatures, falseFeatures);
-			BitSet reducedRule = preparator.prepare(this.ruleInfo, elementsToRemove, this.rule.isInjectiveMatching(),
-					false, false);
+			VBRulePreparator preparator = new VBRulePreparator(this.ruleInfo, trueFeatures, falseFeatures);
+			BitSet reducedRule = preparator.prepare(elementsToRemove, this.rule.isInjectiveMatching(), false, false);
 			if (!matchingInfo.getMatchedSubrules().contains(reducedRule)) {
-
-				VBRulePreparator prep = preparator.getSnapShot();
-				Set<Sentence> theTrue = matchingInfo.getAssumedTrue();
-				preparators.add(prep);
-				assumedTrue.add(theTrue);
+				preparators.add(preparator.getSnapShot());
 				matchingInfo.getMatchedSubrules().add(reducedRule);
 
 			}
 			preparator.undo();
 		}
+		return preparators;
 	}
 
 	private Set<Match> findBasePreMatches() {
-		BitSet bs = this.rulePreparator.prepare(this.ruleInfo, this.ruleInfo.getPc2Elem().keySet(),
-				this.rule.isInjectiveMatching(), true, false);
+		this.rulePreparator.prepare(this.ruleInfo.getPc2Elem().keySet(), this.rule.isInjectiveMatching(), true, false);
 		this.baseNodes = new ArrayList<>(this.rule.getLhs().getNodes());
 		Set<Match> baseMatches = new HashSet<>();
 		Iterator<Match> it = this.engine.findMatches(this.rule, this.graph, null).iterator();
@@ -458,5 +367,12 @@ public class MultiVarMatcher extends VBMatcher {
 		}
 		this.rulePreparator.undo();
 		return baseMatches;
+	}
+
+	/**
+	 * @return the lifting
+	 */
+	public Lifting getLifting() {
+		return lifting;
 	}
 }

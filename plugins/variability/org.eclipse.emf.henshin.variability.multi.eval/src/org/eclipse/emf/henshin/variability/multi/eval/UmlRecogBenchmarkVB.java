@@ -10,7 +10,6 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.henshin.interpreter.Change;
 import org.eclipse.emf.henshin.model.Module;
 import org.eclipse.emf.henshin.model.Rule;
@@ -26,7 +25,6 @@ import org.eclipse.emf.henshin.variability.multi.eval.util.IBenchmarkReport;
 import org.eclipse.emf.henshin.variability.multi.eval.util.LoadingHelper;
 import org.eclipse.emf.henshin.variability.multi.eval.util.LoadingHelper.RuleSet;
 import org.eclipse.emf.henshin.variability.multi.eval.util.RuntimeBenchmarkReport;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
 import de.ovgu.featureide.fm.core.init.FMCoreLibrary;
@@ -94,14 +92,15 @@ public class UmlRecogBenchmarkVB extends UmlRecogBenchmark {
 		Resource res1 = rs.getResource(exampleID + "/" + FILE_NAME_INSTANCE_1);
 		Resource res2 = rs.getResource(exampleID + "/" + FILE_NAME_INSTANCE_2);
 		EObject diff = rs.getEObject(exampleID + "/" + FILE_NAME_INSTANCE_DIFF);
-		EcoreUtil.resolveAll(rs);
+		//		EcoreUtil.resolveAll(rs);
 
 		List<EObject> roots = new ArrayList<>();
 		roots.addAll(res1.getContents());
 		roots.addAll(res2.getContents());
 		roots.add(diff);
 		Map<EObject, String> presenceConditions = new HashMap<>();
-		MultiVarEGraph graph = new SecPLUtil().createEGraphAndCollectPCs(roots, presenceConditions, fmCNF);
+		SecPLUtil secpl = new SecPLUtil();
+		MultiVarEGraph graph = secpl.createEGraphAndCollectPCs(roots, presenceConditions, fmCNF);
 
 		int graphInitially = graph.size();
 		MultiVarEngine engine = new MultiVarEngine();
@@ -123,18 +122,10 @@ public class UmlRecogBenchmarkVB extends UmlRecogBenchmark {
 			int graphInitial = graph.size();
 
 			Collection<Change> changes;
-			if (VariabilityHelper.isVariabilityRule(rule) || rule.getLhs().getFormula() != null
-					|| !rule.getLhs().getFormula().isTrue()) {
-				try {
-					changes = new MultiVarExecution(new SecPLUtil()).transformSPLWithVBRule(roots, rule, engine,
-							graph);
-				} catch (InconsistentRuleException e) {
-					throw new IllegalStateException(e);
-				}
-			} else { // i.e., not a VB rule
-				changes = new MultiVarExecution(new SecPLUtil()).transformSPLWithClassicRule(roots, rule, engine,
-						graph);
-
+			try {
+				changes = new MultiVarExecution(secpl, engine).transformSPL(rule, graph);
+			} catch (InconsistentRuleException e) {
+				throw new IllegalStateException(e);
 			}
 
 			long runtime = (System.currentTimeMillis() - currentRunTime);
@@ -166,5 +157,9 @@ public class UmlRecogBenchmarkVB extends UmlRecogBenchmark {
 		}
 
 		report.finishEntry(graphInitially, graphChanged, runtime, detectedRules, set);
+
+		graph.clear();
+		res1.unload();
+		res2.unload();
 	}
 }

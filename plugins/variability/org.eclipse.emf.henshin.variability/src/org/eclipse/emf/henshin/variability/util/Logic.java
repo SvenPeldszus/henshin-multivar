@@ -2,10 +2,11 @@ package org.eclipse.emf.henshin.variability.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -18,22 +19,28 @@ import javax.script.ScriptException;
  *
  */
 public class Logic {
-	public static final String TRUE = "true";
-	private static final String TRUE_space = " true ";
-	public static final String FALSE = "false";
-	private static final String FALSE_space = " false ";
-	private static String NOT = " not ";
-	private static String AND = " and ";
-	private static String OR = " or ";
-	private static String LB = " ( ";
-	private static String RB = " ) ";
+
+	private Logic() {
+		// This class shouldn't be instantiated
+	}
+
+	public static final String TRUE = Boolean.toString(true);
+	private static final String TRUE_SPACE = ' ' + TRUE + ' ';
+	public static final String FALSE = Boolean.toString(false);
+	private static final String FALSE_SPACE = ' ' + FALSE + ' ';
+	private static final String NOT = " ~ ";
+	private static final String AND = " & ";
+	private static final String OR = " | ";
+	private static final String LB = " ( ";
+	private static final String RB = " ) ";
 	private static String limitForCombinations = "0123456789";
+	private static ScriptEngine engine;
 
 	protected static synchronized String choice(final List<String> expressions, final int min, final int max,
 			final boolean forceFalse) {
 		final List<String> combinationsIndexes = new ArrayList<>();
 		if (expressions.size() > Logic.limitForCombinations.length()) {
-			return TRUE_space;
+			return TRUE_SPACE;
 		}
 		final String limit = Logic.limitForCombinations.substring(0, expressions.size());
 		combinations(min, max, "", limit, combinationsIndexes);
@@ -86,7 +93,7 @@ public class Logic {
 		if (isClaused(expression)) {
 			return expression;
 		}
-		return String.valueOf(Logic.LB) + expression + Logic.RB;
+		return Logic.LB + expression + Logic.RB;
 	}
 
 	private static boolean isClaused(String expression) {
@@ -94,7 +101,7 @@ public class Logic {
 			return false;
 		}
 		Map<Integer, Integer> openClose = new HashMap<>();
-		Stack<Integer> open = new Stack<>();
+		Deque<Integer> open = new LinkedList<>();
 		int index = 0;
 		while (index < expression.length()) {
 			char c = expression.charAt(index);
@@ -110,17 +117,17 @@ public class Logic {
 
 	protected static synchronized String implies(final String lhs, final String rhs) {
 		if (lhs == null || lhs.length() == 0 || rhs == null || rhs.length() == 0) {
-			throw new RuntimeException();
+			throw new IllegalArgumentException();
 		}
-		String lhs_trimmed = lhs.trim();
-		String rhs_trimmed = rhs.trim();
-		if (FALSE.equals(lhs_trimmed) || TRUE.equals(rhs_trimmed) || lhs_trimmed.equals(rhs_trimmed)) {
-			return TRUE_space;
+		String lhsTrimmed = lhs.trim();
+		String rhsTrimmed = rhs.trim();
+		if (FALSE.equals(lhsTrimmed) || TRUE.equals(rhsTrimmed) || lhsTrimmed.equals(rhsTrimmed)) {
+			return TRUE_SPACE;
 		}
-		if (FALSE.equals(rhs_trimmed)) {
+		if (FALSE.equals(rhsTrimmed)) {
 			return negate(lhs);
 		}
-		if (TRUE.equals(lhs_trimmed)) {
+		if (TRUE.equals(lhsTrimmed)) {
 			return rhs;
 		}
 		return or(negate(lhs), rhs);
@@ -129,15 +136,15 @@ public class Logic {
 	public static synchronized String negate(String expression) {
 		String trimmed = expression.trim();
 		if (trimmed.contentEquals(TRUE)) {
-			return FALSE_space;
+			return FALSE_SPACE;
 		} else if (trimmed.equals(FALSE)) {
-			return TRUE_space;
+			return TRUE_SPACE;
 		}
 		return Logic.NOT + claused(expression);
 	}
 
 	private static synchronized String op(final List<String> expressions, final String op) {
-		if (expressions == null || expressions.size() == 0) {
+		if (expressions == null || expressions.isEmpty()) {
 			return "";
 		}
 		if (expressions.size() == 1) {
@@ -165,16 +172,15 @@ public class Logic {
 		for (String expr : expressions) {
 			String trimmedExpr = expr.trim();
 			if (TRUE.equals(trimmedExpr)) {
-				return TRUE_space;
+				return TRUE_SPACE;
 			} else if (FALSE.equals(trimmedExpr)) {
 				// Skip "| false" as id doesn't change the expression
-				continue;
 			} else {
 				reduced.add(expr);
 			}
 		}
 		if (reduced.isEmpty()) {
-			return Logic.FALSE_space; // All expressions are FALSE
+			return Logic.FALSE_SPACE; // All expressions are FALSE
 		}
 		if (reduced.size() == 1) {
 			return reduced.get(0);
@@ -187,43 +193,40 @@ public class Logic {
 	}
 
 	public static synchronized String or(final String s1, final String s2) {
-		String s1_trimmed = s1.trim();
-		String s2_trimmed = s2.trim();
-		if (TRUE.equals(s1_trimmed) || TRUE.equals(s2_trimmed)) {
-			return Logic.TRUE_space;
+		String s1Trimmed = s1.trim();
+		String s2Trimmed = s2.trim();
+		if (TRUE.equals(s1Trimmed) || TRUE.equals(s2Trimmed)) {
+			return Logic.TRUE_SPACE;
 		}
-		if (Logic.negate(s1_trimmed).trim().equals(s2_trimmed) || Logic.negate(s2_trimmed).trim().equals(s1_trimmed)) {
-			return Logic.TRUE_space;
+		if (Logic.negate(s1Trimmed).trim().equals(s2Trimmed) || Logic.negate(s2Trimmed).trim().equals(s1Trimmed)) {
+			return Logic.TRUE_SPACE;
 		}
-		if (s1_trimmed.equals(s2_trimmed)) {
+		if (s1Trimmed.equals(s2Trimmed)) {
 			return s1;
 		}
-		if (FALSE.equals(s1_trimmed)) {
-			if (FALSE.equals(s2_trimmed)) {
-				return Logic.FALSE_space;
-			}
+		if (FALSE.equals(s1Trimmed)) {
 			return s2;
 		}
-		if (FALSE.contentEquals(s2_trimmed)) {
+		if (FALSE.contentEquals(s2Trimmed)) {
 			return s1;
 		}
 		return claused(s1) + Logic.OR + claused(s2);
 	}
+
 	public static synchronized String and(final Collection<String> conditions) {
 		List<String> reduced = new ArrayList<>(conditions.size());
 		for (String expr : conditions) {
 			String trimmed = expr.trim();
 			if (FALSE.equals(trimmed)) {
-				return FALSE_space;
+				return FALSE_SPACE;
 			} else if (TRUE.equals(trimmed)) {
 				// Skip "& true" as id doesn't change the expression
-				continue;
 			} else {
 				reduced.add(expr);
 			}
 		}
-		if (reduced.size() == 0) {
-			return Logic.TRUE_space; // all elements are TRUE
+		if (reduced.isEmpty()) {
+			return Logic.TRUE_SPACE; // all elements are TRUE
 		}
 		if (reduced.size() == 1) {
 			return reduced.get(0);
@@ -240,19 +243,15 @@ public class Logic {
 		for (String expr : conditions) {
 			String trimmed = expr.trim();
 			if (FALSE.equals(trimmed)) {
-				return FALSE_space;
+				return FALSE_SPACE;
 			} else if (TRUE.equals(trimmed)) {
 				// Skip "& true" as id doesn't change the expression
-				continue;
 			} else {
 				reduced.add(expr);
 			}
 		}
-		if (reduced.size() == 0) {
-			return Logic.TRUE_space; // all elements are TRUE
-		}
-		if (reduced.size() == 1) {
-			return reduced.get(0);
+		if (reduced.isEmpty()) {
+			return Logic.TRUE_SPACE; // all elements are TRUE
 		}
 		String v1 = reduced.get(0);
 		for (int i = 1; i < reduced.size(); i++) {
@@ -262,19 +261,19 @@ public class Logic {
 	}
 
 	public static synchronized String and(final String s1, final String s2) {
-		if(s1 == null) {
+		if (s1 == null) {
 			return s2;
 		}
-		if(s2 == null) {
+		if (s2 == null) {
 			return s1;
 		}
 		String s1Trimmed = s1.trim();
 		String s2Trimmed = s2.trim();
 		if (FALSE.equals(s1Trimmed) || FALSE.equals(s2Trimmed)) {
-			return Logic.FALSE_space;
+			return Logic.FALSE_SPACE;
 		}
 		if (Logic.negate(s1Trimmed).trim().equals(s2Trimmed) || Logic.negate(s2Trimmed).trim().equals(s1Trimmed)) {
-			return Logic.FALSE_space;
+			return Logic.FALSE_SPACE;
 		}
 		final List<String> list = new ArrayList<>();
 		if (!"".equals(s1Trimmed) && !TRUE.equals(s1Trimmed)) {
@@ -284,7 +283,7 @@ public class Logic {
 			list.add(s2);
 		}
 		if (list.isEmpty()) {
-			return Logic.TRUE_space;
+			return Logic.TRUE_SPACE;
 		}
 		if (list.size() == 1) {
 			return list.get(0);
@@ -332,9 +331,9 @@ public class Logic {
 						clause = String.valueOf(part1) + part2;
 					}
 				}
-				if (clause.replaceAll(" ", "").length() <= 0
+				if (clause.replace(" ", "").length() <= 0
 						|| newExpression.contains(String.valueOf(Logic.LB) + clause + Logic.RB)
-						|| clause.contains(Logic.FALSE_space)) {
+						|| clause.contains(Logic.FALSE_SPACE)) {
 					continue;
 				}
 				newExpression = String.valueOf(newExpression) + Logic.LB + clause + Logic.RB + Logic.OR;
@@ -346,7 +345,9 @@ public class Logic {
 
 	public static boolean evaluate(String pc, Collection<String> trueFeatures, Collection<String> falseFeatures)
 			throws ScriptException {
-		ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
+		if (engine == null) {
+			engine = new ScriptEngineManager().getEngineByName("JavaScript");
+		}
 		for (String trueFeature : trueFeatures) {
 			engine.put(trueFeature, Boolean.TRUE);
 		}
@@ -354,7 +355,7 @@ public class Logic {
 			engine.put(falseFeature, Boolean.FALSE);
 		}
 
-		Object result = engine.eval(pc.replace('~', '!'));
+		Object result = engine.eval(pc);
 		if (result instanceof Boolean) {
 			return (Boolean) result;
 		} else if (result instanceof Integer) {
@@ -365,7 +366,7 @@ public class Logic {
 			if (number == 1) {
 				return true;
 			}
-			if(number == -1) {
+			if (number == -1) {
 				return false;
 			}
 		}

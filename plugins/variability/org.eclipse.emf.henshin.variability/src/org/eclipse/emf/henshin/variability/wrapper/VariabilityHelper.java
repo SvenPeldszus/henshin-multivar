@@ -13,7 +13,7 @@ import org.eclipse.emf.henshin.model.GraphElement;
 import org.eclipse.emf.henshin.model.HenshinFactory;
 import org.eclipse.emf.henshin.model.ModelElement;
 import org.eclipse.emf.henshin.model.Rule;
-import org.eclipse.emf.henshin.variability.matcher.FeatureExpression;
+import org.eclipse.emf.henshin.variability.util.FeatureExpression;
 
 import aima.core.logic.propositional.parsing.ast.PropositionSymbol;
 import aima.core.logic.propositional.parsing.ast.Sentence;
@@ -22,6 +22,7 @@ import aima.core.logic.propositional.visitors.SymbolCollector;
 public class VariabilityHelper {
 
 	public static final VariabilityHelper INSTANCE = new VariabilityHelper();
+
 
 	Annotation addAnnotation(ModelElement modelElement, VariabilityConstants annotationKey, String value) {
 		Annotation anno = HenshinFactory.eINSTANCE.createAnnotation();
@@ -123,7 +124,7 @@ public class VariabilityHelper {
 
 	/**
 	 * Converts a comma separated string of features into a set
-	 * 
+	 *
 	 * @param featureString The feature names
 	 * @return A set of feature names
 	 */
@@ -133,7 +134,7 @@ public class VariabilityHelper {
 
 	/**
 	 * Returns the injective matching presence condition of this Rule.
-	 * 
+	 *
 	 * @return the injective matching presence condition of this Rule.
 	 */
 	public String getInjectiveMatchingPresenceCondition(Rule rule) {

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.eclipse.emf.henshin.diagram.edit.parts.RuleEditPart;
 import org.eclipse.emf.henshin.model.Edge;
 import org.eclipse.emf.henshin.model.Rule;
-import org.eclipse.emf.henshin.variability.matcher.FeatureExpression;
+import org.eclipse.emf.henshin.variability.util.FeatureExpression;
 import org.eclipse.emf.henshin.variability.util.Logic;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 import org.eclipse.gmf.runtime.notation.impl.ShapeImpl;

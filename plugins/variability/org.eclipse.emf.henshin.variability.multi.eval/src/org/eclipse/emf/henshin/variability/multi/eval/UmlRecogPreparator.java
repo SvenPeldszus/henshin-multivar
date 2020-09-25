@@ -51,7 +51,6 @@ import org.eclipse.emf.henshin.model.Parameter;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.model.Unit;
 import org.eclipse.emf.henshin.model.resource.HenshinResourceSet;
-import org.eclipse.emf.henshin.variability.InconsistentRuleException;
 import org.eclipse.emf.henshin.variability.multi.FeatureModelHelper;
 import org.eclipse.emf.henshin.variability.multi.Lifting;
 import org.eclipse.emf.henshin.variability.multi.MultiVarEGraph;
@@ -314,7 +313,7 @@ public class UmlRecogPreparator {
 					Match baseMatch = new MatchImpl(rule);
 					baseMatch.setNodeTarget(node, target);
 
-					Lifting lifting = new Lifting(engine, graph);
+					Lifting lifting = new Lifting(graph);
 
 					MultiVarMatch usedMatch = null;
 
@@ -331,17 +330,13 @@ public class UmlRecogPreparator {
 					// }
 					// } else {
 					Iterator<? extends MultiVarMatch> it;
-					try {
-						it = engine.findMatches(rule, graph, baseMatch).iterator();
-						if (it.hasNext()) {
-							MultiVarMatch first = it.next();
-							String phiApply = lifting.computePhiApply(first).trim();
-							if (!phiApply.equals("true")) {
-								usedMatch = first;
-							}
+					it = engine.findMatches(rule, graph, baseMatch).iterator();
+					if (it.hasNext()) {
+						MultiVarMatch first = it.next();
+						String phiApply = lifting.computePhiApply(first).trim();
+						if (!phiApply.equals("true")) {
+							usedMatch = first;
 						}
-					} catch (InconsistentRuleException e) {
-						e.printStackTrace();
 					}
 
 					// }
@@ -399,13 +394,14 @@ public class UmlRecogPreparator {
 			}
 
 			System.out.println("Applying rule \"" + rule + "\" to match:\n" + match);
-			MultiVarEngine engine = new MultiVarEngine();
-			Lifting lifting = new Lifting(engine, graph);
-			Change change = lifting.liftAndApplyRule(match, rule);
-			if (change != null) {
-				CompoundChangeImpl ch = (CompoundChangeImpl) change;
+			Lifting lifting = new Lifting(graph);
+			MultiVarMatch liftedMatch = lifting.liftMatch(match);
+
+			if (liftedMatch != null) {
+				CompoundChangeImpl change = (CompoundChangeImpl)  new MultiVarEngine().createChange(rule, graph, liftedMatch, null);
+				change.applyAndReverse();
 				boolean isDetectableChange = true;
-				for (Change subChange : ch.getChanges()) {
+				for (Change subChange : change.getChanges()) {
 					if (subChange instanceof AttributeChangeImpl
 							&& ((AttributeChangeImpl) subChange).getAttribute() == null) {
 						isDetectableChange = false;

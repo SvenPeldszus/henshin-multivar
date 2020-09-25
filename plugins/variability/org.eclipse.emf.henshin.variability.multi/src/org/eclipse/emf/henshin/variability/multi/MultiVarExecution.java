@@ -1,48 +1,46 @@
 package org.eclipse.emf.henshin.variability.multi;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.henshin.interpreter.Change;
-import org.eclipse.emf.henshin.interpreter.Match;
-import org.eclipse.emf.henshin.interpreter.impl.EngineImpl;
+import org.eclipse.emf.henshin.interpreter.impl.MatchImpl;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.variability.InconsistentRuleException;
 
 public class MultiVarExecution {
 
 	private final MultiVarProcessor processor;
+	private final MultiVarEngine engine;
 
-	public MultiVarExecution(MultiVarProcessor processor) {
+	public MultiVarExecution(MultiVarProcessor processor, MultiVarEngine engine) {
 		this.processor = processor;
+		this.engine = engine;
 	}
 
-	public Collection<Change> transformSPLWithVBRule(List<EObject> roots, Rule vbRule,
-			MultiVarEngine engine, MultiVarEGraph graphP) throws InconsistentRuleException {
-		Collection<Change> changes = new MultiVarMatcher(vbRule, graphP, engine).transform();
-		this.processor.deleteObsoleteVariabilityAnnotations(roots, graphP.getPCS());
-		this.processor.createNewVariabilityAnnotations(roots, graphP.getPCS());
-		return changes;
-	}
-
-	@Deprecated
-	public Collection<Change> transformSPLWithClassicRule(List<EObject> roots, Rule rule,
-			MultiVarEngine engine, MultiVarEGraph graphP) {
-		Lifting lifting = new Lifting(engine, graphP);
-
-		Collection<Change> changes = new LinkedList<>();
-		Iterator<Match> it = new EngineImpl().findMatches(rule, graphP, null).iterator();
-		while(it.hasNext()) {
-			MultiVarMatch match = new MultiVarMatch(it.next(), Collections.emptySet(), rule, null, Collections.emptyMap(), Collections.emptyMap());
-			changes.add(lifting.liftAndApplyRule(match, rule));
+	public Collection<Change> transformSPL(Rule rule,
+			MultiVarEGraph graphP) throws InconsistentRuleException {
+		MultiVarMatcher matcher = new MultiVarMatcher(rule, graphP, this.engine);
+		Collection<Change> changes = liftAndAppy(matcher.findMatches(), rule, graphP, matcher.getLifting());
+		if (!changes.isEmpty()) {
+			this.processor.writePCsToModel(graphP);
 		}
-
-		this.processor.deleteObsoleteVariabilityAnnotations(roots, graphP.getPCS());
-		this.processor.createNewVariabilityAnnotations(roots, graphP.getPCS());
 		return changes;
 	}
+
+	public Collection<Change> liftAndAppy(Iterable<MultiVarMatch> matches, Rule rule, MultiVarEGraph graph, Lifting lifting) {
+		Collection<Change> changes = new LinkedList<>();
+		for (MultiVarMatch match : matches) {
+			match.prepareRule();
+			MultiVarMatch resultMatch = lifting.liftMatch(match);
+			if (resultMatch != null) {
+				Change change = this.engine.createChange(rule, graph, match, new MatchImpl(rule, true));
+				change.applyAndReverse();
+				changes.add(change);
+			}
+			match.undoPreparation();
+		}
+		return changes;
+	}
+
 }

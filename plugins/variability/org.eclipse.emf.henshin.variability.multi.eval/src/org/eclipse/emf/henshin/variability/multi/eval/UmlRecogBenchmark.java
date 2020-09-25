@@ -1,7 +1,6 @@
 package org.eclipse.emf.henshin.variability.multi.eval;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,14 +19,12 @@ import org.eclipse.emf.henshin.interpreter.Change.CompoundChange;
 import org.eclipse.emf.henshin.interpreter.Change.ObjectChange;
 import org.eclipse.emf.henshin.model.Module;
 import org.eclipse.emf.henshin.model.resource.HenshinResourceSet;
-import org.eclipse.emf.henshin.variability.multi.eval.util.ExpectedApplications;
 import org.eclipse.emf.henshin.variability.multi.eval.util.IBenchmarkReport;
 import org.eclipse.emf.henshin.variability.multi.eval.util.LoadingHelper.RuleSet;
 import org.eclipse.emf.henshin.variability.multi.eval.util.RuntimeBenchmarkReport;
 import org.eclipse.uml2.uml.UMLPackage;
 
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 
 import carisma.profile.umlsec.UmlsecPackage;
 import carisma.profile.umlsec.variability.VariabilityPackage;
@@ -35,16 +32,17 @@ import symmetric.SemanticChangeSet;
 import symmetric.SymmetricPackage;
 
 public abstract class UmlRecogBenchmark {
-	protected static final String[] values = { "BMWExampleSPL", // 0
-			"EndToEndSecurity", // 1
-//			"BCMS",				// 2
+	protected static final String[] values = {
+			//			"BMWExampleSPL", // 0
+			//			"EndToEndSecurity", // 1
+			//			"BCMS",				// 2
 			"jsse_openjdk", // 3
-			"Notepad-Antenna", // 4
-			"MobilePhoto07_OO", // 5
-			"lampiro" // 6
+			//			"Notepad-Antenna", // 4
+			//			"MobilePhoto07_OO", // 5
+			//			"lampiro" // 6
 	};
 
-	protected static final int MAX_RUNS = 0;
+	protected static final int MAX_RUNS = 10;
 
 	protected static final boolean DEBUG = false;
 
@@ -77,7 +75,7 @@ public abstract class UmlRecogBenchmark {
 
 	static String saveResult(RuntimeBenchmarkReport runtimeBenchmarkReport, String exampleID, EObject instance) {
 		String outputPath = FILE_PATH + FILE_PATH_OUTPUT +
-		// runtimeBenchmarkReport.getDate() + "/" +
+				// runtimeBenchmarkReport.getDate() + "/" +
 				exampleID;
 
 		HenshinResourceSet resourceSet = new HenshinResourceSet(new Path(outputPath).toOSString());
@@ -89,7 +87,7 @@ public abstract class UmlRecogBenchmark {
 
 	/**
 	 * Searches the creation of a SemanticChangeSet and returns its name
-	 * 
+	 *
 	 * @param changes The set of changes in which should be searched
 	 */
 	protected static List<String> getNameOfAppliedRule(Collection<Change> changes) {
@@ -102,7 +100,7 @@ public abstract class UmlRecogBenchmark {
 				Object object = ((ObjectChange) change).getObject();
 				if (object instanceof SemanticChangeSet) {
 					names.add(((SemanticChangeSet) object).getName());
-				}					
+				}
 			}
 		}
 		return names;

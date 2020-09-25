@@ -9,7 +9,5 @@ public interface MultiVarProcessor {
 
 	MultiVarEGraph createEGraphAndCollectPCs(List<EObject> roots, Map<EObject, String> pcsP, String fmP);
 
-	void createNewVariabilityAnnotations(List<EObject> roots, Map<EObject, String> pcsP);
-
-	void deleteObsoleteVariabilityAnnotations(List<EObject> roots, Map<EObject, String> pcsP);
+	void writePCsToModel(MultiVarEGraph graphP);
 }

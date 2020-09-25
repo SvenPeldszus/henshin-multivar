@@ -1,6 +1,7 @@
 package org.eclipse.emf.henshin.variability.multi;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,7 +10,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
@@ -44,8 +44,7 @@ public class SecPLUtil implements MultiVarProcessor {
 		return graphP;
 	}
 
-	@Override
-	public void createNewVariabilityAnnotations(List<EObject> roots, Map<EObject, String> pcsP) {
+	public void createNewVariabilityAnnotations(Map<EObject, String> pcsP) {
 		Set<EObject> markAsDelete = new HashSet<>(); // Discard presence conditions of diffs
 		for (Entry<EObject, String> pair : pcsP.entrySet()) {
 			EObject element = pair.getKey();
@@ -53,7 +52,7 @@ public class SecPLUtil implements MultiVarProcessor {
 
 			// TODO: What is the symmetric package? -> Tries to add PC to SiLift element ->
 			// Check if is instance of Element, do we really want to delete everything else?
-			//			if (element.eClass().getEPackage() != SymmetricPackage.eINSTANCE) {
+			// if (element.eClass().getEPackage() != SymmetricPackage.eINSTANCE) {
 			if (element instanceof Element) {
 				if (!pc.trim().equals(Logic.TRUE.trim())) {
 					Conditional_Element e = VariabilityFactory.eINSTANCE.createConditional_Element();
@@ -61,8 +60,7 @@ public class SecPLUtil implements MultiVarProcessor {
 					e.getPresence_condition().add(pc);
 					element.eResource().getContents().add(e);
 				}
-			}
-			else {
+			} else {
 				markAsDelete.add(element);
 			}
 		}
@@ -71,7 +69,6 @@ public class SecPLUtil implements MultiVarProcessor {
 
 	}
 
-	@Override
 	public void deleteObsoleteVariabilityAnnotations(List<EObject> roots, Map<EObject, String> pcsP) {
 		LinkedList<EObject> delete = new LinkedList<>();
 		for (EObject e : roots) {
@@ -81,10 +78,10 @@ public class SecPLUtil implements MultiVarProcessor {
 				if (baseElement == null) {
 					delete.add(cond);
 				} else {
-					EList<String> pc = cond.getPresence_condition();
+					// Set pc of element to value from map
+					List<String> pc = cond.getPresence_condition();
 					pc.clear();
-					pc.add(pcsP.get(baseElement));
-					pcsP.remove(baseElement);
+					pc.add(pcsP.remove(baseElement));
 				}
 			}
 		}
@@ -111,5 +108,12 @@ public class SecPLUtil implements MultiVarProcessor {
 			}
 
 		}
+	}
+
+	@Override
+	public void writePCsToModel(MultiVarEGraph graph) {
+		Map<EObject, String> mutablePCs = new HashMap<>(graph.getPCS());
+		deleteObsoleteVariabilityAnnotations(graph.getRoots(), mutablePCs);
+		createNewVariabilityAnnotations(mutablePCs);
 	}
 }

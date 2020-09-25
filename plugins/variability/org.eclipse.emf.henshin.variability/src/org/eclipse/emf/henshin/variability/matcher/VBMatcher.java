@@ -17,12 +17,9 @@ import java.util.stream.Collectors;
 import org.eclipse.emf.henshin.interpreter.EGraph;
 import org.eclipse.emf.henshin.interpreter.Match;
 import org.eclipse.emf.henshin.interpreter.impl.EngineImpl;
-import org.eclipse.emf.henshin.model.Mapping;
-import org.eclipse.emf.henshin.model.Node;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.variability.InconsistentRuleException;
-import org.eclipse.emf.henshin.variability.util.VBRuleUtil;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
+import org.eclipse.emf.henshin.variability.util.FeatureExpression;
 
 import aima.core.logic.propositional.parsing.ast.Sentence;
 
@@ -40,17 +37,17 @@ import aima.core.logic.propositional.parsing.ast.Sentence;
  */
 public class VBMatcher {
 
-	protected Rule rule;
 	protected EGraph graph;
 	protected EngineImpl engine;
 
-	protected Map<String, Sentence> expressions;
+	protected final Map<String, Sentence> expressions;
 
-	protected VBRuleInfo ruleInfo;
+	protected final VBRuleInfo ruleInfo;
 	protected VBRulePreparator rulePreparator;
 
-	protected Collection<String> initiallyTrueFeatures;
-	protected Collection<String> initiallyFalseFeatures;
+	protected final Collection<String> initiallyTrueFeatures;
+	protected final Collection<String> initiallyFalseFeatures;
+	protected final Rule rule;
 
 	/**
 	 * Variability-based matching needs to create a new matching engine for each
@@ -101,42 +98,33 @@ public class VBMatcher {
 	 */
 	public VBMatcher(Rule rule, EGraph graph, Collection<String> initiallyTrue,
 			Collection<String> initiallyFalse) throws InconsistentRuleException {
-		super();
-		fixInconsistencies(rule);
-		if (!VBRuleUtil.checkRule(rule)) {
-			throw new InconsistentRuleException();
-		}
+		this.ruleInfo = getRuleInfo(rule);
+		this.expressions = this.ruleInfo.getExpressions();
 		this.rule = rule;
 		this.graph = graph;
 		this.engine = new EngineImpl();
-		this.rulePreparator = new VBRulePreparator(rule, initiallyTrue, initiallyFalse);
+		this.rulePreparator = new VBRulePreparator(this.ruleInfo, initiallyTrue, initiallyFalse);
 
 		this.initiallyTrueFeatures = initiallyTrue;
 		this.initiallyFalseFeatures = initiallyFalse;
-
-		if (!ruleInfoRegistry.containsKey(rule)) {
-			ruleInfoRegistry.put(rule, new VBRuleInfo(rule));
-		}
-		this.ruleInfo = ruleInfoRegistry.get(rule);
-		populateExpressionMap();
 	}
 
-	private void fixInconsistencies(Rule rule) {
-		// Per definition, mapped nodes must have the same presence condition
-		// in the LHS and the RHS.
-		for (Mapping mapping : rule.getMappings()) {
-			Node image = mapping.getImage();
-			String originPresenceCondition = VariabilityHelper.INSTANCE.getPresenceCondition(mapping.getOrigin());
-			if (!originPresenceCondition.equals(VariabilityHelper.INSTANCE.getPresenceCondition(image))) {
-				VariabilityHelper.INSTANCE.setPresenceCondition(image, originPresenceCondition);
-			}
+	/**
+	 * Returns a VBRuleInfo for the given rule.
+	 * If there is a cached rule info, this one is used
+	 *
+	 * @param rule
+	 * @return
+	 * @throws InconsistentRuleException
+	 */
+	private VBRuleInfo getRuleInfo(Rule rule) throws InconsistentRuleException {
+		VBRuleInfo modifyableRuleInfo = ruleInfoRegistry.get(rule);
+		if(modifyableRuleInfo != null) {
+			return modifyableRuleInfo;
 		}
-	}
-
-	private void populateExpressionMap() {
-		if (ruleInfoRegistry.containsKey(this.rule)) {
-			this.expressions = this.ruleInfo.getExpressions();
-		}
+		modifyableRuleInfo = new VBRuleInfo(rule);
+		ruleInfoRegistry.put(rule, modifyableRuleInfo);
+		return modifyableRuleInfo;
 	}
 
 	public Set<? extends VBMatch> findMatches() {
@@ -146,7 +134,7 @@ public class VBMatcher {
 
 		// Remove everything except for the base rule
 		Set<Sentence> nonTauotologies = getNonTautologies(mo);
-		this.rulePreparator.prepare(this.ruleInfo, nonTauotologies, this.rule.isInjectiveMatching(), true, false);
+		this.rulePreparator.prepare(nonTauotologies, this.rule.isInjectiveMatching(), true, false);
 
 		Set<Match> baseMatches = new HashSet<>();
 		Iterator<Match> it = this.engine.findMatches(this.rule, this.graph, null).iterator();
@@ -166,7 +154,7 @@ public class VBMatcher {
 		Set<VBMatch> matches = new HashSet<>();
 		if (!baseMatches.isEmpty()) {
 			mo.set(this.ruleInfo.getFeatureModel(), null, true);
-			findMatches(this.rule, mo, baseMatches, matches);
+			findMatches(mo, baseMatches, matches);
 			mo.set(this.ruleInfo.getFeatureModel(), true, null);
 		}
 
@@ -182,17 +170,17 @@ public class VBMatcher {
 		return result;
 	}
 
-	private Set<VBMatch> findMatches(Rule rule, VBMatchingInfo matchingInfo, Set<Match> baseMatches,
+	private Set<VBMatch> findMatches(VBMatchingInfo matchingInfo, Set<Match> baseMatches,
 			Set<VBMatch> matches) {
 		Sentence current = getFirstNeutral(matchingInfo);
 		if (current == null) {
-			findMatchInner(rule, matchingInfo, baseMatches, matches);
+			findMatchInner(matchingInfo, baseMatches, matches);
 		} else {
 			matchingInfo.set(current, null, true);
-			findMatchInner(rule, matchingInfo, baseMatches, matches);
+			findMatchInner(matchingInfo, baseMatches, matches);
 
 			matchingInfo.set(current, true, false);
-			findMatchInner(rule, matchingInfo, baseMatches, matches);
+			findMatchInner(matchingInfo, baseMatches, matches);
 
 			matchingInfo.set(current, false, null);
 		}
@@ -209,7 +197,7 @@ public class VBMatcher {
 		return null;
 	}
 
-	private Set<VBMatch> findMatchInner(Rule rule, VBMatchingInfo matchingInfo, Set<Match> baseMatches,
+	private Set<VBMatch> findMatchInner(VBMatchingInfo matchingInfo, Set<Match> baseMatches,
 			Set<VBMatch> matches) {
 		Set<Sentence> newContradictory = getNewContradictory(matchingInfo);
 		matchingInfo.setAll(newContradictory, null, false);
@@ -221,17 +209,17 @@ public class VBMatcher {
 		// current assignment (= neutral is empty), calculate the matches
 		// classically.
 		if (matchingInfo.getNeutrals().isEmpty()) {
-			BitSet reducedRule = this.rulePreparator.prepare(this.ruleInfo, matchingInfo.getAssumedFalse(),
+			BitSet reducedRule = this.rulePreparator.prepare(matchingInfo.getAssumedFalse(),
 					determineInjectiveMatching(matchingInfo), false, false);
 			// The following check ensures that we will not match the same
 			// sub-rule twice.
 			if (!matchingInfo.getMatchedSubrules().contains(reducedRule)) {
 				for (Match bm : baseMatches) {
-					Iterator<Match> classicMatches = this.engine.findMatches(rule, this.graph, bm).iterator();
+					Iterator<Match> classicMatches = this.engine.findMatches(this.rule, this.graph, bm).iterator();
 					VBRulePreparator prep = this.rulePreparator.getSnapShot();
 					while (classicMatches.hasNext()) {
 						Match next = classicMatches.next();
-						matches.add(new VBMatch(next, matchingInfo.getAssumedTrue(), rule, prep));
+						matches.add(new VBMatch(next, this.rule, prep));
 					}
 				}
 				matchingInfo.getMatchedSubrules().add(reducedRule);
@@ -242,7 +230,7 @@ public class VBMatcher {
 		}
 		// Otherwise, analyse all of the remaining presence conditions,
 		else {
-			findMatches(rule, matchingInfo, baseMatches, matches);
+			findMatches(matchingInfo, baseMatches, matches);
 		}
 
 		// clean up

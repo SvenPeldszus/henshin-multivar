@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.script.ScriptException;
 
@@ -33,13 +32,13 @@ import org.eclipse.emf.henshin.model.impl.EdgeImpl;
 import org.eclipse.emf.henshin.model.impl.MappingImpl;
 import org.eclipse.emf.henshin.model.impl.NodeImpl;
 import org.eclipse.emf.henshin.model.impl.RuleImpl;
+import org.eclipse.emf.henshin.variability.InconsistentRuleException;
 import org.eclipse.emf.henshin.variability.matcher.VBMatch;
 import org.eclipse.emf.henshin.variability.matcher.VBMatcher.VBMatchingInfo;
 import org.eclipse.emf.henshin.variability.matcher.VBRuleInfo;
 import org.eclipse.emf.henshin.variability.matcher.VBRulePreparator;
 import org.eclipse.emf.henshin.variability.util.Logic;
 import org.eclipse.emf.henshin.variability.util.SatChecker;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 import org.sat4j.specs.ISolver;
 import org.sat4j.specs.TimeoutException;
 
@@ -120,13 +119,14 @@ class MultiVarRuleUtil {
 		return nac.getMappings().stream().anyMatch(mapping -> mapping.getImage().equals(node));
 	}
 
-	static Iterable<VBMatch> flattenRuleAndMatch(EGraphImpl graphP, Rule rule) throws ScriptException {
+	@Deprecated //TODO: check if we can remove this method
+	static Iterable<VBMatch> flattenRuleAndMatch(EGraphImpl graphP, Rule rule) throws ScriptException, InconsistentRuleException {
 		// Calculate allowed rule configurations
 		LinkedList<List<String>> trueFeatureList = new LinkedList<>();
 		LinkedList<List<String>> falseFeatureList = new LinkedList<>();
 
 		VBRuleInfo ruleInfo = new VBRuleInfo(rule);
-		calculateTrueAndFalseFeatures(rule, ruleInfo, trueFeatureList, falseFeatureList);
+		calculateTrueAndFalseFeatures(ruleInfo, trueFeatureList, falseFeatureList);
 
 		LinkedList<VBMatch> matches = new LinkedList<>();
 		MultiVarEngine engine = new MultiVarEngine();
@@ -138,10 +138,10 @@ class MultiVarRuleUtil {
 			Set<Sentence> elementsToRemove = calculateElementsToRemove(ruleInfo, trueFeatures, falseFeatures);
 
 			// Flatten rule
-			VBRulePreparator preparator = new VBRulePreparator(rule, trueFeatures, falseFeatures);
+			VBRulePreparator preparator = new VBRulePreparator(ruleInfo, trueFeatures, falseFeatures);
 			VBMatchingInfo matchingInfo = new VBMatchingInfo(new ArrayList<>(ruleInfo.getExpressions().values()),
 					ruleInfo, Collections.emptyList(), Collections.emptyList());
-			BitSet reducedRule = preparator.prepare(ruleInfo, elementsToRemove, rule.isInjectiveMatching(), false,
+			BitSet reducedRule = preparator.prepare(elementsToRemove, rule.isInjectiveMatching(), false,
 					false);
 
 			if (!matchingInfo.getMatchedSubrules().contains(reducedRule)) {
@@ -152,7 +152,7 @@ class MultiVarRuleUtil {
 				while (classicMatches.hasNext()) {
 					Match match = classicMatches.next();
 					VBRulePreparator prep = preparator.getSnapShot();
-					matches.add(new VBMatch(match, matchingInfo.getAssumedTrue(), rule, prep));
+					matches.add(new VBMatch(match, rule, prep));
 				}
 				matchingInfo.getMatchedSubrules().add(reducedRule);
 
@@ -171,10 +171,10 @@ class MultiVarRuleUtil {
 	 * @param falseFeatureList
 	 * @return
 	 */
-	static Status calculateTrueAndFalseFeatures(Rule rule, VBRuleInfo ruleInfo, List<List<String>> trueFeatureList,
+	static Status calculateTrueAndFalseFeatures(VBRuleInfo ruleInfo, List<List<String>> trueFeatureList,
 			List<List<String>> falseFeatureList) {
 		// Line 5: calculate Phi_rule
-		List<String> features = VariabilityHelper.INSTANCE.getFeatures(rule).stream().collect(Collectors.toList());
+		Collection<String> features = ruleInfo.getFeatures();
 
 		// Line 6: get all Solutions for Phi_rule
 		Sentence phiRule = ruleInfo.getFeatureModel();

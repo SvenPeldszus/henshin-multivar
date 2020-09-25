@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 
+ *
  * @author Daniel Str�ber, Stefan Schulz
  *
  */
@@ -16,7 +16,7 @@ public class XorEncoderUtil {
 	 * Encodes any occurrence of a xor(A,B) pattern into ((A and !B) or (A and
 	 * !B)). Works for an arbitrary number of arguments. A and B are allowed to
 	 * contain futher xor patterns, as long as parentheses are nested correctly.
-	 * 
+	 *
 	 * @param presenceCondition
 	 * @return
 	 */
@@ -24,16 +24,16 @@ public class XorEncoderUtil {
 		if (!isWellFormed(expression)) {
 			return expression;
 		}
-		
+
 		expression = expression.replace("XOR(", "xor(");
 		while (expression.contains("xor(")) {
 			expression = eliminateFirstXor(expression);
 		}
 		return expression;
 	}
-	
-	public static boolean isWellFormed(String expression) {		
-		Deque<Character> stack = new LinkedList<>();		
+
+	public static boolean isWellFormed(String expression) {
+		Deque<Character> stack = new LinkedList<>();
 		for(Character c : expression.toCharArray()) {
 			if (c.equals('(')) {
 				stack.push(c);
@@ -79,7 +79,7 @@ public class XorEncoderUtil {
 				}
 				index = nextRelevantPos + 1;
 			} else {
-				throw new RuntimeException("Error in expression " + expression);
+				throw new IllegalArgumentException("Error in expression " + expression);
 			}
 		}
 		String prefix = expression.substring(0, startIndex - 4);
@@ -89,7 +89,7 @@ public class XorEncoderUtil {
 
 	/**
 	 * Finds next occurrence of a '(', ')' or ','
-	 * 
+	 *
 	 * @param expression
 	 * @param offset
 	 * @return
@@ -117,19 +117,22 @@ public class XorEncoderUtil {
 			if (indexClosedBracket >= 0) {
 				if (indexComma >= 0) {
 					result = Math.min(indexComma, indexClosedBracket);
-				} else
+				} else {
 					result = indexClosedBracket;
-			} else
+				}
+			} else {
 				result = indexComma;
+			}
 		}
 
-		if (result > -1)
+		if (result > -1) {
 			result += offset;
+		}
 		return result;
 	}
-	
+
 	public static String createXorEncodingCNF(List<String> arguments) {
-		int size = arguments.size();			
+		int size = arguments.size();
 		if(size == 0) {
 			return "";
 		}
@@ -168,21 +171,15 @@ public class XorEncoderUtil {
 					sb.append(literals.get(j));
 					sb.append(")");
 				}
-				if (j + 1 < literals.size())
+				if (j + 1 < literals.size()) {
 					sb.append(" and ");
+				}
 			}
 			sb.append(')');
-			if (i + 1 < literals.size())
+			if (i + 1 < literals.size()) {
 				sb.append(" or ");
+			}
 		}
 		return sb.toString();
-	}
-
-	public static void main(String[] args) {
-		System.out.println(encodeXor("xor(A, B)"));
-		System.out.println(encodeXor("xor(A, B, C)"));
-		System.out.println(encodeXor("xor(a, b, c, d)"));
-		System.out.println(encodeXor("xor(A, !B, D)"));
-		System.out.println(encodeXor("xor(A, xor(B,C))"));
 	}
 }

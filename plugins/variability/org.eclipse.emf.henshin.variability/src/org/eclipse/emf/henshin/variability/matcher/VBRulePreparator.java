@@ -26,7 +26,6 @@ import org.eclipse.emf.henshin.model.NestedCondition;
 import org.eclipse.emf.henshin.model.Node;
 import org.eclipse.emf.henshin.model.Not;
 import org.eclipse.emf.henshin.model.Rule;
-import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 
 import aima.core.logic.propositional.parsing.ast.Sentence;
 
@@ -39,7 +38,6 @@ import aima.core.logic.propositional.parsing.ast.Sentence;
  *
  */
 public class VBRulePreparator {
-	public Rule rule;
 	public boolean checkDangling;
 	private boolean injectiveMatching;
 	private boolean injectiveMatchingOriginal;
@@ -61,12 +59,13 @@ public class VBRulePreparator {
 	public Map<Formula, EStructuralFeature> pulledUpFormulasToOldContainingRef;
 	private final Collection<String> trueFeatures;
 	private final Collection<String> falseFeatures;
+	private final VBRuleInfo ruleInfo;
 
-	public VBRulePreparator(Rule rule, Collection<String> trueFeatures, Collection<String> falseFeatures) {
-		this.rule = rule;
+	public VBRulePreparator(VBRuleInfo ruleInfo, Collection<String> trueFeatures, Collection<String> falseFeatures) {
 		this.trueFeatures = trueFeatures;
 		this.falseFeatures = falseFeatures;
-		this.checkDangling = rule.isCheckDangling();
+		this.ruleInfo = ruleInfo;
+		this.checkDangling = ruleInfo.getRule().isCheckDangling();
 	}
 
 	/**
@@ -80,11 +79,11 @@ public class VBRulePreparator {
 	 * @param executed
 	 * @return
 	 */
-	public BitSet prepare(VBRuleInfo ruleInfo, Set<Sentence> rejected, boolean injectiveMatching, boolean baseRule,
+	public BitSet prepare(Set<Sentence> rejected, boolean injectiveMatching, boolean baseRule,
 			boolean includeApplicationConditions) {
 		this.baseRule = baseRule;
 		this.injectiveMatching = injectiveMatching;
-		this.injectiveMatchingOriginal = ruleInfo.rule.isInjectiveMatching();
+		this.injectiveMatchingOriginal = this.ruleInfo.getRule().isInjectiveMatching();
 		this.removeElementContainers = new HashMap<>();
 		this.removeNodes = new HashSet<>();
 		this.removeEdges = new HashSet<>();
@@ -96,18 +95,19 @@ public class VBRulePreparator {
 		this.removeFormulaContainingRef = new HashMap<>();
 		this.removeFormulas = new HashSet<>();
 
-		fillMaps(ruleInfo, rejected, includeApplicationConditions);
+		fillMaps(rejected, includeApplicationConditions);
 
-		BitSet bs = getRepresentation(this.rule, this.removeAttributes, this.removeNodes, this.removeEdges,
+		BitSet bs = getRepresentation(this.removeAttributes, this.removeNodes, this.removeEdges,
 				this.removeFormulas, injectiveMatching);
 
 		doPreparation();
 		return bs;
 	}
 
-	private void fillMaps(VBRuleInfo ruleInfo, Set<Sentence> rejected, boolean includeApplicationConditions) {
+	private void fillMaps(Set<Sentence> rejected, boolean includeApplicationConditions) {
+		Rule rule = this.ruleInfo.getRule();
 		for (Sentence expr : rejected) {
-			Set<GraphElement> elements = ruleInfo.getPc2Elem().get(expr);
+			Set<GraphElement> elements = this.ruleInfo.getPc2Elem().get(expr);
 			if (elements == null) {
 				continue;
 			}
@@ -115,7 +115,7 @@ public class VBRulePreparator {
 			for (GraphElement ge : elements) {
 				if (ge instanceof Node) {
 					this.removeNodes.add((Node) ge);
-					Set<Mapping> mappings = ruleInfo.getNode2Mapping().get(ge);
+					Set<Mapping> mappings = this.ruleInfo.getNode2Mapping().get(ge);
 					if (mappings != null) {
 						this.removeMappings.addAll(mappings);
 					}
@@ -128,16 +128,15 @@ public class VBRulePreparator {
 
 			}
 		}
-
-		if (this.baseRule && this.rule.getLhs().getFormula() != null) {
-			this.removeFormulas.add(this.rule.getLhs().getFormula());
-			this.removeElementContainers.put(this.rule.getLhs().getFormula(), this.rule.getLhs());
-			this.removeFormulaContainingRef.put(this.rule.getLhs().getFormula(),
-					this.rule.getLhs().getFormula().eContainingFeature());
+		if (this.baseRule && rule.getLhs().getFormula() != null) {
+			this.removeFormulas.add(rule.getLhs().getFormula());
+			this.removeElementContainers.put(rule.getLhs().getFormula(), rule.getLhs());
+			this.removeFormulaContainingRef.put(rule.getLhs().getFormula(),
+					rule.getLhs().getFormula().eContainingFeature());
 
 		} else {
-			for (NestedCondition ac : this.rule.getLhs().getNestedConditions()) {
-				Sentence acPC = ruleInfo.getExpressions().get(VariabilityHelper.INSTANCE.getPresenceCondition(ac));
+			for (NestedCondition ac : rule.getLhs().getNestedConditions()) {
+				Sentence acPC = this.ruleInfo.getExpressions().get(this.ruleInfo.getPC(ac));
 				if (!includeApplicationConditions || rejected.contains(acPC)) {
 					Formula removeFormula = null;
 					if (ac.isNAC()) {
@@ -191,8 +190,8 @@ public class VBRulePreparator {
 			this.removeElementContainers.put(n, n.getGraph());
 			n.getGraph().getNodes().remove(n);
 		}
-		this.rule.setInjectiveMatching(this.injectiveMatching);
-		this.rule.setCheckDangling(false); // Dangling edges are allowed in a partial
+		this.ruleInfo.getRule().setInjectiveMatching(this.injectiveMatching);
+		this.ruleInfo.getRule().setCheckDangling(false); // Dangling edges are allowed in a partial
 		// match.
 
 	}
@@ -213,8 +212,8 @@ public class VBRulePreparator {
 	 * "injectiveMatching" flag are restored.
 	 */
 	public void undo() {
-		this.rule.setCheckDangling(this.checkDangling);
-		this.rule.setInjectiveMatching(this.injectiveMatchingOriginal);
+		this.ruleInfo.getRule().setCheckDangling(this.checkDangling);
+		this.ruleInfo.getRule().setInjectiveMatching(this.injectiveMatchingOriginal);
 
 		for (Node n : this.removeNodes) {
 			((Graph) this.removeElementContainers.get(n)).getNodes().add(n);
@@ -266,15 +265,16 @@ public class VBRulePreparator {
 	 *                 Graph) or a NOT
 	 */
 	private void determineRemoveOrder(Set<Formula> formulas) {
-		Formula outer = this.rule.getLhs().getFormula(); //
+		Rule rule = this.ruleInfo.getRule();
+		Formula outer = rule.getLhs().getFormula(); //
 		if (outer instanceof Not || outer instanceof NestedCondition) {
 			Formula formula = formulas.iterator().next();
 			if (formula == outer) {
-				this.removeElementContainers.put(formula, this.rule.getLhs());
+				this.removeElementContainers.put(formula, rule.getLhs());
 				this.removeFormulaContainingRef.put(formula, HenshinPackage.Literals.GRAPH__FORMULA);
 			}
 		} else if (outer instanceof And) {
-			determineRemoverOrder((And) outer, formulas, this.rule.getLhs(), HenshinPackage.Literals.GRAPH__FORMULA);
+			determineRemoverOrder((And) outer, formulas, rule.getLhs(), HenshinPackage.Literals.GRAPH__FORMULA);
 		} else {
 			throw new IllegalArgumentException(
 					"TODO: Only AND-based nesting of applications conditions supported yet.");
@@ -327,8 +327,9 @@ public class VBRulePreparator {
 	 * @param injectiveMatching
 	 * @return
 	 */
-	private BitSet getRepresentation(Rule rule, Set<Attribute> deleteAttributes, Set<Node> deleteNodes,
+	private BitSet getRepresentation(Set<Attribute> deleteAttributes, Set<Node> deleteNodes,
 			Set<Edge> deleteEdges, Set<Formula> deleteFormula, boolean injectiveMatching) {
+		Rule rule = this.ruleInfo.getRule();
 		BitSet result = new BitSet(rule.getLhs().getNodes().size() + rule.getLhs().getEdges().size()
 				+ rule.getLhs().getNestedConditions().size() + 1);
 
@@ -370,7 +371,7 @@ public class VBRulePreparator {
 	}
 
 	public VBRulePreparator getSnapShot() {
-		VBRulePreparator result = new VBRulePreparator(this.rule, getTrueFeatures(), getFalseFeatures());
+		VBRulePreparator result = new VBRulePreparator(this.ruleInfo, getTrueFeatures(), getFalseFeatures());
 		result.removeNodes = new HashSet<>(this.removeNodes);
 		result.removeEdges = new HashSet<>(this.removeEdges);
 		result.removeAttributes = new HashSet<>(this.removeAttributes);

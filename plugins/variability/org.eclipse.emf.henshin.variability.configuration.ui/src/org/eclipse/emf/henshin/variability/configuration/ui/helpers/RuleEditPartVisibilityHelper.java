@@ -11,7 +11,7 @@ import org.eclipse.emf.henshin.model.Attribute;
 import org.eclipse.emf.henshin.model.Edge;
 import org.eclipse.emf.henshin.model.GraphElement;
 import org.eclipse.emf.henshin.model.ModelElement;
-import org.eclipse.emf.henshin.variability.matcher.FeatureExpression;
+import org.eclipse.emf.henshin.variability.util.FeatureExpression;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 
 import aima.core.logic.propositional.parsing.ast.Sentence;
