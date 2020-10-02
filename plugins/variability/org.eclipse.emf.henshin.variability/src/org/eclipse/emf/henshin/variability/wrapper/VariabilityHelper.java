@@ -13,6 +13,7 @@ import org.eclipse.emf.henshin.model.GraphElement;
 import org.eclipse.emf.henshin.model.HenshinFactory;
 import org.eclipse.emf.henshin.model.ModelElement;
 import org.eclipse.emf.henshin.model.Rule;
+import org.eclipse.emf.henshin.model.Unit;
 import org.eclipse.emf.henshin.variability.util.FeatureExpression;
 
 import aima.core.logic.propositional.parsing.ast.PropositionSymbol;
@@ -56,7 +57,7 @@ public class VariabilityHelper {
 
 	public String getPresenceCondition(ModelElement element) {
 		Annotation annotation = getAnnotation(element, VariabilityConstants.PRESENCE_CONDITION);
-		if (annotation != null) {
+		if (annotation != null && annotation.getValue() != null) {
 			return annotation.getValue();
 		}
 		return "";
@@ -97,6 +98,10 @@ public class VariabilityHelper {
 			return annotation.getValue();
 		}
 		return "";
+	}
+	
+	public String getFeatureConstraint(Unit unit) {
+		return (unit instanceof Rule) ? getFeatureConstraint((Rule) unit) : "";
 	}
 
 	public void setFeatures(Rule rule, Set<String> features) {
