@@ -154,6 +154,14 @@ public enum FeatureBinding implements Enumerator {
 		}
 		return null;
 	}
+	
+	public static FeatureBinding get(boolean value) {
+		if (value) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -400,7 +400,7 @@ public class VariabilityView extends ViewPart
 
 		Label variabilityModelLabel = new Label(composite, SWT.NONE);
 		variabilityModelLabel.setImage(ImageHelper.getImage("/icons/variability.gif"));
-		variabilityModelLabel.setText("Configuration constraint");
+		variabilityModelLabel.setText("Feature constraint");
 		variabilityModelLabel.setLayoutData(new GridData(SWT.FILL, SWT.LEFT, false, false, 1, 1));
 		featureModelToolbar = new ToolBar(composite, SWT.FLAT);
 		GridDataFactory.fillDefaults().align(SWT.END, SWT.CENTER).grab(true, false).applyTo(featureModelToolbar);

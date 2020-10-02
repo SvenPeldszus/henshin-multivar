@@ -1,10 +1,12 @@
 package org.eclipse.emf.henshin.variability.configuration.ui.helpers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.eclipse.emf.henshin.diagram.edit.parts.RuleEditPart;
 import org.eclipse.emf.henshin.model.Edge;
 import org.eclipse.emf.henshin.model.Rule;
+import org.eclipse.emf.henshin.variability.ui.util.FeatureConfig;
 import org.eclipse.emf.henshin.variability.util.FeatureExpression;
 import org.eclipse.emf.henshin.variability.util.Logic;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
@@ -45,6 +47,18 @@ public class VariabilityModelHelper {
 		return expr;
 	}
 
+	public static Sentence getFeatureExpression(Collection<FeatureConfig> featureConfigs) {
+		Sentence expr = FeatureExpression.getExpr("");
+		for(FeatureConfig featureConfig : featureConfigs) {
+			if (featureConfig.isTrue()) {
+				expr = FeatureExpression.and(expr, FeatureExpression.getExpr(featureConfig.getFeatureName()));
+			} else if (featureConfig.isFalse()) {
+				expr = FeatureExpression.andNot(expr, FeatureExpression.getExpr(featureConfig.getFeatureName()));
+			}
+		}
+		return expr;
+	}
+	
 	public static String getPresenceCondition(Configuration configuration) {
 		StringBuilder result = new StringBuilder();
 		String delimiter = "";
