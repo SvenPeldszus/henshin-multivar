@@ -172,21 +172,7 @@ public class TransformOperation extends WorkspaceModifyOperation {
 			}
 		};
 
-		try {
-			if (!InterpreterUtil.applyToResource(assignment, engine, input,
-					appMonitor) && !monitor.isCanceled()) {
-				throw new CoreException(
-						new Status(IStatus.WARNING,
-								HenshinInterpreterUIPlugin.PLUGIN_ID,
-								"Transformation could not be applied to given input model."));
-			}
-		} catch (Throwable t) {
-			// NOTE we should use an error dialog with a "details" section showing the caught exception
-			throw new CoreException(
-					new Status(IStatus.ERROR,
-							HenshinInterpreterUIPlugin.PLUGIN_ID,
-							"Error applying transformation: " + t.getMessage(), t));
-		}
+		applyTransformation(assignment, engine, input, appMonitor, monitor);
 		monitor.worked(4);
 		if (monitor.isCanceled()) {
 			return;
@@ -226,6 +212,24 @@ public class TransformOperation extends WorkspaceModifyOperation {
 		monitor.subTask("Finalizing transformation...");
 		monitor.done();
 
+	}
+	
+	public void applyTransformation(Assignment assignment, Engine engine, Resource input, ApplicationMonitor appMonitor, IProgressMonitor monitor) throws CoreException {
+		try {
+			if (!InterpreterUtil.applyToResource(assignment, engine, input,
+					appMonitor) && !monitor.isCanceled()) {
+				throw new CoreException(
+						new Status(IStatus.WARNING,
+								HenshinInterpreterUIPlugin.PLUGIN_ID,
+								"Transformation could not be applied to given input model."));
+			}
+		} catch (Throwable t) {
+			// NOTE we should use an error dialog with a "details" section showing the caught exception
+			throw new CoreException(
+					new Status(IStatus.ERROR,
+							HenshinInterpreterUIPlugin.PLUGIN_ID,
+							"Error applying transformation: " + t.getMessage(), t));
+		}
 	}
 
 }

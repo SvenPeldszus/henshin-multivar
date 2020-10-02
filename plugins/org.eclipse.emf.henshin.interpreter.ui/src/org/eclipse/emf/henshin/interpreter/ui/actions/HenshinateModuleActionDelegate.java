@@ -11,6 +11,7 @@ package org.eclipse.emf.henshin.interpreter.ui.actions;
 
 import org.eclipse.emf.henshin.interpreter.ui.wizard.HenshinWizard;
 import org.eclipse.emf.henshin.interpreter.ui.wizard.HenshinWizardDialog;
+import org.eclipse.emf.henshin.interpreter.ui.wizard.HenshinWizardSelector;
 import org.eclipse.emf.henshin.model.Module;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
@@ -35,7 +36,7 @@ public class HenshinateModuleActionDelegate implements IObjectActionDelegate {
 	 */
 	@Override
 	public void run(IAction action) {
-		HenshinWizard wizard = new HenshinWizard(module);
+		HenshinWizard wizard = HenshinWizardSelector.getWizard(module);
 		HenshinWizardDialog dialog = new HenshinWizardDialog(targetPart.getSite().getShell(), wizard);
 		dialog.open();
 	}

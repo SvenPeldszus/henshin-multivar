@@ -17,17 +17,17 @@ public class HenshinWizardPage extends WizardPage {
 
 	protected static int CONTROL_OFFSET = 5;
 
-	UnitSelector unitSelector;
+	protected UnitSelector unitSelector;
 
-	ModelSelector inputSelector;
+	protected ModelSelector inputSelector;
 
-	ModelSelector outputSelector;
+	protected ModelSelector outputSelector;
 
-	ParameterEditTable parameterEditor;
+	protected ParameterEditTable parameterEditor;
 
-	Button openCompare;
+	protected Button openCompare;
 	
-	Module module;
+	public Module module;
 
 	public HenshinWizardPage() {
 		super("mainpage");
@@ -82,6 +82,14 @@ public class HenshinWizardPage extends WizardPage {
 		inputSelector.getBrowseWorkspaceButton().setFocus();
 		
 		setControl(container);
+	}
+	
+	public void setModule(Module module) {
+		this.module = module;
+	}
+	
+	public Module getModule() {
+		return module;
 	}
 
 	private String deriveOutputURI(String inputUri) {

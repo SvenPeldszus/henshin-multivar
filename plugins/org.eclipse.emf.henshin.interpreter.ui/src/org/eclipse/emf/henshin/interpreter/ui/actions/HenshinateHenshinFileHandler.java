@@ -16,6 +16,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.henshin.interpreter.ui.wizard.HenshinWizard;
 import org.eclipse.emf.henshin.interpreter.ui.wizard.HenshinWizardDialog;
+import org.eclipse.emf.henshin.interpreter.ui.wizard.HenshinWizardSelector;
 import org.eclipse.emf.henshin.model.Module;
 import org.eclipse.emf.henshin.model.resource.HenshinResource;
 import org.eclipse.emf.henshin.model.resource.HenshinResourceSet;
@@ -59,7 +60,7 @@ public class HenshinateHenshinFileHandler extends AbstractHandler {
 
 					// Run the wizard:
 					if (module!=null) {
-						HenshinWizard wizard = new HenshinWizard(module);
+						HenshinWizard wizard = HenshinWizardSelector.getWizard(module);
 						HenshinWizardDialog dialog = new HenshinWizardDialog(
 								HandlerUtil.getActiveShell(event), wizard);
 						dialog.open();
