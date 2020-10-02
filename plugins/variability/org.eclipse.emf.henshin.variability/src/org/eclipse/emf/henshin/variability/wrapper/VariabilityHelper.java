@@ -42,7 +42,7 @@ public class VariabilityHelper {
 		annotation.setValue(value);
 	}
 
-	Annotation getAnnotation(ModelElement modelElement, VariabilityConstants annotationKey) {
+	public Annotation getAnnotation(ModelElement modelElement, VariabilityConstants annotationKey) {
 		EList<Annotation> annotations = modelElement.getAnnotations();
 		if (annotations != null) {
 			for (Annotation anno : annotations) {
