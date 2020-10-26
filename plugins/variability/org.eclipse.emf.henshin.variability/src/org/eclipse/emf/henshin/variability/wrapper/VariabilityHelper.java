@@ -113,7 +113,13 @@ public class VariabilityHelper {
 		if (annotation == null) {
 			addAnnotation(rule, VariabilityConstants.FEATURES, name);
 		} else {
-			setAnnotationValue(annotation, name);
+			String value = annotation.getValue();
+			if (value != null && !value.isEmpty()) {
+				setAnnotationValue(annotation, value + ", " + name);
+			} else {
+				setAnnotationValue(annotation, name);
+			}
+			
 		}
 	}
 
@@ -134,7 +140,8 @@ public class VariabilityHelper {
 	 * @return A set of feature names
 	 */
 	private Set<String> getFeatures(String featureString) {
-		return Stream.of(featureSeparatorPattern.split(featureString)).collect(Collectors.toSet());
+		if (featureString == null) return null;
+		else return Stream.of(featureSeparatorPattern.split(featureString)).collect(Collectors.toSet());
 	}
 
 	/**
