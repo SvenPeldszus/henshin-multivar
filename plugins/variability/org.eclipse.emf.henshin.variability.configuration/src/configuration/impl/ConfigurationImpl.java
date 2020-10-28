@@ -231,10 +231,11 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 		if (feature != null) {
 			Set<String> annotationFeatures = VariabilityHelper.INSTANCE.getFeatures(rule);
 			annotationFeatures.remove(feature.getName());
-			VariabilityHelper.INSTANCE.setFeatures(rule, annotationFeatures);
+			VariabilityTransactionHelper.INSTANCE.setFeatures(rule, annotationFeatures);
 			enableContentAdapter();
 			return features.remove(feature);
 		} else {
+			enableContentAdapter();
 			return false;
 		}
 	}
