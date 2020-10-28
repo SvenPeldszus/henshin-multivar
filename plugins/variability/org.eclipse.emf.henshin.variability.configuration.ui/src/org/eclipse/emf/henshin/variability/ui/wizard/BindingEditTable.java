@@ -83,14 +83,15 @@ public class BindingEditTable {
 		});
 		
 		
-		tableViewer = new TableViewer(tableContainer, SWT.FULL_SELECTION | SWT.BORDER);
+		tableViewer = new TableViewer(tableContainer, SWT.FULL_SELECTION | SWT.BORDER | SWT.V_SCROLL);
 		
-		GridData gridData = new GridData();
-		gridData.verticalAlignment = GridData.FILL;
-		gridData.horizontalSpan = 2;
-		gridData.grabExcessHorizontalSpace = true;
-		gridData.grabExcessVerticalSpace = true;
-		gridData.horizontalAlignment = GridData.FILL;
+		GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
+		gridData.heightHint = 200;
+//		gridData.verticalAlignment = GridData.FILL;
+//		gridData.horizontalSpan = 2;
+//		gridData.grabExcessHorizontalSpace = true;
+//		gridData.grabExcessVerticalSpace = true;
+//		gridData.horizontalAlignment = GridData.FILL;
 		tableViewer.getTable().setLayoutData(gridData);
 		tableViewer.getTable().setLinesVisible(true);
 		tableViewer.getTable().setHeaderVisible(true);
