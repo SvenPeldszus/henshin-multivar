@@ -21,7 +21,7 @@ public class FeatureConstraintViewer {
 		constraintContainer.setText("Feature Constraint");
 		constraintContainer.setLayout(new GridLayout(1, false));
 		
-		constraint = new Text(constraintContainer, SWT.BORDER | SWT.READ_ONLY);
+		constraint = new Text(constraintContainer, SWT.BORDER  | SWT.WRAP | SWT.READ_ONLY);
 		
 		GridData constraintData = new GridData();
 		constraintData.grabExcessHorizontalSpace = true;
@@ -36,8 +36,10 @@ public class FeatureConstraintViewer {
 	public void setConstraint(String constraintString) {
 		if (constraintString != null) {			
 			constraint.setText(constraintString);
+			constraint.setToolTipText(constraintString);
 		} else {
 			constraint.setText("");
+			constraint.setToolTipText(null);
 		}
 	}
 

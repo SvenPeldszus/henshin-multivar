@@ -105,5 +105,6 @@ public class VariabilityAwareHenshinWizard extends HenshinWizard implements Feat
 	@Override
 	public void clearFeatures() {
 		((VariabilityAwareTransformOperation) transformOperation).clearFeatures();
+		fireCompletionChange();
 	}
 }
