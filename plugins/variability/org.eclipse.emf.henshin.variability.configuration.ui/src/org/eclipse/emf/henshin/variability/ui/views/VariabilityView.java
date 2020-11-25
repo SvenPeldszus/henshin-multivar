@@ -42,7 +42,9 @@ import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerBindingEd
 import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerComparator;
 import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerContentProvider;
 import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerNameEditingSupport;
+import org.eclipse.emf.henshin.variability.util.SatChecker;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
+import org.eclipse.emf.henshin.variability.wrapper.VariabilityTransactionHelper;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -68,6 +70,8 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -116,9 +120,9 @@ public class VariabilityView extends ViewPart
 	private DropDownMenuAction loadFavoritesMenu, elementCreationMenu;
 	private LinkWithEditorSelectionListener linkWithEditorSelectionListener = new LinkWithEditorSelectionListener(this);
 	private boolean linkingActive;
-	private Text variabilityModelText;
-	private DataBindingContext variabilityModelTextBindingContext;
-	private ObservableFeatureModelValue<?> observableFeatureModelValue;
+	private Text featureConstraintText;
+	private DataBindingContext featureConstraintTextBindingContext;
+	private ObservableFeatureConstraintValue<?> observableFeatureConstraintValue;
 	private FeatureViewerComparator comparator;
 	private ConfigurationProvider configurationProvider = ConfigurationProvider.getInstance();
 	private WritableValue<Rule> writableValue;
@@ -129,8 +133,10 @@ public class VariabilityView extends ViewPart
 
 	private Label ruleNameLabel;
 
-	private ToolItem add, delete, clear, refresh, selectedFavorite, deleteFavorite;
-	private ToolBar favoriteToolBar, featureModelToolbar;
+	private ToolItem createFeatures, featureModelIsCNF, add, delete, clear, refresh, selectedFavorite, deleteFavorite;
+	private ToolBar favoriteToolBar, featureConstraintToolbar;
+
+	private boolean isCNF;
 
 	public RuleEditPart getSelectedRuleEditPart() {
 		return selectedRuleEditPart;
@@ -398,14 +404,18 @@ public class VariabilityView extends ViewPart
 		Label separatorName = new Label(composite, SWT.HORIZONTAL | SWT.SEPARATOR);
 		separatorName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
 
-		Label variabilityModelLabel = new Label(composite, SWT.NONE);
-		variabilityModelLabel.setImage(ImageHelper.getImage("/icons/variability.gif"));
-		variabilityModelLabel.setText("Feature constraint");
-		variabilityModelLabel.setLayoutData(new GridData(SWT.FILL, SWT.LEFT, false, false, 1, 1));
-		featureModelToolbar = new ToolBar(composite, SWT.FLAT);
-		GridDataFactory.fillDefaults().align(SWT.END, SWT.CENTER).grab(true, false).applyTo(featureModelToolbar);
-		featureModelToolbar.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
-		ToolItem createFeatures = new ToolItem(featureModelToolbar, SWT.PUSH);
+		Label featureConstraintLabel = new Label(composite, SWT.NONE);
+		featureConstraintLabel.setImage(ImageHelper.getImage("/icons/variability.gif"));
+		featureConstraintLabel.setText("Feature constraint");
+		featureConstraintLabel.setLayoutData(new GridData(SWT.FILL, SWT.LEFT, false, false, 1, 1));
+		featureConstraintToolbar = new ToolBar(composite, SWT.FLAT);
+		GridDataFactory.fillDefaults().align(SWT.END, SWT.CENTER).grab(true, false).applyTo(featureConstraintToolbar);
+		featureConstraintToolbar.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
+		
+		featureModelIsCNF = new ToolItem(featureConstraintToolbar, SWT.NONE);
+		featureModelIsCNF.setEnabled(false);
+				
+		createFeatures = new ToolItem(featureConstraintToolbar, SWT.PUSH);
 		createFeatures.setImage(ImageHelper.getImage("/icons/create_features.png"));
 		createFeatures.setToolTipText("Create all undefined features");
 		createFeatures.addSelectionListener(new SelectionListener() {
@@ -419,7 +429,7 @@ public class VariabilityView extends ViewPart
 					feature.setName(featureName);
 					config.addFeature(feature);
 				}
-				featureModelToolbar.setVisible(false);
+				createFeatures.setEnabled(false);
 				refresh();
 			}
 
@@ -428,13 +438,14 @@ public class VariabilityView extends ViewPart
 
 			}
 		});
-		featureModelToolbar.setVisible(false);
+		createFeatures.setEnabled(false);
+		featureConstraintToolbar.setVisible(false);
 
-		variabilityModelText = new Text(composite, SWT.BORDER);
-		variabilityModelText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
+		featureConstraintText = new Text(composite, SWT.BORDER);
+		featureConstraintText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
 		IValueProperty<Widget, String> property = WidgetProperties.text(SWT.Modify);
-		IObservableValue<String> target = property.observe(variabilityModelText);
-		variabilityModelTextBindingContext = new DataBindingContext();
+		IObservableValue<String> target = property.observe(featureConstraintText);
+		featureConstraintTextBindingContext = new DataBindingContext();
 		writableValue = new WritableValue<>();
 		IObservableValue<String> model = EMFProperties.value(HenshinPackage.Literals.MODEL_ELEMENT__ANNOTATIONS)
 				.observeDetail(writableValue);
@@ -448,9 +459,23 @@ public class VariabilityView extends ViewPart
 //		});
 //		
 //		bindingContext.bindValue(target, new ObservableFeatureModelValue(model), null, null);
-		observableFeatureModelValue = new ObservableFeatureModelValue<Object>(model);
-		variabilityModelTextBindingContext.bindValue(target, observableFeatureModelValue);
-
+		observableFeatureConstraintValue = new ObservableFeatureConstraintValue<Object>(model);
+		featureConstraintTextBindingContext.bindValue(target, observableFeatureConstraintValue);
+		featureConstraintText.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (updateCNFIndicator(featureConstraintText.getText())) {
+					VariabilityTransactionHelper.INSTANCE.setFeatureConstraintIsCNF(config.getRule(), !VariabilityTransactionHelper.INSTANCE.isFeatureConstraintCNF(config.getRule()));
+				}
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});		
 		Label separator = new Label(composite, SWT.HORIZONTAL | SWT.SEPARATOR);
 		separator.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
 
@@ -715,11 +740,12 @@ public class VariabilityView extends ViewPart
 				String value = annotation.getValue();
 				if (VariabilityHelper.isFeatureModelAnnotation(annotation)
 						|| VariabilityHelper.isFeaturesAnnotation(annotation) && value != null && !value.isEmpty()) {
-					featureModelToolbar.setVisible(VariabilityHelper.INSTANCE.hasMissingFeatures(config.getRule()));
+					featureConstraintToolbar.setVisible(true);
+					createFeatures.setEnabled(VariabilityHelper.INSTANCE.hasMissingFeatures(config.getRule()));
 				}
 
 			}
-			if (observableFeatureModelValue.shouldUpdate()) {
+			if (observableFeatureConstraintValue.shouldUpdate()) {
 				refresh();
 			} else {
 				viewer.refresh();
@@ -752,11 +778,13 @@ public class VariabilityView extends ViewPart
 			showConfiguredRuleAction.run();
 		}
 
+		featureConstraintToolbar.setVisible(true);
 		if (VariabilityHelper.INSTANCE.getMissingFeatures(rule).length > 0) {
-			featureModelToolbar.setVisible(true);
+			createFeatures.setEnabled(true);
 		} else {
-			featureModelToolbar.setVisible(false);
+			createFeatures.setEnabled(false);
 		}
+		updateCNFIndicator(VariabilityHelper.INSTANCE.getFeatureConstraint(rule));
 
 		add.setEnabled(true);
 		delete.setEnabled(true);
@@ -771,8 +799,8 @@ public class VariabilityView extends ViewPart
 
 	public void refresh() {
 		viewer.refresh();
-		variabilityModelTextBindingContext.updateModels();
-		variabilityModelTextBindingContext.updateTargets();
+		featureConstraintTextBindingContext.updateModels();
+		featureConstraintTextBindingContext.updateTargets();
 	}
 
 	@Override
@@ -877,5 +905,22 @@ public class VariabilityView extends ViewPart
 		selectedFavorite.setText("Configuration");
 		loadFavoritesMenu.uncheckAll();
 		loadFavoritesMenu.setImageDescriptor(ImageHelper.getImageDescriptor("icons/star_grey.png"));
+	}
+	
+	private boolean updateCNFIndicator(String expression) {
+		boolean wasCNF = isCNF;
+		
+		isCNF = SatChecker.isCNF(expression);
+		if (isCNF) {
+			featureModelIsCNF.setImage(ImageHelper.getImage("/icons/cnf.png"));
+			featureModelIsCNF.setDisabledImage(ImageHelper.getImage("/icons/cnf.png"));
+			featureModelIsCNF.setToolTipText("Feature constraint is CNF");
+		} else {
+			featureModelIsCNF.setImage(null);
+			featureModelIsCNF.setDisabledImage(null);
+			featureModelIsCNF.setToolTipText("");
+		}
+		
+		return wasCNF != isCNF;
 	}
 }

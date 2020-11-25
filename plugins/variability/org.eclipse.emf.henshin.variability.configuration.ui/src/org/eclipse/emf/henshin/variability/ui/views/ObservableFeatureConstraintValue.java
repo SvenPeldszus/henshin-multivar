@@ -18,12 +18,12 @@ import org.eclipse.emf.henshin.variability.wrapper.VariabilityTransactionHelper;
  *
  * @param <T>
  */
-public class ObservableFeatureModelValue<T> implements IObservableValue<String>{
+public class ObservableFeatureConstraintValue<T> implements IObservableValue<String>{
 	
 	IObservableValue<String> value;
 	boolean shouldUpdate;
 	
-	ObservableFeatureModelValue(IObservableValue<String> value) {
+	ObservableFeatureConstraintValue(IObservableValue<String> value) {
 		this.value = value;
 	}
 	

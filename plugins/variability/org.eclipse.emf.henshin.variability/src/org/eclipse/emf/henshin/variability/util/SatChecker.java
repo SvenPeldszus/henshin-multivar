@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.Stack;
 
 import org.sat4j.core.VecInt;
 import org.sat4j.minisat.SolverFactory;
@@ -148,6 +149,59 @@ public class SatChecker {
 			counter++;
 		}
 		return result;
+	}
+	
+	public static boolean isCNF(String expr) {
+		if (expr == null || expr.isEmpty() || expr.contains("xor(")) return false;
+		
+		Stack<Character> parenthesis = new Stack<Character>();
+		
+		char[] exprArr = expr.toCharArray();
+		boolean foundAndOperator = false;
+		boolean foundOrOperator = false;
+		boolean mustOnlyContainAndOperators = false;
+		boolean mustOnlyContainOrOperators = false;
+				
+		for (int i = 0; i < exprArr.length; i++) {
+			switch (exprArr[i]) {
+			case '&':
+				if (!parenthesis.isEmpty() && foundOrOperator) {
+					if (mustOnlyContainOrOperators) {
+						return false;
+					} else {
+						mustOnlyContainAndOperators = true;
+					}
+				} else if (mustOnlyContainOrOperators) {
+					return false;
+				}
+				foundAndOperator = true;
+				break;
+			case '|':
+				if (parenthesis.isEmpty()) {
+					if (foundAndOperator || mustOnlyContainAndOperators) {
+						return false;
+					} else {
+						mustOnlyContainOrOperators = true;
+					}
+				}	
+				foundOrOperator = true;
+				break;
+			case '(':
+				parenthesis.add(exprArr[i]);
+				break;
+			case ')':
+				if (parenthesis.empty()) {
+					return false;
+				} else {
+					parenthesis.pop();
+				}
+				break;
+			default:
+				break;
+			}
+		}
+		return true;
+		
 	}
 
 	public List<String> getSolution() {
