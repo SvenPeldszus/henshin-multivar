@@ -141,7 +141,7 @@ public class ConfigurationProvider {
 			EList<Feature> variabilityPoints = result.getFeatures();
 
 			Set<String> features = VariabilityHelper.INSTANCE.getFeatures(rule);
-			if(!features.isEmpty()) {
+			if(features != null && !features.isEmpty()) {
 				for(String variabilityPointName : features) {
 					Feature vp = fac.createFeature();
 					vp.setName(variabilityPointName);

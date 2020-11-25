@@ -183,13 +183,15 @@ public class VariabilityHelper {
 	}
 
 	private Set<String> calculateMissingFeatureNames(Rule rule) {
-		String currentModel = getFeatureConstraint(rule);
+		String currentModel = getFeatureConstraint(rule);		
+		Set<String> missingFeatures = new HashSet<>();
+		if (currentModel == null || currentModel.isEmpty()) return missingFeatures;
+		
 		Sentence sentence = FeatureExpression.getExpr(currentModel);
 		Set<PropositionSymbol> symbols = SymbolCollector.getSymbolsFrom(sentence);
-		Set<String> missingFeatures = new HashSet<>();
 		for (PropositionSymbol symbol : symbols) {
 			String symbolName = symbol.getSymbol().trim();
-			if (!getFeatures(rule).contains(symbolName)) {
+			if (getFeatures(rule) != null && !getFeatures(rule).contains(symbolName)) {
 				missingFeatures.add(symbolName);
 			}
 		}
