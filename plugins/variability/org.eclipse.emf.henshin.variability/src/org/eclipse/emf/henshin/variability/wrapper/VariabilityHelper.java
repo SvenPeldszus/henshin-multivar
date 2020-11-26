@@ -188,11 +188,14 @@ public class VariabilityHelper {
 		if (currentModel == null || currentModel.isEmpty()) return missingFeatures;
 		
 		Sentence sentence = FeatureExpression.getExpr(currentModel);
-		Set<PropositionSymbol> symbols = SymbolCollector.getSymbolsFrom(sentence);
-		for (PropositionSymbol symbol : symbols) {
-			String symbolName = symbol.getSymbol().trim();
-			if (getFeatures(rule) != null && !getFeatures(rule).contains(symbolName)) {
-				missingFeatures.add(symbolName);
+		if (sentence != null) {		
+			Set<PropositionSymbol> symbols = SymbolCollector.getSymbolsFrom(sentence);
+			for (PropositionSymbol symbol : symbols) {
+				String symbolName = symbol.getSymbol().trim();
+				Set<String> features = getFeatures(rule);
+				if (features == null || !features.contains(symbolName)) {
+					missingFeatures.add(symbolName);
+				}
 			}
 		}
 		return missingFeatures;

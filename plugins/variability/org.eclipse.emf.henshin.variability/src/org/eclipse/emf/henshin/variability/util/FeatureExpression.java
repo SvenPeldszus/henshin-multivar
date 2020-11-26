@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import aima.core.logic.common.ParserException;
 import aima.core.logic.propositional.parsing.PLParser;
 import aima.core.logic.propositional.parsing.ast.ComplexSentence;
 import aima.core.logic.propositional.parsing.ast.Connective;
@@ -79,8 +80,14 @@ public class FeatureExpression {
 	}
 
 	public static Sentence getExpr(String condition) {
-		condition = XorEncoderUtil.encodeXor(condition);
-		return parser.parse(condition);
+		Sentence result = null;		
+		try {
+			condition = XorEncoderUtil.encodeXor(condition);
+			result = parser.parse(condition);
+		} catch (ParserException ex) {
+			ex.printStackTrace();
+		}
+		return result;
 	}
 
 	/**

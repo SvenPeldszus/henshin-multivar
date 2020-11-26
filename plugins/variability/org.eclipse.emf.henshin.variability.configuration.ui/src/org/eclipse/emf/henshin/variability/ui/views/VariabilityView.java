@@ -10,8 +10,11 @@ import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.databinding.property.value.IValueProperty;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.databinding.EMFProperties;
+import org.eclipse.emf.ecore.util.FeatureMapUtil.FeatureValue;
 import org.eclipse.emf.henshin.diagram.edit.parts.NodeCompartmentEditPart;
 import org.eclipse.emf.henshin.diagram.edit.parts.RuleEditPart;
 import org.eclipse.emf.henshin.diagram.edit.policies.NodeCompartmentItemSemanticEditPolicy;
@@ -43,6 +46,9 @@ import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerComparato
 import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerContentProvider;
 import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerNameEditingSupport;
 import org.eclipse.emf.henshin.variability.util.SatChecker;
+import org.eclipse.emf.henshin.variability.validation.AbstractVBValidator;
+import org.eclipse.emf.henshin.variability.validation.validators.VBRuleFMValidator;
+import org.eclipse.emf.henshin.variability.validation.validators.VBRuleFeaturesValidator;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityTransactionHelper;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
@@ -75,6 +81,8 @@ import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.events.VerifyEvent;
+import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -133,7 +141,7 @@ public class VariabilityView extends ViewPart
 
 	private Label ruleNameLabel;
 
-	private ToolItem createFeatures, featureModelIsCNF, add, delete, clear, refresh, selectedFavorite, deleteFavorite;
+	private ToolItem createFeatures, featureConstraintCNFIndicator, featureConstraintValidityIndicator, add, delete, clear, refresh, selectedFavorite, deleteFavorite;
 	private ToolBar favoriteToolBar, featureConstraintToolbar;
 
 	private boolean isCNF;
@@ -412,12 +420,13 @@ public class VariabilityView extends ViewPart
 		GridDataFactory.fillDefaults().align(SWT.END, SWT.CENTER).grab(true, false).applyTo(featureConstraintToolbar);
 		featureConstraintToolbar.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
 		
-		featureModelIsCNF = new ToolItem(featureConstraintToolbar, SWT.NONE);
-		featureModelIsCNF.setEnabled(false);
+		featureConstraintCNFIndicator = new ToolItem(featureConstraintToolbar, SWT.NONE);
+		featureConstraintCNFIndicator.setEnabled(false);
+		
+		featureConstraintValidityIndicator = new ToolItem(featureConstraintToolbar, SWT.NONE);
+		featureConstraintValidityIndicator.setEnabled(false);
 				
 		createFeatures = new ToolItem(featureConstraintToolbar, SWT.PUSH);
-		createFeatures.setImage(ImageHelper.getImage("/icons/create_features.png"));
-		createFeatures.setToolTipText("Create all undefined features");
 		createFeatures.addSelectionListener(new SelectionListener() {
 
 			@Override
@@ -449,24 +458,18 @@ public class VariabilityView extends ViewPart
 		writableValue = new WritableValue<>();
 		IObservableValue<String> model = EMFProperties.value(HenshinPackage.Literals.MODEL_ELEMENT__ANNOTATIONS)
 				.observeDetail(writableValue);
-//		UpdateValueStrategy strategy = new UpdateValueStrategy();
-//		strategy.setBeforeSetValidator(new IValidator() {
-//
-//			@Override
-//			public IStatus validate(Object value) {
-//				return null;
-//			}
-//		});
-//		
-//		bindingContext.bindValue(target, new ObservableFeatureModelValue(model), null, null);
 		observableFeatureConstraintValue = new ObservableFeatureConstraintValue<Object>(model);
-		featureConstraintTextBindingContext.bindValue(target, observableFeatureConstraintValue);
+		featureConstraintTextBindingContext.bindValue(target, observableFeatureConstraintValue);		
 		featureConstraintText.addKeyListener(new KeyListener() {
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (updateCNFIndicator(featureConstraintText.getText())) {
-					VariabilityTransactionHelper.INSTANCE.setFeatureConstraintIsCNF(config.getRule(), !VariabilityTransactionHelper.INSTANCE.isFeatureConstraintCNF(config.getRule()));
+				boolean isValid = updateErrorIndicators(config.getRule());
+				boolean hasChanged = updateCNFIndicator(featureConstraintText.getText());
+				updateMissingFeaturesButton(config.getRule());
+				
+				if (isValid && hasChanged) {
+					VariabilityTransactionHelper.INSTANCE.setFeatureConstraintIsCNF(config.getRule(), isCNF);
 				}
 			}
 			
@@ -741,7 +744,8 @@ public class VariabilityView extends ViewPart
 				if (VariabilityHelper.isFeatureModelAnnotation(annotation)
 						|| VariabilityHelper.isFeaturesAnnotation(annotation) && value != null && !value.isEmpty()) {
 					featureConstraintToolbar.setVisible(true);
-					createFeatures.setEnabled(VariabilityHelper.INSTANCE.hasMissingFeatures(config.getRule()));
+					updateMissingFeaturesButton(config.getRule());
+					updateCNFIndicator(VariabilityHelper.INSTANCE.getFeatureConstraint(config.getRule()));
 				}
 
 			}
@@ -779,11 +783,7 @@ public class VariabilityView extends ViewPart
 		}
 
 		featureConstraintToolbar.setVisible(true);
-		if (VariabilityHelper.INSTANCE.getMissingFeatures(rule).length > 0) {
-			createFeatures.setEnabled(true);
-		} else {
-			createFeatures.setEnabled(false);
-		}
+		updateMissingFeaturesButton(rule);
 		updateCNFIndicator(VariabilityHelper.INSTANCE.getFeatureConstraint(rule));
 
 		add.setEnabled(true);
@@ -912,15 +912,49 @@ public class VariabilityView extends ViewPart
 		
 		isCNF = SatChecker.isCNF(expression);
 		if (isCNF) {
-			featureModelIsCNF.setImage(ImageHelper.getImage("/icons/cnf.png"));
-			featureModelIsCNF.setDisabledImage(ImageHelper.getImage("/icons/cnf.png"));
-			featureModelIsCNF.setToolTipText("Feature constraint is CNF");
+			featureConstraintCNFIndicator.setImage(ImageHelper.getImage("/icons/cnf.png"));
+			featureConstraintCNFIndicator.setDisabledImage(ImageHelper.getImage("/icons/cnf.png"));
+			featureConstraintCNFIndicator.setToolTipText("Feature constraint is CNF");
 		} else {
-			featureModelIsCNF.setImage(null);
-			featureModelIsCNF.setDisabledImage(null);
-			featureModelIsCNF.setToolTipText("");
+			featureConstraintCNFIndicator.setImage(null);
+			featureConstraintCNFIndicator.setDisabledImage(null);
+			featureConstraintCNFIndicator.setToolTipText("");
 		}
 		
 		return wasCNF != isCNF;
+	}
+	
+	private void updateMissingFeaturesButton(Rule rule) {
+		if (VariabilityHelper.INSTANCE.hasMissingFeatures(rule)) {
+			createFeatures.setImage(ImageHelper.getImage("/icons/create_features.png"));
+			createFeatures.setToolTipText("Create all undefined features");
+			createFeatures.setEnabled(true);
+		} else {
+			createFeatures.setImage(null);
+			createFeatures.setToolTipText("");
+			createFeatures.setEnabled(false);
+		}
+	}
+	
+	private boolean updateErrorIndicators(Rule rule) {
+		IStatus featureConstraintStatus;
+		try {
+			featureConstraintStatus = VBRuleFMValidator.validateFeatureModel(rule);
+		} catch (NullPointerException e) {
+			featureConstraintStatus = new Status(Status.ERROR, "TODO", "The feature constraint is invalid.");
+		}
+//		IStatus featuresStatus = VBRuleFeaturesValidator.validateFeatures(rule);
+		
+		if (!featureConstraintStatus.isOK()) {
+			featureConstraintValidityIndicator.setImage(ImageHelper.getImage("/icons/error.png"));
+			featureConstraintValidityIndicator.setDisabledImage(ImageHelper.getImage("/icons/error.png"));
+			featureConstraintValidityIndicator.setToolTipText(featureConstraintStatus.getMessage());
+		} else {
+			featureConstraintValidityIndicator.setImage(null);
+			featureConstraintValidityIndicator.setDisabledImage(null);
+			featureConstraintValidityIndicator.setToolTipText("");
+		}
+		
+		return featureConstraintStatus.isOK();
 	}
 }

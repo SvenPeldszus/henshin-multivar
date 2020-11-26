@@ -45,8 +45,13 @@ public class VBRuleFMValidator extends AbstractVBValidator {
 			if (fm == null || fm.trim().length() == 0) {
 				return new Status(Status.ERROR, "TODO", "The feature model is empty");
 			}
-
-			IStatus fmOk = checkConstraint(features, fm);
+			
+			IStatus fmOk;
+			try {			
+				fmOk = checkConstraint(features, fm);
+			} catch (NullPointerException e) {
+				fmOk = new Status(Status.ERROR, "TODO", "The feature model is invalid");
+			}
 			if (!fmOk.isOK()) {
 				return fmOk;
 			}

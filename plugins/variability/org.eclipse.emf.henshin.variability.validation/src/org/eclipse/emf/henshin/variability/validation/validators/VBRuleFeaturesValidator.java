@@ -39,7 +39,7 @@ public class VBRuleFeaturesValidator extends AbstractVBValidator {
 			
 			for(String feature : features) {
 				if(!feature.matches("^[a-zA-Z0-9\\-|_]+")) {
-					return new Status(IStatus.ERROR, "TODO", "The list of features conatins invalid feature names!");
+					return new Status(IStatus.ERROR, "TODO", "The list of features contains invalid feature names!");
 				}
 			}
 			if (features.parallelStream().distinct().count() < features.size()) {
