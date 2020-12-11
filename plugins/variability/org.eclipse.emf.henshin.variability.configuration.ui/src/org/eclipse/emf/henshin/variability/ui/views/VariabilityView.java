@@ -471,6 +471,7 @@ public class VariabilityView extends ViewPart
 				if (isValid && hasChanged) {
 					VariabilityTransactionHelper.INSTANCE.setFeatureConstraintIsCNF(config.getRule(), isCNF);
 				}
+				featureConstraintToolbar.redraw();
 			}
 			
 			@Override
@@ -916,8 +917,8 @@ public class VariabilityView extends ViewPart
 			featureConstraintCNFIndicator.setDisabledImage(ImageHelper.getImage("/icons/cnf.png"));
 			featureConstraintCNFIndicator.setToolTipText("Feature constraint is CNF");
 		} else {
-			featureConstraintCNFIndicator.setImage(null);
-			featureConstraintCNFIndicator.setDisabledImage(null);
+			featureConstraintCNFIndicator.setImage(ImageHelper.getImage("/icons/blank.png"));
+			featureConstraintCNFIndicator.setDisabledImage(ImageHelper.getImage("/icons/blank.png"));
 			featureConstraintCNFIndicator.setToolTipText("");
 		}
 		
@@ -930,7 +931,7 @@ public class VariabilityView extends ViewPart
 			createFeatures.setToolTipText("Create all undefined features");
 			createFeatures.setEnabled(true);
 		} else {
-			createFeatures.setImage(null);
+			createFeatures.setImage(ImageHelper.getImage("/icons/blank.png"));
 			createFeatures.setToolTipText("");
 			createFeatures.setEnabled(false);
 		}
@@ -950,11 +951,10 @@ public class VariabilityView extends ViewPart
 			featureConstraintValidityIndicator.setDisabledImage(ImageHelper.getImage("/icons/error.png"));
 			featureConstraintValidityIndicator.setToolTipText(featureConstraintStatus.getMessage());
 		} else {
-			featureConstraintValidityIndicator.setImage(null);
-			featureConstraintValidityIndicator.setDisabledImage(null);
+			featureConstraintValidityIndicator.setImage(ImageHelper.getImage("/icons/blank.png"));
+			featureConstraintValidityIndicator.setDisabledImage(ImageHelper.getImage("/icons/blank.png"));
 			featureConstraintValidityIndicator.setToolTipText("");
 		}
-		
 		return featureConstraintStatus.isOK();
 	}
 }
