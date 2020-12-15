@@ -10,6 +10,7 @@ import org.eclipse.emf.henshin.model.Annotation;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.variability.validation.AbstractVBValidator;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
+import org.eclipse.emf.validation.preferences.EMFModelValidationPreferences;
 
 /**
  * A validator for VB rules
@@ -23,7 +24,6 @@ public class VBRuleFMValidator extends AbstractVBValidator {
 	public IStatus validate(EObject eObject) {
 		Rule rule = (Rule) eObject;
 		return validateFeatureModel(rule);
-
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class VBRuleFMValidator extends AbstractVBValidator {
 			String fm = VariabilityHelper.INSTANCE.getFeatureConstraint(rule);
 			Set<String> features = VariabilityHelper.INSTANCE.getFeatures(rule);
 
-			if (features == null && fm == null) {
+			if (features == null && fm == null || features.isEmpty() && fm.isEmpty()) {
 				return Status.OK_STATUS;
 			}
 

@@ -38,7 +38,7 @@ public class VBRuleInjectiveValidator extends AbstractVBValidator {
 			String pc = VariabilityHelper.INSTANCE.getInjectiveMatchingPresenceCondition(rule);
 			Set<String> features = VariabilityHelper.INSTANCE.getFeatures(rule);
 			
-			if (features == null && pc == null) {
+			if (features == null && pc == null || features.isEmpty() && pc.isEmpty()) {
 				return Status.OK_STATUS;
 			}
 
