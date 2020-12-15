@@ -2,6 +2,7 @@ package org.eclipse.emf.henshin.variability.configuration.ui.actions;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.henshin.model.GraphElement;
 import org.eclipse.emf.henshin.model.ModelElement;
@@ -12,9 +13,11 @@ import org.eclipse.emf.henshin.variability.wrapper.VariabilityTransactionHelper;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IActionDelegate;
+import org.eclipse.ui.PlatformUI;
 
 import configuration.Configuration;
 
@@ -32,11 +35,29 @@ public class MoveElementToConfigurationAction implements IActionDelegate {
 	@Override
 	public void run(IAction action) {
 		if(selectedGraphElementList != null && !selectedGraphElementList.isEmpty()) {
+			List<String> changedElements = new ArrayList<String>();
+			for (GraphElement graphElement : selectedGraphElementList) {
+				String pc = VariabilityTransactionHelper.INSTANCE.getPresenceCondition((ModelElement) graphElement);
+				if (pc != null && !pc.isEmpty()) {
+					changedElements.add(graphElement.toString());
+				}
+			}
+
+			if (!changedElements.isEmpty()) {
+				MessageDialog messageDialog = new MessageDialog(
+						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Move to Configuration", null,
+						"The presence conditions of the following elements and all attached edges will be overwritten:\n"
+								+ String.join(", ", changedElements) + "\n\nDo you want to continue?",
+						MessageDialog.WARNING, new String[] { "Yes", "No" }, 0);
+				if (messageDialog.open() != 0)
+					return;
+			}
+			
 			for(GraphElement graphElement : selectedGraphElementList) {
 				if (graphElement instanceof ModelElement) {
 					Rule rule = graphElement.getGraph().getRule();
 					Configuration configuration = ConfigurationProvider.getInstance().getConfiguration(rule);
-					String presenceCondition = VariabilityModelHelper.getPresenceCondition(configuration);
+					String presenceCondition = VariabilityModelHelper.getPresenceCondition(configuration);					
 					VariabilityTransactionHelper.INSTANCE.setPresenceCondition((ModelElement) graphElement, presenceCondition);
 				}
 			}
