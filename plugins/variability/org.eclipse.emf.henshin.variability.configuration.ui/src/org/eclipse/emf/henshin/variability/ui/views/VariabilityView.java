@@ -10,7 +10,10 @@ import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.databinding.property.value.IValueProperty;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.databinding.EMFProperties;
@@ -47,6 +50,7 @@ import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerContentPr
 import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerNameEditingSupport;
 import org.eclipse.emf.henshin.variability.util.SatChecker;
 import org.eclipse.emf.henshin.variability.validation.AbstractVBValidator;
+import org.eclipse.emf.henshin.variability.validation.VBConctraintDescriptor;
 import org.eclipse.emf.henshin.variability.validation.validators.VBRuleFMValidator;
 import org.eclipse.emf.henshin.variability.validation.validators.VBRuleFeaturesValidator;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
@@ -55,6 +59,7 @@ import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
+import org.eclipse.emf.validation.preferences.EMFModelValidationPreferences;
 import org.eclipse.gef.NodeEditPart;
 import org.eclipse.gef.editparts.AbstractEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
@@ -470,6 +475,10 @@ public class VariabilityView extends ViewPart
 				
 				if (isValid && hasChanged) {
 					VariabilityTransactionHelper.INSTANCE.setFeatureConstraintIsCNF(config.getRule(), isCNF);
+				} else {
+					toggleRuleValidation(true);
+					VariabilityTransactionHelper.INSTANCE.setFeatureConstraintIsCNF(config.getRule(), isCNF);
+					toggleRuleValidation(false);
 				}
 				featureConstraintToolbar.redraw();
 			}
@@ -499,6 +508,16 @@ public class VariabilityView extends ViewPart
 		createMenu();
 		createToolbar();
 		toggleLinking(true);
+	}
+	
+	private void toggleRuleValidation(boolean disabled) {
+		//TODO: Read validator extension points for rules
+		String featureModel = "org.eclipse.emf.henshin.variability.validation.featureModel";
+		String injectiveMatchingPC = "org.eclipse.emf.henshin.variability.validation.injectiveMatchingPC";
+		String featureList = "org.eclipse.emf.henshin.variability.validation.featuresList";
+		EMFModelValidationPreferences.setConstraintDisabled(featureModel, disabled);
+		EMFModelValidationPreferences.setConstraintDisabled(injectiveMatchingPC, disabled);
+		EMFModelValidationPreferences.setConstraintDisabled(featureList, disabled);
 	}
 
 	private void updateEditPolicy(RuleEditPart ruleEditPart) {
@@ -748,8 +767,8 @@ public class VariabilityView extends ViewPart
 					updateMissingFeaturesButton(config.getRule());
 					updateCNFIndicator(VariabilityHelper.INSTANCE.getFeatureConstraint(config.getRule()));
 				}
-
 			}
+			
 			if (observableFeatureConstraintValue.shouldUpdate()) {
 				refresh();
 			} else {
@@ -956,5 +975,5 @@ public class VariabilityView extends ViewPart
 			featureConstraintValidityIndicator.setToolTipText("");
 		}
 		return featureConstraintStatus.isOK();
-	}
+	}	
 }
