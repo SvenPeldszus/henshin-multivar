@@ -1,15 +1,16 @@
 package org.eclipse.emf.henshin.variability.multi;
 
+import org.prop4j.Node;
+import org.prop4j.NodeWriter;
+
+import de.ovgu.featureide.fm.core.analysis.cnf.CNFCreator;
+import de.ovgu.featureide.fm.core.analysis.cnf.Nodes;
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
-import de.ovgu.featureide.fm.core.io.cnf.CNFFormat;
 
 public class FeatureModelHelper {
 
-	public static String getFMExpressionAsCNF(IFeatureModel fm) {
-		String fullCNF = new CNFFormat().write(fm);
-		String startText = "Textual Symbols:\r\n";
-		int start = fullCNF.indexOf(startText);
-		String cnf = fullCNF.substring(start + startText.length());
-		return cnf.substring(0, cnf.indexOf('\n') - 1);
+	public static String getFMExpressionAsCNF(IFeatureModel featureModel) {
+		final Node nodes = Nodes.convert(CNFCreator.createNodes(featureModel));
+		return nodes.toString(NodeWriter.shortSymbols);
 	}
 }

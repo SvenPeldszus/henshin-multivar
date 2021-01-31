@@ -39,7 +39,7 @@ public class SecPLUtil implements MultiVarProcessor {
 			}
 		}
 		graphP.addTree(UMLPackage.eINSTANCE);
-		graphP.setPCS(pcs);
+		graphP.setAndConvertPCS(pcs);
 		graphP.setFM(fm);
 		return graphP;
 	}
@@ -112,7 +112,7 @@ public class SecPLUtil implements MultiVarProcessor {
 
 	@Override
 	public void writePCsToModel(MultiVarEGraph graph) {
-		Map<EObject, String> mutablePCs = new HashMap<>(graph.getPCS());
+		Map<EObject, String> mutablePCs = new HashMap<>(graph.getPCsAsStrings());
 		deleteObsoleteVariabilityAnnotations(graph.getRoots(), mutablePCs);
 		createNewVariabilityAnnotations(mutablePCs);
 	}

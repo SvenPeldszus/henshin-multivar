@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -12,29 +14,33 @@ import java.util.List;
  */
 public class XorEncoderUtil {
 
+	private static final Pattern xor = Pattern.compile("(xor|XOR)\\s*(\\()");
+
 	/**
-	 * Encodes any occurrence of a xor(A,B) pattern into ((A and !B) or (A and
-	 * !B)). Works for an arbitrary number of arguments. A and B are allowed to
-	 * contain futher xor patterns, as long as parentheses are nested correctly.
+	 * Encodes any occurrence of a xor(A,B) pattern into ((A and !B) or (A and !B)).
+	 * Works for an arbitrary number of arguments. A and B are allowed to contain
+	 * futher xor patterns, as long as parentheses are nested correctly.
 	 *
 	 * @param presenceCondition
 	 * @return
 	 */
 	public static String encodeXor(String expression) {
-		if (!isWellFormed(expression)) {
+		Matcher matcher = xor.matcher(expression);
+		if (!matcher.find() || !isWellFormed(expression)) {
 			return expression;
 		}
 
-		expression = expression.replace("XOR(", "xor(");
-		while (expression.contains("xor(")) {
-			expression = eliminateFirstXor(expression);
-		}
+		do {
+			expression = eliminateFirstXor(expression, matcher);
+			matcher = xor.matcher(expression);
+		} while (matcher.find());
+
 		return expression;
 	}
 
 	public static boolean isWellFormed(String expression) {
 		Deque<Character> stack = new LinkedList<>();
-		for(Character c : expression.toCharArray()) {
+		for (Character c : expression.toCharArray()) {
 			if (c.equals('(')) {
 				stack.push(c);
 			} else if (c.equals(')')) {
@@ -48,13 +54,13 @@ public class XorEncoderUtil {
 		return stack.isEmpty();
 	}
 
-	private static String eliminateFirstXor(String expression) {
+	private static String eliminateFirstXor(String expression, Matcher matcher) {
 		List<String> arguments = new ArrayList<>();
-		int startIndex = expression.indexOf("xor(") + 4;
+		int startIndex = matcher.start(2)+1;
 		int endIndex = -1;
 
-		int index = expression.indexOf("xor(") + 4;
-		int offsetCurrentArgument = expression.indexOf("xor(") + 4;
+		int index = startIndex;
+		int offsetCurrentArgument = startIndex;
 		int bracketDepth = 0;
 		while (endIndex == -1 && index < expression.length()) {
 			int nextRelevantPos = findNextRelevantChar(expression, index);
@@ -65,15 +71,11 @@ public class XorEncoderUtil {
 				} else if (nextRelevant == ')' && bracketDepth > 0) {
 					bracketDepth--;
 				} else if (nextRelevant == ')' && bracketDepth == 0) { // i.e.: done
-					String argument = expression.substring(
-							offsetCurrentArgument, nextRelevantPos)
-							.trim();
+					String argument = expression.substring(offsetCurrentArgument, nextRelevantPos).trim();
 					arguments.add(argument);
 					endIndex = nextRelevantPos;
 				} else if (nextRelevant == ',' && bracketDepth == 0) {
-					String argument = expression.substring(
-							offsetCurrentArgument, nextRelevantPos)
-							.trim();
+					String argument = expression.substring(offsetCurrentArgument, nextRelevantPos).trim();
 					arguments.add(argument);
 					offsetCurrentArgument = nextRelevantPos + 1;
 				}
@@ -82,7 +84,7 @@ public class XorEncoderUtil {
 				throw new IllegalArgumentException("Error in expression " + expression);
 			}
 		}
-		String prefix = expression.substring(0, startIndex - 4);
+		String prefix = expression.substring(0, matcher.start());
 		String suffix = expression.substring(endIndex + 1, expression.length());
 		return prefix + createXorEncodingCNF(arguments) + suffix;
 	}
@@ -133,22 +135,22 @@ public class XorEncoderUtil {
 
 	public static String createXorEncodingCNF(List<String> arguments) {
 		int size = arguments.size();
-		if(size == 0) {
+		if (size == 0) {
 			return "";
 		}
-		if(size == 1) {
+		if (size == 1) {
 			return arguments.get(0);
 		}
 		StringBuilder builder = new StringBuilder();
 		builder.append("((");
 		builder.append(arguments.get(0));
-		for(int i = 1 ; i < size; i++) {
+		for (int i = 1; i < size; i++) {
 			builder.append(") | (");
 			builder.append(arguments.get(i));
 		}
 		builder.append("))");
-		for(int i = 0 ; i < size; i++) {
-			for(int j = i +1; j < size; j++) {
+		for (int i = 0; i < size; i++) {
+			for (int j = i + 1; j < size; j++) {
 				builder.append(" & ( ~(");
 				builder.append(arguments.get(i));
 				builder.append(") | ~(");

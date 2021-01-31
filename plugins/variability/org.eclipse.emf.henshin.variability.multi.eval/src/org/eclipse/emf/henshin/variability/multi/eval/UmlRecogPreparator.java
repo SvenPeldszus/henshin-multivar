@@ -81,7 +81,8 @@ import symmetric.SymmetricFactory;
 
 public class UmlRecogPreparator {
 	// Values: BCMS BMWExampleSPL Notepad-Antenna EndToEndSecurity...
-	private static final String[] values = { "BMWExampleSPL", // 0
+	private static final String[] values = { 
+			"BMWExampleSPL", // 0
 			"EndToEndSecurity", // 1
 			"BCMS", // 2
 			"jsse_openjdk", // 3
@@ -90,7 +91,7 @@ public class UmlRecogPreparator {
 			"lampiro" // 6
 	};
 
-	static String benchmark = values[0];
+	static String benchmark = values[2];
 	static File henshinDirectory = new File("umledit" + File.separator);
 	static File umlFile = new File("models" + File.separator + benchmark + File.separator + "model.uml");
 	static File fmFile = new File("models" + File.separator + benchmark + File.separator + "model.fm.xml");
@@ -286,12 +287,19 @@ public class UmlRecogPreparator {
 					// violate
 					// UML
 					// constraints
+					|| unit.getName().equals("removeFromAssociation_memberEnd_Property") // change not allowed in UML
 					|| unit.getName().equals("setTypedElement_type_TO_Type") // reason extremely long execution
 					|| unit.getName().equals("createAssociation_IN_Class") // reason extremely long execution
-					|| unit.getName().equals("removeFromAssociation_memberEnd_Property") // change not allowed in UML
+					|| unit.getName().equals("moveOperation_FROM_Class_ownedOperation_TO_Class_Class") // reason extremely long execution
+					|| unit.getName().equals("moveLiteralInteger_FROM_MultiplicityElement_lowerValue_TO_MultiplicityElement_MultiplicityElement") // reason extremely long execution
+					|| unit.getName().equals("moveComment_FROM_Element_ownedComment_TO_Element_Element") // reason extremely long execution
+					|| unit.getName().equals("moveOperation_FROM_Class_ownedOperation_TO_Class_Class0") // reason extremely long execution
+					|| unit.getName().equals("setOperation_bodyCondition_TO_Constraint") // reason extremely long execution
+					|| unit.getName().equals("moveConstraint_FROM_Namespace_ownedRule_TO_Namespace_Namespace") // reason extremely long execution
 					) {
 				continue;
 			}
+			System.out.println(this.dateFormat.format(new Date(System.currentTimeMillis())) + " - Process rule: "+unit.getName());
 			Rule rule = (Rule) unit;
 			countRules++;
 
@@ -333,8 +341,8 @@ public class UmlRecogPreparator {
 					it = engine.findMatches(rule, graph, baseMatch).iterator();
 					if (it.hasNext()) {
 						MultiVarMatch first = it.next();
-						String phiApply = lifting.computePhiApply(first).trim();
-						if (!phiApply.equals("true")) {
+						String phiApply = lifting.computePhiApply(first).toString().trim();
+						if (!phiApply.equalsIgnoreCase("true")) {
 							usedMatch = first;
 						}
 					}

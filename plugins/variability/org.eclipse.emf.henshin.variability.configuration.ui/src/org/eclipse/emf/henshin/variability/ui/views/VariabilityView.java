@@ -48,6 +48,7 @@ import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerBindingEd
 import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerComparator;
 import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerContentProvider;
 import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerNameEditingSupport;
+import org.eclipse.emf.henshin.variability.util.FeatureExpression;
 import org.eclipse.emf.henshin.variability.util.SatChecker;
 import org.eclipse.emf.henshin.variability.validation.AbstractVBValidator;
 import org.eclipse.emf.henshin.variability.validation.VBConctraintDescriptor;
@@ -106,6 +107,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
+import aima.core.logic.propositional.parsing.ast.PropositionSymbol;
+import aima.core.logic.propositional.visitors.SymbolCollector;
 import configuration.Configuration;
 import configuration.ConfigurationFactory;
 import configuration.Favorite;
@@ -437,7 +440,7 @@ public class VariabilityView extends ViewPart
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				Rule rule = VariabilityModelHelper.getRuleForEditPart(selectedRuleEditPart);
-				String[] missingFeatures = VariabilityHelper.INSTANCE.getMissingFeatures(config.getRule());
+				String[] missingFeatures = getMissingFeatures(config.getRule());
 				for (String featureName : missingFeatures) {
 					Feature feature = ConfigurationFactory.eINSTANCE.createFeature();
 					feature.setName(featureName);
@@ -945,7 +948,7 @@ public class VariabilityView extends ViewPart
 	}
 	
 	private void updateMissingFeaturesButton(Rule rule) {
-		if (VariabilityHelper.INSTANCE.hasMissingFeatures(rule)) {
+		if (hasMissingFeatures(rule)) {
 			createFeatures.setImage(ImageHelper.getImage("/icons/create_features.png"));
 			createFeatures.setToolTipText("Create all undefined features");
 			createFeatures.setEnabled(true);
@@ -975,5 +978,28 @@ public class VariabilityView extends ViewPart
 			featureConstraintValidityIndicator.setToolTipText("");
 		}
 		return featureConstraintStatus.isOK();
-	}	
+	}
+
+
+	public boolean hasMissingFeatures(Rule rule) {
+		return !calculateMissingFeatureNames(rule).isEmpty();
+	}
+
+	public String[] getMissingFeatures(Rule rule) {
+		return calculateMissingFeatureNames(rule).toArray(new String[0]);
+	}
+
+	private Set<String> calculateMissingFeatureNames(Rule rule) {
+		String sentence = VariabilityHelper.INSTANCE.getFeatureConstraint(rule);
+		Set<String> missingFeatures = new HashSet<>();
+		Set<PropositionSymbol> symbols = SymbolCollector.getSymbolsFrom(FeatureExpression.getExpr(sentence));
+		for (PropositionSymbol symbol : symbols) {
+			String symbolName = symbol.getSymbol().trim();
+			Set<String> features = VariabilityHelper.INSTANCE.getFeatures(rule);
+			if (features == null || !features.contains(symbolName)) {
+				missingFeatures.add(symbolName);
+			}
+		}
+		return missingFeatures;
+	}
 }

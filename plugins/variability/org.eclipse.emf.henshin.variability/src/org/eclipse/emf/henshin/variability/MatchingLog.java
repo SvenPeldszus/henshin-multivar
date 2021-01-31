@@ -5,12 +5,12 @@ import java.util.List;
 
 /**
  * Log being recorded during variability-aware matching.
- * 
- * @author Daniel Strüber
+ *
+ * @author Daniel Strï¿½ber
  *
  */
 public class MatchingLog {
-	static List<MatchingLogEntry> entries = new ArrayList<MatchingLogEntry>();
+	static List<MatchingLogEntry> entries = new ArrayList<>();
 
 	public static List<MatchingLogEntry> getEntries() {
 		return entries;
@@ -19,9 +19,9 @@ public class MatchingLog {
 	public static void setEntries(List<MatchingLogEntry> entries) {
 		MatchingLog.entries = entries;
 	}
-	
+
 	public static String createString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append(entries.size());
 		sb.append(" entries:\n");
 		int i=1;
@@ -43,14 +43,14 @@ public class MatchingLog {
 		}
 		return sb.toString();
 	}
-	
+
 	public static String createStringForSuccessfulEntries() {
-		StringBuffer result = new StringBuffer();
-		StringBuffer sb = new StringBuffer();
+		StringBuilder result = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		result.append(entries.size());
 		result.append(" matching attemps in total, ");
 		int i=1;
-		for (MatchingLogEntry entry :entries) { 
+		for (MatchingLogEntry entry :entries) {
 			if (entry.isSuccessful()) {
 
 				sb.append(i);

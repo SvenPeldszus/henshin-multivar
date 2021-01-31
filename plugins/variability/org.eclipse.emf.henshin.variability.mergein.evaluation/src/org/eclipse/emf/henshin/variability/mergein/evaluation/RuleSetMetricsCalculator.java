@@ -160,7 +160,7 @@ public class RuleSetMetricsCalculator {
 	}
 
 	private boolean isAnnotated(GraphElement graphElement) {
-		String presenceCondition = VariabilityHelper.INSTANCE.getPresenceCondition((ModelElement) graphElement);
+		String presenceCondition = VariabilityHelper.INSTANCE.getPresenceConditionString((ModelElement) graphElement);
 		if (presenceCondition != null
 				&& !presenceCondition.isEmpty()
 				&& !presenceCondition.equals("true"))

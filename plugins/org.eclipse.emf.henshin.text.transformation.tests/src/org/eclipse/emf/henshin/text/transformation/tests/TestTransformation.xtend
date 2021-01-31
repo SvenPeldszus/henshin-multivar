@@ -1,6 +1,5 @@
 package org.eclipse.emf.henshin.text.transformation.tests
 
-import org.w3c.dom.Document
 import org.eclipse.emf.henshin.text.transformation.tests.util.AdaptID
 import org.eclipse.emf.henshin.text.transformation.tests.util.Compare
 import org.junit.Assert

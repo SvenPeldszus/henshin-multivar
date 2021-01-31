@@ -19,38 +19,28 @@ import org.eclipse.emf.henshin.model.Unit;
  */
 public class VBMatch implements Match {
 
-	private final Rule rule;
 	private final Match match;
 
-	private final VBRulePreparator rulePreperator;
+	private final PreparedVBRule rulePreperator;
 
-	public VBMatch(Match match, Rule rule, VBRulePreparator rulePreparator) {
+	public VBMatch(Match match, PreparedVBRule rule) {
 		this.match = match;
-		this.rule = rule;
-		this.rulePreperator = rulePreparator;
+		this.rulePreperator = rule;
 	}
 
 	public Match getMatch() {
 		return this.match;
 	}
 
-	public VBRulePreparator getPreparator() {
+	public PreparedVBRule getPreparator() {
 		return this.rulePreperator;
 	}
 
 	@Override
 	public Rule getRule() {
-		return this.rule;
+		return this.rulePreperator.getRule();
 	}
-
-	public void prepareRule() {
-		this.rulePreperator.doPreparation();
-	}
-
-	public void undoPreparation() {
-		this.rulePreperator.undo();
-	}
-
+	
 	@Override
 	public Unit getUnit() {
 		return this.match.getUnit();

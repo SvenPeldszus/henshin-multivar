@@ -52,7 +52,7 @@ public abstract class NewMergerTester {
 		for (MergeRuleElement mre : mr.getElements()) {
 			String str = mre.getName() + ":";
 			for (GraphElement elem : mre.getReferenceElements()) {
-				str += " " + elem + "(" + VariabilityHelper.INSTANCE.getPresenceCondition((ModelElement) elem) + ")";
+				str += " " + elem + "(" + VariabilityHelper.INSTANCE.getPresenceConditionString((ModelElement) elem) + ")";
 			}
 			System.out.println(str);
 		}

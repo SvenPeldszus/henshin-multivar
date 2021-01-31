@@ -16,67 +16,68 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.PlatformUI;
 
 public abstract class AbstractModifyPresenceConditionAction implements IActionDelegate  {
-	
-	protected ArrayList<ModelElement> selectedModelElementList = new ArrayList<ModelElement>();
+
+	protected ArrayList<ModelElement> selectedModelElementList = new ArrayList<>();
 	protected String dialogTitle;
 	protected String dialogMessage;
-	
-	
+
+
 	@Override
-	public void run(IAction action) {
-		if (selectedModelElementList != null && !selectedModelElementList.isEmpty()) {
-			List<String> changedElements = new ArrayList<String>();
-			for (ModelElement modelElement : selectedModelElementList) {
-				String pc = VariabilityTransactionHelper.INSTANCE.getPresenceCondition(modelElement);
-				if (pc != null && !pc.isEmpty() && !pc.equals(getPresenceCondition(modelElement))) {
+	public void run(final IAction action) {
+		if ((this.selectedModelElementList != null) && !this.selectedModelElementList.isEmpty()) {
+			final List<String> changedElements = new ArrayList<>();
+			for (final ModelElement modelElement : this.selectedModelElementList) {
+				final String pc = VariabilityTransactionHelper.INSTANCE.getPresenceConditionString(modelElement);
+				if ((pc != null) && !pc.isEmpty() && !pc.equals(getPresenceCondition(modelElement))) {
 					changedElements.add(modelElement.toString());
 				}
 			}
 
 			if (!changedElements.isEmpty()) {
-				MessageDialog messageDialog = new MessageDialog(
+				final MessageDialog messageDialog = new MessageDialog(
 						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
 						getDialogTitle(),
 						null,
 						getDialogMessage(changedElements),
 						MessageDialog.WARNING, new String[] { "Yes", "No" }, 0);
-				if (messageDialog.open() != 0)
+				if (messageDialog.open() != 0) {
 					return;
+				}
 			}
-			for (ModelElement modelElement : selectedModelElementList) {
+			for (final ModelElement modelElement : this.selectedModelElementList) {
 				VariabilityTransactionHelper.INSTANCE.setPresenceCondition(modelElement, getPresenceCondition(modelElement));
 			}
 		}
 	}
 
 	@Override
-	public void selectionChanged(IAction action, ISelection selection) {
-		selectedModelElementList.clear();
+	public void selectionChanged(final IAction action, final ISelection selection) {
+		this.selectedModelElementList.clear();
 		if (selection instanceof IStructuredSelection) {
-			Iterator<?> it = ((IStructuredSelection) selection).iterator();
+			final Iterator<?> it = ((IStructuredSelection) selection).iterator();
 
 			while (it.hasNext()) {
-				Object o = it.next();
+				final Object o = it.next();
 				if (o instanceof AbstractGraphicalEditPart) {
-					AbstractGraphicalEditPart editPart = (AbstractGraphicalEditPart) o;
+					final AbstractGraphicalEditPart editPart = (AbstractGraphicalEditPart) o;
 					if (editPart.getModel() instanceof View) {
-						View view = (View) editPart.getModel();
+						final View view = (View) editPart.getModel();
 						if (view.getElement() instanceof ModelElement) {
-							selectedModelElementList.add((ModelElement) view.getElement());
+							this.selectedModelElementList.add((ModelElement) view.getElement());
 						}
 					}
 				}
 			}
 		}
 	}
-	
-	protected String getDialogMessage(List<String> changedElements) {
+
+	protected String getDialogMessage(final List<String> changedElements) {
 		// TODO Auto-generated method stub
 		return String.format(
 				"The presence conditions of the following elements and all attached edges will be overwritten:\n%s\n\nDo you want to continue?",
 				String.join(", ", changedElements));
 	}
-	
+
 	protected abstract String getPresenceCondition(ModelElement modelElement);
 	protected abstract String getDialogTitle();
 

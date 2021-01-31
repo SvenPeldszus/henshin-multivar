@@ -50,7 +50,7 @@ public class VariabilityAwareInterpreterUtil {
 				matcher = new VBMatcher(rule, graph, configuration);
 				Set<? extends VBMatch> allMatches = matcher.findMatches();
 				for(VBMatch match : allMatches) {
-					RuleApplication vbRuleApp = new VBRuleApplicationImpl(engine, graph, rule, configuration, match);
+					RuleApplication vbRuleApp = new VBRuleApplicationImpl(engine, graph, rule, match);
 					foundMatch = vbRuleApp.execute(null);
 					if (foundMatch) {
 						result = true;

@@ -1,418 +1,308 @@
 package org.eclipse.emf.henshin.variability.matcher;
 
+import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.henshin.model.And;
 import org.eclipse.emf.henshin.model.Attribute;
 import org.eclipse.emf.henshin.model.Edge;
-import org.eclipse.emf.henshin.model.Formula;
 import org.eclipse.emf.henshin.model.Graph;
-import org.eclipse.emf.henshin.model.GraphElement;
 import org.eclipse.emf.henshin.model.HenshinFactory;
-import org.eclipse.emf.henshin.model.HenshinPackage;
 import org.eclipse.emf.henshin.model.Mapping;
-import org.eclipse.emf.henshin.model.NestedCondition;
 import org.eclipse.emf.henshin.model.Node;
-import org.eclipse.emf.henshin.model.Not;
+import org.eclipse.emf.henshin.model.Parameter;
 import org.eclipse.emf.henshin.model.Rule;
+import org.eclipse.emf.henshin.model.impl.EdgeImpl;
+import org.eclipse.emf.henshin.model.impl.GraphImpl;
+import org.eclipse.emf.henshin.model.impl.MappingImpl;
+import org.eclipse.emf.henshin.model.impl.NodeImpl;
+import org.eclipse.emf.henshin.model.impl.ParameterImpl;
+import org.eclipse.emf.henshin.model.impl.RuleImpl;
+import org.eclipse.emf.henshin.variability.util.FeatureExpression;
+import org.eclipse.emf.henshin.variability.util.Logic;
+import org.eclipse.emf.henshin.variability.util.SatChecker;
+import org.sat4j.specs.ContradictionException;
+import org.sat4j.specs.TimeoutException;
 
 import aima.core.logic.propositional.parsing.ast.Sentence;
+import aima.core.logic.propositional.visitors.ConvertToCNF;
+import aima.core.logic.propositional.visitors.SymbolCollector;
 
-/**
- * This class prepares a variability-based rule for variability-based
- * application and matching. If the rule is expected to be used later, it is
- * required to call the undo() method after the application has been performed.
- *
- * @author Daniel Str�ber
- *
- */
 public class VBRulePreparator {
-	public boolean checkDangling;
-	private boolean injectiveMatching;
-	private boolean injectiveMatchingOriginal;
-	private boolean baseRule;
 
-	public Set<Node> removeNodes;
-	public Set<Edge> removeEdges;
-	public Set<Attribute> removeAttributes;
-	public Map<Edge, Node> removeEdgeSources;
-	public Map<Edge, Node> removeEdgeTargets;
-	public Set<Mapping> removeMappings;
-	public Map<EObject, EObject> removeElementContainers;
-	public Set<Formula> removeFormulas;
-	public Map<Mapping, EStructuralFeature> removeMappingContainingRef;
-	public Map<Formula, EStructuralFeature> removeFormulaContainingRef;
-	public Map<Formula, EObject> pulledUpFormulasToContainer;
-	public Map<Formula, EStructuralFeature> pulledUpFormulasToContainingRef;
-	public Map<Formula, EObject> pulledUpFormulasToOldContainer;
-	public Map<Formula, EStructuralFeature> pulledUpFormulasToOldContainingRef;
-	private final Collection<String> trueFeatures;
-	private final Collection<String> falseFeatures;
 	private final VBRuleInfo ruleInfo;
+	private final PreparedVBRule baseRule;
+	private final Collection<String> initiallyTrueFeatures;
+	private final Collection<String> initiallyFalseFeatures;
 
-	public VBRulePreparator(VBRuleInfo ruleInfo, Collection<String> trueFeatures, Collection<String> falseFeatures) {
-		this.trueFeatures = trueFeatures;
-		this.falseFeatures = falseFeatures;
-		this.ruleInfo = ruleInfo;
-		this.checkDangling = ruleInfo.getRule().isCheckDangling();
+	private final List<String> features;
+	private final Map<BitSet, PreparedVBRule> ruleCache = new HashMap<>();
+
+	private final SatChecker solver;
+	private final Map<Sentence, SatChecker> solvers;
+
+	public VBRulePreparator(final VBRuleInfo rule) throws ContradictionException {
+		this(rule, Collections.emptyList(), Collections.emptyList());
 	}
 
-	/**
-	 * Prepares the rule for variability-based merging and rule application:
-	 * rejected elements and removed and the "injective" flag is set. Assumes that
-	 * the reject() method has been invoked method before.
-	 *
-	 * @param rule
-	 * @param ruleInfo
-	 * @param rejected
-	 * @param executed
-	 * @return
-	 */
-	public BitSet prepare(Set<Sentence> rejected, boolean injectiveMatching, boolean baseRule,
-			boolean includeApplicationConditions) {
-		this.baseRule = baseRule;
-		this.injectiveMatching = injectiveMatching;
-		this.injectiveMatchingOriginal = this.ruleInfo.getRule().isInjectiveMatching();
-		this.removeElementContainers = new HashMap<>();
-		this.removeNodes = new HashSet<>();
-		this.removeEdges = new HashSet<>();
-		this.removeAttributes = new HashSet<>();
-		this.removeEdgeSources = new HashMap<>();
-		this.removeEdgeTargets = new HashMap<>();
-		this.removeMappings = new HashSet<>();
-		this.removeMappingContainingRef = new HashMap<>();
-		this.removeFormulaContainingRef = new HashMap<>();
-		this.removeFormulas = new HashSet<>();
-
-		fillMaps(rejected, includeApplicationConditions);
-
-		BitSet bs = getRepresentation(this.removeAttributes, this.removeNodes, this.removeEdges,
-				this.removeFormulas, injectiveMatching);
-
-		doPreparation();
-		return bs;
+	public VBRulePreparator(final VBRuleInfo rule, final Collection<String> initiallyTrueFeatures,
+			final Collection<String> initiallyFalseFeatures) throws ContradictionException {
+		this.ruleInfo = rule;
+		Sentence cnf = this.ruleInfo.getFeatureModel();
+		if (!this.ruleInfo.isFeatureConstraintCNF()) {
+			cnf = ConvertToCNF.convert(cnf);
+		}
+		this.solvers = new HashMap<>();
+		this.solver = new SatChecker(cnf);
+		this.solvers.put(cnf, this.solver);
+		this.solvers.put(this.ruleInfo.getFeatureModel(), this.solver);
+		this.features = new ArrayList<>(rule.getFeatures());
+		this.initiallyTrueFeatures = Collections.unmodifiableCollection(initiallyTrueFeatures);
+		this.initiallyFalseFeatures = Collections.unmodifiableCollection(initiallyFalseFeatures);
+		this.baseRule = createRule(initiallyTrueFeatures, initiallyFalseFeatures);
 	}
 
-	private void fillMaps(Set<Sentence> rejected, boolean includeApplicationConditions) {
-		Rule rule = this.ruleInfo.getRule();
-		for (Sentence expr : rejected) {
-			Set<GraphElement> elements = this.ruleInfo.getPc2Elem().get(expr);
-			if (elements == null) {
-				continue;
+	private BitSet getBitSet(final Collection<String> trueFeatures, final Collection<String> falseFeatures) {
+		final BitSet set = new BitSet(this.features.size());
+		for (int i = 0; i < this.features.size(); i++) {
+			final String feature = this.features.get(i);
+			if (trueFeatures.contains(feature)) {
+				set.set(i);
+			} else if (falseFeatures.contains(feature)) {
+				set.clear(i);
+			} else {
+				throw new IllegalArgumentException("The feature \"" + feature + "\" is unbound");
 			}
+		}
+		return set;
+	}
 
-			for (GraphElement ge : elements) {
-				if (ge instanceof Node) {
-					this.removeNodes.add((Node) ge);
-					Set<Mapping> mappings = this.ruleInfo.getNode2Mapping().get(ge);
-					if (mappings != null) {
-						this.removeMappings.addAll(mappings);
+	public PreparedVBRule getRule(final Collection<String> trueFeatures, final Collection<String> falseFeatures) {
+		final Set<String> allTrueFeatures = Stream
+				.concat(this.initiallyTrueFeatures.parallelStream(), trueFeatures.parallelStream())
+				.collect(Collectors.toSet());
+		final Set<String> allFalseFeatures = Stream
+				.concat(this.initiallyFalseFeatures.parallelStream(), falseFeatures.parallelStream())
+				.collect(Collectors.toSet());
+		final BitSet bs = getBitSet(allTrueFeatures, allFalseFeatures);
+		PreparedVBRule rule = this.ruleCache.get(bs);
+		if (rule != null) {
+			return rule;
+		}
+		rule = createRule(allTrueFeatures, allFalseFeatures);
+		this.ruleCache.put(bs, rule);
+		return rule;
+	}
+
+	private PreparedVBRule createRule(final Collection<String> trueFeatures, final Collection<String> falseFeatures) {
+		final Rule vbRule = this.ruleInfo.getRule();
+
+		final LinkedList<Node> notClonedLhsNodes = new LinkedList<>();
+		final LinkedList<Edge> notClonedLhsEdges = new LinkedList<>();
+		final BiMap<Node, Node> lhsNodeMapOriginalToPrepared = cloneNonVariable(vbRule.getLhs(), this.ruleInfo,
+				trueFeatures, falseFeatures, notClonedLhsNodes);
+		final BiMap<Edge, Edge> lhsEdgeMapOriginalToPrepared = cloneNonVariable(vbRule.getLhs(),
+				lhsNodeMapOriginalToPrepared, this.ruleInfo, trueFeatures, falseFeatures,notClonedLhsEdges);
+		final Graph preparedLhs = new GraphImpl(vbRule.getLhs().getName());
+		preparedLhs.getNodes().addAll(lhsNodeMapOriginalToPrepared.values());
+		preparedLhs.getEdges().addAll(lhsEdgeMapOriginalToPrepared.values());
+
+		final BiMap<Node, Node> rhsNodeMapOriginalToPrepared = cloneNonVariable(vbRule.getRhs(), this.ruleInfo,
+				trueFeatures, falseFeatures, new LinkedList<>());
+		final BiMap<Edge, Edge> rhsEdgeMapOriginalToPrepared = cloneNonVariable(vbRule.getRhs(),
+				rhsNodeMapOriginalToPrepared, this.ruleInfo, trueFeatures, falseFeatures, new LinkedList<>());
+		final Graph rhs = new GraphImpl(vbRule.getRhs().getName());
+		rhs.getNodes().addAll(rhsNodeMapOriginalToPrepared.values());
+		rhs.getEdges().addAll(rhsEdgeMapOriginalToPrepared.values());
+
+		final Collection<Mapping> preparedMappings = vbRule.getMappings().parallelStream()
+				.map((final Mapping mapping) -> {
+					final Node origin = lhsNodeMapOriginalToPrepared.getValue(mapping.getOrigin());
+					if (origin == null) {
+						return null;
 					}
-					((Node) ge).getAllEdges().forEach(this.removeEdges::add);
-				} else if (ge instanceof Edge) {
-					this.removeEdges.add((Edge) ge);
-				} else if (ge instanceof Attribute) {
-					this.removeAttributes.add((Attribute) ge);
-				}
-
-			}
-		}
-		if (this.baseRule && rule.getLhs().getFormula() != null) {
-			this.removeFormulas.add(rule.getLhs().getFormula());
-			this.removeElementContainers.put(rule.getLhs().getFormula(), rule.getLhs());
-			this.removeFormulaContainingRef.put(rule.getLhs().getFormula(),
-					rule.getLhs().getFormula().eContainingFeature());
-
-		} else {
-			for (NestedCondition ac : rule.getLhs().getNestedConditions()) {
-				Sentence acPC = this.ruleInfo.getExpressions().get(this.ruleInfo.getPC(ac));
-				if (!includeApplicationConditions || rejected.contains(acPC)) {
-					Formula removeFormula = null;
-					if (ac.isNAC()) {
-						removeFormula = (Formula) ac.eContainer();
-					} else if (ac.isPAC()) {
-						removeFormula = ac;
-					} else {
-						throw new IllegalStateException("Unsupported formula: " + ac);
+					final Node image = rhsNodeMapOriginalToPrepared.getValue(mapping.getImage());
+					if (image == null) {
+						return null;
 					}
+					return new MappingImpl(origin, image);
+				}).filter(Objects::nonNull).collect(Collectors.toList());
 
-					this.removeFormulas.add(removeFormula);
-					this.removeElementContainers.put(removeFormula, removeFormula.eContainer());
-					this.removeFormulaContainingRef.put(removeFormula, removeFormula.eContainingFeature());
+		final BiMap<Parameter, Parameter> paramMapOriginalToPrepared = new BiMap<>();
+		for(final Parameter parameter: vbRule.getParameters()) {
+			final Parameter clone = new ParameterImpl(parameter.getName(), parameter.getType());
+			clone.setKind(parameter.getKind());
+			paramMapOriginalToPrepared.put(parameter, clone);
+		}
+
+		final Rule preparedRule = new RuleImpl(vbRule.getName());
+		preparedRule.setCheckDangling(vbRule.isCheckDangling());
+		Boolean injective = Logic.evaluate(this.ruleInfo.getInjectiveMatching(), trueFeatures, falseFeatures);
+		if (injective == null) {
+			injective = this.ruleInfo.getRule().isInjectiveMatching();
+		}
+		preparedRule.setInjectiveMatching(injective);
+		preparedRule.setLhs(preparedLhs);
+		preparedRule.setRhs(rhs);
+		preparedRule.getMappings().addAll(preparedMappings);
+		preparedRule.getParameters().addAll(paramMapOriginalToPrepared.values());
+		return new PreparedVBRule(this, preparedRule, trueFeatures, falseFeatures, lhsNodeMapOriginalToPrepared,
+				lhsEdgeMapOriginalToPrepared, paramMapOriginalToPrepared, notClonedLhsNodes, notClonedLhsEdges);
+	}
+
+	private BiMap<Edge, Edge> cloneNonVariable(final Graph originalLhs,
+			final BiMap<Node, Node> lhsNodeMapOriginalToPrepared, final VBRuleInfo ruleInfo,
+			final Collection<String> trueFeatures, final Collection<String> falseFeatures, final Collection<Edge> notCloned) {
+		final BiMap<Edge, Edge> map = new BiMap<>();
+		for (final Edge edge : originalLhs.getEdges()) {
+			final Sentence pc = ruleInfo.getPC(edge);
+			try {
+				if (isPresent(pc, trueFeatures, falseFeatures)
+						&& lhsNodeMapOriginalToPrepared.containsKey(edge.getSource())
+						&& lhsNodeMapOriginalToPrepared.containsKey(edge.getTarget())) {
+					final Node src = lhsNodeMapOriginalToPrepared.getValue(edge.getSource());
+					final Node trg = lhsNodeMapOriginalToPrepared.getValue(edge.getTarget());
+					map.put(edge, new EdgeImpl(src, trg, edge.getType()));
 				}
+				else {
+					notCloned.add(edge);
+				}
+			} catch (ContradictionException | TimeoutException e1) {
+				e1.printStackTrace();
 			}
 		}
+		return map;
 	}
 
-	/**
-	 * Prepares the rule for variability-based merging and rule application:
-	 * rejected elements are removed and the "injective" flag is set. Assumes that
-	 * the reject() method has been invoked method before.
-	 */
-	public void doPreparation() {
-		if (this.removeNodes == null) {
-			throw new IllegalStateException("This method may only be invoked after reject() has been invoked.");
+	private boolean isPresent(final Sentence pc, final Collection<String> trueFeatures,
+			final Collection<String> falseFeatures) throws ContradictionException, TimeoutException {
+		if (FeatureExpression.TRUE.equals(pc)) {
+			return true;
 		}
-
-		removeFormulas();
-
-		for (Mapping m : this.removeMappings) {
-			EStructuralFeature feature = m.eContainingFeature();
-			this.removeMappingContainingRef.put(m, feature);
-			EObject eContainer = m.eContainer();
-			this.removeElementContainers.put(m, eContainer);
-			((EList<EObject>) eContainer.eGet(feature)).remove(m);
+		if (trueFeatures.isEmpty() && falseFeatures.isEmpty()) {
+			return false;
 		}
-		for (Attribute a : this.removeAttributes) {
-			this.removeElementContainers.put(a, a.getNode());
-			a.getNode().getAttributes().remove(a);
+		final boolean unboundVariables = SymbolCollector.getSymbolsFrom(pc).parallelStream().map(Object::toString)
+				.noneMatch(f -> trueFeatures.contains(f) || falseFeatures.contains(f));
+		if (unboundVariables) {
+			return false;
 		}
-		for (Edge e : this.removeEdges) {
-			this.removeElementContainers.put(e, e.getGraph());
-			this.removeEdgeSources.put(e, e.getSource());
-			this.removeEdgeTargets.put(e, e.getTarget());
-			e.getGraph().getEdges().remove(e);
-			e.getSource().getOutgoing().remove(e);
-			e.getTarget().getIncoming().remove(e);
+		SatChecker pcSolver = this.solvers.get(pc);
+		if (pcSolver == null) {
+			pcSolver = new SatChecker(pc);
+			this.solvers.put(pc, pcSolver);
 		}
-		for (Node n : this.removeNodes) {
-			this.removeElementContainers.put(n, n.getGraph());
-			n.getGraph().getNodes().remove(n);
-		}
-		this.ruleInfo.getRule().setInjectiveMatching(this.injectiveMatching);
-		this.ruleInfo.getRule().setCheckDangling(false); // Dangling edges are allowed in a partial
-		// match.
-
+		return pcSolver.isSatisfiable(trueFeatures, falseFeatures);
 	}
 
-	/**
-	 * Removes the formulas in the previously determined order.
-	 */
-	private void removeFormulas() {
-		for (Formula formula : this.removeFormulas) {
-			this.removeElementContainers.get(formula).eUnset(this.removeFormulaContainingRef.get(formula));
-			this.removeElementContainers.get(formula).eSet(this.removeFormulaContainingRef.get(formula),
-					HenshinFactory.eINSTANCE.createTrue());
-		}
-	}
-
-	/**
-	 * Puts the rule back in its original state: rejected elements and
-	 * "injectiveMatching" flag are restored.
-	 */
-	public void undo() {
-		this.ruleInfo.getRule().setCheckDangling(this.checkDangling);
-		this.ruleInfo.getRule().setInjectiveMatching(this.injectiveMatchingOriginal);
-
-		for (Node n : this.removeNodes) {
-			((Graph) this.removeElementContainers.get(n)).getNodes().add(n);
-		}
-		for (Edge e : this.removeEdges) {
-			((Graph) this.removeElementContainers.get(e)).getEdges().add(e);
-			this.removeEdgeSources.get(e).getOutgoing().add(e);
-			this.removeEdgeTargets.get(e).getIncoming().add(e);
-		}
-
-		for (Attribute a : this.removeAttributes) {
-			((Node) this.removeElementContainers.get(a)).getAttributes().add(a);
-		}
-
-		for (Mapping m : this.removeMappings) {
-			EStructuralFeature feature = this.removeMappingContainingRef.get(m);
-			@SuppressWarnings("unchecked")
-			EList<Mapping> list = (EList<Mapping>) this.removeElementContainers.get(m).eGet(feature);
-			list.add(m);
-		}
-
-		restoreFormulas();
-
-	}
-
-	/**
-	 * Restores the formulas in the previously determined order.
-	 */
-	private void restoreFormulas() {
-		for (Formula formula : this.removeFormulas) {
-			this.removeElementContainers.get(formula).eSet(this.removeFormulaContainingRef.get(formula), formula);
-		}
-		// fix
-		// for (Formula f:pulledUpFormulasToOldContainingRef.keySet()) {
-		// EObject container = pulledUpFormulasToOldContainer.get(f);
-		// container.eSet(pulledUpFormulasToOldContainingRef.get(f), f);
-		// }
-		// for (Formula f:removeFormulaContainingRef.keySet()) {
-		// EObject container = removeElementContainers.get(f);
-		// container.eSet(removeFormulaContainingRef.get(f), f);
-		// }
-	}
-
-	/**
-	 * Calling this method ensures that the elements to be removed can later be
-	 * added in the correct order to produce the original rule.
-	 *
-	 * @param formulas All instances must be either a NestedCondition (i.e., a
-	 *                 Graph) or a NOT
-	 */
-	private void determineRemoveOrder(Set<Formula> formulas) {
-		Rule rule = this.ruleInfo.getRule();
-		Formula outer = rule.getLhs().getFormula(); //
-		if (outer instanceof Not || outer instanceof NestedCondition) {
-			Formula formula = formulas.iterator().next();
-			if (formula == outer) {
-				this.removeElementContainers.put(formula, rule.getLhs());
-				this.removeFormulaContainingRef.put(formula, HenshinPackage.Literals.GRAPH__FORMULA);
-			}
-		} else if (outer instanceof And) {
-			determineRemoverOrder((And) outer, formulas, rule.getLhs(), HenshinPackage.Literals.GRAPH__FORMULA);
-		} else {
-			throw new IllegalArgumentException(
-					"TODO: Only AND-based nesting of applications conditions supported yet.");
-		}
-	}
-
-	private void determineRemoverOrder(And and, Set<Formula> formulas, EObject container, EReference feature) {
-		if (formulas.contains(and.getLeft()) && formulas.contains(and.getRight())) {
-			this.removeFormulaContainingRef.put(and, feature);
-			this.removeElementContainers.put(and, container);
-		}
-		if (!formulas.contains(and.getLeft()) && formulas.contains(and.getRight())) {
-			designatePullupChild(and.getLeft(), and, HenshinPackage.Literals.BINARY_FORMULA__LEFT, container, feature);
-		}
-		if (formulas.contains(and.getLeft()) && !formulas.contains(and.getRight())) {
-			designatePullupChild(and.getRight(), and, HenshinPackage.Literals.BINARY_FORMULA__RIGHT, container,
-					feature);
-
-		}
-		if (!formulas.contains(and.getLeft()) && !formulas.contains(and.getRight())) {
-			if (and.getLeft() instanceof And) {
-				determineRemoverOrder((And) and.getLeft(), formulas, and, HenshinPackage.Literals.BINARY_FORMULA__LEFT);
-			}
-			if (and.getRight() instanceof And) {
-				determineRemoverOrder((And) and.getRight(), formulas, and,
-						HenshinPackage.Literals.BINARY_FORMULA__RIGHT);
+	private BiMap<Node, Node> cloneNonVariable(final Graph graph, final VBRuleInfo ruleInfo,
+			final Collection<String> trueFeatures, final Collection<String> falseFeatures, final Collection<Node> notCloned) {
+		final BiMap<Node, Node> map = new BiMap<>();
+		for (final Node node : graph.getNodes()) {
+			final Sentence pc = ruleInfo.getPC(node);
+			try {
+				if (isPresent(pc, trueFeatures, falseFeatures)) {
+					map.put(node, cloneNode(node, trueFeatures, falseFeatures));
+				}
+				else {
+					notCloned.add(node);
+				}
+			} catch (ContradictionException | TimeoutException e) {
 			}
 		}
+		return map;
 	}
 
-	private void designatePullupChild(Formula formula, And oldContainer, EReference oldFeature, EObject newContainer,
-			EReference newFeature) {
-		this.removeFormulaContainingRef.put(oldContainer, newFeature);
-		this.removeElementContainers.put(oldContainer, newContainer);
-		this.pulledUpFormulasToContainingRef.put(formula, newFeature);
-		this.pulledUpFormulasToContainer.put(formula, newContainer);
-		this.pulledUpFormulasToOldContainingRef.put(formula, oldFeature);
-		this.pulledUpFormulasToOldContainer.put(formula, oldContainer);
-	}
-
-	/**
-	 * A representation of the removed elements in a rule as a bit set. Aims at
-	 * avoiding to match the same sub-rule on the same input twice.
-	 *
-	 * @param rule
-	 * @param deleteAttributes
-	 * @param deleteNodes
-	 * @param deleteEdges
-	 * @param deleteFormula
-	 * @param injectiveMatching
-	 * @return
-	 */
-	private BitSet getRepresentation(Set<Attribute> deleteAttributes, Set<Node> deleteNodes,
-			Set<Edge> deleteEdges, Set<Formula> deleteFormula, boolean injectiveMatching) {
-		Rule rule = this.ruleInfo.getRule();
-		BitSet result = new BitSet(rule.getLhs().getNodes().size() + rule.getLhs().getEdges().size()
-				+ rule.getLhs().getNestedConditions().size() + 1);
-
-		result.set(0, injectiveMatching);
-		int i = 1;
-
-		for (NestedCondition nc : rule.getLhs().getNestedConditions()) {
-			result.set(i, !deleteFormula.contains(nc));
-			i++;
-		}
-
-		for (Node n : rule.getLhs().getNodes()) {
-			result.set(i, !deleteNodes.contains(n));
-			i++;
-			for (Attribute a : n.getAttributes()) {
-				result.set(i, !deleteAttributes.contains(a));
-				i++;
+	private Node cloneNode(final Node node, final Collection<String> trueFeatures,
+			final Collection<String> falseFeatures) {
+		final Node baseNode = new NodeImpl(node.getName(), node.getType());
+		for (final Attribute attribute : node.getAttributes()) {
+			try {
+				if (isPresent(this.ruleInfo.getPC(attribute), trueFeatures, falseFeatures)) {
+					HenshinFactory.eINSTANCE.createAttribute(baseNode, attribute.getType(), attribute.getValue());
+				}
+			} catch (ContradictionException | TimeoutException e) {
+				e.printStackTrace();
 			}
 		}
-		for (Edge e : rule.getLhs().getEdges()) {
-			result.set(i, !deleteEdges.contains(e));
-			i++;
+		return baseNode;
+	}
+
+	// static Set<Sentence> getNonTautologies(VBMatchingInfo matchingInfo) {
+	// Set<Sentence> newImplicated = getNewImplicated(matchingInfo);
+	// matchingInfo.setAll(newImplicated, null, true);
+	//
+	// Set<Sentence> result = new HashSet<>(matchingInfo.getNeutrals());
+	// result.addAll(matchingInfo.getAssumedFalse());
+	// return result;
+	// }
+	//
+	// static Set<Sentence> getNewImplicated(VBMatchingInfo mo) {
+	// Set<Sentence> result = new HashSet<>();
+	// Sentence knowledge = getKnowledgeBase(mo);
+	// for (Sentence e : mo.getNeutrals()) {
+	// if (FeatureExpression.implies(knowledge, e)) {
+	// result.add(e);
+	// }
+	// }
+	// return result;
+	// }
+	//
+	// static Sentence getKnowledgeBase(VBMatchingInfo mo) {
+	// Sentence fe = FeatureExpression.TRUE;
+	// for (Sentence t : mo.getAssumedTrue()) {
+	// fe = FeatureExpression.and(fe, t);
+	// }
+	// for (Sentence f : mo.getAssumedFalse()) {
+	// fe = FeatureExpression.andNot(fe, f);
+	// }
+	// return fe;
+	// }
+
+	public PreparedVBRule getBaseRule() {
+		return this.baseRule;
+	}
+
+	public Collection<String> getInitiallyTrueFeatures() {
+		return this.initiallyTrueFeatures;
+	}
+
+	public Collection<String> getInitiallyFalseFeatures() {
+		return this.initiallyFalseFeatures;
+	}
+
+	public List<String> getFeatures() {
+		return this.features;
+	}
+
+	public Collection<PreparedVBRule> prepareAllRules() {
+		// Calculate all possible configurations of concrete rule
+		final LinkedList<List<String>> trueFeatureList = new LinkedList<>();
+		final LinkedList<List<String>> falseFeatureList = new LinkedList<>();
+		this.solver.calculateTrueAndFalseFeatures(this.initiallyTrueFeatures, this.initiallyFalseFeatures,
+				trueFeatureList, falseFeatureList, this.ruleInfo.getFeatures());
+
+		// Iterate over all concrete rules and collect matches
+		final Collection<PreparedVBRule> rules = new ArrayList<>(trueFeatureList.size());
+		for (int i = 0; i < trueFeatureList.size(); i++) {
+			final List<String> trueFeatures = trueFeatureList.get(i);
+			final List<String> falseFeatures = falseFeatureList.get(i);
+
+			rules.add(getRule(trueFeatures, falseFeatures));
 		}
-
-		for (Node n : rule.getRhs().getNodes()) {
-			result.set(i, !deleteNodes.contains(n));
-			i++;
-			for (Attribute a : n.getAttributes()) {
-				result.set(i, !deleteAttributes.contains(a));
-				i++;
-			}
-		}
-		for (Edge e : rule.getRhs().getEdges()) {
-			result.set(i, !deleteEdges.contains(e));
-			i++;
-		}
-
-		return result;
+		return rules;
 	}
 
-	public VBRulePreparator getSnapShot() {
-		VBRulePreparator result = new VBRulePreparator(this.ruleInfo, getTrueFeatures(), getFalseFeatures());
-		result.removeNodes = new HashSet<>(this.removeNodes);
-		result.removeEdges = new HashSet<>(this.removeEdges);
-		result.removeAttributes = new HashSet<>(this.removeAttributes);
-		result.removeEdgeSources = new HashMap<>(this.removeEdgeSources);
-		result.removeEdgeTargets = new HashMap<>(this.removeEdgeTargets);
-		result.removeElementContainers = new HashMap<>(this.removeElementContainers);
-		result.removeFormulas = new HashSet<>(this.removeFormulas);
-		result.removeFormulaContainingRef = new HashMap<>(this.removeFormulaContainingRef);
-		// result.pulledUpFormulasToContainer = new HashMap<Formula, EObject>(
-		// pulledUpFormulasToContainer);
-		// result.pulledUpFormulasToContainingRef = new HashMap<Formula,
-		// EStructuralFeature>(
-		// pulledUpFormulasToContainingRef);
-		result.removeMappings = new HashSet<>(this.removeMappings);
-		result.removeMappingContainingRef = new HashMap<>(this.removeMappingContainingRef);
-		// result.pulledUpFormulasToOldContainingRef = new HashMap<Formula,
-		// EStructuralFeature>();
-		// result.pulledUpFormulasToOldContainer = new HashMap<Formula, EObject>();
-
-		return result;
-
+	public Rule getVBRule() {
+		return this.ruleInfo.getRule();
 	}
-
-	public List<NestedCondition> getApplicationConditions() {
-		return this.removeFormulas.parallelStream().filter(NestedCondition.class::isInstance)
-				.map(NestedCondition.class::cast).filter(cond -> cond.isNAC() || cond.isPAC())
-				.collect(Collectors.toList());
-	}
-
-	/**
-	 * @return the trueFeatures
-	 */
-	public Collection<String> getTrueFeatures() {
-		return this.trueFeatures;
-	}
-
-	/**
-	 * @return the falseFeatures
-	 */
-	public Collection<String> getFalseFeatures() {
-		return this.falseFeatures;
-	}
-
 }

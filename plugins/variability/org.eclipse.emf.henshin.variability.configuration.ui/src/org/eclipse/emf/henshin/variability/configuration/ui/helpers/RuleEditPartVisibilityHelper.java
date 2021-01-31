@@ -48,7 +48,7 @@ public class RuleEditPartVisibilityHelper {
 		@Override
 		public boolean shouldConceal(GraphElement graphElement) {
 			if(graphElement instanceof ModelElement) {
-				String pc = VariabilityHelper.INSTANCE.getPresenceCondition((ModelElement) graphElement);
+				String pc = VariabilityHelper.INSTANCE.getPresenceConditionString((ModelElement) graphElement);
 				return pc != null && !pc.isEmpty();
 			}
 			throw new IllegalStateException();
@@ -68,7 +68,7 @@ public class RuleEditPartVisibilityHelper {
 			boolean result = REVEAL;
 			String pc;
 			if(graphElement instanceof ModelElement) {
-				pc = VariabilityHelper.INSTANCE.getPresenceCondition((ModelElement) graphElement);
+				pc = VariabilityHelper.INSTANCE.getPresenceConditionString((ModelElement) graphElement);
 
 			}
 			else {

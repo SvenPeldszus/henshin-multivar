@@ -1,14 +1,19 @@
 package org.eclipse.emf.henshin.variability.util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
-import java.util.regex.Pattern;
+import java.util.Set;
 
 import aima.core.logic.common.ParserException;
 import aima.core.logic.propositional.parsing.PLParser;
 import aima.core.logic.propositional.parsing.ast.ComplexSentence;
 import aima.core.logic.propositional.parsing.ast.Connective;
 import aima.core.logic.propositional.parsing.ast.Sentence;
+import aima.core.logic.propositional.visitors.ConvertToCNF;
 
 /**
  * This class serves as a cache for SAT evaluation results, helping to avoid
@@ -21,6 +26,7 @@ public class FeatureExpression {
 	private static PropositionalParser parser = new PropositionalParser();
 
 	public static final Sentence TRUE = parser.parse(Logic.TRUE);
+	public static final Sentence FALSE = parser.parse(Logic.FALSE);
 
 	static Map<Sentence, Map<Sentence, Boolean>> implies = new HashMap<>();
 	static Map<Sentence, Map<Sentence, Boolean>> contradicts = new HashMap<>();
@@ -34,12 +40,12 @@ public class FeatureExpression {
 	 * @param expr2
 	 * @return
 	 */
-	public static boolean implies(Sentence expr1, Sentence expr2) {
+	public static boolean implies(final Sentence expr1, final Sentence expr2) {
 		if (implies.containsKey(expr1)) {
 			if (implies.get(expr1).containsKey(expr2)) {
 				return implies.get(expr1).get(expr2);
 			} else {
-				boolean val = new SatChecker().isContradiction(andNot(expr1, expr2).toString());
+				final boolean val = SatChecker.isContradiction(andNot(expr1, expr2));
 				implies.get(expr1).put(expr2, val);
 				return val;
 			}
@@ -49,12 +55,12 @@ public class FeatureExpression {
 		}
 	}
 
-	public static Sentence and(Sentence expr1, Sentence expr2) {
+	public static Sentence and(final Sentence expr1, final Sentence expr2) {
 		if (and.containsKey(expr1)) {
 			if (and.get(expr1).containsKey(expr2)) {
 				return and.get(expr1).get(expr2);
 			} else {
-				Sentence val = Sentence.newConjunction(expr1, expr2);
+				final Sentence val = Sentence.newConjunction(expr1, expr2);
 				and.get(expr1).put(expr2, val);
 				return val;
 			}
@@ -64,12 +70,12 @@ public class FeatureExpression {
 		}
 	}
 
-	public static Sentence andNot(Sentence expr1, Sentence expr2) {
+	public static Sentence andNot(final Sentence expr1, final Sentence expr2) {
 		if (andNot.containsKey(expr1)) {
 			if (andNot.get(expr1).containsKey(expr2)) {
 				return andNot.get(expr1).get(expr2);
 			} else {
-				Sentence val = Sentence.newConjunction(expr1, new ComplexSentence(Connective.NOT, expr2));
+				final Sentence val = Sentence.newConjunction(expr1, new ComplexSentence(Connective.NOT, expr2));
 				andNot.get(expr1).put(expr2, val);
 				return val;
 			}
@@ -79,12 +85,49 @@ public class FeatureExpression {
 		}
 	}
 
-	public static Sentence getExpr(String condition) {
-		Sentence result = null;		
+	public static Sentence and(final Sentence... sentences) {
+		return and(Arrays.asList(sentences));
+	}
+
+	public static Sentence and(final Collection<Sentence> values) {
+		final Set<Sentence> set = new HashSet<>(values);
+		if (set.contains(FALSE)) {
+			return FALSE;
+		}
+		set.remove(TRUE);
+		return Sentence.newConjunction(new ArrayList<>(set));
+	}
+
+	public static Sentence or(final Sentence... sentences) {
+		return or(Arrays.asList(sentences));
+	}
+
+	public static Sentence or(final Collection<Sentence> sentences) {
+		final Set<Sentence> set = new HashSet<>(sentences);
+		if(set.contains(TRUE)) {
+			return TRUE;
+		}
+		set.remove(FALSE);
+		return Sentence.newDisjunction(new ArrayList<>(set));
+	}
+
+	public static Sentence negate(final Sentence sentence) {
+		if (FeatureExpression.TRUE.equals(sentence)) {
+			return FeatureExpression.FALSE;
+		} else if (FeatureExpression.FALSE.equals(sentence)) {
+			return FeatureExpression.TRUE;
+		}
+		return new ComplexSentence(Connective.NOT, sentence);
+	}
+
+	public static Sentence getExpr(final String condition) {
+		if (condition.isEmpty()) {
+			return TRUE;
+		}
+		Sentence result = null;
 		try {
-			condition = XorEncoderUtil.encodeXor(condition);
-			result = parser.parse(condition);
-		} catch (ParserException ex) {
+			result = ConvertToCNF.convert(parser.parse(condition));
+		} catch (final ParserException ex) {
 			ex.printStackTrace();
 		}
 		return result;
@@ -97,17 +140,17 @@ public class FeatureExpression {
 	 * @param expr2
 	 * @return
 	 */
-	public static boolean contradicts(Sentence expr1, Sentence expr2) {
+	public static boolean contradicts(final Sentence expr1, final Sentence expr2) {
 		if (contradicts.containsKey(expr1)) {
 			if (contradicts.get(expr1).containsKey(expr2)) {
 				return contradicts.get(expr1).get(expr2);
 			} else {
-				boolean val = new SatChecker().isContradiction(Sentence.newConjunction(expr1, expr2));
+				final boolean val = SatChecker.isContradiction(Sentence.newConjunction(expr1, expr2));
 				contradicts.get(expr1).put(expr2, val);
 				return val;
 			}
 		} else {
-			contradicts.put(expr1, new HashMap<Sentence, Boolean>());
+			contradicts.put(expr1, new HashMap<>());
 			return contradicts(expr1, expr2);
 		}
 	}
@@ -124,35 +167,23 @@ public class FeatureExpression {
 		 * Creates a new parser and initializes a map with already parsed expressions
 		 */
 		public PropositionalParser() {
-			Sentence trueSentence = super.parse(Logic.TRUE);
+			final Sentence trueSentence = super.parse(Logic.TRUE);
 			this.exprToSentence = new HashMap<>();
 			this.exprToSentence.put(Logic.TRUE, trueSentence);
 			this.exprToSentence.put("", trueSentence);
 		}
 
 		@Override
-		public Sentence parse(String input) {
-			String trimmed = input.trim();
+		public Sentence parse(final String input) {
+			final String trimmed = input.trim();
 			if (this.exprToSentence.containsKey(trimmed)) {
 				return this.exprToSentence.get(trimmed);
 			}
-			String resolved = resolveSynonyms(trimmed);
-			Sentence sentence = super.parse(resolved);
+			final String resolved = Logic.resolveSynonyms4Aima(XorEncoderUtil.encodeXor(trimmed));
+			final Sentence sentence = super.parse(resolved);
 			this.exprToSentence.put(trimmed, sentence);
 			this.exprToSentence.put(resolved, sentence);
 			return sentence;
 		}
-
-		private static final Pattern and = Pattern.compile(" *(\\b(and|AND)\\b)|(\\&\\&) *");
-		private static final Pattern or = Pattern.compile(" *(\\b(or|OR)\\b)|(\\|\\|) *");
-		private static final Pattern not = Pattern.compile(" *(\\b(not|NOT)\\b)|\\! *");
-
-		public static String resolveSynonyms(String expression) {
-			expression = and.matcher(expression).replaceAll(' ' + Connective.AND.getSymbol() + ' ');
-			expression = or.matcher(expression).replaceAll(' ' + Connective.OR.getSymbol() + ' ');
-			expression = not.matcher(expression).replaceAll(' ' + Connective.NOT.getSymbol() + ' ');
-			return expression;
-		}
 	}
-
 }

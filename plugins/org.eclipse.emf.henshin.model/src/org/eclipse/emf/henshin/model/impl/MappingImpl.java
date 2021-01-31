@@ -68,6 +68,16 @@ public class MappingImpl extends ModelElementImpl implements Mapping {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public MappingImpl(Node origin, Node image) {
+		this.origin = origin;
+		this.image = image;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

@@ -97,7 +97,7 @@ public class VBEngineParameterizedTest {
 
 
 		for(VBMatch match : allMatches) {
-			RuleApplication vbRuleApp = new VBRuleApplicationImpl(engine, graph, rule, configuration, match);
+			RuleApplication vbRuleApp = new VBRuleApplicationImpl(engine, graph, configuration, match);
 			vbRuleApp.execute(null);
 		}
 

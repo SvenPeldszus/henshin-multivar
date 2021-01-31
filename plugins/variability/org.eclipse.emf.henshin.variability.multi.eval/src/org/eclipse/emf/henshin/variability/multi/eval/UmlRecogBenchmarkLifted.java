@@ -14,7 +14,6 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.henshin.interpreter.Change;
 import org.eclipse.emf.henshin.model.Module;
 import org.eclipse.emf.henshin.model.Rule;
@@ -40,44 +39,52 @@ import de.ovgu.featureide.fm.core.io.manager.FeatureModelManager;
 
 public class UmlRecogBenchmarkLifted extends UmlRecogBenchmark {
 
-	public static final String mode = "LIFTED";
+	@Override
+	public String mode() {
+		return "LIFTED";
+	}
+
 	private static final boolean SAVE = false;
 
-	static {
-		FILE_PATH_OUTPUT = "output/lifted/";
-		FILE_PATH_RULES = "rules";
-	}
+
+	private final static String FILE_PATH_RULES = "rules";
+
 
 	private static Map<String, Map<String, List<String>>> appliedRules = new HashMap<>();
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
+		new UmlRecogBenchmarkLifted().run();
+	}
+
+	@Override
+	public void run() {
 		FMCoreLibrary.getInstance().install();
 
 		for (int choice = 0; choice < values.length; choice++) {
-			for (RuleSet set : RuleSet.values()) {
-				if (set == RuleSet.ALL || set == RuleSet.NOFILTER) {
+			for (final RuleSet set : RuleSet.values()) {
+				if ((set == RuleSet.ALL) || (set == RuleSet.NOFILTER)) {
 					continue;
 				}
-				for (int i = 0; i <= MAX_RUNS; i++) {
+				for (int i = 0; i <= maxRuns; i++) {
 					System.out.println(
 							"[Info] Starting run " + i + " for " + set + " on " + UmlRecogBenchmark.values[choice]);
-					HenshinResourceSet rs = init();
-					Module module = LoadingHelper.loadAllRulesAsOneModule(rs, FILE_PATH, FILE_PATH_RULES, 2, set);
+					final HenshinResourceSet rs = init();
+					final Module module = LoadingHelper.loadAllRulesAsOneModule(rs, FILE_PATH, FILE_PATH_RULES, 2, set);
 					// module.getUnits().removeIf(u ->
 					// !u.getName().contains("createAssociation_IN_Class"));
 
-					String projectName = values[choice];
-					File projectPath = new File(FILE_PATH + "prepared/" + projectName);
+					final String projectName = values[choice];
+					final File projectPath = new File(FILE_PATH + "prepared/" + projectName);
 
-					IBenchmarkReport reporter = new RuntimeBenchmarkReport(projectPath,
+					final IBenchmarkReport reporter = new RuntimeBenchmarkReport(projectPath,
 							UmlRecogBenchmarkClassic.class.getSimpleName(),
-							FILE_PATH + FILE_PATH_OUTPUT + projectName + "/" + set + "/");
+							FILE_PATH + getOutputPath() + projectName + "/" + set + "/");
 					reporter.start();
 
-					List<String> examples = LoadingHelper.getModelLocations(FILE_PATH, "prepared/" + projectName + "/",
+					final List<String> examples = LoadingHelper.getModelLocations(FILE_PATH, "prepared/" + projectName + "/",
 							FILE_NAME_INSTANCE_DIFF);
 
-					for (String example : examples) {
+					for (final String example : examples) {
 						new UmlRecogBenchmarkLifted().runPerformanceBenchmark(module, set, example, projectPath,
 								reporter);
 					}
@@ -93,66 +100,69 @@ public class UmlRecogBenchmarkLifted extends UmlRecogBenchmark {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 	@Override
-	public void runPerformanceBenchmark(Module module, RuleSet set, String exampleID, File projectPath,
-			IBenchmarkReport report) {
+	protected String getOutputPath() {
+		return "output/lifted/";
+	}
+
+	@Override
+	public void runPerformanceBenchmark(final Module module, final RuleSet set, final String exampleID, final File projectPath,
+			final IBenchmarkReport report) {
 		report.beginNewEntry(exampleID);
-		HenshinResourceSet rs = (HenshinResourceSet) module.eResource().getResourceSet();
+		final HenshinResourceSet rs = (HenshinResourceSet) module.eResource().getResourceSet();
 
 		// Load the model into a graph:
-		Path fmFile = new File(projectPath, FILE_NAME_INSTANCE_FEATURE_MODEL).toPath();
-		IFeatureModel modelFM = FeatureModelManager.load(fmFile);
-		String fmCNF = FeatureModelHelper.getFMExpressionAsCNF(modelFM);
+		final Path fmFile = new File(projectPath, FILE_NAME_INSTANCE_FEATURE_MODEL).toPath();
+		final IFeatureModel modelFM = FeatureModelManager.load(fmFile);
+		final String fmCNF = FeatureModelHelper.getFMExpressionAsCNF(modelFM);
 
-		Resource res1 = rs.getResource(exampleID + "/" + FILE_NAME_INSTANCE_1);
-		Resource res2 = rs.getResource(exampleID + "/" + FILE_NAME_INSTANCE_2);
-		EObject diff = rs.getEObject(exampleID + "/" + FILE_NAME_INSTANCE_DIFF);
-		EcoreUtil.resolveAll(rs);
+		final Resource res1 = rs.getResource(exampleID + "/" + FILE_NAME_INSTANCE_1);
+		final Resource res2 = rs.getResource(exampleID + "/" + FILE_NAME_INSTANCE_2);
+		final EObject diff = rs.getEObject(exampleID + "/" + FILE_NAME_INSTANCE_DIFF);
+		//		EcoreUtil.resolveAll(rs);
 
-		List<EObject> roots = new ArrayList<>();
-		roots.addAll(res1.getContents());
+		final List<EObject> roots = new ArrayList<>(res1.getContents());
 		roots.addAll(res2.getContents());
 		roots.add(diff);
-		Map<EObject, String> presenceConditions = new HashMap<>();
-		MultiVarEGraph graph = new SecPLUtil().createEGraphAndCollectPCs(roots, presenceConditions, fmCNF);
+		final Map<EObject, String> presenceConditions = new HashMap<>();
+		final MultiVarEGraph graph = new SecPLUtil().createEGraphAndCollectPCs(roots, presenceConditions, fmCNF);
 
-		int graphInitially = graph.size();
-		MultiVarEngine engine = new MultiVarEngine();
+		final int graphInitially = graph.size();
+		final MultiVarEngine engine = new MultiVarEngine();
 
 		// engine.getOptions().put(Engine. OPTION_SORT_VARIABLES, false);
-		List<Rule> detectedRules = new ArrayList<>();
-		List<String> expectedApplications = getExpectedApplications(set, projectPath);
+		final List<Rule> detectedRules = new ArrayList<>();
+		final List<String> expectedApplications = getExpectedApplications(set, projectPath);
 
 		System.gc();
-		long startTime = System.currentTimeMillis();
+		final long startTime = System.currentTimeMillis();
 
-		for (Unit unit : module.getUnits()) {
-			Rule rule = (Rule) unit;
-			if (DEBUG) {
+		for (final Unit unit : module.getUnits()) {
+			final Rule rule = (Rule) unit;
+			if (debug) {
 				System.out.println("Rule: " + rule);
 			}
 
-			long currentRunTime = System.currentTimeMillis();
-			int graphInitial = graph.size();
+			final long currentRunTime = System.currentTimeMillis();
+			final int graphInitial = graph.size();
 
 			Collection<Change> changes;
 			try {
 				changes = new MultiVarExecution(new SecPLUtil(), engine).transformSPL(rule, graph);
-			} catch (InconsistentRuleException e) {
+			} catch (final InconsistentRuleException e) {
 				throw new IllegalStateException(e);
 			}
 
-			long runtime = (System.currentTimeMillis() - currentRunTime);
-			int graphChanged = graph.size();
+			final long runtime = (System.currentTimeMillis() - currentRunTime);
+			final int graphChanged = graph.size();
 			report.addSubEntry(unit, graphInitial, graphChanged, runtime);
-			if (DEBUG || SAVE) {
+			if (debug || SAVE) {
 				for (int i = graphInitial; i < graphChanged; i++) {
 					detectedRules.add(rule);
 				}
-				List<String> names = getNameOfAppliedRule(changes);
+				final List<String> names = getNameOfAppliedRule(changes);
 				for (String name : names) {
 					name = name.toLowerCase();
 					appliedRules.computeIfAbsent(projectPath.getName(), x -> new HashMap<>())
@@ -161,7 +171,7 @@ public class UmlRecogBenchmarkLifted extends UmlRecogBenchmark {
 			}
 
 			if (expectedApplications != null) {
-				List<String> names = getNameOfAppliedRule(changes);
+				final List<String> names = getNameOfAppliedRule(changes);
 				for (String name : names) {
 					name = name.toLowerCase();
 					if (!expectedApplications.remove(name)) {
@@ -171,8 +181,8 @@ public class UmlRecogBenchmarkLifted extends UmlRecogBenchmark {
 			}
 		}
 
-		long runtime = (System.currentTimeMillis() - startTime);
-		int graphChanged = graph.size();
+		final long runtime = (System.currentTimeMillis() - startTime);
+		final int graphChanged = graph.size();
 
 		if (expectedApplications != null) {
 			expectedApplications.forEach(s -> System.err.println("FN: " + s));

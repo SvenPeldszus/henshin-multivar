@@ -1,6 +1,5 @@
 package org.eclipse.emf.henshin.variability.multi.eval.util;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -51,20 +50,21 @@ public class RuleSetNormalizer {
 	}
 
 	public static List<Rule> prepareRules(Module module) {
-//		List<Rule> rules = new ArrayList<>();
-//		for (Rule rule : module.getAllRules()) {
-//			rules.add(normalizeRule(rule));
-//		}
+		//		List<Rule> rules = new ArrayList<>();
+		//		for (Rule rule : module.getAllRules()) {
+		//			rules.add(normalizeRule(rule));
+		//		}
 
 		// remove duplicates
 		HashSet<String> usedNames = new HashSet<>();
 		for (Rule rule : module.getAllRules()) {
 			int i = 0;
-			while (usedNames.contains(rule.getName()))
+			while (usedNames.contains(rule.getName())) {
 				rule.setName(rule.getName() + i++);
+			}
 			usedNames.add(rule.getName());
 		}
-//		module.getUnits().retainAll(rules);
+		//		module.getUnits().retainAll(rules);
 		return module.getAllRules();
 	}
 }

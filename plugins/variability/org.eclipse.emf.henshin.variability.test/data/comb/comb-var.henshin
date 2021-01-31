@@ -2,11 +2,11 @@
 <henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_q2mewKo1EeGWmNM0TiX1dQ">
   <imports href="grid.ecore#/"/>
   <units xsi:type="henshin:Rule" xmi:id="_OVdmvvPvEeSqRohALvsrgg" name="combPattern">
-    <annotations xmi:id="_Be-oAJaQEemUmuWcLbh5qQ" key="featureConstraint" value="xor(combPattern3, combPattern4, combPattern5)"/>
+    <annotations xmi:id="_Be-oAJaQEemUmuWcLbh5qQ" key="featureConstraint" value=" (~combPattern3 | ~combPattern4) &amp; (~combPattern3 | ~combPattern5) &amp; (~combPattern4 | ~combPattern5)"/>
     <annotations xmi:id="_Be-oAZaQEemUmuWcLbh5qQ" key="features" value="combPattern3, combPattern4, combPattern5"/>
     <annotations xmi:id="_QirmcPpWEem5wpnPu4aQLQ" key="injectiveMatchingPresenceCondition"/>
     <lhs xmi:id="_OVdmv_PvEeSqRohALvsrgg" name="LHS">
-      <nodes xmi:id="_OVdmwvPvEeSqRohALvsrgg" name="comb2" outgoing="_OVdmyvPvEeSqRohALvsrgg _OVdmy_PvEeSqRohALvsrgg">
+      <nodes xmi:id="_OVdmwvPvEeSqRohALvsrgg" name="comb2" incoming="_OFHJYC8IEeuRMbCcPRCHKA" outgoing="_OVdmyvPvEeSqRohALvsrgg _OVdmy_PvEeSqRohALvsrgg">
         <annotations xmi:id="_UGRpAPpWEem5wpnPu4aQLQ" key="presenceCondition"/>
         <type href="grid.ecore#//Node"/>
       </nodes>
@@ -38,16 +38,18 @@
         <annotations xmi:id="_UzBlMJaIEem9eqq-XCLikw" key="presenceCondition" value="combPattern5"/>
         <type href="grid.ecore#//Node"/>
       </nodes>
-      <nodes xmi:id="_zaCfIAZEEeq-0oliJiwLkQ" name="test">
-        <annotations xmi:id="_zaP6gAZEEeq-0oliJiwLkQ" key="presenceCondition"/>
-        <type href="grid.ecore#//Grid"/>
+      <nodes xmi:id="_IMo6IC8IEeuRMbCcPRCHKA" name="com1" outgoing="_OFHJYC8IEeuRMbCcPRCHKA _OrdXsC8IEeuRMbCcPRCHKA">
+        <type href="grid.ecore#//Node"/>
+      </nodes>
+      <nodes xmi:id="_J974oC8IEeuRMbCcPRCHKA" name="comb1Var" incoming="_OrdXsC8IEeuRMbCcPRCHKA">
+        <type href="grid.ecore#//Node"/>
       </nodes>
       <edges xmi:id="_OVdmyvPvEeSqRohALvsrgg" source="_OVdmwvPvEeSqRohALvsrgg" target="_OVdmw_PvEeSqRohALvsrgg">
         <annotations xmi:id="_UGV6cPpWEem5wpnPu4aQLQ" key="presenceCondition"/>
         <type href="grid.ecore#//Node/ver"/>
       </edges>
       <edges xmi:id="_OVdmy_PvEeSqRohALvsrgg" source="_OVdmwvPvEeSqRohALvsrgg" target="_OVdmxPPvEeSqRohALvsrgg">
-        <annotations xmi:id="_kf6U0JaIEem9eqq-XCLikw" key="presenceCondition" value="combpattern3 or combpattern4 or combpattern5"/>
+        <annotations xmi:id="_kf6U0JaIEem9eqq-XCLikw" key="presenceCondition" value="combPattern3 or combPattern4 or combPattern5"/>
         <type href="grid.ecore#//Node/hor"/>
       </edges>
       <edges xmi:id="_OVdmzPPvEeSqRohALvsrgg" source="_OVdmxPPvEeSqRohALvsrgg" target="_OVdmxfPvEeSqRohALvsrgg">
@@ -70,9 +72,15 @@
         <annotations xmi:id="_miAIYJaIEem9eqq-XCLikw" key="presenceCondition" value="combPattern5"/>
         <type href="grid.ecore#//Node/ver"/>
       </edges>
+      <edges xmi:id="_OFHJYC8IEeuRMbCcPRCHKA" source="_IMo6IC8IEeuRMbCcPRCHKA" target="_OVdmwvPvEeSqRohALvsrgg">
+        <type href="grid.ecore#//Node/hor"/>
+      </edges>
+      <edges xmi:id="_OrdXsC8IEeuRMbCcPRCHKA" source="_IMo6IC8IEeuRMbCcPRCHKA" target="_J974oC8IEeuRMbCcPRCHKA">
+        <type href="grid.ecore#//Node/ver"/>
+      </edges>
     </lhs>
     <rhs xmi:id="_OVdmz_PvEeSqRohALvsrgg" name="RHS">
-      <nodes xmi:id="_OVdm0vPvEeSqRohALvsrgg" outgoing="_OVdm2vPvEeSqRohALvsrgg _OVdm2_PvEeSqRohALvsrgg">
+      <nodes xmi:id="_OVdm0vPvEeSqRohALvsrgg" incoming="_OFIXgC8IEeuRMbCcPRCHKA" outgoing="_OVdm2vPvEeSqRohALvsrgg _OVdm2_PvEeSqRohALvsrgg">
         <type href="grid.ecore#//Node"/>
       </nodes>
       <nodes xmi:id="_OVdm0_PvEeSqRohALvsrgg" incoming="_OVdm2vPvEeSqRohALvsrgg">
@@ -96,8 +104,11 @@
       <nodes xmi:id="_Pk08ofPvEeSqRohALvsrgg" incoming="_QYo_MfPvEeSqRohALvsrgg">
         <type href="grid.ecore#//Node"/>
       </nodes>
-      <nodes xmi:id="_zaEUUAZEEeq-0oliJiwLkQ">
-        <type href="grid.ecore#//Grid"/>
+      <nodes xmi:id="_IMo6IS8IEeuRMbCcPRCHKA" name="com1" outgoing="_OFIXgC8IEeuRMbCcPRCHKA _Orel0C8IEeuRMbCcPRCHKA">
+        <type href="grid.ecore#//Node"/>
+      </nodes>
+      <nodes xmi:id="_J974oS8IEeuRMbCcPRCHKA" name="comb1Var" incoming="_Orel0C8IEeuRMbCcPRCHKA">
+        <type href="grid.ecore#//Node"/>
       </nodes>
       <edges xmi:id="_OVdm2vPvEeSqRohALvsrgg" source="_OVdm0vPvEeSqRohALvsrgg" target="_OVdm0_PvEeSqRohALvsrgg">
         <type href="grid.ecore#//Node/ver"/>
@@ -120,6 +131,12 @@
       <edges xmi:id="_QYo_MfPvEeSqRohALvsrgg" source="_PeNXQfPvEeSqRohALvsrgg" target="_Pk08ofPvEeSqRohALvsrgg">
         <type href="grid.ecore#//Node/ver"/>
       </edges>
+      <edges xmi:id="_OFIXgC8IEeuRMbCcPRCHKA" source="_IMo6IS8IEeuRMbCcPRCHKA" target="_OVdm0vPvEeSqRohALvsrgg">
+        <type href="grid.ecore#//Node/hor"/>
+      </edges>
+      <edges xmi:id="_Orel0C8IEeuRMbCcPRCHKA" source="_IMo6IS8IEeuRMbCcPRCHKA" target="_J974oS8IEeuRMbCcPRCHKA">
+        <type href="grid.ecore#//Node/ver"/>
+      </edges>
     </rhs>
     <mappings xmi:id="_OVdm4fPvEeSqRohALvsrgg" origin="_OVdmwvPvEeSqRohALvsrgg" image="_OVdm0vPvEeSqRohALvsrgg"/>
     <mappings xmi:id="_OVdm4vPvEeSqRohALvsrgg" origin="_OVdmw_PvEeSqRohALvsrgg" image="_OVdm0_PvEeSqRohALvsrgg"/>
@@ -129,7 +146,8 @@
     <mappings xmi:id="_OVdm5vPvEeSqRohALvsrgg" origin="_OVdmx_PvEeSqRohALvsrgg" image="_OVdm1_PvEeSqRohALvsrgg"/>
     <mappings xmi:id="_PeNXQvPvEeSqRohALvsrgg" origin="_PeNXQPPvEeSqRohALvsrgg" image="_PeNXQfPvEeSqRohALvsrgg"/>
     <mappings xmi:id="_Pk08ovPvEeSqRohALvsrgg" origin="_Pk08oPPvEeSqRohALvsrgg" image="_Pk08ofPvEeSqRohALvsrgg"/>
-    <mappings xmi:id="_zaEUUQZEEeq-0oliJiwLkQ" origin="_zaCfIAZEEeq-0oliJiwLkQ" image="_zaEUUAZEEeq-0oliJiwLkQ"/>
+    <mappings xmi:id="_IMphMC8IEeuRMbCcPRCHKA" origin="_IMo6IC8IEeuRMbCcPRCHKA" image="_IMo6IS8IEeuRMbCcPRCHKA"/>
+    <mappings xmi:id="_J974oi8IEeuRMbCcPRCHKA" origin="_J974oC8IEeuRMbCcPRCHKA" image="_J974oS8IEeuRMbCcPRCHKA"/>
   </units>
   <units xsi:type="henshin:Rule" xmi:id="_3nCLYAZBEeqhdr1yv25vOw" name="test">
     <annotations xmi:id="_3ncbEAZBEeqhdr1yv25vOw" key="featureConstraint"/>

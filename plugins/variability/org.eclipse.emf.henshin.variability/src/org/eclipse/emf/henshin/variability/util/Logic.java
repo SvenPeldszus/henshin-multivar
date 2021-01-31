@@ -7,10 +7,24 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
+import javax.script.Bindings;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import javax.script.SimpleBindings;
+
+import org.sat4j.core.VecInt;
+import org.sat4j.specs.ContradictionException;
+import org.sat4j.specs.ISolver;
+import org.sat4j.specs.IVecInt;
+import org.sat4j.specs.TimeoutException;
+
+import aima.core.logic.propositional.parsing.ast.Connective;
+import aima.core.logic.propositional.parsing.ast.Sentence;
 
 /**
  *
@@ -34,7 +48,7 @@ public class Logic {
 	private static final String LB = " ( ";
 	private static final String RB = " ) ";
 	private static String limitForCombinations = "0123456789";
-	private static ScriptEngine engine;
+	private static volatile ScriptEngine engine;
 
 	protected static synchronized String choice(final List<String> expressions, final int min, final int max,
 			final boolean forceFalse) {
@@ -87,7 +101,7 @@ public class Logic {
 	}
 
 	protected static synchronized String claused(final String expression) {
-		if (expression == null || expression.length() == 0) {
+		if ((expression == null) || (expression.length() == 0)) {
 			return "";
 		}
 		if (isClaused(expression)) {
@@ -96,15 +110,15 @@ public class Logic {
 		return Logic.LB + expression + Logic.RB;
 	}
 
-	private static boolean isClaused(String expression) {
+	private static boolean isClaused(final String expression) {
 		if (!expression.startsWith("(") || !expression.endsWith(")")) {
 			return false;
 		}
-		Map<Integer, Integer> openClose = new HashMap<>();
-		Deque<Integer> open = new LinkedList<>();
+		final Map<Integer, Integer> openClose = new HashMap<>();
+		final Deque<Integer> open = new LinkedList<>();
 		int index = 0;
 		while (index < expression.length()) {
-			char c = expression.charAt(index);
+			final char c = expression.charAt(index);
 			if (c == '(') {
 				open.push(index);
 			} else if (c == ')') {
@@ -112,15 +126,15 @@ public class Logic {
 			}
 			index++;
 		}
-		return openClose.get(Integer.valueOf(0)).intValue() == expression.length() - 1;
+		return openClose.get(Integer.valueOf(0)).intValue() == (expression.length() - 1);
 	}
 
 	protected static synchronized String implies(final String lhs, final String rhs) {
-		if (lhs == null || lhs.length() == 0 || rhs == null || rhs.length() == 0) {
+		if ((lhs == null) || (lhs.length() == 0) || (rhs == null) || (rhs.length() == 0)) {
 			throw new IllegalArgumentException();
 		}
-		String lhsTrimmed = lhs.trim();
-		String rhsTrimmed = rhs.trim();
+		final String lhsTrimmed = lhs.trim();
+		final String rhsTrimmed = rhs.trim();
 		if (FALSE.equals(lhsTrimmed) || TRUE.equals(rhsTrimmed) || lhsTrimmed.equals(rhsTrimmed)) {
 			return TRUE_SPACE;
 		}
@@ -133,8 +147,8 @@ public class Logic {
 		return or(negate(lhs), rhs);
 	}
 
-	public static synchronized String negate(String expression) {
-		String trimmed = expression.trim();
+	public static synchronized String negate(final String expression) {
+		final String trimmed = expression.trim();
 		if (trimmed.contentEquals(TRUE)) {
 			return FALSE_SPACE;
 		} else if (trimmed.equals(FALSE)) {
@@ -144,7 +158,7 @@ public class Logic {
 	}
 
 	private static synchronized String op(final List<String> expressions, final String op) {
-		if (expressions == null || expressions.isEmpty()) {
+		if ((expressions == null) || expressions.isEmpty()) {
 			return "";
 		}
 		if (expressions.size() == 1) {
@@ -153,9 +167,9 @@ public class Logic {
 		String expression = "";
 		String part = null;
 		boolean first = true;
-		for (String expression2 : expressions) {
+		for (final String expression2 : expressions) {
 			part = expression2;
-			if (part != null && part.length() > 0) {
+			if ((part != null) && (part.length() > 0)) {
 				if (first) {
 					expression = String.valueOf(expression) + claused(part);
 					first = false;
@@ -168,9 +182,9 @@ public class Logic {
 	}
 
 	public static synchronized String or(final List<String> expressions) {
-		List<String> reduced = new ArrayList<>(expressions.size());
-		for (String expr : expressions) {
-			String trimmedExpr = expr.trim();
+		final List<String> reduced = new ArrayList<>(expressions.size());
+		for (final String expr : expressions) {
+			final String trimmedExpr = expr.trim();
 			if (TRUE.equals(trimmedExpr)) {
 				return TRUE_SPACE;
 			} else if (FALSE.equals(trimmedExpr)) {
@@ -193,8 +207,8 @@ public class Logic {
 	}
 
 	public static synchronized String or(final String s1, final String s2) {
-		String s1Trimmed = s1.trim();
-		String s2Trimmed = s2.trim();
+		final String s1Trimmed = s1.trim();
+		final String s2Trimmed = s2.trim();
 		if (TRUE.equals(s1Trimmed) || TRUE.equals(s2Trimmed)) {
 			return Logic.TRUE_SPACE;
 		}
@@ -214,9 +228,9 @@ public class Logic {
 	}
 
 	public static synchronized String and(final Collection<String> conditions) {
-		List<String> reduced = new ArrayList<>(conditions.size());
-		for (String expr : conditions) {
-			String trimmed = expr.trim();
+		final List<String> reduced = new ArrayList<>(conditions.size());
+		for (final String expr : conditions) {
+			final String trimmed = expr.trim();
 			if (FALSE.equals(trimmed)) {
 				return FALSE_SPACE;
 			} else if (TRUE.equals(trimmed)) {
@@ -239,9 +253,9 @@ public class Logic {
 	}
 
 	public static synchronized String and(final String... conditions) {
-		List<String> reduced = new ArrayList<>(conditions.length);
-		for (String expr : conditions) {
-			String trimmed = expr.trim();
+		final List<String> reduced = new ArrayList<>(conditions.length);
+		for (final String expr : conditions) {
+			final String trimmed = expr.trim();
 			if (FALSE.equals(trimmed)) {
 				return FALSE_SPACE;
 			} else if (TRUE.equals(trimmed)) {
@@ -267,8 +281,8 @@ public class Logic {
 		if (s2 == null) {
 			return s1;
 		}
-		String s1Trimmed = s1.trim();
-		String s2Trimmed = s2.trim();
+		final String s1Trimmed = s1.trim();
+		final String s2Trimmed = s2.trim();
 		if (FALSE.equals(s1Trimmed) || FALSE.equals(s2Trimmed)) {
 			return Logic.FALSE_SPACE;
 		}
@@ -317,8 +331,8 @@ public class Logic {
 				}
 			}
 			expression = expression.substring(0, expression.lastIndexOf(" | "));
-			if (!delete && newExpression.indexOf(String.valueOf(Logic.LB) + clause + Logic.RB) == -1
-					&& clause.indexOf(Logic.FALSE) == -1) {
+			if (!delete && (newExpression.indexOf(String.valueOf(Logic.LB) + clause + Logic.RB) == -1)
+					&& (clause.indexOf(Logic.FALSE) == -1)) {
 				for (final String variable : variables) {
 					if (clause.indexOf(variable) != clause.lastIndexOf(variable)) {
 						clause = clause.replaceAll(Logic.AND + Logic.TRUE + Logic.AND, Logic.AND)
@@ -331,7 +345,7 @@ public class Logic {
 						clause = String.valueOf(part1) + part2;
 					}
 				}
-				if (clause.replace(" ", "").length() <= 0
+				if ((clause.replace(" ", "").length() <= 0)
 						|| newExpression.contains(String.valueOf(Logic.LB) + clause + Logic.RB)
 						|| clause.contains(Logic.FALSE_SPACE)) {
 					continue;
@@ -343,35 +357,108 @@ public class Logic {
 		return newExpression;
 	}
 
-	public static boolean evaluate(String pc, Collection<String> trueFeatures, Collection<String> falseFeatures)
+	/**
+	 * Evaluates a constraint with the given feature assignments
+	 *
+	 * @param pc            The constraint to evaluate
+	 * @param trueFeatures  The variables assigned to true
+	 * @param falseFeatures The variables assigned to false
+	 * @return the evaluation result or null if not all variables are assigned to a
+	 *         value
+	 * @throws ScriptException
+	 */
+	public static boolean evaluate(final Sentence pc, final Collection<String> trueFeatures, final Collection<String> falseFeatures) {
+		if (FeatureExpression.TRUE.equals(pc)) {
+			return true;
+		}
+		try {
+			final Map<String, Integer> symbolsToIndices = new HashMap<>();
+			final ISolver solver = SatChecker.createSolver(pc, new HashMap<>(), symbolsToIndices);
+
+			final Set<String> symbols = symbolsToIndices.keySet();
+			final List<String> tf = trueFeatures.parallelStream().filter(symbols::contains).collect(Collectors.toList());
+			final List<String> ff = falseFeatures.parallelStream().filter(symbols::contains).collect(Collectors.toList());
+			final int[] vec = new int[tf.size() + ff.size()];
+			int pos = 0;
+			for (final String t : tf) {
+				final Integer integer = symbolsToIndices.get(t);
+				if (integer != null) {
+					vec[pos++] = integer;
+				}
+			}
+			for (final String t : ff) {
+				final Integer integer = symbolsToIndices.get(t);
+				if (integer != null) {
+					vec[pos++] = integer * -1;
+				}
+			}
+			final IVecInt assignments = new VecInt(vec);
+			return solver.isSatisfiable(assignments);
+		} catch (ContradictionException | TimeoutException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static Boolean evaluateJS(final Sentence pc, final Collection<String> trueFeatures, final Collection<String> falseFeatures)
 			throws ScriptException {
+		if (FeatureExpression.TRUE.equals(pc)) {
+			return Boolean.TRUE;
+		}
 		if (engine == null) {
 			engine = new ScriptEngineManager().getEngineByName("JavaScript");
 		}
-		for (String trueFeature : trueFeatures) {
-			engine.put(trueFeature, Boolean.TRUE);
+		final Bindings bindings = new SimpleBindings();
+		for (final String trueFeature : trueFeatures) {
+			bindings.put(trueFeature, Boolean.TRUE);
 		}
-		for (String falseFeature : falseFeatures) {
-			engine.put(falseFeature, Boolean.FALSE);
+		for (final String falseFeature : falseFeatures) {
+			bindings.put(falseFeature, Boolean.FALSE);
 		}
 
-		Object result = engine.eval(pc);
-		if (result instanceof Boolean) {
-			return (Boolean) result;
-		} else if (result instanceof Integer) {
-			int number = (int) result;
-			if (number == 0) {
-				return false;
+		Object result = null;
+		try {
+			result = engine.eval(getJavaScriptCondition(pc), bindings);
+			if (result instanceof Boolean) {
+				return (Boolean) result;
+			} else if (result instanceof Integer) {
+				final int number = (int) result;
+				switch (number) {
+				case 0:
+					return false;
+				case 1:
+					return true;
+				case -1:
+					return false;
+				default:
+					break;
+				}
+			} else if (result == null) {
+				return null;
 			}
-			if (number == 1) {
-				return true;
-			}
-			if (number == -1) {
-				return false;
+		} catch (final ScriptException e) {
+			final Pattern pattern = Pattern.compile("ReferenceError: \\\".+\\\" is not defined");
+			if (pattern.matcher(e.getMessage()).find()) {
+				return null;
 			}
 		}
+
 		throw new IllegalStateException("Unknown evaluation result:\n" + "Constraint: " + pc + "\n" + "True features: "
 				+ String.join(", ", trueFeatures) + "\n" + "False features: " + String.join(", ", falseFeatures) + "\n"
 				+ "Result: " + result);
+	}
+
+	private static String getJavaScriptCondition(final Sentence pc) {
+		return pc.toString().replace('~', '!');
+	}
+
+	private static final Pattern and = Pattern.compile(" *(\\b(and|AND)\\b)|(\\&\\&) *");
+	private static final Pattern or = Pattern.compile(" *(\\b(or|OR)\\b)|(\\|\\|) *");
+	private static final Pattern not = Pattern.compile(" *(\\b(not|NOT)\\b)|\\!|-|~ *");
+
+	public static String resolveSynonyms4Aima(String expression) {
+		expression = and.matcher(expression).replaceAll(' ' + Connective.AND.getSymbol() + ' ');
+		expression = or.matcher(expression).replaceAll(' ' + Connective.OR.getSymbol() + ' ');
+		expression = not.matcher(expression).replaceAll(' ' + Connective.NOT.getSymbol() + ' ');
+		return expression;
 	}
 }

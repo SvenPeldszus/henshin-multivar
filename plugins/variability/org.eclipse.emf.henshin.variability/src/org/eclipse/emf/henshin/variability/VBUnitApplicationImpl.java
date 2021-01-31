@@ -13,7 +13,7 @@ import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.model.Unit;
 /**
  * Variability-aware {@link org.eclipse.emf.henshin.interpreter.UnitApplication UnitApplication} implementation.
- * 
+ *
  * @author Daniel Str�ber
  */
 public class VBUnitApplicationImpl extends UnitApplicationImpl {
@@ -29,32 +29,33 @@ public class VBUnitApplicationImpl extends UnitApplicationImpl {
 
 	@Override
 	protected boolean executeRule(ApplicationMonitor monitor) {
-		Rule rule = (Rule) unit;
-		RuleApplication ruleApp = new VBRuleApplicationImpl(engine, graph, rule, resultAssignment);
+		Rule rule = (Rule) this.unit;
+		RuleApplication ruleApp = new VBRuleApplicationImpl(this.engine, this.graph, rule, this.resultAssignment);
 		if (ruleApp.execute(monitor)) {
-			resultAssignment = new AssignmentImpl(ruleApp.getResultMatch(), true);
-			appliedRules.push(ruleApp);
+			this.resultAssignment = new AssignmentImpl(ruleApp.getResultMatch(), true);
+			this.appliedRules.push(ruleApp);
 			return true;  // notification is done in the rule application
 		} else {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * Create an UnitApplication for a given Unit.
 	 */
+	@Override
 	protected UnitApplicationImpl createApplicationFor(Unit subUnit) {
-		if (resultAssignment==null) {
-			resultAssignment = new AssignmentImpl(unit);
+		if (this.resultAssignment==null) {
+			this.resultAssignment = new AssignmentImpl(this.unit);
 		}
 		Assignment assign = new AssignmentImpl(subUnit);
-		for (ParameterMapping mapping : unit.getParameterMappings()) {
+		for (ParameterMapping mapping : this.unit.getParameterMappings()) {
 			Parameter source = mapping.getSource();
 			Parameter target = mapping.getTarget();
 			if (target.getUnit()==subUnit) {
-				assign.setParameterValue(target, resultAssignment.getParameterValue(source));
+				assign.setParameterValue(target, this.resultAssignment.getParameterValue(source));
 			}
 		}
-		return new VBUnitApplicationImpl(engine, graph, subUnit, assign);
+		return new VBUnitApplicationImpl(this.engine, this.graph, subUnit, assign);
 	}
 }

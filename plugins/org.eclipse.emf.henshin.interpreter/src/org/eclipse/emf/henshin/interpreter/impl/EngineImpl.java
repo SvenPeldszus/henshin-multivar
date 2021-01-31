@@ -558,7 +558,7 @@ public class EngineImpl implements Engine {
 
 			// Evaluates attribute conditions of the rule:
 			ConditionHandler conditionHandler = new ConditionHandler(conditionInfo.getConditionParameters(),
-					EngineImpl.this.scriptEngine.getEngine());
+					scriptEngine, Collections.emptyList());
 
 			/*
 			 * The set "usedObjects" ensures injective matching by removing

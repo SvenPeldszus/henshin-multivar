@@ -21,24 +21,23 @@ public class MultiVarExecution {
 	public Collection<Change> transformSPL(Rule rule,
 			MultiVarEGraph graphP) throws InconsistentRuleException {
 		MultiVarMatcher matcher = new MultiVarMatcher(rule, graphP, this.engine);
-		Collection<Change> changes = liftAndAppy(matcher.findMatches(), rule, graphP, matcher.getLifting());
+		Collection<Change> changes = liftAndAppy(matcher.findMatches(), graphP, matcher.getLifting());
 		if (!changes.isEmpty()) {
 			this.processor.writePCsToModel(graphP);
 		}
 		return changes;
 	}
 
-	public Collection<Change> liftAndAppy(Iterable<MultiVarMatch> matches, Rule rule, MultiVarEGraph graph, Lifting lifting) {
+	public Collection<Change> liftAndAppy(Iterable<MultiVarMatch> matches, MultiVarEGraph graph, Lifting lifting) {
 		Collection<Change> changes = new LinkedList<>();
 		for (MultiVarMatch match : matches) {
-			match.prepareRule();
 			MultiVarMatch resultMatch = lifting.liftMatch(match);
 			if (resultMatch != null) {
+				Rule rule = match.getRule();
 				Change change = this.engine.createChange(rule, graph, match, new MatchImpl(rule, true));
 				change.applyAndReverse();
 				changes.add(change);
 			}
-			match.undoPreparation();
 		}
 		return changes;
 	}

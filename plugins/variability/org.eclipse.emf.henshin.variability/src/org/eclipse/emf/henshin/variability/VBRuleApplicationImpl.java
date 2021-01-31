@@ -42,8 +42,8 @@ public class VBRuleApplicationImpl extends RuleApplicationImpl {
 	 * @param completeMatchVar If available, a complete match
 	 * @param configuration A (potentially partial) map of feature names to a boolean value
 	 */
-	public VBRuleApplicationImpl(Engine engine, EGraph graph, Rule rule, Map<String,Boolean> configuration, VBMatch completeMatchVar) {
-		super(engine, graph, rule, null);
+	public VBRuleApplicationImpl(Engine engine, EGraph graph, Map<String,Boolean> configuration, VBMatch completeMatchVar) {
+		super(engine, graph, completeMatchVar.getRule(), null);
 		if (configuration == null) {
 			this.configuration = new HashMap<>();
 		} else {
@@ -118,17 +118,11 @@ public class VBRuleApplicationImpl extends RuleApplicationImpl {
 				return false;
 			}
 		}
-		if (this.completeVarMatch != null) {
-			this.completeVarMatch.prepareRule();
-		}
 		this.resultMatch = new MatchImpl((Rule) this.unit, true);
 		this.change = this.engine.createChange((Rule) this.unit, this.graph, this.completeMatch, this.resultMatch);
 		if (this.change == null) {
 			if (monitor != null) {
 				monitor.notifyExecute(this, false);
-			}
-			if (this.completeVarMatch != null) {
-				this.completeVarMatch.undoPreparation();
 			}
 			return false;
 		}
@@ -136,9 +130,6 @@ public class VBRuleApplicationImpl extends RuleApplicationImpl {
 		this.isExecuted = true;
 		if (monitor != null) {
 			monitor.notifyExecute(this, true);
-		}
-		if (this.completeVarMatch != null) {
-			this.completeVarMatch.undoPreparation();
 		}
 		return true;
 	}

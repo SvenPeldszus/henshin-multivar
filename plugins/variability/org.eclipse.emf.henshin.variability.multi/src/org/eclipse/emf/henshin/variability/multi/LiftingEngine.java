@@ -3,9 +3,11 @@ package org.eclipse.emf.henshin.variability.multi;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.script.ScriptException;
 
@@ -33,81 +35,92 @@ import org.eclipse.emf.henshin.model.Node;
 import org.eclipse.emf.henshin.model.Parameter;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.model.impl.TrueImpl;
-import org.eclipse.emf.henshin.variability.util.Logic;
+import org.eclipse.emf.henshin.variability.util.FeatureExpression;
 import org.eclipse.emf.henshin.variability.util.SatChecker;
+
+import aima.core.logic.propositional.parsing.ast.ComplexSentence;
+import aima.core.logic.propositional.parsing.ast.Connective;
+import aima.core.logic.propositional.parsing.ast.Sentence;
 
 public class LiftingEngine extends EngineImpl {
 
 	private final String[] globalJavaImports;
 
-	public LiftingEngine(String... globalJavaImports) {
+	public LiftingEngine(final String... globalJavaImports) {
 		super(globalJavaImports);
 		this.globalJavaImports = globalJavaImports;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Iterable<Match> findMatches(Rule rule, EGraph graph, Match partialMatch) {
+	public Iterable<Match> findMatches(final Rule rule, final EGraph graph, final Match partialMatch) {
 		if (graph instanceof MultiVarEGraph) {
 			return (Iterable<Match>) findMatches(rule, (MultiVarEGraph) graph, partialMatch);
 		}
 		return super.findMatches(rule, graph, partialMatch);
 	}
 
-	public Iterable<? extends MultiVarMatch> findMatches(Rule rule, MultiVarEGraph graph, Match partialMatch) {
-		Lifting lifting = new Lifting(graph);
-		ApplicationConditionMatcher acs = new ApplicationConditionMatcher(new EngineImpl(this.globalJavaImports), rule);
-		Formula formula = rule.getLhs().getFormula();
+	public Iterable<? extends MultiVarMatch> findMatches(final Rule rule, final MultiVarEGraph graph, final Match partialMatch) {
+		final Lifting lifting = new Lifting(graph);
+		final ApplicationConditionMatcher acs = new ApplicationConditionMatcher(new EngineImpl(this.globalJavaImports), rule);
+		final Formula formula = rule.getLhs().getFormula();
 		rule.getLhs().setFormula(new TrueImpl());
-		Iterable<Match> matches = super.findMatches(rule, graph, partialMatch);
-		List<MultiVarMatch> liftedMatches =  new LinkedList<>();
-		for(Match m : matches) {
-			Map<Rule, List<Match>> nacs = acs.getNACMatches(acs.createACRules(acs.getNACs()), m, graph);
-			Map<Rule, List<Match>> pacs = acs.getPACMatches(acs.createACRules(acs.getPACs()), m, graph);
-			MultiVarMatch liftedMatch = lifting.liftMatch(new MultiVarMatch(m, rule, null, pacs, nacs));
-			if(liftedMatch != null) {
+		final Iterable<Match> matches = super.findMatches(rule, graph, partialMatch);
+		final List<MultiVarMatch> liftedMatches = new LinkedList<>();
+		for (final Match m : matches) {
+			final Map<Rule, Collection<Match>> nacs = acs.getNACMatches(acs.createACRules(acs.getNACs()).collect(Collectors.toList()), m, graph);
+			final Map<Rule, Iterator<Match>> pacMatchIterators = acs.getPACMatches(acs.createACRules(acs.getPACs()).collect(Collectors.toList()), m,
+					graph);
+			if (pacMatchIterators == null) {
+				continue;
+			}
+			final Map<Rule, Collection<Match>> pacs = ApplicationConditionMatcher.getAllMatches(pacMatchIterators);
+			final MultiVarMatch liftedMatch = lifting.liftMatch(new MultiVarMatch(m, new LiftedRule(rule), pacs, nacs));
+			if (liftedMatch != null) {
 				liftedMatches.add(liftedMatch);
 			}
 		}
 		rule.getLhs().setFormula(formula);
 		return liftedMatches;
 	}
+
 	@Override
-	public Change createChange(Rule rule, EGraph graph, Match completeMatch, Match resultMatch) {
-		if (graph instanceof MultiVarEGraph && completeMatch instanceof MultiVarMatch) {
+	public Change createChange(final Rule rule, final EGraph graph, final Match completeMatch, final Match resultMatch) {
+		if ((graph instanceof MultiVarEGraph) && (completeMatch instanceof MultiVarMatch)) {
 			return createChange(rule, (MultiVarEGraph) graph, (MultiVarMatch) completeMatch, resultMatch);
 		}
 		return super.createChange(rule, graph, completeMatch, resultMatch);
 	}
 
-	public Change createChange(Rule rule, MultiVarEGraph graph, MultiVarMatch completeMatch, Match resultMatch) {
-		CompoundChange complexChange = new CompoundChangeImpl(graph);
+	public Change createChange(final Rule rule, final MultiVarEGraph graph, final MultiVarMatch completeMatch, final Match resultMatch) {
+		final CompoundChange complexChange = new CompoundChangeImpl(graph);
 		createChanges(rule, graph, completeMatch, resultMatch, complexChange);
 		return complexChange;
 	}
 
-	private void createChanges(Rule rule, MultiVarEGraph graph, MultiVarMatch completeMatch, Match resultMatch,
-			CompoundChange complexChange) {
-		Map<EObject, String> pcs = graph.getPCS();
+	private void createChanges(final Rule rule, final MultiVarEGraph graph, final MultiVarMatch completeMatch, final Match resultMatch,
+			final CompoundChange complexChange) {
+		final Map<EObject, Sentence> pcs = graph.getPCS();
 
 		// Get the rule change info and the object change list:
-		RuleChangeInfo ruleChange = getRuleInfo(rule).getChangeInfo();
-		List<Change> changes = complexChange.getChanges();
+		final RuleChangeInfo ruleChange = getRuleInfo(rule).getChangeInfo();
+		final List<Change> changes = complexChange.getChanges();
 
-		for (Parameter param : rule.getParameters()) {
-			Object value = completeMatch.getParameterValue(param);
+		for (final Parameter param : rule.getParameters()) {
+			final Object value = completeMatch.getParameterValue(param);
 			resultMatch.setParameterValue(param, value);
 			this.scriptEngine.put(param.getName(), value);
 		}
 
 		// Created objects:
-		String applicationCondition = Logic.TRUE;
+		Sentence applicationCondition = FeatureExpression.TRUE;
 		if (completeMatch instanceof MultiVarMatch) {
 			applicationCondition = completeMatch.getApplicationCondition();
 		}
-		for (Node node : ruleChange.getCreatedNodes()) {
-			EClass type = node.getType();
-			EObject createdObject = type.getEPackage().getEFactoryInstance().create(type);
-			if (!applicationCondition.trim().equals(Logic.TRUE)) {
+		for (final Node node : ruleChange.getCreatedNodes()) {
+			final EClass type = node.getType();
+			final EObject createdObject = type.getEPackage().getEFactoryInstance().create(type);
+			if (!applicationCondition.equals(FeatureExpression.TRUE)) {
 				pcs.put(createdObject, applicationCondition);
 			}
 			changes.add(new ObjectChangeImpl(graph, createdObject, true));
@@ -115,25 +128,24 @@ public class LiftingEngine extends EngineImpl {
 		}
 
 		// Deleted objects:
-		HashSet<EObject> ignoreDeletion = new HashSet<>();
-		HashSet<EObject> deleted = new HashSet<>();
-		for (Node node : ruleChange.getDeletedNodes()) {
-			EObject deletedObject = completeMatch.getNodeTarget(node);
-			String phidtick;
+		final HashSet<EObject> ignoreDeletion = new HashSet<>();
+		final HashSet<EObject> deleted = new HashSet<>();
+		for (final Node node : ruleChange.getDeletedNodes()) {
+			final EObject deletedObject = completeMatch.getNodeTarget(node);
+			Sentence phidtick;
 			if (pcs.containsKey(deletedObject)) {
-				String phid = pcs.get(deletedObject);
-				phidtick = Logic.and(phid, Logic.negate(applicationCondition));
+				final Sentence phid = pcs.get(deletedObject);
+				phidtick = new ComplexSentence(Connective.AND, phid, new ComplexSentence(Connective.NOT,applicationCondition));
 			} else {
-				phidtick = Logic.negate(applicationCondition);
+				phidtick = new ComplexSentence(Connective.NOT,applicationCondition);
 			}
 
-			SatChecker satChecker = new SatChecker();
-			boolean isSat = satChecker.isSatisfiable(Logic.and(graph.getFM(), phidtick));
+			final boolean isSat = SatChecker.isSatisfiable(new ComplexSentence(Connective.AND, graph.getFM(), phidtick));
 			if (isSat) {
 				pcs.put(deletedObject, phidtick);
 
-				Collection<Setting> removedEdges = graph.getCrossReferenceAdapter().getInverseReferences(deletedObject);
-				for (Setting edge : removedEdges) {
+				final Collection<Setting> removedEdges = graph.getCrossReferenceAdapter().getInverseReferences(deletedObject);
+				for (final Setting edge : removedEdges) {
 					ignoreDeletion.add(edge.getEObject());
 				}
 			} else {
@@ -142,9 +154,9 @@ public class LiftingEngine extends EngineImpl {
 				changes.add(new ObjectChangeImpl(graph, deletedObject, false));
 				// TODO: Shouldn't we check the rule options?
 				if (!rule.isCheckDangling()) {
-					Collection<Setting> removedEdges = graph.getCrossReferenceAdapter()
+					final Collection<Setting> removedEdges = graph.getCrossReferenceAdapter()
 							.getInverseReferences(deletedObject);
-					for (Setting edge : removedEdges) {
+					for (final Setting edge : removedEdges) {
 						changes.add(new ReferenceChangeImpl(graph, edge.getEObject(), deletedObject,
 								(EReference) edge.getEStructuralFeature(), false));
 					}
@@ -153,13 +165,13 @@ public class LiftingEngine extends EngineImpl {
 		}
 
 		// Preserved objects:
-		for (Node node : ruleChange.getPreservedNodes()) {
-			Node lhsNode = rule.getMappings().getOrigin(node);
+		for (final Node node : ruleChange.getPreservedNodes()) {
+			final Node lhsNode = rule.getMappings().getOrigin(node);
 			resultMatch.setNodeTarget(node, completeMatch.getNodeTarget(lhsNode));
 		}
 
 		// Deleted edges:
-		for (Edge edge : ruleChange.getDeletedEdges()) {
+		for (final Edge edge : ruleChange.getDeletedEdges()) {
 			if (!ignoreDeletion.contains(edge)) {
 				changes.add(new ReferenceChangeImpl(graph, completeMatch.getNodeTarget(edge.getSource()),
 						completeMatch.getNodeTarget(edge.getTarget()), edge.getType(), false));
@@ -167,24 +179,24 @@ public class LiftingEngine extends EngineImpl {
 		}
 
 		// Created edges:
-		for (Edge edge : ruleChange.getCreatedEdges()) {
+		for (final Edge edge : ruleChange.getCreatedEdges()) {
 			changes.add(new ReferenceChangeImpl(graph, resultMatch.getNodeTarget(edge.getSource()),
 					resultMatch.getNodeTarget(edge.getTarget()), edge.getType(), true));
 
 		}
 
 		// Edge index changes:
-		for (Edge edge : ruleChange.getIndexChanges()) {
+		for (final Edge edge : ruleChange.getIndexChanges()) {
 			Integer newIndex = edge.getIndexConstant();
 			if (newIndex == null) {
-				Parameter param = rule.getParameter(edge.getIndex());
+				final Parameter param = rule.getParameter(edge.getIndex());
 				if (param != null) {
 					newIndex = ((Number) resultMatch.getParameterValue(param)).intValue();
 				} else {
 					try {
 						newIndex = ((Number) this.scriptEngine.eval(edge.getIndex(), Collections.emptyList()))
 								.intValue();
-					} catch (ScriptException e) {
+					} catch (final ScriptException e) {
 						throw new RuntimeException(
 								"Error evaluating edge index expression \"" + edge.getIndex() + "\": " + e.getMessage(),
 								e);
@@ -196,10 +208,10 @@ public class LiftingEngine extends EngineImpl {
 		}
 
 		// Attribute changes:
-		for (Attribute attribute : ruleChange.getAttributeChanges()) {
-			EObject object = resultMatch.getNodeTarget(attribute.getNode());
+		for (final Attribute attribute : ruleChange.getAttributeChanges()) {
+			final EObject object = resultMatch.getNodeTarget(attribute.getNode());
 			Object value;
-			Parameter param = rule.getParameter(attribute.getValue());
+			final Parameter param = rule.getParameter(attribute.getValue());
 			if (param != null) {
 				value = castValueToDataType(resultMatch.getParameterValue(param),
 						attribute.getType().getEAttributeType(), attribute.getType().isMany());
@@ -211,10 +223,10 @@ public class LiftingEngine extends EngineImpl {
 		}
 
 		// Now recursively for the multi-rules:
-		for (Rule multiRule : rule.getMultiRules()) {
-			for (Match multiMatch : completeMatch.getMultiMatches(multiRule)) {
-				Match multiResultMatch = new MatchImpl(multiRule, true);
-				for (Mapping mapping : multiRule.getMultiMappings()) {
+		for (final Rule multiRule : rule.getMultiRules()) {
+			for (final Match multiMatch : completeMatch.getMultiMatches(multiRule)) {
+				final Match multiResultMatch = new MatchImpl(multiRule, true);
+				for (final Mapping mapping : multiRule.getMultiMappings()) {
 					if (mapping.getImage().getGraph().isRhs()) {
 						multiResultMatch.setNodeTarget(mapping.getImage(),
 								resultMatch.getNodeTarget(mapping.getOrigin()));
@@ -228,15 +240,15 @@ public class LiftingEngine extends EngineImpl {
 	}
 
 	@Override
-	public void createChanges(Rule rule, EGraph graph, Match completeMatch, Match resultMatch,
+	public void createChanges(final Rule rule, final EGraph graph, final Match completeMatch, final Match resultMatch,
 			CompoundChange complexChange) {
-		if(complexChange == null) {
+		if (complexChange == null) {
 			complexChange = new CompoundChangeImpl(graph);
 		}
 		if (graph instanceof MultiVarEGraph) {
-			MultiVarEGraph multiVarGraph = (MultiVarEGraph) graph;
+			final MultiVarEGraph multiVarGraph = (MultiVarEGraph) graph;
 			if (completeMatch instanceof MultiVarMatch) {
-				MultiVarMatch multiVarMatch = (MultiVarMatch) completeMatch;
+				final MultiVarMatch multiVarMatch = (MultiVarMatch) completeMatch;
 				createChanges(rule, multiVarGraph, multiVarMatch, resultMatch, complexChange);
 			} else {
 				super.createChanges(rule, multiVarGraph, completeMatch, resultMatch, complexChange);

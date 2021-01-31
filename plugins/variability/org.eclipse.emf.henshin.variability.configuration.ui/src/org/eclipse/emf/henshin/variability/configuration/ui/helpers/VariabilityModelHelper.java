@@ -116,9 +116,9 @@ public class VariabilityModelHelper {
 	public static String getPresenceConditionForNewEdge(Edge edge, Configuration configuration) {
 		String configPC = getPresenceCondition(configuration);
 		Sentence config = FeatureExpression.getExpr(configPC);
-		String sourcePresenceCondition = VariabilityHelper.INSTANCE.getPresenceCondition(edge.getTarget());
+		String sourcePresenceCondition = VariabilityHelper.INSTANCE.getPresenceConditionString(edge.getTarget());
 		Sentence source = FeatureExpression.getExpr(sourcePresenceCondition);
-		String targetPresenceCondition = VariabilityHelper.INSTANCE.getPresenceCondition(edge.getSource());
+		String targetPresenceCondition = VariabilityHelper.INSTANCE.getPresenceConditionString(edge.getSource());
 		Sentence target = FeatureExpression.getExpr(targetPresenceCondition);
 
 		// Out of the current configuration, the source node, and the target

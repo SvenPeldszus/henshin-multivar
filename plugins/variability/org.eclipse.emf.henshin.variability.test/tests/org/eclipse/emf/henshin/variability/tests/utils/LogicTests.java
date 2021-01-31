@@ -8,6 +8,11 @@ import org.junit.Test;
 public class LogicTests {
 
 	@Test
+	public void testXOR0() {
+		assertEquals("((A) | (B)) & ( ~(A) | ~(B))", XorEncoderUtil.encodeXor("((A) | (B)) & ( ~(A) | ~(B))"));
+	}
+
+	@Test
 	public void testXOR1() {
 		assertEquals("((A) | (B)) & ( ~(A) | ~(B))", XorEncoderUtil.encodeXor("xor(A, B)"));
 	}
@@ -35,5 +40,20 @@ public class LogicTests {
 	public void testXOR5() {
 		assertEquals("((A) | (((B) | (C)) & ( ~(B) | ~(C)))) & ( ~(A) | ~(((B) | (C)) & ( ~(B) | ~(C))))",
 				XorEncoderUtil.encodeXor("xor(A, xor(B,C))"));
+	}
+
+	@Test
+	public void testXOR6() {
+		assertEquals("((A) | (B)) & ( ~(A) | ~(B)) and ((A) | (B)) & ( ~(A) | ~(B))", XorEncoderUtil.encodeXor("xor(A, B) and xor(A, B)"));
+	}
+
+	@Test
+	public void testXOR7() {
+		assertEquals("((A) | (B & C)) & ( ~(A) | ~(B & C))", XorEncoderUtil.encodeXor("xor(A, B & C)"));
+	}
+
+	@Test
+	public void testXOR8() {
+		assertEquals("((A) | (((B) | (C)) & ( ~(B) | ~(C)))) & ( ~(A) | ~(((B) | (C)) & ( ~(B) | ~(C))))", XorEncoderUtil.encodeXor("xor(A, xor(B,C))"));
 	}
 }

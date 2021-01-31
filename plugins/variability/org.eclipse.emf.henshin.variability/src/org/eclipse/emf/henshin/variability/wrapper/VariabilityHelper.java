@@ -16,6 +16,7 @@ import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.model.Unit;
 import org.eclipse.emf.henshin.variability.util.FeatureExpression;
 
+import aima.core.logic.propositional.parsing.ast.AtomicSentence;
 import aima.core.logic.propositional.parsing.ast.PropositionSymbol;
 import aima.core.logic.propositional.parsing.ast.Sentence;
 import aima.core.logic.propositional.visitors.SymbolCollector;
@@ -23,7 +24,6 @@ import aima.core.logic.propositional.visitors.SymbolCollector;
 public class VariabilityHelper {
 
 	public static final VariabilityHelper INSTANCE = new VariabilityHelper();
-
 
 	Annotation addAnnotation(ModelElement modelElement, VariabilityConstants annotationKey, String value) {
 		Annotation anno = HenshinFactory.eINSTANCE.createAnnotation();
@@ -55,7 +55,7 @@ public class VariabilityHelper {
 		return null;
 	}
 
-	public String getPresenceCondition(ModelElement element) {
+	public String getPresenceConditionString(ModelElement element) {
 		Annotation annotation = getAnnotation(element, VariabilityConstants.PRESENCE_CONDITION);
 		if (annotation != null && annotation.getValue() != null) {
 			return annotation.getValue();
@@ -83,7 +83,7 @@ public class VariabilityHelper {
 
 	public String getPresenceConditionIfModelElement(GraphElement elem) {
 		if (elem instanceof ModelElement) {
-			return getPresenceCondition((ModelElement) elem);
+			return getPresenceConditionString((ModelElement) elem);
 		}
 		throw new IllegalStateException();
 	}
@@ -92,14 +92,14 @@ public class VariabilityHelper {
 		setAnnotation(rule, VariabilityConstants.FEATURE_CONSTRAINT, featureModel);
 	}
 
-	public String getFeatureConstraint(Rule rule) {
-		Annotation annotation = getAnnotation(rule, VariabilityConstants.FEATURE_CONSTRAINT);
+	public String getFeatureConstraint(Rule unit) {
+		Annotation annotation = getAnnotation(unit, VariabilityConstants.FEATURE_CONSTRAINT);
 		if (annotation != null) {
 			return annotation.getValue();
 		}
 		return "";
 	}
-	
+
 	public String getFeatureConstraint(Unit unit) {
 		return (unit instanceof Rule) ? getFeatureConstraint((Rule) unit) : "";
 	}
@@ -119,7 +119,7 @@ public class VariabilityHelper {
 			} else {
 				setAnnotationValue(annotation, name);
 			}
-			
+
 		}
 	}
 
@@ -140,8 +140,10 @@ public class VariabilityHelper {
 	 * @return A set of feature names
 	 */
 	private Set<String> getFeatures(String featureString) {
-		if (featureString == null) return null;
-		else return Stream.of(featureSeparatorPattern.split(featureString)).collect(Collectors.toSet());
+		if (featureString == null)
+			return null;
+		else
+			return Stream.of(featureSeparatorPattern.split(featureString)).collect(Collectors.toSet());
 	}
 
 	/**
@@ -172,33 +174,6 @@ public class VariabilityHelper {
 			String value = annotation.getValue();
 			return value != null && !value.isEmpty();
 		});
-	}
-
-	public boolean hasMissingFeatures(Rule rule) {
-		return !calculateMissingFeatureNames(rule).isEmpty();
-	}
-
-	public String[] getMissingFeatures(Rule rule) {
-		return calculateMissingFeatureNames(rule).toArray(new String[0]);
-	}
-
-	private Set<String> calculateMissingFeatureNames(Rule rule) {
-		String currentModel = getFeatureConstraint(rule);		
-		Set<String> missingFeatures = new HashSet<>();
-		if (currentModel == null || currentModel.isEmpty()) return missingFeatures;
-		
-		Sentence sentence = FeatureExpression.getExpr(currentModel);
-		if (sentence != null) {		
-			Set<PropositionSymbol> symbols = SymbolCollector.getSymbolsFrom(sentence);
-			for (PropositionSymbol symbol : symbols) {
-				String symbolName = symbol.getSymbol().trim();
-				Set<String> features = getFeatures(rule);
-				if (features == null || !features.contains(symbolName)) {
-					missingFeatures.add(symbolName);
-				}
-			}
-		}
-		return missingFeatures;
 	}
 
 	private static boolean isAnnotation(Annotation annotation, VariabilityConstants id) {
