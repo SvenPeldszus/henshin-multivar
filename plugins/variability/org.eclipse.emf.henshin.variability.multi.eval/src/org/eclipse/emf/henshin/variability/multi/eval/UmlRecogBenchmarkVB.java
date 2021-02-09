@@ -4,9 +4,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -16,7 +14,6 @@ import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.model.Unit;
 import org.eclipse.emf.henshin.model.resource.HenshinResourceSet;
 import org.eclipse.emf.henshin.variability.InconsistentRuleException;
-import org.eclipse.emf.henshin.variability.multi.FeatureModelHelper;
 import org.eclipse.emf.henshin.variability.multi.MultiVarEGraph;
 import org.eclipse.emf.henshin.variability.multi.MultiVarEngine;
 import org.eclipse.emf.henshin.variability.multi.MultiVarExecution;
@@ -99,7 +96,6 @@ public class UmlRecogBenchmarkVB extends UmlRecogBenchmark {
 		// Load the model into a graph:
 		final Path fmPath = new File(projectPath, FILE_NAME_INSTANCE_FEATURE_MODEL).toPath();
 		final IFeatureModel modelFM = FeatureModelManager.load(fmPath);
-		final String fmCNF = FeatureModelHelper.getFMExpressionAsCNF(modelFM);
 
 		final Resource res1 = rs.getResource(exampleID + "/" + FILE_NAME_INSTANCE_1);
 		final Resource res2 = rs.getResource(exampleID + "/" + FILE_NAME_INSTANCE_2);
@@ -109,9 +105,8 @@ public class UmlRecogBenchmarkVB extends UmlRecogBenchmark {
 		final List<EObject> roots = new ArrayList<>(res1.getContents());
 		roots.addAll(res2.getContents());
 		roots.add(diff);
-		final Map<EObject, String> presenceConditions = new HashMap<>();
 		final SecPLUtil secpl = new SecPLUtil();
-		final MultiVarEGraph graph = secpl.createEGraphAndCollectPCs(roots, presenceConditions, fmCNF);
+		final MultiVarEGraph graph = secpl.createEGraphAndCollectPCs(roots, modelFM);
 
 		final int graphInitially = graph.size();
 		final MultiVarEngine engine = new MultiVarEngine();

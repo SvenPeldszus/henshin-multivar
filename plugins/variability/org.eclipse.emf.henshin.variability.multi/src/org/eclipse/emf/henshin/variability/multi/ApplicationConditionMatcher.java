@@ -23,7 +23,6 @@ import org.eclipse.emf.henshin.model.NestedCondition;
 import org.eclipse.emf.henshin.model.Node;
 import org.eclipse.emf.henshin.model.Not;
 import org.eclipse.emf.henshin.model.Rule;
-import org.eclipse.emf.henshin.variability.matcher.PreparedVBRule;
 
 public class ApplicationConditionMatcher {
 
@@ -79,33 +78,11 @@ public class ApplicationConditionMatcher {
 	 * @param nacs       A mapping between the extracted NAC rules and the context
 	 *                   nodes of the NACs
 	 * @param match      The match of the original rule
-	 * @param preparator
 	 * @return The matches for the NAC rules
 	 */
 	Map<Rule, Collection<Match>> getNACMatches(final List<ACRule> nacs, final Match match,
-			final PreparedVBRule preparator, final EGraph graph) {
-		final Map<Rule, Collection<Match>> nacMatchMap = new HashMap<>();
-		for (final ACRule entry : nacs) {
-			final Rule nac = entry.getRule();
-			//			entry.prepare(preparator);
-			final Match preMatch = prepare(match, entry);
-			final Collection<Match> matches = new LinkedList<>();
-			for (final Match nacMatch : this.engine.findMatches(nac, graph, preMatch)) {
-				matches.add(nacMatch);
-			}
-			nacMatchMap.put(nac, matches);
-			//			entry.restore();
-		}
-		return nacMatchMap;
-	}
-
-	/**
-	 * @param nacs  A mapping between the extracted NAC rules and the context nodes
-	 *              of the NACs
-	 * @param match The match of the original rule
-	 * @return The matches for the NAC rules
-	 */
-	Map<Rule, Collection<Match>> getNACMatches(final List<ACRule> nacs, final Match match, final EGraph graph) {
+			final EGraph graph) {
+		final Object prev  = this.engine.getOptions().put(Engine.OPTION_CHECK_DANGLING, false);
 		final Map<Rule, Collection<Match>> nacMatchMap = new HashMap<>();
 		for (final ACRule entry : nacs) {
 			final Rule nac = entry.getRule();
@@ -116,6 +93,7 @@ public class ApplicationConditionMatcher {
 			}
 			nacMatchMap.put(nac, matches);
 		}
+		this.engine.getOptions().put(Engine.OPTION_CHECK_DANGLING, prev);
 		return nacMatchMap;
 	}
 
@@ -138,57 +116,23 @@ public class ApplicationConditionMatcher {
 	 * @param pacs                      A mapping between the extracted PAC rules
 	 *                                  and the context nodes of the PACs
 	 * @param match                     The match of the original rule
-	 * @param preparator
-	 * @param graph                     The graph the pac should be matched on
-	 * @return The matches for the PAC rules or null, if there have been no matches
-	 *         for a rule
-	 */
-	Map<Rule, Iterator<Match>> getPACMatches(final List<ACRule> pacs, final Match match,
-			final PreparedVBRule preparator, final EGraph graph) {
-		final Map<Rule, Iterator<Match>> matchIterators = new HashMap<>();
-		for (final ACRule entry : pacs) {
-			final Rule rule = entry.getRule();
-			//			entry.prepare(preparator);
-			final Match preMatch = prepare(match, entry);
-			if (preMatch.isEmpty()) {
-				continue;
-			}
-			final Iterator<Match> iterator = this.engine.findMatches(rule, graph, preMatch).iterator();
-			if (!iterator.hasNext()) {
-				entry.restore();
-				return null;
-			}
-			//			entry.restore();
-			matchIterators.put(rule, iterator);
-		}
-		return matchIterators;
-	}
-
-	/**
-	 * @param nodeToOriginalNodeMapping A mapping between the nodes of the extracted
-	 *                                  NAC rules and the corresponding nodes from
-	 *                                  the original rule
-	 * @param pacs                      A mapping between the extracted PAC rules
-	 *                                  and the context nodes of the PACs
-	 * @param match                     The match of the original rule
 	 * @param graph                     The graph the pac should be matched on
 	 * @return The matches for the PAC rules or null, if there have been no matches
 	 *         for a rule
 	 */
 	Map<Rule, Iterator<Match>> getPACMatches(final List<ACRule> pacs, final Match match, final EGraph graph) {
+		final Object prev  = this.engine.getOptions().put(Engine.OPTION_CHECK_DANGLING, false);
 		final Map<Rule, Iterator<Match>> matchIterators = new HashMap<>();
 		for (final ACRule entry : pacs) {
 			final Rule rule = entry.getRule();
 			final Match preMatch = prepare(match, entry);
-			if (preMatch.isEmpty()) {
-				continue;
-			}
 			final Iterator<Match> iterator = this.engine.findMatches(rule, graph, preMatch).iterator();
 			if (!iterator.hasNext()) {
 				return null;
 			}
 			matchIterators.put(rule, iterator);
 		}
+		this.engine.getOptions().put(Engine.OPTION_CHECK_DANGLING, prev);
 		return matchIterators;
 	}
 

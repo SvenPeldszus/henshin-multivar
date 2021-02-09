@@ -51,7 +51,6 @@ import org.eclipse.emf.henshin.model.Parameter;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.model.Unit;
 import org.eclipse.emf.henshin.model.resource.HenshinResourceSet;
-import org.eclipse.emf.henshin.variability.multi.FeatureModelHelper;
 import org.eclipse.emf.henshin.variability.multi.Lifting;
 import org.eclipse.emf.henshin.variability.multi.MultiVarEGraph;
 import org.eclipse.emf.henshin.variability.multi.MultiVarEngine;
@@ -63,7 +62,7 @@ import org.eclipse.uml2.uml.PrimitiveType;
 import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.VisibilityKind;
-import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
+import org.eclipse.uml2.uml.resource.UMLResource;
 
 import carisma.profile.umlsec.variability.Conditional_Element;
 import carisma.profile.umlsec.variability.VariabilityPackage;
@@ -80,15 +79,16 @@ import symmetric.SymmetricDifference;
 import symmetric.SymmetricFactory;
 
 public class UmlRecogPreparator {
+
 	// Values: BCMS BMWExampleSPL Notepad-Antenna EndToEndSecurity...
-	private static final String[] values = { 
-			"BMWExampleSPL", // 0
+	private static final String[] values = { "BMWExampleSPL", // 0
 			"EndToEndSecurity", // 1
 			"BCMS", // 2
 			"jsse_openjdk", // 3
 			"Notepad-Antenna", // 4
 			"MobilePhoto07_OO", // 5
-			"lampiro" // 6
+			"lampiro", // 6
+			"iTrust"
 	};
 
 	static String benchmark = values[2];
@@ -104,15 +104,15 @@ public class UmlRecogPreparator {
 
 	DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
 
-	public static void main(String[] args) throws IOException {
+	public static void main(final String[] args) throws IOException {
 		FMCoreLibrary.getInstance().install();
 		// for (int i = 3; i < values.length; i++) {
 
-		UmlRecogPreparator umlRecogPreparator = new UmlRecogPreparator();
+		final UmlRecogPreparator umlRecogPreparator = new UmlRecogPreparator();
 
 		System.out.println("Processing \"" + benchmark + "\"");
 
-		long start = System.currentTimeMillis();
+		final long start = System.currentTimeMillis();
 
 		umlRecogPreparator.run();
 
@@ -127,34 +127,33 @@ public class UmlRecogPreparator {
 	private void run() throws IOException {
 		// Initialization
 		loadModelsAndRules();
-		Copier oldModel = copyModel();
-		Map<EObject, String> presenceConditions = new HashMap<>();
-		MultiVarEGraph graph = new SecPLUtil().createEGraphAndCollectPCs(this.modelResource.getContents(),
-				presenceConditions, FeatureModelHelper.getFMExpressionAsCNF(this.modelFM));
+		final Copier oldModel = copyModel();
+		final MultiVarEGraph graph = new SecPLUtil().createEGraphAndCollectPCs(this.modelResource.getContents(),
+				this.modelFM);
 		System.out.println("initialization done");
 
 		// Find interesting matches, i.e., those whose Phi-Apply value is not
 		// "true"
-		Map<Rule, MultiVarMatch> matches = findMatchesWherePhiApplyIsNotTrue(graph);
+		final Map<Rule, MultiVarMatch> matches = findMatchesWherePhiApplyIsNotTrue(graph);
 
 		// Perform rule applications and save results
-		List<Change> resultChanges = new ArrayList<>();
-		List<Rule> appliedRules = applyRules(graph, matches, resultChanges);
-		SymmetricDifference symmetric = createSymmetricDifference(oldModel, resultChanges);
+		final List<Change> resultChanges = new ArrayList<>();
+		final List<Rule> appliedRules = applyRules(graph, matches, resultChanges);
+		final SymmetricDifference symmetric = createSymmetricDifference(oldModel, resultChanges);
 		saveResults(oldModel, graph, symmetric, appliedRules);
 	}
 
-	private Map<Node, List<EObject>> findElementsWithPC(List<Conditional_Element> pcs, final Rule rule,
-			Map<EClass, LinkedList<EObject>> mapping) {
-		Map<EClass, List<EClass>> subclasses = getInheritanceTree(UMLPackage.eINSTANCE);
+	private Map<Node, List<EObject>> findElementsWithPC(final List<Conditional_Element> pcs, final Rule rule,
+			final Map<EClass, LinkedList<EObject>> mapping) {
+		final Map<EClass, List<EClass>> subclasses = getInheritanceTree(UMLPackage.eINSTANCE);
 
-		Map<Node, List<EObject>> result = new HashMap<>();
-		for (Node node : rule.getLhs().getNodes()) {
-			LinkedList<EObject> nodeResult = new LinkedList<>();
-			Stack<EClass> todo = new Stack<>();
+		final Map<Node, List<EObject>> result = new HashMap<>();
+		for (final Node node : rule.getLhs().getNodes()) {
+			final LinkedList<EObject> nodeResult = new LinkedList<>();
+			final Stack<EClass> todo = new Stack<>();
 			todo.add(node.getType());
 			while (!todo.isEmpty()) {
-				EClass type = todo.pop();
+				final EClass type = todo.pop();
 				nodeResult.addAll(findType(mapping, pcs, type));
 				if (subclasses.containsKey(type)) {
 					todo.addAll(subclasses.get(type));
@@ -165,12 +164,12 @@ public class UmlRecogPreparator {
 		return result;
 	}
 
-	public Map<EClass, List<EClass>> getInheritanceTree(EPackage ePackage) {
-		Map<EClass, List<EClass>> subclasses = new HashMap<>();
-		for (EClassifier classifier : ePackage.getEClassifiers()) {
+	public Map<EClass, List<EClass>> getInheritanceTree(final EPackage ePackage) {
+		final Map<EClass, List<EClass>> subclasses = new HashMap<>();
+		for (final EClassifier classifier : ePackage.getEClassifiers()) {
 			if (classifier instanceof EClass) {
-				EClass eclass = (EClass) classifier;
-				for (EClass e : eclass.getEAllSuperTypes()) {
+				final EClass eclass = (EClass) classifier;
+				for (final EClass e : eclass.getEAllSuperTypes()) {
 					if (e.getEPackage() instanceof UMLPackage) {
 
 						List<EClass> sub;
@@ -188,14 +187,14 @@ public class UmlRecogPreparator {
 		return subclasses;
 	}
 
-	public List<EObject> findType(Map<EClass, LinkedList<EObject>> mapping, List<Conditional_Element> pcs,
-			EClass type) {
+	public List<EObject> findType(final Map<EClass, LinkedList<EObject>> mapping, final List<Conditional_Element> pcs,
+			final EClass type) {
 		if (mapping.containsKey(type)) {
 			return mapping.get(type);
 		} else {
-			LinkedList<EObject> matches = new LinkedList<>();
+			final LinkedList<EObject> matches = new LinkedList<>();
 			for (int i = pcs.size() - 1; i > 0; i--) {
-				Conditional_Element pc = pcs.get(i);
+				final Conditional_Element pc = pcs.get(i);
 				if (type.equals(pc.getBase_Element().eClass())) {
 					matches.add(pc.getBase_Element());
 					pcs.remove(i);
@@ -207,13 +206,13 @@ public class UmlRecogPreparator {
 	}
 
 	private void loadModelsAndRules() throws IOException {
-		HenshinResourceSet rs = new HenshinResourceSet(henshinDirectory.getPath());
+		final HenshinResourceSet rs = new HenshinResourceSet(henshinDirectory.getPath());
 
 		UMLPackage.eINSTANCE.eClass();
 		rs.getPackageRegistry().put(UMLPackage.eINSTANCE.getNsURI(), UMLPackage.eINSTANCE);
 		VariabilityPackage.eINSTANCE.eClass();
 		rs.getPackageRegistry().put(VariabilityPackage.eINSTANCE.getNsURI(), VariabilityPackage.eINSTANCE);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("uml", new UMLResourceFactoryImpl());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(UMLResource.FILE_EXTENSION, UMLResource.Factory.INSTANCE);
 
 		this.modelFM = FeatureModelManager.getInstance(fmFile.toPath()).getObject();
 		this.modelResource = rs.createResource(umlFile.getName());
@@ -223,7 +222,7 @@ public class UmlRecogPreparator {
 	}
 
 	private Copier copyModel() {
-		Copier oldModel = new Copier();
+		final Copier oldModel = new Copier();
 		oldModel.copyAll(this.modelResource.getContents());
 		oldModel.copyReferences();
 		return oldModel;
@@ -235,13 +234,13 @@ public class UmlRecogPreparator {
 	 * @param match
 	 * @param rule
 	 */
-	private void prepareMatch(Match match, Rule rule) {
-		for (Parameter parameter : rule.getParameters()) {
+	private void prepareMatch(final Match match, final Rule rule) {
+		for (final Parameter parameter : rule.getParameters()) {
 			if (match.getParameterValue(parameter) == null) {
-				EClassifier type = parameter.getType();
+				final EClassifier type = parameter.getType();
 				Object value = null;
 				if (type.getName().contentEquals("String")) {
-					value = new String("RandString" + (int) (Math.random() * 1000));
+					value = ("RandString" + (int) (Math.random() * 1000));
 				}
 				if (type.getName().contentEquals("Boolean")) {
 					value = Boolean.TRUE;
@@ -261,22 +260,22 @@ public class UmlRecogPreparator {
 	}
 
 	@SuppressWarnings("unused")
-	private Map<Rule, MultiVarMatch> findMatchesWherePhiApplyIsNotTrue(MultiVarEGraph graph) {
+	private Map<Rule, MultiVarMatch> findMatchesWherePhiApplyIsNotTrue(final MultiVarEGraph graph) {
 		int countSuccess = 0;
 		int countFail = 0;
 		int countBaseMatchRules = 0;
 		int countRules = 0;
 
 		// Caches for Elements with PC
-		HashMap<EClass, LinkedList<EObject>> mapping = new HashMap<>();
-		List<Conditional_Element> pcs = getPCs(graph);
+		final HashMap<EClass, LinkedList<EObject>> mapping = new HashMap<>();
+		final List<Conditional_Element> pcs = getPCs(graph);
 
-		Map<Rule, MultiVarMatch> matches = new LinkedHashMap<>();
+		final Map<Rule, MultiVarMatch> matches = new LinkedHashMap<>();
 
-		int engineReinitializations = 0;
-		MultiVarEngine engine = new MultiVarEngine();
+		final int engineReinitializations = 0;
+		final MultiVarEngine engine = new MultiVarEngine();
 
-		for (Unit unit : this.module.getUnits()) {
+		for (final Unit unit : this.module.getUnits()) {
 			// Skip the following rules which seem to be defective
 			if (unit.getName().startsWith("createConstraint_IN_Transition")
 					|| unit.getName().startsWith("createLiteralInteger")
@@ -290,38 +289,56 @@ public class UmlRecogPreparator {
 					|| unit.getName().equals("removeFromAssociation_memberEnd_Property") // change not allowed in UML
 					|| unit.getName().equals("setTypedElement_type_TO_Type") // reason extremely long execution
 					|| unit.getName().equals("createAssociation_IN_Class") // reason extremely long execution
-					|| unit.getName().equals("moveOperation_FROM_Class_ownedOperation_TO_Class_Class") // reason extremely long execution
-					|| unit.getName().equals("moveLiteralInteger_FROM_MultiplicityElement_lowerValue_TO_MultiplicityElement_MultiplicityElement") // reason extremely long execution
-					|| unit.getName().equals("moveComment_FROM_Element_ownedComment_TO_Element_Element") // reason extremely long execution
-					|| unit.getName().equals("moveOperation_FROM_Class_ownedOperation_TO_Class_Class0") // reason extremely long execution
-					|| unit.getName().equals("setOperation_bodyCondition_TO_Constraint") // reason extremely long execution
-					|| unit.getName().equals("moveConstraint_FROM_Namespace_ownedRule_TO_Namespace_Namespace") // reason extremely long execution
+					|| unit.getName().equals("moveOperation_FROM_Class_ownedOperation_TO_Class_Class") // reason
+					// extremely
+					// long
+					// execution
+					|| unit.getName().equals(
+							"moveLiteralInteger_FROM_MultiplicityElement_lowerValue_TO_MultiplicityElement_MultiplicityElement") // reason
+					// extremely
+					// long
+					// execution
+					|| unit.getName().equals("moveComment_FROM_Element_ownedComment_TO_Element_Element") // reason
+					// extremely
+					// long
+					// execution
+					|| unit.getName().equals("moveOperation_FROM_Class_ownedOperation_TO_Class_Class0") // reason
+					// extremely
+					// long
+					// execution
+					|| unit.getName().equals("setOperation_bodyCondition_TO_Constraint") // reason extremely long
+					// execution
+					|| unit.getName().equals("moveConstraint_FROM_Namespace_ownedRule_TO_Namespace_Namespace") // reason
+					// extremely
+					// long
+					// execution
 					) {
 				continue;
 			}
-			System.out.println(this.dateFormat.format(new Date(System.currentTimeMillis())) + " - Process rule: "+unit.getName());
-			Rule rule = (Rule) unit;
+			System.out.println(this.dateFormat.format(new Date(System.currentTimeMillis())) + " - Process rule: "
+					+ unit.getName());
+			final Rule rule = (Rule) unit;
 			countRules++;
 
-			Map<Node, List<EObject>> elements = findElementsWithPC(pcs, rule, mapping);
+			final Map<Node, List<EObject>> elements = findElementsWithPC(pcs, rule, mapping);
 			int size = 0;
-			for (List<EObject> val : elements.values()) {
+			for (final List<EObject> val : elements.values()) {
 				size += val.size();
 			}
 			if (size == 0) {
 				continue;
 			}
 
-			long startRule = System.currentTimeMillis();
+			final long startRule = System.currentTimeMillis();
 			countBaseMatchRules++;
 
-			for (Entry<Node, List<EObject>> entry : elements.entrySet()) {
-				Node node = entry.getKey();
-				for (EObject target : entry.getValue()) {
-					Match baseMatch = new MatchImpl(rule);
+			for (final Entry<Node, List<EObject>> entry : elements.entrySet()) {
+				final Node node = entry.getKey();
+				for (final EObject target : entry.getValue()) {
+					final Match baseMatch = new MatchImpl(rule);
 					baseMatch.setNodeTarget(node, target);
 
-					Lifting lifting = new Lifting(graph);
+					final Lifting lifting = new Lifting(graph);
 
 					MultiVarMatch usedMatch = null;
 
@@ -340,8 +357,8 @@ public class UmlRecogPreparator {
 					Iterator<? extends MultiVarMatch> it;
 					it = engine.findMatches(rule, graph, baseMatch).iterator();
 					if (it.hasNext()) {
-						MultiVarMatch first = it.next();
-						String phiApply = lifting.computePhiApply(first).toString().trim();
+						final MultiVarMatch first = it.next();
+						final String phiApply = lifting.computePhiApply(first).toString().trim();
 						if (!phiApply.equalsIgnoreCase("true")) {
 							usedMatch = first;
 						}
@@ -358,23 +375,23 @@ public class UmlRecogPreparator {
 
 				}
 			}
-			String message = this.dateFormat.format(new Date(System.currentTimeMillis())) + " - " + countRules + "/"
-					+ this.module.getUnits().size() + " rule, " + countBaseMatchRules + " baseMatchRules, duration: "
-					+ (System.currentTimeMillis() - startRule) + "ms";
+			final String message = this.dateFormat.format(new Date(System.currentTimeMillis())) + " - " + countRules
+					+ "/" + this.module.getUnits().size() + " rule, " + countBaseMatchRules
+					+ " baseMatchRules, duration: " + (System.currentTimeMillis() - startRule) + "ms";
 			System.out.println(message);
 		}
 		System.out.println("Rules with base match: " + countBaseMatchRules);
 		return matches;
 	}
 
-	private List<Conditional_Element> getPCs(EGraphImpl graph) {
-		List<Conditional_Element> pcs = new LinkedList<>();
-		HashSet<Resource> seen = new HashSet<>();
-		for (EObject root : graph.getRoots()) {
-			Resource resource = root.eResource();
-			if (resource != null && !seen.contains(resource)) {
+	private List<Conditional_Element> getPCs(final EGraphImpl graph) {
+		final List<Conditional_Element> pcs = new LinkedList<>();
+		final HashSet<Resource> seen = new HashSet<>();
+		for (final EObject root : graph.getRoots()) {
+			final Resource resource = root.eResource();
+			if ((resource != null) && !seen.contains(resource)) {
 				seen.add(resource);
-				for (EObject eObject : resource.getContents()) {
+				for (final EObject eObject : resource.getContents()) {
 					if (eObject instanceof Conditional_Element) {
 						pcs.add((Conditional_Element) eObject);
 					}
@@ -384,34 +401,36 @@ public class UmlRecogPreparator {
 		return pcs;
 	}
 
-	private List<Rule> applyRules(MultiVarEGraph graph, Map<Rule, MultiVarMatch> matches, List<Change> resultChanges) {
-		List<Rule> rules = new ArrayList<>(matches.keySet());
-		List<Rule> appliedRules = new ArrayList<>();
+	private List<Rule> applyRules(final MultiVarEGraph graph, final Map<Rule, MultiVarMatch> matches,
+			final List<Change> resultChanges) {
+		final List<Rule> rules = new ArrayList<>(matches.keySet());
+		final List<Rule> appliedRules = new ArrayList<>();
 		// for (int i = 0; i < 5; i++) {
 		// int index = (int) (rules.size() * Math.random());
 		// Rule rule = rules.get(index);
 
-		for (Rule rule : rules) {
-			MultiVarMatch match = matches.get(rule);
+		for (final Rule rule : rules) {
+			final MultiVarMatch match = matches.get(rule);
 
 			if (rule.getName().startsWith("move")) {
-				boolean applicible = checkForCycleInContainmentHieracy(rule, match);
+				final boolean applicible = checkForCycleInContainmentHieracy(rule, match);
 				if (!applicible) {
 					continue;
 				}
 			}
 
 			System.out.println("Applying rule \"" + rule + "\" to match:\n" + match);
-			Lifting lifting = new Lifting(graph);
-			MultiVarMatch liftedMatch = lifting.liftMatch(match);
+			final Lifting lifting = new Lifting(graph);
+			final MultiVarMatch liftedMatch = lifting.liftMatch(match);
 
 			if (liftedMatch != null) {
-				CompoundChangeImpl change = (CompoundChangeImpl)  new MultiVarEngine().createChange(rule, graph, liftedMatch, null);
+				final CompoundChangeImpl change = (CompoundChangeImpl) new MultiVarEngine().createChange(rule, graph,
+						liftedMatch, null);
 				change.applyAndReverse();
 				boolean isDetectableChange = true;
-				for (Change subChange : change.getChanges()) {
-					if (subChange instanceof AttributeChangeImpl
-							&& ((AttributeChangeImpl) subChange).getAttribute() == null) {
+				for (final Change subChange : change.getChanges()) {
+					if ((subChange instanceof AttributeChangeImpl)
+							&& (((AttributeChangeImpl) subChange).getAttribute() == null)) {
 						isDetectableChange = false;
 						// else if (subChange instanceof ReferenceChangeImpl
 						// && ((ReferenceChangeImpl) subChange).getReference() ==
@@ -420,7 +439,7 @@ public class UmlRecogPreparator {
 					}
 				}
 
-				for (EObject e : match.getNodeTargets()) {
+				for (final EObject e : match.getNodeTargets()) {
 					// Drop changes which remove a matched EObject from a
 					// resource
 					if (e.eResource() == null) {
@@ -442,13 +461,13 @@ public class UmlRecogPreparator {
 		return appliedRules;
 	}
 
-	private boolean checkForCycleInContainmentHieracy(Rule rule, Match match) {
+	private boolean checkForCycleInContainmentHieracy(final Rule rule, final Match match) {
 		boolean applicible = true;
-		for (Edge edge : rule.getRhs().getEdges()) {
-			Action action = edge.getAction();
+		for (final Edge edge : rule.getRhs().getEdges()) {
+			final Action action = edge.getAction();
 			if (action.getType() == Type.CREATE) {
-				Node src = edge.getSource();
-				EObject nodeTarget = match.getNodeTarget(src.getActionNode());
+				final Node src = edge.getSource();
+				final EObject nodeTarget = match.getNodeTarget(src.getActionNode());
 				EObject next = nodeTarget.eContainer();
 				while (next != null) {
 					if (match.getNodeTargets().contains(next)) {
@@ -465,15 +484,15 @@ public class UmlRecogPreparator {
 		return applicible;
 	}
 
-	private SymmetricDifference createSymmetricDifference(Copier new2old, List<Change> resultChanges) {
-		SymmetricFactory factory = SymmetricFactory.eINSTANCE;
-		SymmetricDifference result = factory.createSymmetricDifference();
-		Map<EObject, EObject> new2cor = new HashMap<>();
-		Map<EObject, EObject> old2new = new HashMap<>();
+	private SymmetricDifference createSymmetricDifference(final Copier new2old, final List<Change> resultChanges) {
+		final SymmetricFactory factory = SymmetricFactory.eINSTANCE;
+		final SymmetricDifference result = factory.createSymmetricDifference();
+		final Map<EObject, EObject> new2cor = new HashMap<>();
+		final Map<EObject, EObject> old2new = new HashMap<>();
 
 		// Init lists
-		for (Entry<EObject, EObject> entry : new2old.entrySet()) {
-			Correspondence cor = factory.createCorrespondence();
+		for (final Entry<EObject, EObject> entry : new2old.entrySet()) {
+			final Correspondence cor = factory.createCorrespondence();
 			cor.setObjA(entry.getValue());
 			cor.setObjB(entry.getKey());
 			cor.setReliability(1.0F);
@@ -483,17 +502,17 @@ public class UmlRecogPreparator {
 		}
 
 		// Create changes
-		List<symmetric.Change> changes = new ArrayList<>();
-		for (Change compound : resultChanges) {
-			for (Change change : ((CompoundChangeImpl) compound).getChanges()) {
+		final List<symmetric.Change> changes = new ArrayList<>();
+		for (final Change compound : resultChanges) {
+			for (final Change change : ((CompoundChangeImpl) compound).getChanges()) {
 				if (change instanceof ObjectChangeImpl) {
-					ObjectChangeImpl ch = (ObjectChangeImpl) change;
+					final ObjectChangeImpl ch = (ObjectChangeImpl) change;
 					createObjectChanges(new2old, old2new, factory, result, new2cor, changes, ch);
 				} else if (change instanceof ReferenceChangeImpl) {
-					ReferenceChangeImpl ch = (ReferenceChangeImpl) change;
+					final ReferenceChangeImpl ch = (ReferenceChangeImpl) change;
 					createReferenceChanges(new2old, old2new, factory, changes, ch);
 				} else if (change instanceof AttributeChangeImpl) {
-					AttributeChangeImpl ch = (AttributeChangeImpl) change;
+					final AttributeChangeImpl ch = (AttributeChangeImpl) change;
 					createAttributeChanges(new2old, factory, changes, ch);
 				} else {
 					throw new RuntimeException("Unsupported change type!");
@@ -514,40 +533,40 @@ public class UmlRecogPreparator {
 		return result;
 	}
 
-	private void createAttributeChanges(Copier new2old, SymmetricFactory factory, List<symmetric.Change> changes,
-			AttributeChangeImpl ch) {
-		AttributeValueChange attrValueChange = factory.createAttributeValueChange();
-		EAttribute attribute = ch.getAttribute();
+	private void createAttributeChanges(final Copier new2old, final SymmetricFactory factory,
+			final List<symmetric.Change> changes, final AttributeChangeImpl ch) {
+		final AttributeValueChange attrValueChange = factory.createAttributeValueChange();
+		final EAttribute attribute = ch.getAttribute();
 		attrValueChange.setObjB(ch.getObject());
 		attrValueChange.setObjA(new2old.get(ch.getObject()));
 		attrValueChange.setType(attribute);
 		changes.add(attrValueChange);
 	}
 
-	private void createReferenceChanges(Copier new2old, Map<EObject, EObject> old2new, SymmetricFactory factory,
-			List<symmetric.Change> changes, ReferenceChangeImpl ch) {
-		EReference reference = ch.getReference();
+	private void createReferenceChanges(final Copier new2old, final Map<EObject, EObject> old2new,
+			final SymmetricFactory factory, final List<symmetric.Change> changes, final ReferenceChangeImpl ch) {
+		final EReference reference = ch.getReference();
 
 		if (reference.isMany()) {
 			if (!ch.isCreate()) { // -> created (REVERSED!)
-				AddReference addReference = factory.createAddReference();
+				final AddReference addReference = factory.createAddReference();
 				addReference.setTgt(ch.getTarget());
 				addReference.setSrc(ch.getSource());
 				addReference.setType(reference);
 				changes.add(addReference);
 
-				if (reference.isContainment() && new2old.get(ch.getTarget()) != null) {
-					RemoveReference removeReference = factory.createRemoveReference();
-					EObject oldTarget = new2old.get(ch.getTarget());
+				if (reference.isContainment() && (new2old.get(ch.getTarget()) != null)) {
+					final RemoveReference removeReference = factory.createRemoveReference();
+					final EObject oldTarget = new2old.get(ch.getTarget());
 					removeReference.setSrc(oldTarget.eContainer());
 					removeReference.setTgt(oldTarget);
 					removeReference.setType(oldTarget.eContainmentFeature());
 					changes.add(removeReference);
 				}
 			} else if (ch.isCreate()) { // -> deleted (REVERSED)
-				RemoveReference removeReference = factory.createRemoveReference();
-				EObject oldSource = new2old.get(ch.getSource());
-				EObject oldTarget = new2old.get(ch.getTarget());
+				final RemoveReference removeReference = factory.createRemoveReference();
+				final EObject oldSource = new2old.get(ch.getSource());
+				final EObject oldTarget = new2old.get(ch.getTarget());
 				removeReference.setSrc(oldSource);
 				removeReference.setTgt(oldTarget);
 				removeReference.setType(reference);
@@ -555,25 +574,25 @@ public class UmlRecogPreparator {
 			}
 		} else if (!reference.isMany()) {
 			if (ch.isCreate()) { // -> created (NOT REVERSED!)
-				AddReference addReference = factory.createAddReference();
+				final AddReference addReference = factory.createAddReference();
 				addReference.setTgt(ch.getTarget());
 				addReference.setSrc(ch.getSource());
 				addReference.setType(reference);
 				changes.add(addReference);
 
 				if (ch.getTarget() != null) {
-					RemoveReference removeReference = factory.createRemoveReference();
-					EObject oldSource = new2old.get(ch.getSource());
-					EObject oldTarget = new2old.get(ch.getTarget());
+					final RemoveReference removeReference = factory.createRemoveReference();
+					final EObject oldSource = new2old.get(ch.getSource());
+					final EObject oldTarget = new2old.get(ch.getTarget());
 					removeReference.setSrc(oldSource);
 					removeReference.setTgt(oldTarget);
 					removeReference.setType(reference);
 					changes.add(removeReference);
 				}
 			} else if (!ch.isCreate()) { // > deleted (NOT REVERSED!)
-				RemoveReference removeReference = factory.createRemoveReference();
-				EObject oldSource = new2old.get(ch.getSource());
-				EObject oldTarget = new2old.get(ch.getTarget()); // REVERSED
+				final RemoveReference removeReference = factory.createRemoveReference();
+				final EObject oldSource = new2old.get(ch.getSource());
+				final EObject oldTarget = new2old.get(ch.getTarget()); // REVERSED
 				removeReference.setSrc(oldSource);
 				removeReference.setTgt(oldTarget);
 				removeReference.setType(reference);
@@ -583,28 +602,28 @@ public class UmlRecogPreparator {
 
 	}
 
-	private void createObjectChanges(Copier new2old, Map<EObject, EObject> old2new, SymmetricFactory factory,
-			SymmetricDifference result, Map<EObject, EObject> new2cor, List<symmetric.Change> changes,
-			ObjectChangeImpl ch) {
+	private void createObjectChanges(final Copier new2old, final Map<EObject, EObject> old2new,
+			final SymmetricFactory factory, final SymmetricDifference result, final Map<EObject, EObject> new2cor,
+			final List<symmetric.Change> changes, final ObjectChangeImpl ch) {
 		if (!ch.isCreate()) { // negated because object changes are
 			// reversed
-			AddObject addObject = factory.createAddObject();
+			final AddObject addObject = factory.createAddObject();
 			addObject.setObj(ch.getObject());
 			changes.add(addObject);
 
-			AddReference addReference = factory.createAddReference();
+			final AddReference addReference = factory.createAddReference();
 			addReference.setSrc(ch.getObject().eContainer());
 			addReference.setTgt(ch.getObject());
 			addReference.setType(ch.getObject().eContainmentFeature());
 			changes.add(addReference);
 		} else {
-			RemoveObject removeObject = factory.createRemoveObject();
-			EObject oldObject = new2old.get(ch.getObject());
+			final RemoveObject removeObject = factory.createRemoveObject();
+			final EObject oldObject = new2old.get(ch.getObject());
 			removeObject.setObj(oldObject);
 			changes.add(removeObject);
 			result.getCorrespondences().remove(new2cor.get(ch.getObject()));
 
-			RemoveReference removeReference = factory.createRemoveReference();
+			final RemoveReference removeReference = factory.createRemoveReference();
 			removeReference.setSrc(oldObject.eContainer());
 			removeReference.setTgt(oldObject);
 			removeReference.setType(oldObject.eContainmentFeature());
@@ -612,29 +631,29 @@ public class UmlRecogPreparator {
 		}
 	}
 
-	private void saveResults(Copier oldModel, EGraphImpl graph, SymmetricDifference symmetric, List<Rule> appliedRules)
-			throws IOException {
-		HenshinResourceSet resourceSet = new HenshinResourceSet(new Path(outputPathPart1).toOSString());
+	private void saveResults(final Copier oldModel, final EGraphImpl graph, final SymmetricDifference symmetric,
+			final List<Rule> appliedRules) throws IOException {
+		final HenshinResourceSet resourceSet = new HenshinResourceSet(new Path(outputPathPart1).toOSString());
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
 
-		File file = new File(outputPathPart1 + outputPathPart2);
+		final File file = new File(outputPathPart1 + outputPathPart2);
 		file.mkdirs();
-		FileWriter writer = new FileWriter(new File(file, "appliedRules"));
-		for (Rule rule : appliedRules) {
+		final FileWriter writer = new FileWriter(new File(file, "appliedRules"));
+		for (final Rule rule : appliedRules) {
 			writer.write(rule.getName());
 			writer.write('\n');
 		}
 		writer.close();
 
-		Resource res1 = resourceSet.createResource(outputPathPart2 + "1.uml");
-		Resource res2 = resourceSet.createResource(outputPathPart2 + "2.uml");
-		for (EObject root : graph.getRoots()) {
+		final Resource res1 = resourceSet.createResource(outputPathPart2 + "1.uml");
+		final Resource res2 = resourceSet.createResource(outputPathPart2 + "2.uml");
+		for (final EObject root : graph.getRoots()) {
 			if (!(root instanceof EPackage) && !(root instanceof EFactory) && !(root instanceof PrimitiveType)
 					&& !(root instanceof EFactory) && !(root instanceof EFactory) && !(root instanceof Profile)) {
 				res2.getContents().add(root);
 			}
 		}
-		for (EObject old : oldModel.values()) {
+		for (final EObject old : oldModel.values()) {
 			if (old.eContainer() == null) {
 				res1.getContents().add(old);
 			}

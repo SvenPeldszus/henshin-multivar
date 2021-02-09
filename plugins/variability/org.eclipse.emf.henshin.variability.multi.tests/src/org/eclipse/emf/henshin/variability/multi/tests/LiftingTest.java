@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.henshin.model.Module;
@@ -26,39 +27,48 @@ public class LiftingTest {
 
 	@Test
 	public void liftNAC() throws InconsistentRuleException {
-		HenshinResourceSet rs = new HenshinResourceSet();
+		final HenshinResourceSet rs = new HenshinResourceSet();
 		rs.getPackageRegistry().put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
 		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("uml", new XMIResourceFactoryImpl());
 
-		Resource model = rs.getResource("models/Inheritance.uml");
-		Module module = rs.getModule("rules/nac.henshin");
-		Rule rule = module.getAllRules().get(0);
-
-		MultiVarProcessor multiVarProcessor = new MultiVarProcessor() {
-
-			@Override
-			public void writePCsToModel(MultiVarEGraph graphP) {
-
-			}
+		final Resource model = rs.getResource("models/Inheritance.uml");
+		final Module module = rs.getModule("rules/nac.henshin");
+		final Rule rule = module.getAllRules().get(0);
+		final MultiVarProcessor<EPackage,String> multiVarProcessor = new MultiVarProcessor<EPackage,String>() {
 
 			@Override
-			public MultiVarEGraph createEGraphAndCollectPCs(List<EObject> roots, final Map<EObject, String> pcsP,
-					String fmP) {
-				for (EObject e : roots) {
+			public final MultiVarEGraph createEGraphAndCollectPCs(final List<EObject> roots, final String fmP) {
+				final Map<EObject, String> pcs = new HashMap<>();
+				for (final EObject e : roots) {
 					e.eAllContents().forEachRemaining(c -> {
 						if (c instanceof Generalization) {
-							pcsP.put(c, "A");
+							pcs.put(c, "A");
 						}
 					});
 				}
-				return new MultiVarEGraph(roots, pcsP, fmP);
+				return new MultiVarEGraph(roots, pcs, fmP);
+			}
+
+			@Override
+			public void writePCsToModel(final MultiVarEGraph graphP) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public final MultiVarEGraph createEGraphAndCollectPCs(final HenshinResourceSet set, final String modelLocation,
+					final String featureModelLocation) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public EPackage getEPackage() {
+				throw new UnsupportedOperationException();
 			}
 		};
-		MultiVarEGraph graph = multiVarProcessor.createEGraphAndCollectPCs(model.getContents(),
-				new HashMap<EObject, String>(), "A | B");
+		final MultiVarEGraph graph = multiVarProcessor.createEGraphAndCollectPCs(model.getContents(), "A | B");
 		new MultiVarExecution(multiVarProcessor, new MultiVarEngine()).transformSPL(rule, graph);
 
-		long added = graph.getPCS().keySet().parallelStream().filter(Comment.class::isInstance).count();
+		final long added = graph.getPCS().keySet().parallelStream().filter(Comment.class::isInstance).count();
 		assertEquals(3, added);
 
 	}

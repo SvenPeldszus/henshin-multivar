@@ -66,11 +66,11 @@ public class MultiVarMatcher extends VBMatcher {
 
 			// Create the rules for NACs and PACs
 			final List<ACRule> nacRules = this.acMatcher
-					.createACRules(getNotRejectedConditions(prep, this.acMatcher.getNACs())).map(acr -> acr.prepare(prep))
-					.collect(Collectors.toList());
+					.createACRules(getNotRejectedConditions(prep, this.acMatcher.getNACs()))
+					.map(acr -> acr.prepare(prep)).collect(Collectors.toList());
 			final List<ACRule> pacRules = this.acMatcher
-					.createACRules(getNotRejectedConditions(prep, this.acMatcher.getPACs())).map(acr -> acr.prepare(prep))
-					.collect(Collectors.toList());
+					.createACRules(getNotRejectedConditions(prep, this.acMatcher.getPACs()))
+					.map(acr -> acr.prepare(prep)).collect(Collectors.toList());
 
 			for (final BaseMatch basePreMatch : liftableBaseMatches) {
 				// but remove base NAC rules that didn't match as they cannot match with more
@@ -126,12 +126,12 @@ public class MultiVarMatcher extends VBMatcher {
 		// }
 		final Match originalRuleMatch = preparator.getMatchOnOriginalRule(match);
 		final Map<Rule, Iterator<Match>> pacMatchMap = this.acMatcher.getPACMatches(pacRules, originalRuleMatch,
-				preparator, this.graph);
+				this.graph);
 		if (pacMatchMap == null) {
 			return null;
 		}
 		final Map<Rule, Collection<Match>> nacMatchMap = this.acMatcher.getNACMatches(nacRules, originalRuleMatch,
-				preparator, this.graph);
+				this.graph);
 
 		return getLifting().liftMatch(new MultiVarMatch(match, preparator,
 				ApplicationConditionMatcher.getAllMatches(pacMatchMap), nacMatchMap));
@@ -148,8 +148,10 @@ public class MultiVarMatcher extends VBMatcher {
 	private Collection<BaseMatch> findLiftableBaseMatches(final Set<Match> basePreMatches) {
 		final PreparedVBRule baseRule = this.rulePreparator.getBaseRule();
 
-		final List<ACRule> baseNacRules = this.acMatcher.createACRules(getBaseNACs()).map(r -> r.prepare(baseRule)).collect(Collectors.toList());
-		final List<ACRule> basePacRules = this.acMatcher.createACRules(getBasePACs()).map(r -> r.prepare(baseRule)).collect(Collectors.toList());
+		final List<ACRule> baseNacRules = this.acMatcher.createACRules(getBaseNACs()).map(r -> r.prepare(baseRule))
+				.collect(Collectors.toList());
+		final List<ACRule> basePacRules = this.acMatcher.createACRules(getBasePACs()).map(r -> r.prepare(baseRule))
+				.collect(Collectors.toList());
 
 		// Line 2: iterate over all base-matches
 		final Collection<BaseMatch> liftableBaseMatches = new LinkedList<>();
@@ -160,12 +162,11 @@ public class MultiVarMatcher extends VBMatcher {
 			// If there is no base-match the rule is liftable in all cases
 			// (optimization for too many base-matches)
 			if (basePreMatch != null) {
-				nacMatches = this.acMatcher.getNACMatches(baseNacRules, basePreMatch, baseRule,
-						this.graph);
+				nacMatches = this.acMatcher.getNACMatches(baseNacRules, basePreMatch, this.graph);
 
 				// Line 3: calculate Phi_apply and AND FM from Line 4
 				final Map<Rule, Iterator<Match>> pacMatches = this.acMatcher.getPACMatches(basePacRules, basePreMatch,
-						baseRule, this.graph);
+						this.graph);
 				if (pacMatches == null) {
 					continue;
 				}

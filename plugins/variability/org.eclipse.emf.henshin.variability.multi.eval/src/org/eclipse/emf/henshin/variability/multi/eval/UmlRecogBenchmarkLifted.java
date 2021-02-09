@@ -20,7 +20,6 @@ import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.model.Unit;
 import org.eclipse.emf.henshin.model.resource.HenshinResourceSet;
 import org.eclipse.emf.henshin.variability.InconsistentRuleException;
-import org.eclipse.emf.henshin.variability.multi.FeatureModelHelper;
 import org.eclipse.emf.henshin.variability.multi.MultiVarEGraph;
 import org.eclipse.emf.henshin.variability.multi.MultiVarEngine;
 import org.eclipse.emf.henshin.variability.multi.MultiVarExecution;
@@ -116,7 +115,6 @@ public class UmlRecogBenchmarkLifted extends UmlRecogBenchmark {
 		// Load the model into a graph:
 		final Path fmFile = new File(projectPath, FILE_NAME_INSTANCE_FEATURE_MODEL).toPath();
 		final IFeatureModel modelFM = FeatureModelManager.load(fmFile);
-		final String fmCNF = FeatureModelHelper.getFMExpressionAsCNF(modelFM);
 
 		final Resource res1 = rs.getResource(exampleID + "/" + FILE_NAME_INSTANCE_1);
 		final Resource res2 = rs.getResource(exampleID + "/" + FILE_NAME_INSTANCE_2);
@@ -126,8 +124,7 @@ public class UmlRecogBenchmarkLifted extends UmlRecogBenchmark {
 		final List<EObject> roots = new ArrayList<>(res1.getContents());
 		roots.addAll(res2.getContents());
 		roots.add(diff);
-		final Map<EObject, String> presenceConditions = new HashMap<>();
-		final MultiVarEGraph graph = new SecPLUtil().createEGraphAndCollectPCs(roots, presenceConditions, fmCNF);
+		final MultiVarEGraph graph = new SecPLUtil().createEGraphAndCollectPCs(roots, modelFM);
 
 		final int graphInitially = graph.size();
 		final MultiVarEngine engine = new MultiVarEngine();
