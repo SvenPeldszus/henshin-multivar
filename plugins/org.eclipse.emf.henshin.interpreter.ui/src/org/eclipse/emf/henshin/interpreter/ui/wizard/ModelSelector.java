@@ -57,11 +57,10 @@ public class ModelSelector {
 	protected Text uriField;
 
 	public ModelSelector(Composite parent, final IResource baseDir,
-			boolean output) {
+			String text, boolean generateFileSelectors) {
 
 		container = new Group(parent, SWT.NONE);
-		container.setText(HenshinInterpreterUIPlugin
-				.LL(output ? "_UI_OutputModel" : "_UI_InputModel"));
+		container.setText(text);
 		container.setLayout(new GridLayout(3, false));
 
 		GridData data;
@@ -83,7 +82,7 @@ public class ModelSelector {
 			}
 		});
 
-		if (!output) {
+		if (generateFileSelectors) {
 
 			Label label = new Label(container, SWT.NONE);
 			label.setText("");
@@ -178,6 +177,13 @@ public class ModelSelector {
 
 	public Button getBrowseFileSystemButton() {
 		return browseFileSystemButton;
+	}
+	
+	public void setEnabled(boolean enabled) {
+		if (browseWorkspaceButton != null) browseWorkspaceButton.setEnabled(enabled);
+		if (browseFileSystemButton != null)	browseFileSystemButton.setEnabled(enabled);
+		uriField.setEnabled(enabled);
+		container.setEnabled(enabled);
 	}
 	
 }

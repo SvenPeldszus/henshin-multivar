@@ -50,7 +50,7 @@ public class UnitSelector {
 		container = new Group(parent, SWT.NONE);
 		container.setText(HenshinInterpreterUIPlugin.LL("_UI_SelectTransformationUnit"));
 		container.setLayout(new FormLayout());
-		unitSelector = new Combo(container, SWT.NONE);
+		unitSelector = new Combo(container, SWT.READ_ONLY);
 		{
 			FormData data = new FormData();
 			data.top = new FormAttachment(0, CONTROL_OFFSET);
@@ -75,6 +75,7 @@ public class UnitSelector {
 			FormData data = new FormData();
 			data.top = new FormAttachment(unitSelector, CONTROL_OFFSET);
 			data.right = new FormAttachment(100, -CONTROL_OFFSET);
+			data.left = new FormAttachment(0, CONTROL_OFFSET);
 			unitFilter.setLayoutData(data);
 		}
 		
@@ -127,6 +128,10 @@ public class UnitSelector {
 
 	public Combo getUnitSelector() {
 		return unitSelector;
+	}
+	
+	public Button getUnitFilter() {
+		return unitFilter;
 	}
 	
 }

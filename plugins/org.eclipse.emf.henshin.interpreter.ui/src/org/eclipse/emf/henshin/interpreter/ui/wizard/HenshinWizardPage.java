@@ -8,6 +8,8 @@ import org.eclipse.emf.henshin.interpreter.ui.wizard.ModelSelector.ModelSelector
 import org.eclipse.emf.henshin.model.Module;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -43,6 +45,17 @@ public class HenshinWizardPage extends WizardPage {
 		unitSelector = new UnitSelector(container);
 		unitSelector.getControl().setLayoutData(
 				new GridData(SWT.FILL, SWT.FILL, true, false));
+		
+		parameterEditor = new ParameterEditTable((Composite)unitSelector.getControl());
+		{
+			FormData data = new FormData();
+			data.top = new FormAttachment(unitSelector.getUnitFilter(), 2*CONTROL_OFFSET);
+			data.left = new FormAttachment(0, CONTROL_OFFSET);
+			data.right = new FormAttachment(100, -CONTROL_OFFSET);
+			parameterEditor.getControl().setLayoutData(data);
+		}
+//		parameterEditor.getControl().setLayoutData(
+//				new GridData(SWT.FILL, SWT.FILL, true, true));
 
 		IResource selected = null;
 		if (module != null) {
@@ -51,11 +64,11 @@ public class HenshinWizardPage extends WizardPage {
 					.findMember(path);
 		}
 
-		inputSelector = new ModelSelector(container, selected, false);
+		inputSelector = new ModelSelector(container, selected, HenshinInterpreterUIPlugin.LL("_UI_InputModel"), true);
 		inputSelector.getControl().setLayoutData(
 				new GridData(SWT.FILL, SWT.FILL, true, false));
 
-		outputSelector = new ModelSelector(container, selected, true);
+		outputSelector = new ModelSelector(container, selected, HenshinInterpreterUIPlugin.LL("_UI_OutputModel"), false);
 		outputSelector.getControl().setLayoutData(
 				new GridData(SWT.FILL, SWT.FILL, true, false));
 
@@ -69,10 +82,6 @@ public class HenshinWizardPage extends WizardPage {
 				return true;
 			}
 		});
-
-		parameterEditor = new ParameterEditTable(container);
-		parameterEditor.getControl().setLayoutData(
-				new GridData(SWT.FILL, SWT.FILL, true, true));
 
 		openCompare = new Button(container, SWT.CHECK);
 		openCompare.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));

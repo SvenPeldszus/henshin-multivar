@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
@@ -145,5 +146,11 @@ public class SecPLUtil implements MultiVarProcessor<VariabilityPackage, IFeature
 	@Override
 	public VariabilityPackage getEPackage() {
 		return VariabilityPackage.eINSTANCE;
+	}
+
+	@Override
+	public MultiVarEGraph createEGraphAndCollectPCs(Resource resource, String featureModelLocation) {
+		final IFeatureModel fm = FeatureModelManager.load(Paths.get(featureModelLocation));
+		return createEGraphAndCollectPCs(resource.getContents(), fm);
 	}
 }

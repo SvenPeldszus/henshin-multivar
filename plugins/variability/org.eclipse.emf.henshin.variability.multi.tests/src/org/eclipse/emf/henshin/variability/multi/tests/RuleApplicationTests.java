@@ -92,6 +92,11 @@ public class RuleApplicationTests {
 			public EPackage getEPackage() {
 				throw new UnsupportedOperationException();
 			}
+
+			@Override
+			public MultiVarEGraph createEGraphAndCollectPCs(Resource resource, String featureModelLocation) {
+				throw new UnsupportedOperationException();
+			}
 		}.createEGraphAndCollectPCs(this.model.getContents(), null);
 		return new MultiVarEngine();
 	}

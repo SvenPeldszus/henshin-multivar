@@ -28,10 +28,25 @@ public class FigureVisibilityConcealingStrategy extends AbstractConcealingStrate
 	@Override
 	public void doConceal(AbstractGraphicalEditPart abstractEditPart) {
 		IFigure figure = getFigure(abstractEditPart);
-		if (!(abstractEditPart instanceof EdgeEditPart)) {
+		if (!(abstractEditPart instanceof ConnectionEditPart)) {
+			figure.setVisible(false);
 			figure = figure.getParent();
 		}
 		figure.setVisible(false);
 		figure.invalidate();
+		
+		for(Object connection : abstractEditPart.getSourceConnections()) {
+			if (connection instanceof AbstractGraphicalEditPart) {
+				IFigure fig = getFigure(((AbstractGraphicalEditPart) connection));
+				fig.setVisible(false);
+			}
+		}
+		
+		for(Object connection : abstractEditPart.getTargetConnections()) {
+			if (connection instanceof AbstractGraphicalEditPart) {
+				IFigure fig = getFigure(((AbstractGraphicalEditPart) connection));
+				fig.setVisible(false);
+			}
+		}
 	}
 }

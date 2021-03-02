@@ -2,8 +2,10 @@ package org.eclipse.emf.henshin.variability.multi;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.henshin.model.resource.HenshinResourceSet;
 
 /**
@@ -49,4 +51,6 @@ public interface MultiVarProcessor<D extends EPackage, F> {
 	 * @return The EPackage
 	 */
 	D getEPackage();
+
+	MultiVarEGraph createEGraphAndCollectPCs(Resource resource, String featureModelPath);
 }

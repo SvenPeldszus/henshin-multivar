@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.henshin.interpreter.ui.HenshinInterpreterUIPlugin;
 import org.eclipse.emf.henshin.interpreter.ui.util.ParameterConfig;
 import org.eclipse.emf.henshin.interpreter.ui.util.TransformOperation;
 import org.eclipse.emf.henshin.interpreter.ui.wizard.ModelSelector;
@@ -63,7 +64,7 @@ public class LaunchRuleControl {
 
 		if (module == null) {
 			// show file selector to select module
-			moduleSelector = new ModelSelector(container, selected, false);
+			moduleSelector = new ModelSelector(container, selected, "test", false);
 			moduleSelector.getControl().setLayoutData(
 					new GridData(SWT.FILL, SWT.FILL, true, false));
 			((Group) moduleSelector.getControl()).setText("Module (.henshin file)");
@@ -99,11 +100,11 @@ public class LaunchRuleControl {
 		unitSelector.getControl().setLayoutData(
 				new GridData(SWT.FILL, SWT.FILL, true, false));
 
-		inputSelector = new ModelSelector(container, selected, false);
+		inputSelector = new ModelSelector(container, selected, HenshinInterpreterUIPlugin.LL("_UI_InputModel"), true);
 		inputSelector.getControl().setLayoutData(
 				new GridData(SWT.FILL, SWT.FILL, true, false));
 
-		outputSelector = new ModelSelector(container, selected, true);
+		outputSelector = new ModelSelector(container, selected, HenshinInterpreterUIPlugin.LL("_UI_OutputModel"), false);
 		outputSelector.getControl().setLayoutData(
 				new GridData(SWT.FILL, SWT.FILL, true, false));
 

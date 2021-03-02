@@ -3,15 +3,20 @@ package org.eclipse.emf.henshin.variability.ui.wizard;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.henshin.interpreter.ui.wizard.HenshinWizard;
+import org.eclipse.emf.henshin.interpreter.ui.wizard.ModelSelector.ModelSelectorListener;
 import org.eclipse.emf.henshin.model.Annotation;
 import org.eclipse.emf.henshin.model.Module;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.model.Unit;
 import org.eclipse.emf.henshin.variability.configuration.ui.helpers.VariabilityModelHelper;
+import org.eclipse.emf.henshin.variability.multi.MultiVarProcessor;
 import org.eclipse.emf.henshin.variability.ui.util.FeatureConfig;
-import org.eclipse.emf.henshin.variability.ui.wizard.BindingEditTable.FeatureChangeListener;
-import org.eclipse.emf.henshin.variability.ui.wizard.BindingEditTable.FeatureClearListener;
+import org.eclipse.emf.henshin.variability.ui.wizard.VariabilityRuleViewer.FeatureChangeListener;
+import org.eclipse.emf.henshin.variability.ui.wizard.VariabilityRuleViewer.FeatureClearListener;
+import org.eclipse.emf.henshin.variability.ui.wizard.FeatureModelSelector.FeatureModelSelectionListener;
+import org.eclipse.emf.henshin.variability.ui.wizard.FeatureModelSelector.MultiVarProcessorSelectionListener;
 import org.eclipse.emf.henshin.variability.util.FeatureExpression;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityConstants;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
@@ -24,7 +29,7 @@ import aima.core.logic.propositional.parsing.ast.Sentence;
  * @author Stefan Schulz
  * 
  */
-public class VariabilityAwareHenshinWizard extends HenshinWizard implements FeatureChangeListener, FeatureClearListener {
+public class VariabilityAwareHenshinWizard extends HenshinWizard implements FeatureChangeListener, FeatureClearListener, MultiVarProcessorSelectionListener, FeatureModelSelectionListener {
 
 	public VariabilityAwareHenshinWizard(Module module) {
 		super(module);
@@ -39,7 +44,7 @@ public class VariabilityAwareHenshinWizard extends HenshinWizard implements Feat
 		VariabilityAwareHenshinWizardPage vbPage = (VariabilityAwareHenshinWizardPage) page;
 		String constraint = VariabilityHelper.INSTANCE.getFeatureConstraint(unit);
 		operation.setUnit(unit, getParameterPreferences(unit), getFeatureConfigurations(unit));
-		vbPage.featureConstraintViewer.setConstraint(constraint);
+		vbPage.bindingSelector.setConstraint(constraint);
 		vbPage.bindingSelector.setFeatures(operation.getFeatureConfigurations());
 	}
 
@@ -48,8 +53,10 @@ public class VariabilityAwareHenshinWizard extends HenshinWizard implements Feat
 		super.initData();
 		transformOperation = new VariabilityAwareTransformOperation(transformOperation);
 		setInput(initialUnit);
-		((VariabilityAwareHenshinWizardPage) page).bindingSelector.addFeatureChangeListener(VariabilityAwareHenshinWizard.this);
-		((VariabilityAwareHenshinWizardPage) page).bindingSelector.addFeatureClearListener(VariabilityAwareHenshinWizard.this);
+		((VariabilityAwareHenshinWizardPage) page).processorSelector.addFeatureModelSelectionListener(this);
+		((VariabilityAwareHenshinWizardPage) page).processorSelector.addMultiVarProcessorSelectionListener(this);
+		((VariabilityAwareHenshinWizardPage) page).bindingSelector.addFeatureChangeListener(this);
+		((VariabilityAwareHenshinWizardPage) page).bindingSelector.addFeatureClearListener(this);
 	}
 
 	@Override
@@ -105,6 +112,20 @@ public class VariabilityAwareHenshinWizard extends HenshinWizard implements Feat
 	@Override
 	public void clearFeatures() {
 		((VariabilityAwareTransformOperation) transformOperation).clearFeatures();
+		fireCompletionChange();
+	}
+
+	@Override
+	public void featureModelURIChanged(String featureModelURI) {
+		// TODO Auto-generated method stub
+		((VariabilityAwareTransformOperation) transformOperation).setFeatureModel(URI.createURI(featureModelURI));
+		fireCompletionChange();
+	}
+
+	@Override
+	public void mutliVarProcessorChanged(MultiVarProcessor processor) {
+		// TODO Auto-generated method stub
+		((VariabilityAwareTransformOperation) transformOperation).setProcessor(processor);
 		fireCompletionChange();
 	}
 }

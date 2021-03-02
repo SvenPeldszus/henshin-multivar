@@ -1,13 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Multi
-Bundle-SymbolicName: org.eclipse.emf.henshin.variability.multi
+Bundle-SymbolicName: org.eclipse.emf.henshin.variability.multi;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Export-Package: org.eclipse.emf.henshin.variability.multi
+Export-Package: org.eclipse.emf.henshin.variability.multi,
+ org.eclipse.emf.henshin.variability.multi.extension
 Require-Bundle: org.eclipse.emf.henshin.interpreter,
  org.eclipse.emf.henshin.variability;visibility:=reexport,
  org.sat4j.core,
- org.eclipse.uml2.uml
+ org.eclipse.uml2.uml,
+ org.eclipse.core.runtime;bundle-version="3.19.0",
+ org.eclipse.e4.core.di;bundle-version="1.7.600"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: org.eclipse.emf.henshin.variability.multi
 Bundle-ClassPath: .

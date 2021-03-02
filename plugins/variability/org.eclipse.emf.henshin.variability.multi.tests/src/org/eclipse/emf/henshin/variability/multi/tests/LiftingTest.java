@@ -64,6 +64,12 @@ public class LiftingTest {
 			public EPackage getEPackage() {
 				throw new UnsupportedOperationException();
 			}
+
+			@Override
+			public MultiVarEGraph createEGraphAndCollectPCs(Resource resource, String featureModelLocation) {
+				// TODO Auto-generated method stub
+				throw new UnsupportedOperationException();
+			}
 		};
 		final MultiVarEGraph graph = multiVarProcessor.createEGraphAndCollectPCs(model.getContents(), "A | B");
 		new MultiVarExecution(multiVarProcessor, new MultiVarEngine()).transformSPL(rule, graph);

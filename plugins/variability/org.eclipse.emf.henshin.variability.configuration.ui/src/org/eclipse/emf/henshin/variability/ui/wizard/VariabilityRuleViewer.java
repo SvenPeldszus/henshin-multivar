@@ -35,28 +35,32 @@ import org.eclipse.swt.widgets.ToolItem;
 
 import configuration.FeatureBinding;
 
-public class BindingEditTable {
+public class VariabilityRuleViewer {
 	
 	protected int CONTROL_OFFSET = 5;
 	
 	protected Collection<FeatureChangeListener> listeners = new ArrayList<FeatureChangeListener>();
 	protected Collection<FeatureClearListener> clearListeners = new ArrayList<FeatureClearListener>();
 	
+	private Group tableContainer;
+	protected Text constraint;
 	protected TableViewer tableViewer;
 
-	private Group tableContainer;
-
-	public BindingEditTable(Composite parent) {
+	public VariabilityRuleViewer(Composite parent) {
 		GridLayout grid = new GridLayout(2, false);
-//		grid.marginLeft = -5;
-//		grid.marginRight = -5;
-//		grid.marginTop = -5;
-//		grid.marginBottom = -5;
 		grid.horizontalSpacing = 0;
 		tableContainer = new Group(parent, SWT.NONE);
-		tableContainer.setText("Feature Bindings");
+		tableContainer.setText("Variability");
 		tableContainer.setLayout(grid);
 		
+		Label constraintLabel = new Label(tableContainer, SWT.FLAT);
+		constraintLabel.setText("Feature Constraint");
+		constraintLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
+		constraint = new Text(tableContainer, SWT.BORDER | SWT.READ_ONLY);
+		constraint.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
+		
+		Label featureBindingsLabel = new Label(tableContainer, SWT.FLAT);
+		featureBindingsLabel.setText("Feature Bindings");
 		ToolBar buttonToolBar = new ToolBar(tableContainer, SWT.FLAT);
 		GridDataFactory.fillDefaults().align(SWT.END, SWT.CENTER).grab(true, false).applyTo(buttonToolBar);
 		buttonToolBar.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
@@ -87,11 +91,6 @@ public class BindingEditTable {
 		
 		GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
 		gridData.heightHint = 200;
-//		gridData.verticalAlignment = GridData.FILL;
-//		gridData.horizontalSpan = 2;
-//		gridData.grabExcessHorizontalSpace = true;
-//		gridData.grabExcessVerticalSpace = true;
-//		gridData.horizontalAlignment = GridData.FILL;
 		tableViewer.getTable().setLayoutData(gridData);
 		tableViewer.getTable().setLinesVisible(true);
 		tableViewer.getTable().setHeaderVisible(true);
@@ -198,5 +197,20 @@ public class BindingEditTable {
 			});
 		}
 	}
+	
+	public void setConstraint(String constraintString) {
+		if (constraintString != null) {			
+			constraint.setText(constraintString);
+			constraint.setToolTipText(constraintString);
+		} else {
+			constraint.setText("");
+			constraint.setToolTipText(null);
+		}
+	}
+	
+	public Text getConstraint() {
+		return constraint;
+	}
+
 	
 }
