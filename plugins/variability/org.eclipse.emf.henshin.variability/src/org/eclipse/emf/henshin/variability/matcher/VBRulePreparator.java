@@ -69,6 +69,7 @@ public class VBRulePreparator {
 		this.initiallyTrueFeatures = Collections.unmodifiableCollection(initiallyTrueFeatures);
 		this.initiallyFalseFeatures = Collections.unmodifiableCollection(initiallyFalseFeatures);
 		this.baseRule = createRule(initiallyTrueFeatures, initiallyFalseFeatures);
+		this.baseRule.getRule().setName(this.baseRule.getRule().getName()+"base");
 	}
 
 	private BitSet getBitSet(final Collection<String> trueFeatures, final Collection<String> falseFeatures) {
@@ -144,7 +145,7 @@ public class VBRulePreparator {
 			paramMapOriginalToPrepared.put(parameter, clone);
 		}
 
-		final Rule preparedRule = new RuleImpl(vbRule.getName());
+		final Rule preparedRule = new RuleImpl(vbRule.getName()+"-"+String.join("&", trueFeatures));
 		preparedRule.setCheckDangling(vbRule.isCheckDangling());
 		Boolean injective = Logic.evaluate(this.ruleInfo.getInjectiveMatching(), trueFeatures, falseFeatures);
 		if (injective == null) {

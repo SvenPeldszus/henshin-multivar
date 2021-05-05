@@ -10,21 +10,22 @@ import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.variability.InconsistentRuleException;
 import org.eclipse.emf.henshin.variability.matcher.VBMatch;
 import org.eclipse.emf.henshin.variability.matcher.VBMatcher;
+import org.eclipse.emf.henshin.variability.util.VBRuleUtil;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 
 public class MultiVarEngine extends LiftingEngine {
 
 	private final String[] globalJavaImports;
 
-	public MultiVarEngine(String... globalJavaImports) {
+	public MultiVarEngine(final String... globalJavaImports) {
 		super(globalJavaImports);
 		this.globalJavaImports = globalJavaImports;
 	}
 
 	@Override
-	public Iterable<Match> findMatches(Rule rule, EGraph graph, Match partialMatch) {
-		boolean isVBRule = VariabilityHelper.isVariabilityRule(rule);
-		if (graph instanceof MultiVarEGraph && !((MultiVarEGraph) graph).getPCS().isEmpty()) {
+	public Iterable<Match> findMatches(final Rule rule, final EGraph graph, final Match partialMatch) {
+		final boolean isVBRule = VariabilityHelper.isVariabilityRule(rule);
+		if ((graph instanceof MultiVarEGraph) && !((MultiVarEGraph) graph).getPCS().isEmpty()) {
 			if (isVBRule) {
 				// MultiVar if VB rule and application to SPL
 				return (Iterable<Match>) findMatches(rule, (MultiVarEGraph) graph, partialMatch);
@@ -35,7 +36,7 @@ public class MultiVarEngine extends LiftingEngine {
 		if (isVBRule) {
 			// Use VB Matcher if VB rule but not applied to SPL
 			try {
-				Set<? extends VBMatch> vbMatches = new VBMatcher(rule, graph).findMatches();
+				final Set<? extends VBMatch> vbMatches = new VBMatcher(rule, graph).findMatches();
 				Stream<? extends VBMatch> stream;
 				if (vbMatches.size() > 10) {
 					stream = vbMatches.parallelStream();
@@ -43,7 +44,7 @@ public class MultiVarEngine extends LiftingEngine {
 					stream = vbMatches.stream();
 				}
 				return stream.map(VBMatch::getMatch).collect(Collectors.toList());
-			} catch (InconsistentRuleException e) {
+			} catch (final InconsistentRuleException e) {
 				throw new IllegalArgumentException(e);
 			}
 		}
@@ -52,11 +53,14 @@ public class MultiVarEngine extends LiftingEngine {
 	}
 
 	@Override
-	public Iterable<? extends MultiVarMatch> findMatches(Rule rule, MultiVarEGraph graph, Match partialMatch) {
+	public Iterable<? extends MultiVarMatch> findMatches(final Rule rule, final MultiVarEGraph graph, final Match partialMatch) {
+		if(!VBRuleUtil.isVarRule(rule)) {
+			return super.findMatches(rule, graph, partialMatch);
+		}
 		MultiVarMatcher matcher;
 		try {
 			matcher = new MultiVarMatcher(rule, graph, this);
-		} catch (InconsistentRuleException e) {
+		} catch (final InconsistentRuleException e) {
 			throw new IllegalStateException(e);
 		}
 		return matcher.findMatches();

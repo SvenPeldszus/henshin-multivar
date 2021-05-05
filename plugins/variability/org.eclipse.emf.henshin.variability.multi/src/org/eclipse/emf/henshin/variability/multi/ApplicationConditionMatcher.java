@@ -77,16 +77,16 @@ public class ApplicationConditionMatcher {
 	/**
 	 * @param nacs       A mapping between the extracted NAC rules and the context
 	 *                   nodes of the NACs
-	 * @param match      The match of the original rule
+	 * @param originalRuleMatch      The match of the original rule
 	 * @return The matches for the NAC rules
 	 */
-	Map<Rule, Collection<Match>> getNACMatches(final List<ACRule> nacs, final Match match,
+	Map<Rule, Collection<Match>> getNACMatches(final List<ACRule> nacs, final Match originalRuleMatch,
 			final EGraph graph) {
 		final Object prev  = this.engine.getOptions().put(Engine.OPTION_CHECK_DANGLING, false);
 		final Map<Rule, Collection<Match>> nacMatchMap = new HashMap<>();
 		for (final ACRule entry : nacs) {
 			final Rule nac = entry.getRule();
-			final Match preMatch = prepare(match, entry);
+			final Match preMatch = prepare(originalRuleMatch, entry);
 			final Collection<Match> matches = new LinkedList<>();
 			for (final Match nacMatch : this.engine.findMatches(nac, graph, preMatch)) {
 				matches.add(nacMatch);
@@ -97,11 +97,11 @@ public class ApplicationConditionMatcher {
 		return nacMatchMap;
 	}
 
-	private Match prepare(final Match match, final ACRule entry) {
+	private Match prepare(final Match originalRuleMatch, final ACRule entry) {
 		final Rule rule = entry.getRule();
 		final Match preMatch = new MatchImpl(rule);
 		for (final Node contextNode : entry.getContextNodesOfACRule()) {
-			final EObject value = match.getNodeTarget(entry.getOriginalNode(contextNode));
+			final EObject value = originalRuleMatch.getNodeTarget(entry.getOriginalNode(contextNode));
 			if (value != null) {
 				preMatch.setNodeTarget(contextNode, value);
 			}
@@ -115,17 +115,17 @@ public class ApplicationConditionMatcher {
 	 *                                  the original rule
 	 * @param pacs                      A mapping between the extracted PAC rules
 	 *                                  and the context nodes of the PACs
-	 * @param match                     The match of the original rule
+	 * @param originalRuleMatch                     The match of the original rule
 	 * @param graph                     The graph the pac should be matched on
 	 * @return The matches for the PAC rules or null, if there have been no matches
 	 *         for a rule
 	 */
-	Map<Rule, Iterator<Match>> getPACMatches(final List<ACRule> pacs, final Match match, final EGraph graph) {
+	Map<Rule, Iterator<Match>> getPACMatches(final List<ACRule> pacs, final Match originalRuleMatch, final EGraph graph) {
 		final Object prev  = this.engine.getOptions().put(Engine.OPTION_CHECK_DANGLING, false);
 		final Map<Rule, Iterator<Match>> matchIterators = new HashMap<>();
 		for (final ACRule entry : pacs) {
 			final Rule rule = entry.getRule();
-			final Match preMatch = prepare(match, entry);
+			final Match preMatch = prepare(originalRuleMatch, entry);
 			final Iterator<Match> iterator = this.engine.findMatches(rule, graph, preMatch).iterator();
 			if (!iterator.hasNext()) {
 				return null;

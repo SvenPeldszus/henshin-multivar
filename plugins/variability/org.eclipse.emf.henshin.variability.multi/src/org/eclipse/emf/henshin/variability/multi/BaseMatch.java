@@ -7,19 +7,20 @@ import java.util.stream.Collectors;
 
 import org.eclipse.emf.henshin.interpreter.Match;
 import org.eclipse.emf.henshin.model.Rule;
+import org.eclipse.emf.henshin.variability.matcher.VBMatch;
 
 public class BaseMatch {
 
-	private final Match match;
+	private final VBMatch match;
 	private final Collection<Rule> notMatchingNACs;
 
-	public BaseMatch(final Match basePreMatch, final Map<Rule, Collection<Match>> nacMatches) {
+	public BaseMatch(final VBMatch basePreMatch, final Map<Rule, Collection<Match>> nacMatches) {
 		this.match = basePreMatch;
 		this.notMatchingNACs = nacMatches.entrySet().stream().filter(e -> e.getValue().isEmpty()).map(Entry::getKey)
 				.collect(Collectors.toList());
 	}
 
-	public Match getMatch() {
+	public VBMatch getMatch() {
 		return this.match;
 	}
 

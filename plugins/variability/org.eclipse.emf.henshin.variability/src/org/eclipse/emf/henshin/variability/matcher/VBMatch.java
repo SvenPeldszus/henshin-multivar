@@ -19,17 +19,21 @@ import org.eclipse.emf.henshin.model.Unit;
  */
 public class VBMatch implements Match {
 
-	private final Match match;
+	private final Match preparedRuleMatch;
+	private Match originalRuleMatch;
 
 	private final PreparedVBRule rulePreperator;
 
-	public VBMatch(Match match, PreparedVBRule rule) {
-		this.match = match;
+	public VBMatch(final Match match, final PreparedVBRule rule) {
+		if(!match.getRule().equals(rule.getRule())) {
+			throw new IllegalArgumentException("The prepared rule is not the rule of the match!");
+		}
+		this.preparedRuleMatch = match;
 		this.rulePreperator = rule;
 	}
 
 	public Match getMatch() {
-		return this.match;
+		return this.preparedRuleMatch;
 	}
 
 	public PreparedVBRule getPreparator() {
@@ -40,74 +44,81 @@ public class VBMatch implements Match {
 	public Rule getRule() {
 		return this.rulePreperator.getRule();
 	}
-	
+
 	@Override
 	public Unit getUnit() {
-		return this.match.getUnit();
+		return this.preparedRuleMatch.getUnit();
 	}
 
 	@Override
-	public Object getParameterValue(Parameter param) {
-		return this.match.getParameterValue(param);
+	public Object getParameterValue(final Parameter param) {
+		return this.preparedRuleMatch.getParameterValue(param);
 	}
 
 	@Override
-	public void setParameterValue(Parameter param, Object value) {
-		this.match.setParameterValue(param, value);
+	public void setParameterValue(final Parameter param, final Object value) {
+		this.preparedRuleMatch.setParameterValue(param, value);
 	}
 
 	@Override
 	public List<Object> getParameterValues() {
-		return this.match.getParameterValues();
+		return this.preparedRuleMatch.getParameterValues();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return this.match.isEmpty();
+		return this.preparedRuleMatch.isEmpty();
 	}
 
 	@Override
 	public void clear() {
-		this.match.clear();
+		this.preparedRuleMatch.clear();
 	}
 
 	@Override
 	public boolean isResult() {
-		return this.match.isResult();
+		return this.preparedRuleMatch.isResult();
 	}
 
 	@Override
-	public EObject getNodeTarget(Node node) {
-		return this.match.getNodeTarget(node);
+	public EObject getNodeTarget(final Node node) {
+		return this.preparedRuleMatch.getNodeTarget(node);
 	}
 
 	@Override
-	public void setNodeTarget(Node node, EObject target) {
-		this.match.setNodeTarget(node, target);
+	public void setNodeTarget(final Node node, final EObject target) {
+		this.preparedRuleMatch.setNodeTarget(node, target);
 	}
 
 	@Override
 	public List<EObject> getNodeTargets() {
-		return this.match.getNodeTargets();
+		return this.preparedRuleMatch.getNodeTargets();
 	}
 
 	@Override
-	public List<Match> getMultiMatches(Rule multiRule) {
-		return this.match.getMultiMatches(multiRule);
+	public List<Match> getMultiMatches(final Rule multiRule) {
+		return this.preparedRuleMatch.getMultiMatches(multiRule);
 	}
 
 	@Override
-	public boolean overlapsWith(Match match) {
-		return this.match.overlapsWith(match);
+	public boolean overlapsWith(final Match match) {
+		return this.preparedRuleMatch.overlapsWith(match);
 	}
 
 	@Override
 	public boolean isComplete() {
-		return this.match.isComplete();
+		return this.preparedRuleMatch.isComplete();
 	}
 
 	@Override
 	public boolean isValid() {
-		return this.match.isValid();
+		return this.preparedRuleMatch.isValid();
+	}
+
+	public Match getMatchOnOriginalRule() {
+		if(this.originalRuleMatch == null) {
+			this.originalRuleMatch = this.rulePreperator.getMatchOnOriginalRule(this.preparedRuleMatch);
+		}
+		return this.originalRuleMatch;
 	}
 }

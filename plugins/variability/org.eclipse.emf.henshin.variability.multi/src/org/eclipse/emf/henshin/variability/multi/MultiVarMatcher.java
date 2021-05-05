@@ -1,5 +1,6 @@
 package org.eclipse.emf.henshin.variability.multi;
 
+import java.text.NumberFormat;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -23,6 +24,7 @@ import org.eclipse.emf.henshin.model.Node;
 import org.eclipse.emf.henshin.model.Rule;
 import org.eclipse.emf.henshin.variability.InconsistentRuleException;
 import org.eclipse.emf.henshin.variability.matcher.PreparedVBRule;
+import org.eclipse.emf.henshin.variability.matcher.VBMatch;
 import org.eclipse.emf.henshin.variability.matcher.VBMatcher;
 import org.eclipse.emf.henshin.variability.util.FeatureExpression;
 import org.eclipse.emf.henshin.variability.util.Logic;
@@ -49,7 +51,7 @@ public class MultiVarMatcher extends VBMatcher {
 		final Set<MultiVarMatch> matches = new HashSet<>();
 
 		// Line 1: findBasePreMatches
-		final Set<Match> baseMatches = findBasePreMatches();
+		final Set<VBMatch> baseMatches = findBasePreMatches();
 		if (baseMatches.isEmpty()) {
 			return Collections.emptySet();
 		}
@@ -91,18 +93,18 @@ public class MultiVarMatcher extends VBMatcher {
 		return matches;
 	}
 
-	private Collection<MultiVarMatch> extendAndLiftBaseMatches(final PreparedVBRule preparator,
-			final Match basePreMatch, final List<ACRule> nacRules, final List<ACRule> pacRules) {
+	private Collection<MultiVarMatch> extendAndLiftBaseMatches(final PreparedVBRule preparedRule,
+			final VBMatch basePreMatch, final List<ACRule> nacRules, final List<ACRule> pacRules) {
 		if (!checkVariableEdgesAndAttributesWithinBasePart(basePreMatch)) {
 			return Collections.emptySet();
 		}
 		final Collection<MultiVarMatch> matches = new LinkedList<>();
-		final Iterator<Match> classicMatches = this.engine
-				.findMatches(preparator.getRule(), this.graph, preparator.getMatchOnPreparedRule(basePreMatch))
+		final Iterator<Match> classicMatches = this.engine.findMatches(preparedRule.getRule(), this.graph, basePreMatch)
 				.iterator();
 		while (classicMatches.hasNext()) {
 			final Match nextMatch = classicMatches.next();
-			final MultiVarMatch liftedMatch = liftMatch(nextMatch, nacRules, pacRules, preparator);
+			final MultiVarMatch liftedMatch = liftMatch(new VBMatch(nextMatch, preparedRule), nacRules, pacRules,
+					preparedRule);
 			if (liftedMatch != null) {
 				matches.add(liftedMatch);
 			}
@@ -119,19 +121,18 @@ public class MultiVarMatcher extends VBMatcher {
 	 * @param preparator The rule preparator of the rule to lift
 	 * @return The lifted match or null if the match is not liftable
 	 */
-	private MultiVarMatch liftMatch(final Match match, final List<ACRule> nacRules, final List<ACRule> pacRules,
+	private MultiVarMatch liftMatch(final VBMatch match, final List<ACRule> nacRules, final List<ACRule> pacRules,
 			final PreparedVBRule preparator) {
 		// if (!checkVariableExtensionsOfBasePart(match)) {
 		// return null;
 		// }
-		final Match originalRuleMatch = preparator.getMatchOnOriginalRule(match);
-		final Map<Rule, Iterator<Match>> pacMatchMap = this.acMatcher.getPACMatches(pacRules, originalRuleMatch,
-				this.graph);
+		final Map<Rule, Iterator<Match>> pacMatchMap = this.acMatcher.getPACMatches(pacRules,
+				match.getMatchOnOriginalRule(), this.graph);
 		if (pacMatchMap == null) {
 			return null;
 		}
-		final Map<Rule, Collection<Match>> nacMatchMap = this.acMatcher.getNACMatches(nacRules, originalRuleMatch,
-				this.graph);
+		final Map<Rule, Collection<Match>> nacMatchMap = this.acMatcher.getNACMatches(nacRules,
+				match.getMatchOnOriginalRule(), this.graph);
 
 		return getLifting().liftMatch(new MultiVarMatch(match, preparator,
 				ApplicationConditionMatcher.getAllMatches(pacMatchMap), nacMatchMap));
@@ -145,7 +146,7 @@ public class MultiVarMatcher extends VBMatcher {
 	 * @return The liftable base matches mapped to the matches of the base rule's
 	 *         NACs
 	 */
-	private Collection<BaseMatch> findLiftableBaseMatches(final Set<Match> basePreMatches) {
+	private Collection<BaseMatch> findLiftableBaseMatches(final Collection<VBMatch> basePreMatches) {
 		final PreparedVBRule baseRule = this.rulePreparator.getBaseRule();
 
 		final List<ACRule> baseNacRules = this.acMatcher.createACRules(getBaseNACs()).map(r -> r.prepare(baseRule))
@@ -154,19 +155,25 @@ public class MultiVarMatcher extends VBMatcher {
 				.collect(Collectors.toList());
 
 		// Line 2: iterate over all base-matches
+		final NumberFormat instance = NumberFormat.getInstance();
+		instance.setMaximumFractionDigits(2);
 		final Collection<BaseMatch> liftableBaseMatches = new LinkedList<>();
-		for (final Match basePreMatch : basePreMatches) {
+		for (final VBMatch basePreMatch : basePreMatches) {
 			boolean isLiftAble = true;
 			Map<Rule, Collection<Match>> nacMatches;
 
 			// If there is no base-match the rule is liftable in all cases
 			// (optimization for too many base-matches)
 			if (basePreMatch != null) {
-				nacMatches = this.acMatcher.getNACMatches(baseNacRules, basePreMatch, this.graph);
+				Match matchOnOriginalRule = null;
+				if (!baseNacRules.isEmpty() || !basePacRules.isEmpty()) {
+					matchOnOriginalRule = basePreMatch.getMatchOnOriginalRule();
+				}
+				nacMatches = this.acMatcher.getNACMatches(baseNacRules, matchOnOriginalRule, this.graph);
 
 				// Line 3: calculate Phi_apply and AND FM from Line 4
-				final Map<Rule, Iterator<Match>> pacMatches = this.acMatcher.getPACMatches(basePacRules, basePreMatch,
-						this.graph);
+				final Map<Rule, Iterator<Match>> pacMatches = this.acMatcher.getPACMatches(basePacRules,
+						matchOnOriginalRule, this.graph);
 				if (pacMatches == null) {
 					continue;
 				}
@@ -180,12 +187,15 @@ public class MultiVarMatcher extends VBMatcher {
 			}
 
 			if (isLiftAble) {
-				liftableBaseMatches.add(new BaseMatch(basePreMatch, nacMatches));
+				liftableBaseMatches.add(new BaseMatch(new VBMatch(basePreMatch, baseRule), nacMatches));
 			}
 		}
 
 		baseNacRules.forEach(ACRule::restore);
 		basePacRules.forEach(ACRule::restore);
+
+		System.out.println(liftableBaseMatches.size() + " of " + basePreMatches.size() + "("
+				+ instance.format(((liftableBaseMatches.size()*100d) / basePreMatches.size()) ) + "%) are liftable.");
 		return liftableBaseMatches;
 	}
 
@@ -295,18 +305,19 @@ public class MultiVarMatcher extends VBMatcher {
 	/**
 	 * @param basePreMatch
 	 */
-	private boolean checkVariableEdgesAndAttributesWithinBasePart(final Match basePreMatch) {
+	private boolean checkVariableEdgesAndAttributesWithinBasePart(final VBMatch basePreMatch) {
 		if (basePreMatch == null) {
 			// Nothing to check
 			return true;
 		}
+		final Match matchOnOriginalRule = basePreMatch.getMatchOnOriginalRule();
 		final Collection<Node> baseNodes = this.rulePreparator.getBaseRule().getPreservedBaseRuleNodes();
 		for (final Node node : baseNodes) {
-			final EObject src = basePreMatch.getNodeTarget(node);
+			final EObject src = matchOnOriginalRule.getNodeTarget(node);
 			for (final Edge edge : node.getOutgoing()) {
 				// Check variable edges pointing to base nodes
 				if (baseNodes.contains(edge.getTarget()) && (this.ruleInfo.getPC(edge) != null)) {
-					final EObject expect = basePreMatch.getNodeTarget(edge.getTarget());
+					final EObject expect = matchOnOriginalRule.getNodeTarget(edge.getTarget());
 					final EReference type = edge.getType();
 					final Object is = src.eGet(type);
 					if (type.getUpperBound() == 1) {
@@ -345,12 +356,12 @@ public class MultiVarMatcher extends VBMatcher {
 	 * @return The base matches using the nodes of the original VB rule or a set
 	 *         only containing null, iff there are too many base matches
 	 */
-	private Set<Match> findBasePreMatches() {
+	private Set<VBMatch> findBasePreMatches() {
 		final PreparedVBRule baseRule = this.rulePreparator.getBaseRule();
-		final Set<Match> baseMatches = new HashSet<>();
+		final Set<VBMatch> baseMatches = new HashSet<>();
 		for (final Match match : this.engine.findMatches(baseRule.getRule(), this.graph, null)) {
 			if ((THRESHOLD_MAXIMUM_BASE_MATCHES < 0) || (baseMatches.size() < THRESHOLD_MAXIMUM_BASE_MATCHES)) {
-				baseMatches.add(baseRule.getMatchOnOriginalRule(match));
+				baseMatches.add(new VBMatch(match, baseRule));
 			} else {
 				baseMatches.clear();
 				baseMatches.add(null);

@@ -58,7 +58,7 @@ public class PreparedVBRule {
 		this.removedBaseRuleEdges = Collections.emptyList();
 	}
 
-	public Match getMatchOnOriginalRule(final Match prepared) {
+	Match getMatchOnOriginalRule(final Match prepared) {
 		final Match match = new MatchImpl(this.preparator.getVBRule());
 		for (final Node node : prepared.getRule().getLhs().getNodes()) {
 			final EObject value = prepared.getNodeTarget(node);
@@ -110,15 +110,6 @@ public class PreparedVBRule {
 
 	public Collection<Node> getRemovedBaseRuleNodes() {
 		return this.removedBaseRuleNodes;
-	}
-
-	Match getBaseMatch(final Match basePreMatch) {
-		final Match match = new MatchImpl(this.rule);
-		for (final Node baseNode : basePreMatch.getRule().getLhs().getNodes()) {
-			final Node node = this.lhsOriginalToPreparedNodeMap.getValue(this.lhsOriginalToPreparedNodeMap.getKey(baseNode));
-			match.setNodeTarget(node, basePreMatch.getNodeTarget(baseNode));
-		}
-		return match;
 	}
 
 	public Collection<Node> getPreservedBaseRuleNodes() {

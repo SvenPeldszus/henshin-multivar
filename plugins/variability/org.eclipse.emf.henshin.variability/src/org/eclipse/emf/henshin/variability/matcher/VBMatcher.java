@@ -123,12 +123,13 @@ public class VBMatcher {
 	}
 
 	public Set<? extends VBMatch> findMatches() {
-		final Set<Match> baseMatches = new HashSet<>();
-		final Iterator<Match> it = this.engine.findMatches(this.rulePreparator.getBaseRule().getRule(), this.graph, null)
+		final Set<VBMatch> baseMatches = new HashSet<>();
+		final PreparedVBRule baseRule = this.rulePreparator.getBaseRule();
+		final Iterator<Match> it = this.engine.findMatches(baseRule.getRule(), this.graph, null)
 				.iterator();
 		while (it.hasNext()) {
 			if ((THRESHOLD_MAXIMUM_BASE_MATCHES < 0) || (baseMatches.size() < THRESHOLD_MAXIMUM_BASE_MATCHES)) {
-				baseMatches.add(it.next());
+				baseMatches.add(new VBMatch(it.next(), baseRule));
 			} else {
 				baseMatches.clear();
 				baseMatches.add(null);
@@ -145,10 +146,10 @@ public class VBMatcher {
 		return matches;
 	}
 
-	private void findProductMatches(final Set<Match> baseMatches, final Set<VBMatch> matches) {
+	private void findProductMatches(final Set<VBMatch> baseMatches, final Set<VBMatch> matches) {
 		for (final PreparedVBRule preparedRule : this.rulePreparator.prepareAllRules()) {
-			for (final Match baseMatch : baseMatches) {
-				for (final Match match : this.engine.findMatches(preparedRule.getRule(), this.graph, preparedRule.getBaseMatch(baseMatch))) {
+			for (final VBMatch baseMatch : baseMatches) {
+				for (final Match match : this.engine.findMatches(preparedRule.getRule(), this.graph, preparedRule.getMatchOnPreparedRule(baseMatch.getMatchOnOriginalRule()))) {
 					matches.add(new VBMatch(match, preparedRule));
 				}
 			}

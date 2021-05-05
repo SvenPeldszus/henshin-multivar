@@ -10,14 +10,10 @@ import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.databinding.property.value.IValueProperty;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.databinding.EMFProperties;
-import org.eclipse.emf.ecore.util.FeatureMapUtil.FeatureValue;
 import org.eclipse.emf.henshin.diagram.edit.parts.NodeCompartmentEditPart;
 import org.eclipse.emf.henshin.diagram.edit.parts.RuleEditPart;
 import org.eclipse.emf.henshin.diagram.edit.policies.NodeCompartmentItemSemanticEditPolicy;
@@ -50,10 +46,7 @@ import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerContentPr
 import org.eclipse.emf.henshin.variability.ui.viewer.util.FeatureViewerNameEditingSupport;
 import org.eclipse.emf.henshin.variability.util.FeatureExpression;
 import org.eclipse.emf.henshin.variability.util.SatChecker;
-import org.eclipse.emf.henshin.variability.validation.AbstractVBValidator;
-import org.eclipse.emf.henshin.variability.validation.VBConctraintDescriptor;
 import org.eclipse.emf.henshin.variability.validation.validators.VBRuleFMValidator;
-import org.eclipse.emf.henshin.variability.validation.validators.VBRuleFeaturesValidator;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityHelper;
 import org.eclipse.emf.henshin.variability.wrapper.VariabilityTransactionHelper;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
@@ -87,8 +80,6 @@ import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.events.VerifyEvent;
-import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -118,12 +109,12 @@ import configuration.FeatureBinding;
 /**
  * Provides a view that enables users to use variability features in the
  * graphical editor.
- * 
+ *
  * @author Stefan Schulz
  *
  */
 public class VariabilityView extends ViewPart
-		implements ILinkedWithEditorView, IContentView<Configuration>, ITableViewerSynchronizedPart {
+implements ILinkedWithEditorView, IContentView<Configuration>, ITableViewerSynchronizedPart {
 
 	/**
 	 * The ID of the view as specified by the extension.
@@ -132,15 +123,15 @@ public class VariabilityView extends ViewPart
 
 	private SynchronizedTableViewer viewer;
 	private Action showBaseRuleAction, showConfiguredRuleAction, showFullRuleAction, linkWithEditorAction,
-			fadeConcealingAction, visibilityConcealingAction, linkToViewingMode, createInBase, createInConfiguration;
+	fadeConcealingAction, visibilityConcealingAction, linkToViewingMode, createInBase, createInConfiguration;
 	private DropDownMenuAction loadFavoritesMenu, elementCreationMenu;
-	private LinkWithEditorSelectionListener linkWithEditorSelectionListener = new LinkWithEditorSelectionListener(this);
+	private final LinkWithEditorSelectionListener linkWithEditorSelectionListener = new LinkWithEditorSelectionListener(this);
 	private boolean linkingActive;
 	private Text featureConstraintText;
 	private DataBindingContext featureConstraintTextBindingContext;
 	private ObservableFeatureConstraintValue<?> observableFeatureConstraintValue;
 	private FeatureViewerComparator comparator;
-	private ConfigurationProvider configurationProvider = ConfigurationProvider.getInstance();
+	private final ConfigurationProvider configurationProvider = ConfigurationProvider.getInstance();
 	private WritableValue<Rule> writableValue;
 	private CreationMode creationMode = CreationMode.SELECTION;
 	private Configuration config;
@@ -155,28 +146,27 @@ public class VariabilityView extends ViewPart
 	private boolean isCNF;
 
 	public RuleEditPart getSelectedRuleEditPart() {
-		return selectedRuleEditPart;
+		return this.selectedRuleEditPart;
 	}
 
-	public void setSelectedRuleEditPart(RuleEditPart selectedRuleEditPart) {
+	public void setSelectedRuleEditPart(final RuleEditPart selectedRuleEditPart) {
 		this.selectedRuleEditPart = selectedRuleEditPart;
 	}
 
 	public VariabilityView() {
-		super();
 	}
 
 	/**
 	 * @see IViewPart.init(IViewSite)
 	 */
 	@Override
-	public void init(IViewSite site) throws PartInitException {
+	public void init(final IViewSite site) throws PartInitException {
 		super.init(site);
 	}
 
-	private Composite createViewer(Composite parent) {
-		Composite composite = new Composite(parent, SWT.NONE);
-		GridLayout grid = new GridLayout(2, false);
+	private Composite createViewer(final Composite parent) {
+		final Composite composite = new Composite(parent, SWT.NONE);
+		final GridLayout grid = new GridLayout(2, false);
 		grid.marginLeft = -5;
 		grid.marginRight = -5;
 		grid.marginTop = -5;
@@ -186,106 +176,106 @@ public class VariabilityView extends ViewPart
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
 		composite.setLayout(grid);
 
-		favoriteToolBar = new ToolBar(composite, SWT.FLAT);
-		favoriteToolBar.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		this.favoriteToolBar = new ToolBar(composite, SWT.FLAT);
+		this.favoriteToolBar.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
-//		deleteFavorite = new ToolItem(favoriteToolBar, SWT.PUSH);
-//		deleteFavorite.setImage(ImageHelper.getImage("/icons/trash.png"));
-//		deleteFavorite.setToolTipText("Create feature");
-		selectedFavorite = new ToolItem(favoriteToolBar, SWT.FLAT);
-		selectedFavorite.setText("Configuration");
+		//		deleteFavorite = new ToolItem(favoriteToolBar, SWT.PUSH);
+		//		deleteFavorite.setImage(ImageHelper.getImage("/icons/trash.png"));
+		//		deleteFavorite.setToolTipText("Create feature");
+		this.selectedFavorite = new ToolItem(this.favoriteToolBar, SWT.FLAT);
+		this.selectedFavorite.setText("Configuration");
 
-		ToolBar buttonToolBar = new ToolBar(composite, SWT.FLAT);
+		final ToolBar buttonToolBar = new ToolBar(composite, SWT.FLAT);
 		GridDataFactory.fillDefaults().align(SWT.END, SWT.CENTER).grab(true, false).applyTo(buttonToolBar);
 		buttonToolBar.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
 
 		new ToolItem(buttonToolBar, SWT.SEPARATOR);
-		add = new ToolItem(buttonToolBar, SWT.PUSH);
-		add.setImage(ImageHelper.getImage("/icons/add.png"));
-		add.setToolTipText("Create feature");
-		add.addSelectionListener(new SelectionListener() {
+		this.add = new ToolItem(buttonToolBar, SWT.PUSH);
+		this.add.setImage(ImageHelper.getImage("/icons/add.png"));
+		this.add.setToolTipText("Create feature");
+		this.add.addSelectionListener(new SelectionListener() {
 
 			@Override
-			public void widgetSelected(SelectionEvent e) {
+			public void widgetSelected(final SelectionEvent e) {
 				Rule rule;
-				if (selectedRuleEditPart == null) {
-					rule = writableValue.doGetValue();
+				if (VariabilityView.this.selectedRuleEditPart == null) {
+					rule = VariabilityView.this.writableValue.doGetValue();
 				} else {
-					rule = VariabilityModelHelper.getRuleForEditPart(selectedRuleEditPart);
+					rule = VariabilityModelHelper.getRuleForEditPart(VariabilityView.this.selectedRuleEditPart);
 				}
 
-				NameDialog dialog = new NameDialog(getViewSite().getShell(), "Feature",
+				final NameDialog dialog = new NameDialog(getViewSite().getShell(), "Feature",
 						VariabilityHelper.INSTANCE.getFeatures(rule));
 
 				if (dialog.open() == Window.OK) {
-					String featureName = dialog.getName().trim();
-					Feature feature = ConfigurationFactory.eINSTANCE.createFeature();
+					final String featureName = dialog.getName().trim();
+					final Feature feature = ConfigurationFactory.eINSTANCE.createFeature();
 					feature.setName(featureName);
-					config.addFeature(feature);
+					VariabilityView.this.config.addFeature(feature);
 					refresh();
 				}
 			}
 
 			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
+			public void widgetDefaultSelected(final SelectionEvent e) {
 				// TODO Auto-generated method stub
 
 			}
 		});
-		add.setEnabled(false);
+		this.add.setEnabled(false);
 
-		delete = new ToolItem(buttonToolBar, SWT.PUSH);
-		delete.setImage(ImageHelper.getImage("/icons/delete.png"));
-		delete.setToolTipText("Delete selected features");
-		delete.addSelectionListener(new SelectionListener() {
+		this.delete = new ToolItem(buttonToolBar, SWT.PUSH);
+		this.delete.setImage(ImageHelper.getImage("/icons/delete.png"));
+		this.delete.setToolTipText("Delete selected features");
+		this.delete.addSelectionListener(new SelectionListener() {
 
 			@Override
-			public void widgetSelected(SelectionEvent e) {
-				Rule rule = VariabilityModelHelper.getRuleForEditPart(selectedRuleEditPart);
-				StructuredSelection selection = (StructuredSelection) viewer.getSelection();
-				ArrayList<Feature> selectedFeatures = new ArrayList<Feature>();
-				Iterator<?> it = selection.iterator();
+			public void widgetSelected(final SelectionEvent e) {
+				final Rule rule = VariabilityModelHelper.getRuleForEditPart(VariabilityView.this.selectedRuleEditPart);
+				final StructuredSelection selection = (StructuredSelection) VariabilityView.this.viewer.getSelection();
+				final ArrayList<Feature> selectedFeatures = new ArrayList<>();
+				final Iterator<?> it = selection.iterator();
 
 				while (it.hasNext()) {
-					Object obj = it.next();
+					final Object obj = it.next();
 
 					if (obj instanceof Feature) {
 						selectedFeatures.add((Feature) obj);
 					}
 				}
 
-				MessageDialog messageDialog = new MessageDialog(getViewSite().getShell(), "Delete features", null,
+				final MessageDialog messageDialog = new MessageDialog(getViewSite().getShell(), "Delete features", null,
 						"Do you really want to delete the selected features?\nDoing so may render the rule's feature model invalid.",
 						MessageDialog.WARNING, new String[] { "Yes", "No" }, 0);
 
 				if (messageDialog.open() == 0) {
-					for (Feature feature : selectedFeatures) {
-						config.removeFeature(feature);
+					for (final Feature feature : selectedFeatures) {
+						VariabilityView.this.config.removeFeature(feature);
 					}
-					configurationProvider.clearFavorites(config);
+					VariabilityView.this.configurationProvider.clearFavorites(VariabilityView.this.config);
 					refreshFavorites(rule);
 					refresh();
 				}
 			}
 
 			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
+			public void widgetDefaultSelected(final SelectionEvent e) {
 				// TODO Auto-generated method stub
 
 			}
 		});
-		delete.setEnabled(false);
+		this.delete.setEnabled(false);
 
-		clear = new ToolItem(buttonToolBar, SWT.PUSH);
-		clear.setImage(ImageHelper.getImage("/icons/clear.png"));
-		clear.setToolTipText("Clear feature bindings");
-		clear.addSelectionListener(new SelectionListener() {
+		this.clear = new ToolItem(buttonToolBar, SWT.PUSH);
+		this.clear.setImage(ImageHelper.getImage("/icons/clear.png"));
+		this.clear.setToolTipText("Clear feature bindings");
+		this.clear.addSelectionListener(new SelectionListener() {
 
 			@Override
-			public void widgetSelected(SelectionEvent e) {
-				if (config != null) {
+			public void widgetSelected(final SelectionEvent e) {
+				if (VariabilityView.this.config != null) {
 					clearFavorite();
-					for (Feature feature : config.getFeatures()) {
+					for (final Feature feature : VariabilityView.this.config.getFeatures()) {
 						feature.setBinding(FeatureBinding.UNBOUND);
 					}
 					refresh();
@@ -293,78 +283,78 @@ public class VariabilityView extends ViewPart
 			}
 
 			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
+			public void widgetDefaultSelected(final SelectionEvent e) {
 				// TODO Auto-generated method stub
 
 			}
 		});
 
-		clear.setEnabled(false);
+		this.clear.setEnabled(false);
 
-		refresh = new ToolItem(buttonToolBar, SWT.PUSH);
-		refresh.setImage(ImageHelper.getImage("/icons/refresh.png"));
-		refresh.setToolTipText("Refresh");
-		refresh.addSelectionListener(new SelectionListener() {
+		this.refresh = new ToolItem(buttonToolBar, SWT.PUSH);
+		this.refresh.setImage(ImageHelper.getImage("/icons/refresh.png"));
+		this.refresh.setToolTipText("Refresh");
+		this.refresh.addSelectionListener(new SelectionListener() {
 
 			@Override
-			public void widgetSelected(SelectionEvent e) {
+			public void widgetSelected(final SelectionEvent e) {
 				refresh();
 			}
 
 			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
+			public void widgetDefaultSelected(final SelectionEvent e) {
 				// TODO Auto-generated method stub
 
 			}
 		});
 
-		clear.setEnabled(false);
+		this.clear.setEnabled(false);
 
-		Composite tableComposite = new Composite(parent, SWT.NONE);
+		final Composite tableComposite = new Composite(parent, SWT.NONE);
 		tableComposite.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true, 1, 1));
-		TableColumnLayout tableColumnLayout = new TableColumnLayout();
+		final TableColumnLayout tableColumnLayout = new TableColumnLayout();
 		tableComposite.setLayout(tableColumnLayout);
 
-		viewer = new SynchronizedTableViewer(tableComposite,
+		this.viewer = new SynchronizedTableViewer(tableComposite,
 				SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER, this);
-		createColumns(tableComposite, tableColumnLayout, viewer);
-		final Table table = viewer.getTable();
+		createColumns(tableComposite, tableColumnLayout, this.viewer);
+		final Table table = this.viewer.getTable();
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 
-		viewer.setContentProvider(new FeatureViewerContentProvider());
-		viewer.setInput(config);
+		this.viewer.setContentProvider(new FeatureViewerContentProvider());
+		this.viewer.setInput(this.config);
 
-		getSite().setSelectionProvider(viewer);
+		getSite().setSelectionProvider(this.viewer);
 
-		GridData gridData = new GridData();
+		final GridData gridData = new GridData();
 		gridData.verticalAlignment = GridData.FILL;
 		gridData.horizontalSpan = 2;
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.grabExcessVerticalSpace = true;
 		gridData.horizontalAlignment = GridData.FILL;
-		viewer.getControl().setLayoutData(gridData);
+		this.viewer.getControl().setLayoutData(gridData);
 
-		comparator = new FeatureViewerComparator();
-		viewer.setComparator(comparator);
+		this.comparator = new FeatureViewerComparator();
+		this.viewer.setComparator(this.comparator);
 
 		return tableComposite;
 	}
 
 	private void createColumns(final Composite parent, final TableColumnLayout tableColumnLayout,
 			final TableViewer viewer) {
-		String[] titles = { "Feature", "Binding" };
+		final String[] titles = { "Feature", "Binding" };
 
 		TableViewerColumn col = createTableViewerColumn(titles[0], 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
-			public String getText(Object element) {
-				Feature vp = (Feature) element;
+			public String getText(final Object element) {
+				final Feature vp = (Feature) element;
 				return vp.getName();
 			}
 
 			@Override
-			public Image getImage(Object element) {
+			public Image getImage(final Object element) {
 				return ImageHelper.getImage("/icons/table_default.png");
 			}
 		});
@@ -374,13 +364,13 @@ public class VariabilityView extends ViewPart
 		col = createTableViewerColumn(titles[1], 1);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
-			public String getText(Object element) {
-				Feature vp = (Feature) element;
+			public String getText(final Object element) {
+				final Feature vp = (Feature) element;
 				return vp.getBinding().getName();
 			}
 
 			@Override
-			public Image getImage(Object element) {
+			public Image getImage(final Object element) {
 				return ImageHelper.getImage("/icons/table_default.png");
 				// return ImageHelper.getImage("/icons/" + ((Feature)
 				// element).getBinding().getName().toLowerCase() + ".png");
@@ -390,8 +380,8 @@ public class VariabilityView extends ViewPart
 		tableColumnLayout.setColumnData(col.getColumn(), new ColumnWeightData(40, false));
 	}
 
-	private TableViewerColumn createTableViewerColumn(String title, int index) {
-		final TableViewerColumn viewerColumn = new TableViewerColumn(viewer, SWT.NONE, index);
+	private TableViewerColumn createTableViewerColumn(final String title, final int index) {
+		final TableViewerColumn viewerColumn = new TableViewerColumn(this.viewer, SWT.NONE, index);
 		final TableColumn column = viewerColumn.getColumn();
 
 		column.setText(title);
@@ -404,148 +394,148 @@ public class VariabilityView extends ViewPart
 	}
 
 	@Override
-	public void createPartControl(Composite parent) {
-		GridLayout gl_parent = new GridLayout(1, false);
+	public void createPartControl(final Composite parent) {
+		final GridLayout gl_parent = new GridLayout(1, false);
 		gl_parent.verticalSpacing = 0;
 		parent.setLayout(gl_parent);
 
-		Composite composite = new Composite(parent, SWT.NONE);
+		final Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		composite.setLayout(new GridLayout(2, false));
 
-		ruleNameLabel = new Label(composite, SWT.NONE);
-		ruleNameLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
-		ruleNameLabel.setText("No rule selected");
+		this.ruleNameLabel = new Label(composite, SWT.NONE);
+		this.ruleNameLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		this.ruleNameLabel.setText("No rule selected");
 
-		Label separatorName = new Label(composite, SWT.HORIZONTAL | SWT.SEPARATOR);
+		final Label separatorName = new Label(composite, SWT.HORIZONTAL | SWT.SEPARATOR);
 		separatorName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
 
-		Label featureConstraintLabel = new Label(composite, SWT.NONE);
+		final Label featureConstraintLabel = new Label(composite, SWT.NONE);
 		featureConstraintLabel.setImage(ImageHelper.getImage("/icons/variability.gif"));
 		featureConstraintLabel.setText("Feature constraint");
 		featureConstraintLabel.setLayoutData(new GridData(SWT.FILL, SWT.LEFT, false, false, 1, 1));
-		featureConstraintToolbar = new ToolBar(composite, SWT.FLAT);
-		GridDataFactory.fillDefaults().align(SWT.END, SWT.CENTER).grab(true, false).applyTo(featureConstraintToolbar);
-		featureConstraintToolbar.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
-		
-		featureConstraintCNFIndicator = new ToolItem(featureConstraintToolbar, SWT.NONE);
-		featureConstraintCNFIndicator.setEnabled(false);
-		
-		featureConstraintValidityIndicator = new ToolItem(featureConstraintToolbar, SWT.NONE);
-		featureConstraintValidityIndicator.setEnabled(false);
-				
-		createFeatures = new ToolItem(featureConstraintToolbar, SWT.PUSH);
-		createFeatures.addSelectionListener(new SelectionListener() {
+		this.featureConstraintToolbar = new ToolBar(composite, SWT.FLAT);
+		GridDataFactory.fillDefaults().align(SWT.END, SWT.CENTER).grab(true, false).applyTo(this.featureConstraintToolbar);
+		this.featureConstraintToolbar.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
+
+		this.featureConstraintCNFIndicator = new ToolItem(this.featureConstraintToolbar, SWT.NONE);
+		this.featureConstraintCNFIndicator.setEnabled(false);
+
+		this.featureConstraintValidityIndicator = new ToolItem(this.featureConstraintToolbar, SWT.NONE);
+		this.featureConstraintValidityIndicator.setEnabled(false);
+
+		this.createFeatures = new ToolItem(this.featureConstraintToolbar, SWT.PUSH);
+		this.createFeatures.addSelectionListener(new SelectionListener() {
 
 			@Override
-			public void widgetSelected(SelectionEvent e) {
-				Rule rule = VariabilityModelHelper.getRuleForEditPart(selectedRuleEditPart);
-				String[] missingFeatures = getMissingFeatures(config.getRule());
-				for (String featureName : missingFeatures) {
-					Feature feature = ConfigurationFactory.eINSTANCE.createFeature();
+			public void widgetSelected(final SelectionEvent e) {
+				final Rule rule = VariabilityModelHelper.getRuleForEditPart(VariabilityView.this.selectedRuleEditPart);
+				final String[] missingFeatures = getMissingFeatures(VariabilityView.this.config.getRule());
+				for (final String featureName : missingFeatures) {
+					final Feature feature = ConfigurationFactory.eINSTANCE.createFeature();
 					feature.setName(featureName);
-					config.addFeature(feature);
+					VariabilityView.this.config.addFeature(feature);
 				}
-				createFeatures.setEnabled(false);
+				VariabilityView.this.createFeatures.setEnabled(false);
 				refresh();
 			}
 
 			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
+			public void widgetDefaultSelected(final SelectionEvent e) {
 
 			}
 		});
-		createFeatures.setEnabled(false);
-		featureConstraintToolbar.setVisible(false);
+		this.createFeatures.setEnabled(false);
+		this.featureConstraintToolbar.setVisible(false);
 
-		featureConstraintText = new Text(composite, SWT.BORDER);
-		featureConstraintText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
-		IValueProperty<Widget, String> property = WidgetProperties.text(SWT.Modify);
-		IObservableValue<String> target = property.observe(featureConstraintText);
-		featureConstraintTextBindingContext = new DataBindingContext();
-		writableValue = new WritableValue<>();
-		IObservableValue<String> model = EMFProperties.value(HenshinPackage.Literals.MODEL_ELEMENT__ANNOTATIONS)
-				.observeDetail(writableValue);
-		observableFeatureConstraintValue = new ObservableFeatureConstraintValue<Object>(model);
-		featureConstraintTextBindingContext.bindValue(target, observableFeatureConstraintValue);		
-		featureConstraintText.addKeyListener(new KeyListener() {
-			
+		this.featureConstraintText = new Text(composite, SWT.BORDER);
+		this.featureConstraintText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
+		final IValueProperty<Widget, String> property = WidgetProperties.text(SWT.Modify);
+		final IObservableValue<String> target = property.observe(this.featureConstraintText);
+		this.featureConstraintTextBindingContext = new DataBindingContext();
+		this.writableValue = new WritableValue<>();
+		final IObservableValue<String> model = EMFProperties.value(HenshinPackage.Literals.MODEL_ELEMENT__ANNOTATIONS)
+				.observeDetail(this.writableValue);
+		this.observableFeatureConstraintValue = new ObservableFeatureConstraintValue<>(model);
+		this.featureConstraintTextBindingContext.bindValue(target, this.observableFeatureConstraintValue);
+		this.featureConstraintText.addKeyListener(new KeyListener() {
+
 			@Override
-			public void keyReleased(KeyEvent e) {
-				boolean isValid = updateErrorIndicators(config.getRule());
-				boolean hasChanged = updateCNFIndicator(featureConstraintText.getText());
-				updateMissingFeaturesButton(config.getRule());
-				
+			public void keyReleased(final KeyEvent e) {
+				final boolean isValid = updateErrorIndicators(VariabilityView.this.config.getRule());
+				final boolean hasChanged = updateCNFIndicator(VariabilityView.this.featureConstraintText.getText());
+				updateMissingFeaturesButton(VariabilityView.this.config.getRule());
+
 				if (isValid && hasChanged) {
-					VariabilityTransactionHelper.INSTANCE.setFeatureConstraintIsCNF(config.getRule(), isCNF);
+					VariabilityTransactionHelper.INSTANCE.setFeatureConstraintIsCNF(VariabilityView.this.config.getRule(), VariabilityView.this.isCNF);
 				} else {
 					toggleRuleValidation(true);
-					VariabilityTransactionHelper.INSTANCE.setFeatureConstraintIsCNF(config.getRule(), isCNF);
+					VariabilityTransactionHelper.INSTANCE.setFeatureConstraintIsCNF(VariabilityView.this.config.getRule(), VariabilityView.this.isCNF);
 					toggleRuleValidation(false);
 				}
-				featureConstraintToolbar.redraw();
+				VariabilityView.this.featureConstraintToolbar.redraw();
 			}
-			
+
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(final KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-		});		
-		Label separator = new Label(composite, SWT.HORIZONTAL | SWT.SEPARATOR);
+		});
+		final Label separator = new Label(composite, SWT.HORIZONTAL | SWT.SEPARATOR);
 		separator.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
 
-		GridData tableCompositeGridData = new GridData();
+		final GridData tableCompositeGridData = new GridData();
 		tableCompositeGridData.grabExcessHorizontalSpace = true;
 		tableCompositeGridData.grabExcessVerticalSpace = true;
 		tableCompositeGridData.horizontalAlignment = GridData.FILL;
 		tableCompositeGridData.verticalAlignment = GridData.FILL;
 		tableCompositeGridData.horizontalSpan = 2;
-		Composite tableComposite = createViewer(parent);
+		final Composite tableComposite = createViewer(parent);
 		tableComposite.setLayoutData(tableCompositeGridData);
 
 		// Create the help context id for the viewer's control
-		PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(),
+		PlatformUI.getWorkbench().getHelpSystem().setHelp(this.viewer.getControl(),
 				"org.eclipse.emf.henshin.variability.ui.viewer");
 		createActions(parent);
 		createMenu();
 		createToolbar();
 		toggleLinking(true);
 	}
-	
-	private void toggleRuleValidation(boolean disabled) {
+
+	private void toggleRuleValidation(final boolean disabled) {
 		//TODO: Read validator extension points for rules
-		String featureModel = "org.eclipse.emf.henshin.variability.validation.featureModel";
-		String injectiveMatchingPC = "org.eclipse.emf.henshin.variability.validation.injectiveMatchingPC";
-		String featureList = "org.eclipse.emf.henshin.variability.validation.featuresList";
+		final String featureModel = "org.eclipse.emf.henshin.variability.validation.featureModel";
+		final String injectiveMatchingPC = "org.eclipse.emf.henshin.variability.validation.injectiveMatchingPC";
+		final String featureList = "org.eclipse.emf.henshin.variability.validation.featuresList";
 		EMFModelValidationPreferences.setConstraintDisabled(featureModel, disabled);
 		EMFModelValidationPreferences.setConstraintDisabled(injectiveMatchingPC, disabled);
 		EMFModelValidationPreferences.setConstraintDisabled(featureList, disabled);
 	}
 
-	private void updateEditPolicy(RuleEditPart ruleEditPart) {
+	private void updateEditPolicy(final RuleEditPart ruleEditPart) {
 		if (ruleEditPart == null) {
 			return;
 		}
 
-		AbstractEditPart parent = (AbstractEditPart) ruleEditPart.getChildren().get(1);
+		final AbstractEditPart parent = (AbstractEditPart) ruleEditPart.getChildren().get(1);
 
-		if (creationMode == CreationMode.CONFIGURATION
-				|| (creationMode == CreationMode.SELECTION && !showBaseRuleAction.isChecked())) {
+		if ((this.creationMode == CreationMode.CONFIGURATION)
+				|| ((this.creationMode == CreationMode.SELECTION) && !this.showBaseRuleAction.isChecked())) {
 			installConfigurationEditPolicy(parent);
 		} else {
 			installBasePolicy(parent);
 		}
 	}
 
-	protected void installBasePolicy(AbstractEditPart editPart) {
+	protected void installBasePolicy(final AbstractEditPart editPart) {
 		editPart.installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RuleCompartmentItemSemanticEditPolicy());
 
-		for (Object child : editPart.getChildren()) {
+		for (final Object child : editPart.getChildren()) {
 			if (child instanceof NodeEditPart) {
-				NodeEditPart nodeEditPart = (NodeEditPart) child;
+				final NodeEditPart nodeEditPart = (NodeEditPart) child;
 				nodeEditPart.installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new NodeItemSemanticEditPolicy());
-				NodeCompartmentEditPart nodeCompartmentEditPart = (NodeCompartmentEditPart) nodeEditPart.getChildren()
+				final NodeCompartmentEditPart nodeCompartmentEditPart = (NodeCompartmentEditPart) nodeEditPart.getChildren()
 						.get(2);
 				nodeCompartmentEditPart.installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
 						new NodeCompartmentItemSemanticEditPolicy());
@@ -554,199 +544,199 @@ public class VariabilityView extends ViewPart
 		}
 	}
 
-	private void installConfigurationEditPolicy(AbstractEditPart editPart) {
-		editPart.installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RuleVariabilityEditPolicy(config));
+	private void installConfigurationEditPolicy(final AbstractEditPart editPart) {
+		editPart.installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RuleVariabilityEditPolicy(this.config));
 
-		for (Object child : editPart.getChildren()) {
+		for (final Object child : editPart.getChildren()) {
 			if (child instanceof NodeEditPart) {
-				NodeEditPart nodeEditPart = (NodeEditPart) child;
+				final NodeEditPart nodeEditPart = (NodeEditPart) child;
 				nodeEditPart.installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-						new NodeVariabilityItemSemanticEditPolicy(config));
-				NodeCompartmentEditPart nodeCompartmentEditPart = (NodeCompartmentEditPart) nodeEditPart.getChildren()
+						new NodeVariabilityItemSemanticEditPolicy(this.config));
+				final NodeCompartmentEditPart nodeCompartmentEditPart = (NodeCompartmentEditPart) nodeEditPart.getChildren()
 						.get(2);
 				nodeCompartmentEditPart.installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-						new NodeVariabilityEditPolicy(config));
+						new NodeVariabilityEditPolicy(this.config));
 			}
 		}
 	}
 
-	private void createActions(Composite parent) {
-		elementCreationMenu = new DropDownMenuAction("Element creation mode", parent);
-		elementCreationMenu.setImageDescriptor(ImageHelper.getImageDescriptor("icons/creation_mode.gif"));
+	private void createActions(final Composite parent) {
+		this.elementCreationMenu = new DropDownMenuAction("Element creation mode", parent);
+		this.elementCreationMenu.setImageDescriptor(ImageHelper.getImageDescriptor("icons/creation_mode.gif"));
 
-		linkToViewingMode = new Action("Link to viewing mode", IAction.AS_RADIO_BUTTON) {
+		this.linkToViewingMode = new Action("Link to viewing mode", IAction.AS_RADIO_BUTTON) {
 			@Override
 			public void run() {
-				creationMode = CreationMode.SELECTION;
-				updateEditPolicy(selectedRuleEditPart);
+				VariabilityView.this.creationMode = CreationMode.SELECTION;
+				updateEditPolicy(VariabilityView.this.selectedRuleEditPart);
 			}
 		};
-		linkToViewingMode.setImageDescriptor(ImageHelper.getImageDescriptor("icons/add_to_selection.gif"));
+		this.linkToViewingMode.setImageDescriptor(ImageHelper.getImageDescriptor("icons/add_to_selection.gif"));
 
-		createInBase = new Action("Create in base rule", IAction.AS_RADIO_BUTTON) {
+		this.createInBase = new Action("Create in base rule", IAction.AS_RADIO_BUTTON) {
 			@Override
 			public void run() {
-				creationMode = CreationMode.BASE;
-				updateEditPolicy(selectedRuleEditPart);
+				VariabilityView.this.creationMode = CreationMode.BASE;
+				updateEditPolicy(VariabilityView.this.selectedRuleEditPart);
 			}
 		};
-		createInBase.setImageDescriptor(ImageHelper.getImageDescriptor("icons/add_to_base.gif"));
+		this.createInBase.setImageDescriptor(ImageHelper.getImageDescriptor("icons/add_to_base.gif"));
 
-		createInConfiguration = new Action("Create in configuration", IAction.AS_RADIO_BUTTON) {
+		this.createInConfiguration = new Action("Create in configuration", IAction.AS_RADIO_BUTTON) {
 			@Override
 			public void run() {
-				creationMode = CreationMode.CONFIGURATION;
-				updateEditPolicy(selectedRuleEditPart);
+				VariabilityView.this.creationMode = CreationMode.CONFIGURATION;
+				updateEditPolicy(VariabilityView.this.selectedRuleEditPart);
 			}
 		};
-		createInConfiguration.setImageDescriptor(ImageHelper.getImageDescriptor("icons/add_to_configuration.gif"));
+		this.createInConfiguration.setImageDescriptor(ImageHelper.getImageDescriptor("icons/add_to_configuration.gif"));
 
-		elementCreationMenu.addActionToMenu(linkToViewingMode);
-		elementCreationMenu.addActionToMenu(createInBase);
-		elementCreationMenu.addActionToMenu(createInConfiguration);
+		this.elementCreationMenu.addActionToMenu(this.linkToViewingMode);
+		this.elementCreationMenu.addActionToMenu(this.createInBase);
+		this.elementCreationMenu.addActionToMenu(this.createInConfiguration);
 
-		visibilityConcealingAction = new Action("Visibility", IAction.AS_RADIO_BUTTON) {
+		this.visibilityConcealingAction = new Action("Visibility", IAction.AS_RADIO_BUTTON) {
 			@Override
 			public void run() {
-				RuleEditPartVisibilityHelper.showFullRule(selectedRuleEditPart);
+				RuleEditPartVisibilityHelper.showFullRule(VariabilityView.this.selectedRuleEditPart);
 				RuleEditPartVisibilityHelper.setFadingStrategy(new FigureVisibilityConcealingStrategy());
 				runSelectedVisibilityAction();
-			};
+			}
 		};
-		visibilityConcealingAction.setChecked(true);
-		fadeConcealingAction = new Action("Fading", IAction.AS_RADIO_BUTTON) {
+		this.visibilityConcealingAction.setChecked(true);
+		this.fadeConcealingAction = new Action("Fading", IAction.AS_RADIO_BUTTON) {
 			@Override
 			public void run() {
-				RuleEditPartVisibilityHelper.showFullRule(selectedRuleEditPart);
+				RuleEditPartVisibilityHelper.showFullRule(VariabilityView.this.selectedRuleEditPart);
 				RuleEditPartVisibilityHelper.setFadingStrategy(new ShapeAlphaConcealingStrategy());
 				runSelectedVisibilityAction();
-			};
+			}
 		};
 
-		showBaseRuleAction = new Action("Show base rule", IAction.AS_RADIO_BUTTON) {
+		this.showBaseRuleAction = new Action("Show base rule", IAction.AS_RADIO_BUTTON) {
 			@Override
 			public void run() {
 				if (isChecked()) {
 					super.run();
-					RuleEditPartVisibilityHelper.showBaseRule(selectedRuleEditPart);
-					if (creationMode == CreationMode.SELECTION) {
-						updateEditPolicy(selectedRuleEditPart);
+					RuleEditPartVisibilityHelper.showBaseRule(VariabilityView.this.selectedRuleEditPart);
+					if (VariabilityView.this.creationMode == CreationMode.SELECTION) {
+						updateEditPolicy(VariabilityView.this.selectedRuleEditPart);
 					}
 				}
 			}
 		};
-		showBaseRuleAction.setImageDescriptor(ImageHelper.getImageDescriptor("icons/rule_base.gif"));
+		this.showBaseRuleAction.setImageDescriptor(ImageHelper.getImageDescriptor("icons/rule_base.gif"));
 
-		showConfiguredRuleAction = new Action("Show current configuration", IAction.AS_RADIO_BUTTON) {
+		this.showConfiguredRuleAction = new Action("Show current configuration", IAction.AS_RADIO_BUTTON) {
 			@Override
 			public void run() {
-				if (isChecked() && selectedRuleEditPart != null) {
+				if (isChecked() && (VariabilityView.this.selectedRuleEditPart != null)) {
 					super.run();
-					RuleEditPartVisibilityHelper.showConfiguredRule(selectedRuleEditPart, config,
-							VariabilityHelper.INSTANCE.getFeatureConstraint(config.getRule()));
-					if (creationMode == CreationMode.SELECTION) {
-						updateEditPolicy(selectedRuleEditPart);
+					RuleEditPartVisibilityHelper.showConfiguredRule(VariabilityView.this.selectedRuleEditPart, VariabilityView.this.config,
+							VariabilityHelper.INSTANCE.getFeatureConstraint(VariabilityView.this.config.getRule()));
+					if (VariabilityView.this.creationMode == CreationMode.SELECTION) {
+						updateEditPolicy(VariabilityView.this.selectedRuleEditPart);
 					}
 				}
 			}
 		};
-		showConfiguredRuleAction.setImageDescriptor(ImageHelper.getImageDescriptor("icons/rule_configured.gif"));
+		this.showConfiguredRuleAction.setImageDescriptor(ImageHelper.getImageDescriptor("icons/rule_configured.gif"));
 
-		showFullRuleAction = new Action("Show full rule", IAction.AS_RADIO_BUTTON) {
+		this.showFullRuleAction = new Action("Show full rule", IAction.AS_RADIO_BUTTON) {
 			@Override
 			public void run() {
 				if (isChecked()) {
 					super.run();
-					RuleEditPartVisibilityHelper.showFullRule(selectedRuleEditPart);
+					RuleEditPartVisibilityHelper.showFullRule(VariabilityView.this.selectedRuleEditPart);
 				}
 			}
 		};
-		showFullRuleAction.setImageDescriptor(ImageHelper.getImageDescriptor("icons/rule_full.gif"));
-		showFullRuleAction.setChecked(true);
+		this.showFullRuleAction.setImageDescriptor(ImageHelper.getImageDescriptor("icons/rule_full.gif"));
+		this.showFullRuleAction.setChecked(true);
 
-		loadFavoritesMenu = new DropDownMenuAction("Manage favorites", parent) {
+		this.loadFavoritesMenu = new DropDownMenuAction("Manage favorites", parent) {
 			@Override
-			public void runWithEvent(Event event) {
-				if (config == null) {
+			public void runWithEvent(final Event event) {
+				if (VariabilityView.this.config == null) {
 					return;
 				}
 
 				// Star button was clicked
 				if (event.detail == 0) {
-					if (!configurationProvider.isFavorite(config)) {
-						Rule rule = VariabilityModelHelper.getRuleForEditPart(selectedRuleEditPart);
-						Set<String> favoriteNames = new HashSet<>();
-						Set<Favorite> favorites = configurationProvider.getFavorites(rule);
+					if (!VariabilityView.this.configurationProvider.isFavorite(VariabilityView.this.config)) {
+						final Rule rule = VariabilityModelHelper.getRuleForEditPart(VariabilityView.this.selectedRuleEditPart);
+						final Set<String> favoriteNames = new HashSet<>();
+						final Set<Favorite> favorites = VariabilityView.this.configurationProvider.getFavorites(rule);
 
 						if (favorites != null) {
-							for (Favorite fav : favorites) {
+							for (final Favorite fav : favorites) {
 								favoriteNames.add(fav.getName());
 							}
 						}
-						NameDialog dialog = new NameDialog(getViewSite().getShell(), "Favorite", favoriteNames);
+						final NameDialog dialog = new NameDialog(getViewSite().getShell(), "Favorite", favoriteNames);
 						if (dialog.open() == Window.OK) {
-							String name = dialog.getName();
-							Favorite favorite = configurationProvider.addConfigurationToFavorites(rule, name, config);
-							LoadFavoriteConfigurationAction loadConfigurationAction = new LoadFavoriteConfigurationAction(
+							final String name = dialog.getName();
+							final Favorite favorite = VariabilityView.this.configurationProvider.addConfigurationToFavorites(rule, name, VariabilityView.this.config);
+							final LoadFavoriteConfigurationAction loadConfigurationAction = new LoadFavoriteConfigurationAction(
 									favorite, VariabilityView.this);
-							this.addActionToMenu(loadConfigurationAction);
-							this.uncheckAll();
-							selectFavorite(config);
+							addActionToMenu(loadConfigurationAction);
+							uncheckAll();
+							selectFavorite(VariabilityView.this.config);
 							loadConfigurationAction.setChecked(true);
 						} else {
 							return;
 						}
 					} else {
-						configurationProvider.removeConfigurationFromFavorites(config);
-						refreshFavorites(config.getRule());
+						VariabilityView.this.configurationProvider.removeConfigurationFromFavorites(VariabilityView.this.config);
+						refreshFavorites(VariabilityView.this.config.getRule());
 					}
 
-					setChecked(configurationProvider.isFavorite(config));
+					setChecked(VariabilityView.this.configurationProvider.isFavorite(VariabilityView.this.config));
 				}
 			}
 
 			@Override
-			public void setChecked(boolean favorite) {
-				String imagePath = favorite ? "icons/star.png" : "icons/star_grey.png";
+			public void setChecked(final boolean favorite) {
+				final String imagePath = favorite ? "icons/star.png" : "icons/star_grey.png";
 				setImageDescriptor(ImageHelper.getImageDescriptor(imagePath));
 				firePropertyChange(CHECKED, !favorite, favorite);
 			}
 		};
-		loadFavoritesMenu.setToolTipText("Manage favorites");
-		loadFavoritesMenu.setImageDescriptor(ImageHelper.getImageDescriptor("icons/star_grey.png"));
+		this.loadFavoritesMenu.setToolTipText("Manage favorites");
+		this.loadFavoritesMenu.setImageDescriptor(ImageHelper.getImageDescriptor("icons/star_grey.png"));
 
-		linkWithEditorAction = new Action("Link with editor", IAction.AS_CHECK_BOX) {
+		this.linkWithEditorAction = new Action("Link with editor", IAction.AS_CHECK_BOX) {
 			@Override
 			public void run() {
 				toggleLinking(isChecked());
 			}
 		};
-		linkWithEditorAction.setImageDescriptor(ImageHelper.getImageDescriptor("icons/synchronize.gif"));
+		this.linkWithEditorAction.setImageDescriptor(ImageHelper.getImageDescriptor("icons/synchronize.gif"));
 	}
 
 	private void createMenu() {
-		IMenuManager mgr = getViewSite().getActionBars().getMenuManager();
-		IMenuManager subMgr = new MenuManager("Concealing strategies",
+		final IMenuManager mgr = getViewSite().getActionBars().getMenuManager();
+		final IMenuManager subMgr = new MenuManager("Concealing strategies",
 				ImageHelper.getImageDescriptor("icons/concealing.gif"), null);
 
-		mgr.add(linkWithEditorAction);
+		mgr.add(this.linkWithEditorAction);
 		mgr.add(subMgr);
-		subMgr.add(fadeConcealingAction);
-		subMgr.add(visibilityConcealingAction);
+		subMgr.add(this.fadeConcealingAction);
+		subMgr.add(this.visibilityConcealingAction);
 	}
 
 	private void createToolbar() {
-		IToolBarManager mgr = getViewSite().getActionBars().getToolBarManager();
+		final IToolBarManager mgr = getViewSite().getActionBars().getToolBarManager();
 
-		mgr.add(elementCreationMenu);
+		mgr.add(this.elementCreationMenu);
 		mgr.add(new Separator());
-		mgr.add(showBaseRuleAction);
-		mgr.add(showConfiguredRuleAction);
-		mgr.add(showFullRuleAction);
+		mgr.add(this.showBaseRuleAction);
+		mgr.add(this.showConfiguredRuleAction);
+		mgr.add(this.showFullRuleAction);
 		mgr.add(new Separator());
-		mgr.add(loadFavoritesMenu);
+		mgr.add(this.loadFavoritesMenu);
 		mgr.add(new Separator());
-		mgr.add(linkWithEditorAction);
+		mgr.add(this.linkWithEditorAction);
 	}
 
 	/**
@@ -754,33 +744,33 @@ public class VariabilityView extends ViewPart
 	 */
 	@Override
 	public void setFocus() {
-		viewer.getControl().setFocus();
+		this.viewer.getControl().setFocus();
 	}
 
 	private class ConfigurationListener extends ResourceSetListenerImpl {
 
 		@Override
-		public void resourceSetChanged(ResourceSetChangeEvent event) {
-			Annotation annotation = findModifiedAnnotation(event.getNotifications());
+		public void resourceSetChanged(final ResourceSetChangeEvent event) {
+			final Annotation annotation = findModifiedAnnotation(event.getNotifications());
 			if (annotation != null) {
-				String value = annotation.getValue();
+				final String value = annotation.getValue();
 				if (VariabilityHelper.isFeatureModelAnnotation(annotation)
-						|| VariabilityHelper.isFeaturesAnnotation(annotation) && value != null && !value.isEmpty()) {
-					featureConstraintToolbar.setVisible(true);
-					updateMissingFeaturesButton(config.getRule());
-					updateCNFIndicator(VariabilityHelper.INSTANCE.getFeatureConstraint(config.getRule()));
+						|| (VariabilityHelper.isFeaturesAnnotation(annotation) && (value != null) && !value.isEmpty())) {
+					VariabilityView.this.featureConstraintToolbar.setVisible(true);
+					updateMissingFeaturesButton(VariabilityView.this.config.getRule());
+					updateCNFIndicator(VariabilityHelper.INSTANCE.getFeatureConstraint(VariabilityView.this.config.getRule()));
 				}
 			}
-			
-			if (observableFeatureConstraintValue.shouldUpdate()) {
+
+			if (VariabilityView.this.observableFeatureConstraintValue.shouldUpdate()) {
 				refresh();
 			} else {
-				viewer.refresh();
+				VariabilityView.this.viewer.refresh();
 			}
 		}
 
-		private Annotation findModifiedAnnotation(List<Notification> notifications) {
-			for (Notification notification : notifications) {
+		private Annotation findModifiedAnnotation(final List<Notification> notifications) {
+			for (final Notification notification : notifications) {
 				if (notification.getNotifier() instanceof Annotation) {
 					return (Annotation) notification.getNotifier();
 				}
@@ -790,55 +780,55 @@ public class VariabilityView extends ViewPart
 	}
 
 	@Override
-	public void setContent(Configuration config) {
-		Rule rule = config.getRule();
+	public void setContent(final Configuration config) {
+		final Rule rule = config.getRule();
 
-		TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(rule);
+		final TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(rule);
 		domain.addResourceSetListener(new ConfigurationListener());
 
-		viewer.setInput(config);
-		ruleNameLabel.setText("Selected rule: " + rule.getName());
-		writableValue.setValue(rule);
+		this.viewer.setInput(config);
+		this.ruleNameLabel.setText("Selected rule: " + rule.getName());
+		this.writableValue.setValue(rule);
 		refreshFavorites(rule);
 
-		if (showConfiguredRuleAction.isChecked()) {
-			showConfiguredRuleAction.run();
+		if (this.showConfiguredRuleAction.isChecked()) {
+			this.showConfiguredRuleAction.run();
 		}
 
-		featureConstraintToolbar.setVisible(true);
+		this.featureConstraintToolbar.setVisible(true);
 		updateMissingFeaturesButton(rule);
 		updateCNFIndicator(VariabilityHelper.INSTANCE.getFeatureConstraint(rule));
 
-		add.setEnabled(true);
-		delete.setEnabled(true);
-		clear.setEnabled(true);
-		refresh.setEnabled(true);
+		this.add.setEnabled(true);
+		this.delete.setEnabled(true);
+		this.clear.setEnabled(true);
+		this.refresh.setEnabled(true);
 	}
 
 	@Override
 	public Configuration getContent() {
-		return config;
+		return this.config;
 	}
 
 	public void refresh() {
-		viewer.refresh();
-		featureConstraintTextBindingContext.updateModels();
-		featureConstraintTextBindingContext.updateTargets();
+		this.viewer.refresh();
+		this.featureConstraintTextBindingContext.updateModels();
+		this.featureConstraintTextBindingContext.updateTargets();
 	}
 
 	@Override
-	public void editorSelectionChanged(IEditorPart activeEditor) {
-		if (!this.linkingActive || !getViewSite().getPage().isPartVisible(this) || activeEditor == null) {
+	public void editorSelectionChanged(final IEditorPart activeEditor) {
+		if (!this.linkingActive || !getViewSite().getPage().isPartVisible(this) || (activeEditor == null)) {
 			return;
 		}
-		ISelection selection = activeEditor.getEditorSite().getSelectionProvider().getSelection();
+		final ISelection selection = activeEditor.getEditorSite().getSelectionProvider().getSelection();
 		if (selection instanceof StructuredSelection) {
-			StructuredSelection structuredSelection = (StructuredSelection) selection;
-			if (structuredSelection.size() == 1 && structuredSelection.getFirstElement() instanceof RuleEditPart) {
-				RuleEditPart ruleEditPart = (RuleEditPart) structuredSelection.getFirstElement();
-				Rule rule = VariabilityModelHelper.getRuleForEditPart(ruleEditPart);
-				config = configurationProvider.getConfiguration(rule);
-				setContent(config);
+			final StructuredSelection structuredSelection = (StructuredSelection) selection;
+			if ((structuredSelection.size() == 1) && (structuredSelection.getFirstElement() instanceof RuleEditPart)) {
+				final RuleEditPart ruleEditPart = (RuleEditPart) structuredSelection.getFirstElement();
+				final Rule rule = VariabilityModelHelper.getRuleForEditPart(ruleEditPart);
+				this.config = this.configurationProvider.getConfiguration(rule);
+				setContent(this.config);
 				refresh();
 			} else if (structuredSelection.size() == 1) {
 				refresh();
@@ -846,60 +836,60 @@ public class VariabilityView extends ViewPart
 		}
 	}
 
-	protected void toggleLinking(boolean checked) {
+	protected void toggleLinking(final boolean checked) {
 		this.linkingActive = checked;
 		if (checked) {
-			getSite().getPage().addSelectionListener(linkWithEditorSelectionListener);
+			getSite().getPage().addSelectionListener(this.linkWithEditorSelectionListener);
 			editorSelectionChanged(getSite().getPage().getActiveEditor());
 		} else {
-			getSite().getPage().removeSelectionListener(linkWithEditorSelectionListener);
+			getSite().getPage().removeSelectionListener(this.linkWithEditorSelectionListener);
 		}
-		if (linkWithEditorAction != null) {
-			linkWithEditorAction.setChecked(checked);
+		if (this.linkWithEditorAction != null) {
+			this.linkWithEditorAction.setChecked(checked);
 		}
 	}
 
-	private void refreshFavorites(Rule rule) {
-		loadFavoritesMenu.clearMenu();
-		Set<Favorite> favorites = configurationProvider.getFavorites(rule);
+	private void refreshFavorites(final Rule rule) {
+		this.loadFavoritesMenu.clearMenu();
+		final Set<Favorite> favorites = this.configurationProvider.getFavorites(rule);
 		if (favorites != null) {
-			for (Favorite favorite : favorites) {
-				LoadFavoriteConfigurationAction loadConfigurationAction = new LoadFavoriteConfigurationAction(favorite,
+			for (final Favorite favorite : favorites) {
+				final LoadFavoriteConfigurationAction loadConfigurationAction = new LoadFavoriteConfigurationAction(favorite,
 						this);
-				loadFavoritesMenu.addActionToMenu(loadConfigurationAction);
+				this.loadFavoritesMenu.addActionToMenu(loadConfigurationAction);
 			}
 		}
-		selectFavorite(config);
+		selectFavorite(this.config);
 	}
 
 	@Override
-	public void selectedRuleChanged(RuleEditPart ruleEditPart) {
+	public void selectedRuleChanged(final RuleEditPart ruleEditPart) {
 		if (ruleEditPart != null) {
-			Rule rule = VariabilityModelHelper.getRuleForEditPart(ruleEditPart);
-			config = configurationProvider.getConfiguration(rule);
-			selectedRuleEditPart = ruleEditPart;
-			setContent(config);
+			final Rule rule = VariabilityModelHelper.getRuleForEditPart(ruleEditPart);
+			this.config = this.configurationProvider.getConfiguration(rule);
+			this.selectedRuleEditPart = ruleEditPart;
+			setContent(this.config);
 			updateEditPolicy(ruleEditPart);
 			refresh();
 		}
 	}
 
 	private void runSelectedVisibilityAction() {
-		if (showBaseRuleAction.isChecked()) {
-			showBaseRuleAction.run();
-		} else if (showConfiguredRuleAction.isChecked()) {
-			showConfiguredRuleAction.run();
+		if (this.showBaseRuleAction.isChecked()) {
+			this.showBaseRuleAction.run();
+		} else if (this.showConfiguredRuleAction.isChecked()) {
+			this.showConfiguredRuleAction.run();
 		}
 	}
 
 	private SelectionAdapter getSelectionAdapter(final TableColumn column, final int index) {
-		SelectionAdapter selectionAdapter = new SelectionAdapter() {
+		final SelectionAdapter selectionAdapter = new SelectionAdapter() {
 			@Override
-			public void widgetSelected(SelectionEvent e) {
-				comparator.setColumn(index);
-				int sortDirection = comparator.getDirection();
-				viewer.getTable().setSortDirection(sortDirection);
-				viewer.getTable().setSortColumn(column);
+			public void widgetSelected(final SelectionEvent e) {
+				VariabilityView.this.comparator.setColumn(index);
+				final int sortDirection = VariabilityView.this.comparator.getDirection();
+				VariabilityView.this.viewer.getTable().setSortDirection(sortDirection);
+				VariabilityView.this.viewer.getTable().setSortColumn(column);
 				refresh();
 			}
 		};
@@ -908,95 +898,95 @@ public class VariabilityView extends ViewPart
 
 	@Override
 	public void tableViewerUpdated() {
-		selectFavorite(config);
-		if (showConfiguredRuleAction.isChecked()) {
-			showConfiguredRuleAction.run();
+		selectFavorite(this.config);
+		if (this.showConfiguredRuleAction.isChecked()) {
+			this.showConfiguredRuleAction.run();
 		}
 	}
 
-	private void selectFavorite(Configuration config) {
-		Favorite favorite = configurationProvider.findFavorite(config);
+	private void selectFavorite(final Configuration config) {
+		final Favorite favorite = this.configurationProvider.findFavorite(config);
 		if (favorite != null) {
-			selectedFavorite.setText(favorite.getName());
-			loadFavoritesMenu.setImageDescriptor(ImageHelper.getImageDescriptor("icons/star.png"));
+			this.selectedFavorite.setText(favorite.getName());
+			this.loadFavoritesMenu.setImageDescriptor(ImageHelper.getImageDescriptor("icons/star.png"));
 		} else {
 			clearFavorite();
 		}
 	}
 
 	private void clearFavorite() {
-		selectedFavorite.setText("Configuration");
-		loadFavoritesMenu.uncheckAll();
-		loadFavoritesMenu.setImageDescriptor(ImageHelper.getImageDescriptor("icons/star_grey.png"));
+		this.selectedFavorite.setText("Configuration");
+		this.loadFavoritesMenu.uncheckAll();
+		this.loadFavoritesMenu.setImageDescriptor(ImageHelper.getImageDescriptor("icons/star_grey.png"));
 	}
-	
-	private boolean updateCNFIndicator(String expression) {
-		boolean wasCNF = isCNF;
-		
-		isCNF = SatChecker.isCNF(expression);
-		if (isCNF) {
-			featureConstraintCNFIndicator.setImage(ImageHelper.getImage("/icons/cnf.png"));
-			featureConstraintCNFIndicator.setDisabledImage(ImageHelper.getImage("/icons/cnf.png"));
-			featureConstraintCNFIndicator.setToolTipText("Feature constraint is CNF");
+
+	private boolean updateCNFIndicator(final String expression) {
+		final boolean wasCNF = this.isCNF;
+
+		this.isCNF = SatChecker.isCNF(expression);
+		if (this.isCNF) {
+			this.featureConstraintCNFIndicator.setImage(ImageHelper.getImage("/icons/cnf.png"));
+			this.featureConstraintCNFIndicator.setDisabledImage(ImageHelper.getImage("/icons/cnf.png"));
+			this.featureConstraintCNFIndicator.setToolTipText("Feature constraint is CNF");
 		} else {
-			featureConstraintCNFIndicator.setImage(ImageHelper.getImage("/icons/blank.png"));
-			featureConstraintCNFIndicator.setDisabledImage(ImageHelper.getImage("/icons/blank.png"));
-			featureConstraintCNFIndicator.setToolTipText("");
+			this.featureConstraintCNFIndicator.setImage(ImageHelper.getImage("/icons/blank.png"));
+			this.featureConstraintCNFIndicator.setDisabledImage(ImageHelper.getImage("/icons/blank.png"));
+			this.featureConstraintCNFIndicator.setToolTipText("");
 		}
-		
-		return wasCNF != isCNF;
+
+		return wasCNF != this.isCNF;
 	}
-	
-	private void updateMissingFeaturesButton(Rule rule) {
+
+	private void updateMissingFeaturesButton(final Rule rule) {
 		if (hasMissingFeatures(rule)) {
-			createFeatures.setImage(ImageHelper.getImage("/icons/create_features.png"));
-			createFeatures.setToolTipText("Create all undefined features");
-			createFeatures.setEnabled(true);
+			this.createFeatures.setImage(ImageHelper.getImage("/icons/create_features.png"));
+			this.createFeatures.setToolTipText("Create all undefined features");
+			this.createFeatures.setEnabled(true);
 		} else {
-			createFeatures.setImage(ImageHelper.getImage("/icons/blank.png"));
-			createFeatures.setToolTipText("");
-			createFeatures.setEnabled(false);
+			this.createFeatures.setImage(ImageHelper.getImage("/icons/blank.png"));
+			this.createFeatures.setToolTipText("");
+			this.createFeatures.setEnabled(false);
 		}
 	}
-	
-	private boolean updateErrorIndicators(Rule rule) {
+
+	private boolean updateErrorIndicators(final Rule rule) {
 		IStatus featureConstraintStatus;
 		try {
 			featureConstraintStatus = VBRuleFMValidator.validateFeatureModel(rule);
-		} catch (NullPointerException e) {
-			featureConstraintStatus = new Status(Status.ERROR, "TODO", "The feature constraint is invalid.");
+		} catch (final NullPointerException e) {
+			featureConstraintStatus = new Status(IStatus.ERROR, "TODO", "The feature constraint is invalid.");
 		}
-//		IStatus featuresStatus = VBRuleFeaturesValidator.validateFeatures(rule);
-		
+		//		IStatus featuresStatus = VBRuleFeaturesValidator.validateFeatures(rule);
+
 		if (!featureConstraintStatus.isOK()) {
-			featureConstraintValidityIndicator.setImage(ImageHelper.getImage("/icons/error.png"));
-			featureConstraintValidityIndicator.setDisabledImage(ImageHelper.getImage("/icons/error.png"));
-			featureConstraintValidityIndicator.setToolTipText(featureConstraintStatus.getMessage());
+			this.featureConstraintValidityIndicator.setImage(ImageHelper.getImage("/icons/error.png"));
+			this.featureConstraintValidityIndicator.setDisabledImage(ImageHelper.getImage("/icons/error.png"));
+			this.featureConstraintValidityIndicator.setToolTipText(featureConstraintStatus.getMessage());
 		} else {
-			featureConstraintValidityIndicator.setImage(ImageHelper.getImage("/icons/blank.png"));
-			featureConstraintValidityIndicator.setDisabledImage(ImageHelper.getImage("/icons/blank.png"));
-			featureConstraintValidityIndicator.setToolTipText("");
+			this.featureConstraintValidityIndicator.setImage(ImageHelper.getImage("/icons/blank.png"));
+			this.featureConstraintValidityIndicator.setDisabledImage(ImageHelper.getImage("/icons/blank.png"));
+			this.featureConstraintValidityIndicator.setToolTipText("");
 		}
 		return featureConstraintStatus.isOK();
 	}
 
 
-	public boolean hasMissingFeatures(Rule rule) {
+	public boolean hasMissingFeatures(final Rule rule) {
 		return !calculateMissingFeatureNames(rule).isEmpty();
 	}
 
-	public String[] getMissingFeatures(Rule rule) {
+	public String[] getMissingFeatures(final Rule rule) {
 		return calculateMissingFeatureNames(rule).toArray(new String[0]);
 	}
 
-	private Set<String> calculateMissingFeatureNames(Rule rule) {
-		String sentence = VariabilityHelper.INSTANCE.getFeatureConstraint(rule);
-		Set<String> missingFeatures = new HashSet<>();
-		Set<PropositionSymbol> symbols = SymbolCollector.getSymbolsFrom(FeatureExpression.getExpr(sentence));
-		for (PropositionSymbol symbol : symbols) {
-			String symbolName = symbol.getSymbol().trim();
-			Set<String> features = VariabilityHelper.INSTANCE.getFeatures(rule);
-			if (features == null || !features.contains(symbolName)) {
+	private Set<String> calculateMissingFeatureNames(final Rule rule) {
+		final String sentence = VariabilityHelper.INSTANCE.getFeatureConstraint(rule);
+		final Set<String> missingFeatures = new HashSet<>();
+		final Set<PropositionSymbol> symbols = SymbolCollector.getSymbolsFrom(FeatureExpression.getExpr(sentence));
+		for (final PropositionSymbol symbol : symbols) {
+			final String symbolName = symbol.getSymbol().trim();
+			final Set<String> features = VariabilityHelper.INSTANCE.getFeatures(rule);
+			if ((features == null) || !features.contains(symbolName)) {
 				missingFeatures.add(symbolName);
 			}
 		}

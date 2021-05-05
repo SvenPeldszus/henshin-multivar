@@ -8,8 +8,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.sat4j.core.VecInt;
 import org.sat4j.minisat.SolverFactory;
 import org.sat4j.specs.ContradictionException;
@@ -27,69 +28,69 @@ import aima.core.logic.propositional.visitors.ConvertToCNF;
 import aima.core.logic.propositional.visitors.SymbolCollector;
 
 /**
- * 
+ *
  * @author Daniel Strüber
  * @author Sven Peldszus
  *
  */
 public class SatChecker {
 
-	private ISolver solver;
-	private Map<Integer, String> indicesToSymbols;
-	private Map<String, Integer> symbolsToIndices;
+	private final ISolver solver;
+	private final Map<Integer, String> indicesToSymbols;
+	private final Map<String, Integer> symbolsToIndices;
 
-	public SatChecker(Sentence cnf) throws ContradictionException {
-		indicesToSymbols = new HashMap<>();
-		symbolsToIndices = new HashMap<>();
-		solver = createSolver(cnf, indicesToSymbols, symbolsToIndices);
+	public SatChecker(final Sentence cnf) throws ContradictionException {
+		this.indicesToSymbols = new HashMap<>();
+		this.symbolsToIndices = new HashMap<>();
+		this.solver = createSolver(cnf, this.indicesToSymbols, this.symbolsToIndices);
 	}
 
-	public static ISolver createSolver(Sentence cnf, Map<Integer, String> indicesToSymbols,
-			Map<String, Integer> symbolsToIndices) throws ContradictionException {
+	public static ISolver createSolver(final Sentence cnf, final Map<Integer, String> indicesToSymbols,
+			final Map<String, Integer> symbolsToIndices) throws ContradictionException {
 		return addToSolver(cnf, indicesToSymbols, symbolsToIndices, SolverFactory.newDefault());
 	}
 
-	private static ISolver addToSolver(Sentence cnf, Map<Integer, String> indicesToSymbols,
-			Map<String, Integer> symbolsToIndices, ISolver solver) throws ContradictionException {
-		Set<PropositionSymbol> symbols = SymbolCollector.getSymbolsFrom(cnf);
-		Set<Clause> clauses = ClauseCollector.getClausesFrom(cnf);
+	private static ISolver addToSolver(final Sentence cnf, final Map<Integer, String> indicesToSymbols,
+			final Map<String, Integer> symbolsToIndices, final ISolver solver) throws ContradictionException {
+		final Set<PropositionSymbol> symbols = SymbolCollector.getSymbolsFrom(cnf);
+		final Set<Clause> clauses = ClauseCollector.getClausesFrom(cnf);
 
-		Map<PropositionSymbol, Integer> indices = getSymbol2IndexMap(symbols);
-		for (Entry<PropositionSymbol, Integer> entry : indices.entrySet()) {
-			String symbol = entry.getKey().getSymbol();
-			Integer index = entry.getValue();
+		final Map<PropositionSymbol, Integer> indices = getSymbol2IndexMap(symbols);
+		for (final Entry<PropositionSymbol, Integer> entry : indices.entrySet()) {
+			final String symbol = entry.getKey().getSymbol();
+			final Integer index = entry.getValue();
 			indicesToSymbols.put(index, symbol);
 			symbolsToIndices.put(symbol, index);
 		}
 
-		int numberOfVariables = symbols.size();
-		int numberOfClauses = clauses.size();
+		final int numberOfVariables = symbols.size();
+		final int numberOfClauses = clauses.size();
 
 		solver.setDBSimplificationAllowed(true);
 		solver.newVar(numberOfVariables);
 		solver.setExpectedNumberOfClauses(numberOfClauses);
-		for (Clause clause : clauses) {
+		for (final Clause clause : clauses) {
 			if (clause.isFalse()) {
 				return null;
 			}
 			if (!clause.isTautology()) {
-				int[] clauseArray = convertToArray(clause, indices);
+				final int[] clauseArray = convertToArray(clause, indices);
 				solver.addClause(new VecInt(clauseArray));
 			}
 		}
 		return solver;
 	}
 
-	public static boolean isSatisfiable(Sentence expr) {
-		Sentence cnf = ConvertToCNF.convert(expr);
+	public static boolean isSatisfiable(final Sentence expr) {
+		final Sentence cnf = ConvertToCNF.convert(expr);
 		return isCNFSatisfiable(cnf);
 	}
 
-	public static boolean isCNFSatisfiable(Sentence cnf) {
+	public static boolean isCNFSatisfiable(final Sentence cnf) {
 		ISolver solver;
 		try {
 			solver = addToSolver(cnf, new HashMap<>(), new HashMap<>(), SolverFactory.newDefault());
-		} catch (ContradictionException e) {
+		} catch (final ContradictionException e) {
 			return false;
 		}
 		if (solver == null) {
@@ -97,53 +98,54 @@ public class SatChecker {
 		}
 		try {
 			return solver.isSatisfiable();
-		} catch (TimeoutException e) {
+		} catch (final TimeoutException e) {
 			throw new RuntimeException("Timeout during evaluation of satisfiability.");
 		}
 	}
 
-	public static boolean isContradiction(Sentence expr) {
+	public static boolean isContradiction(final Sentence expr) {
 		return !isSatisfiable(expr);
 	}
 
-	private static Map<PropositionSymbol, Integer> getSymbol2IndexMap(Set<PropositionSymbol> symbols) {
-		Map<PropositionSymbol, Integer> list2Index = new HashMap<>(symbols.size());
+	private static Map<PropositionSymbol, Integer> getSymbol2IndexMap(final Set<PropositionSymbol> symbols) {
+		final Map<PropositionSymbol, Integer> list2Index = new HashMap<>(symbols.size());
 		int counter = 1;
-		for (PropositionSymbol symbol : symbols) {
-			list2Index.put(symbol, Integer.valueOf(counter));
+		for (final PropositionSymbol symbol : symbols) {
+			list2Index.put(symbol, counter);
 			counter++;
 		}
 		return list2Index;
 	}
 
-	private static int[] convertToArray(Clause clause, Map<PropositionSymbol, Integer> indices) {
-		Set<Literal> literals = clause.getLiterals();
-		int[] result = new int[literals.size()];
+	private static int[] convertToArray(final Clause clause, final Map<PropositionSymbol, Integer> indices) {
+		final Set<Literal> literals = clause.getLiterals();
+		final int[] result = new int[literals.size()];
 		int counter = 0;
-		for (Literal literal : literals) {
-			int sign = literal.isPositiveLiteral() ? 1 : -1;
-			PropositionSymbol symbol = literal.getAtomicSentence();
-			int index = indices.get(symbol).intValue();
+		for (final Literal literal : literals) {
+			final int sign = literal.isPositiveLiteral() ? 1 : -1;
+			final PropositionSymbol symbol = literal.getAtomicSentence();
+			final int index = indices.get(symbol);
 			result[counter] = sign * index;
 			counter++;
 		}
 		return result;
 	}
 
-	public static boolean isCNF(String expr) {
-		if (expr == null || expr.isEmpty() || expr.contains("xor("))
+	public static boolean isCNF(final String expr) {
+		if ((expr == null) || expr.isEmpty() || expr.contains("xor(")) {
 			return false;
+		}
 
-		Deque<Character> parenthesis = new LinkedList<>();
+		final Deque<Character> parenthesis = new LinkedList<>();
 
-		char[] exprArr = expr.toCharArray();
+		final char[] exprArr = expr.toCharArray();
 		boolean foundAndOperator = false;
 		boolean foundOrOperator = false;
 		boolean mustOnlyContainAndOperators = false;
 		boolean mustOnlyContainOrOperators = false;
 
-		for (int i = 0; i < exprArr.length; i++) {
-			switch (exprArr[i]) {
+		for (final char element : exprArr) {
+			switch (element) {
 			case '&':
 				if (!parenthesis.isEmpty() && foundOrOperator) {
 					if (mustOnlyContainOrOperators) {
@@ -167,7 +169,7 @@ public class SatChecker {
 				foundOrOperator = true;
 				break;
 			case '(':
-				parenthesis.add(exprArr[i]);
+				parenthesis.add(element);
 				break;
 			case ')':
 				if (parenthesis.isEmpty()) {
@@ -184,20 +186,20 @@ public class SatChecker {
 
 	}
 
-	private IVecInt createVec(Collection<String> initiallyTrue, Collection<String> initiallyFalse) {
-		Set<String> symbols = symbolsToIndices.keySet();
-		List<String> tf = initiallyTrue.parallelStream().filter(symbols::contains).collect(Collectors.toList());
-		List<String> ff = initiallyFalse.parallelStream().filter(symbols::contains).collect(Collectors.toList());
-		int[] vec = new int[tf.size() + ff.size()];
+	private IVecInt createVec(final Collection<String> initiallyTrue, final Collection<String> initiallyFalse) {
+		final Set<String> symbols = this.symbolsToIndices.keySet();
+		final List<String> tf = initiallyTrue.parallelStream().filter(symbols::contains).collect(Collectors.toList());
+		final List<String> ff = initiallyFalse.parallelStream().filter(symbols::contains).collect(Collectors.toList());
+		final int[] vec = new int[tf.size() + ff.size()];
 		int pos = 0;
-		for (String t : tf) {
-			Integer integer = symbolsToIndices.get(t);
+		for (final String t : tf) {
+			final Integer integer = this.symbolsToIndices.get(t);
 			if (integer != null) {
 				vec[pos++] = integer;
 			}
 		}
-		for (String t : ff) {
-			Integer integer = symbolsToIndices.get(t);
+		for (final String t : ff) {
+			final Integer integer = this.symbolsToIndices.get(t);
 			if (integer != null) {
 				vec[pos++] = integer * -1;
 			}
@@ -207,7 +209,7 @@ public class SatChecker {
 
 	/**
 	 * Calculates all possible rule products and their feature configurations
-	 * 
+	 *
 	 * @param initiallyFalseFeatures2
 	 * @param initiallyTrueFeatures2
 	 *
@@ -218,26 +220,26 @@ public class SatChecker {
 	 * @param features
 	 * @return
 	 */
-	public SatStatus calculateTrueAndFalseFeatures(Collection<String> initiallyTrue, Collection<String> initiallyFalse,
-			List<List<String>> trueFeatureList, List<List<String>> falseFeatureList, Collection<String> features) {
-		ISolver solver = new ModelIterator(this.solver);
+	public SatStatus calculateTrueAndFalseFeatures(final Collection<String> initiallyTrue, final Collection<String> initiallyFalse,
+			final List<List<String>> trueFeatureList, final List<List<String>> falseFeatureList, final Collection<String> features) {
+		final ISolver solver = new ModelIterator(this.solver);
 
 		// Remove contained features
-		List<String> unusedFeatures = getUnusedFeatures(indicesToSymbols, features);
+		final List<String> unusedFeatures = getUnusedFeatures(this.indicesToSymbols, features);
 
-		IVecInt assignments = createVec(initiallyTrue, initiallyFalse);
+		final IVecInt assignments = createVec(initiallyTrue, initiallyFalse);
 		// Line 6: iterate over all Solutions of Phi_rule
 		try {
 			while (solver.isSatisfiable(assignments)) {
-				int[] model = solver.model();
-				List<String> tmpTrueFeatures = new LinkedList<>();
-				List<String> tmpFalseFeatures = new LinkedList<>();
-				for (int selection : model) {
-					int abs = Math.abs(selection);
+				final int[] model = solver.model();
+				final List<String> tmpTrueFeatures = new LinkedList<>();
+				final List<String> tmpFalseFeatures = new LinkedList<>();
+				for (final int selection : model) {
+					final int abs = Math.abs(selection);
 					if (selection > 0) {
-						tmpTrueFeatures.add(indicesToSymbols.get(abs));
+						tmpTrueFeatures.add(this.indicesToSymbols.get(abs));
 					} else {
-						tmpFalseFeatures.add(indicesToSymbols.get(abs));
+						tmpFalseFeatures.add(this.indicesToSymbols.get(abs));
 					}
 				}
 				if (unusedFeatures.isEmpty()) {
@@ -246,10 +248,10 @@ public class SatChecker {
 				} else {
 					int bitVector = (int) Math.pow(2, unusedFeatures.size() - 1);
 					while (bitVector >= 0) {
-						LinkedList<String> trueFeatures = new LinkedList<>(tmpTrueFeatures);
-						LinkedList<String> falseFeatures = new LinkedList<>(tmpFalseFeatures);
+						final LinkedList<String> trueFeatures = new LinkedList<>(tmpTrueFeatures);
+						final LinkedList<String> falseFeatures = new LinkedList<>(tmpFalseFeatures);
 						for (int i = 0; i < unusedFeatures.size(); i++) {
-							if (((1 << unusedFeatures.size() - i - 1 & bitVector) != 0)) {
+							if ((((1 << (unusedFeatures.size() - i - 1)) & bitVector) != 0)) {
 								trueFeatures.add(unusedFeatures.get(i));
 							} else {
 								falseFeatures.add(unusedFeatures.get(i));
@@ -262,15 +264,15 @@ public class SatChecker {
 				}
 
 			}
-		} catch (TimeoutException e1) {
+		} catch (final TimeoutException e1) {
 			return SatStatus.SATTimeout;
 		}
 		return SatStatus.OK;
 	}
 
-	private static List<String> getUnusedFeatures(Map<Integer, String> symbolsToIndices, Collection<String> features) {
-		ArrayList<String> unusedFeatures = new ArrayList<>(features.size());
-		for (String next : features) {
+	private static List<String> getUnusedFeatures(final Map<Integer, String> symbolsToIndices, final Collection<String> features) {
+		final ArrayList<String> unusedFeatures = new ArrayList<>(features.size());
+		for (final String next : features) {
 			if (!symbolsToIndices.containsValue(next)) {
 				unusedFeatures.add(next);
 			}
@@ -278,8 +280,8 @@ public class SatChecker {
 		return unusedFeatures;
 	}
 
-	public boolean isSatisfiable(Collection<String> trueFeatures, Collection<String> falseFeatures)
+	public boolean isSatisfiable(final Collection<String> trueFeatures, final Collection<String> falseFeatures)
 			throws TimeoutException {
-		return solver.isSatisfiable(createVec(trueFeatures, falseFeatures));
+		return this.solver.isSatisfiable(createVec(trueFeatures, falseFeatures));
 	}
 }

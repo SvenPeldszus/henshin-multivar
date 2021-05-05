@@ -41,6 +41,7 @@ import org.eclipse.emf.henshin.variability.util.SatChecker;
 import aima.core.logic.propositional.parsing.ast.ComplexSentence;
 import aima.core.logic.propositional.parsing.ast.Connective;
 import aima.core.logic.propositional.parsing.ast.Sentence;
+import aima.core.logic.propositional.visitors.ConvertToCNF;
 
 public class LiftingEngine extends EngineImpl {
 
@@ -92,14 +93,22 @@ public class LiftingEngine extends EngineImpl {
 		return super.createChange(rule, graph, completeMatch, resultMatch);
 	}
 
-	public Change createChange(final Rule rule, final MultiVarEGraph graph, final MultiVarMatch completeMatch, final Match resultMatch) {
+	public Change createChange(final Rule rule, final MultiVarEGraph graph, final MultiVarMatch completeMatch, Match resultMatch) {
 		final CompoundChange complexChange = new CompoundChangeImpl(graph);
+		if(resultMatch == null) {
+			resultMatch = new MatchImpl(completeMatch.getRule(), true);
+		}
+
 		createChanges(rule, graph, completeMatch, resultMatch, complexChange);
 		return complexChange;
 	}
 
-	private void createChanges(final Rule rule, final MultiVarEGraph graph, final MultiVarMatch completeMatch, final Match resultMatch,
+	private void createChanges(final Rule rule, final MultiVarEGraph graph, final MultiVarMatch completeMatch, Match resultMatch,
 			final CompoundChange complexChange) {
+		if(resultMatch == null) {
+			resultMatch = new MatchImpl(completeMatch.getRule(), true);
+		}
+
 		final Map<EObject, Sentence> pcs = graph.getPCS();
 
 		// Get the rule change info and the object change list:
@@ -139,8 +148,9 @@ public class LiftingEngine extends EngineImpl {
 			} else {
 				phidtick = new ComplexSentence(Connective.NOT,applicationCondition);
 			}
+			phidtick = ConvertToCNF.convert(phidtick);
 
-			final boolean isSat = SatChecker.isSatisfiable(new ComplexSentence(Connective.AND, graph.getFM(), phidtick));
+			final boolean isSat = SatChecker.isCNFSatisfiable(new ComplexSentence(Connective.AND, graph.getFM(), phidtick));
 			if (isSat) {
 				pcs.put(deletedObject, phidtick);
 
